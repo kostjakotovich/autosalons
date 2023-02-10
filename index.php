@@ -1,9 +1,12 @@
 
 <?php
-session_start(); //Start the session.
+
 require_once 'connection.php';
 
-    echo "
+$sql = "SELECT * FROM comments ORDER BY commentID DESC";
+$result = $DBconnection->query($sql);
+?>
+
     <html>
     <head>
       <title>Form Example</title>
@@ -23,10 +26,9 @@ require_once 'connection.php';
         
       </form>
 
-      <form> " ?>
+      <form>
 
       <?php 
-        
 
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         // Check connection
@@ -34,14 +36,18 @@ require_once 'connection.php';
             die("Connection failed: " . mysqli_connect_error());
         }
       
-        $sql = "SELECT name, email, comment FROM comments";
+        $sql = "SELECT commentID, name, email, comment FROM comments";
         $result = mysqli_query($conn, $sql);
       
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
+                
                 echo "Name: " . $row["name"]. " - Email: " . $row["email"]. " - Comment: " . $row["comment"]. "<br>";
-                echo "<a href="deleteNews.php?Info_ID=<?php echo $row["Info_ID"]; ?>">Delete</a>"
+                ?>
+                <a href="delete.php?commentID=<?php echo $row["commentID"]; ?>">Delete</a>
+                <br></br>
+                <?php
             }
         } else {
             echo "0 results";
@@ -57,9 +63,9 @@ require_once 'connection.php';
   
   
   ";
+
   if(isset($_GET["success"])){
     if($_GET["success"] =="suc"){
         echo "<script>alert('Jūs esat ielagojies!')</script>";
     }
-  }
-?>
+  };

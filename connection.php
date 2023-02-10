@@ -1,8 +1,8 @@
 <?php
-  $servername = "localhost";
+  $servername = "127.0.0.1";
   $username = "root";
-  $password = "";
-  $dbname = "forum";
+  $password = "mariadb";
+  $dbname = "mariadb";
   //Connecting to the database, catching any errors that can be present.
   try{
     $DBconnection = new PDO("mysql:host=$servername; dbname=$dbname" , $username, $password);
