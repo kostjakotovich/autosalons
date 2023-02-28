@@ -1,5 +1,5 @@
 <?php
-
+session_start(); //Start the session.
 require_once 'connection.php';
 
 $sql = "SELECT * FROM comments ORDER BY commentID DESC";
@@ -11,7 +11,9 @@ $result = $DBconnection->query($sql);
       <title>Formu aizpildīšana</title>
       
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <script src="../autosalons/script.js" defer></script>
+      <link rel="stylesheet" href="..autosalons/css/index.css">
+      <script src="../autosalons/js/script.js" defer></script>
+      <script src="../autosalons/js/registration.js" defer></script>
     </head>
     <body>
     <header class="p-3 mb-3 border-bottom">
@@ -28,19 +30,29 @@ $result = $DBconnection->query($sql);
           <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
         </ul>
 
-
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#" onClick="RedToProfile()">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-        </div>
+        <?php 
+            if (isset($_SESSION['username'])) {
+                echo "<div class='dropdown text-end'>
+                <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <img src='https://github.com/mdo.png' alt='mdo' width='32' height='32' class='rounded-circle'>
+                      </a>
+                      <ul class='dropdown-menu text-small'>
+                        <li><a class='dropdown-item' href='#'>New project...</a></li>
+                        <li><a class='dropdown-item' href='#'>Settings</a></li>
+                        <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
+                        <li><hr class='dropdown-divider'></li>
+                        <li><a href='logout.php' class='logreg'>Sign out</a></li>
+                      </ul>
+                    </div>";
+                
+                
+            }
+            else {
+                echo "<a href='#' class='logreg' onclick='openRegistration()'>Registration</a>";
+                echo "<a href='#' class='logreg' onclick='openLogin()'>Login</a>";
+            }
+          ?>
+          
       </div>
     </div>
   </header>
@@ -56,6 +68,7 @@ $result = $DBconnection->query($sql);
       </form>
 
       <button class="button" id="redirecttoprofile" onClick="RedToProfile()">Profils</button>
+
       <form action='submit.php' method='post'>
         <label for='name'>Name:</label>
         <input type='text' id='name' name='name'>
@@ -70,11 +83,75 @@ $result = $DBconnection->query($sql);
         
       </form>
 
-      <form>
+      <!-- LOGIN FORM -->
+
+
+    <form class="form-container" method="POST" action="login.php" id="js_login">
+        <div class="login-block" id="js_login" >
+            <h1>Login</h1>
+            <input type="text" value="" placeholder="Username" name="username" id="username" />
+            <input type="password" value="" placeholder="Password" name="password" id="password" />
+            <button type="submit">Submit</button>
+            <button id="cancel" onclick="closeLogin()">Cancel</button>
+        </div>
+    </form>
+
+    <!-- REGISTRATION FORM -->
+    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="text" id="orangeForm-name" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
+        </div>
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="orangeForm-email" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" id="orangeForm-pass" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">Your password</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-deep-orange">Sign up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">Launch
+    Modal Register Form</a>
+</div>
+
+    <form class="form-container" action="registration.php" method="POST" id="jsReg">
+        <div class="registration-block">
+            <h1>Registration</h1>
+            <input type="text" value="" placeholder="Username" name="username" id="username2" />
+            <input type="email" value="" placeholder="E-mail" name="email" id="email"/>
+            <input type="password" value="" placeholder="Password" name="password" id="password2"/>
+            <button type="submit" name="reg_user">Register</button>
+            <button id="cancel" onclick="closeRegistration()">Cancel</button>
+        </div>
+    </form>
 
       <?php 
 
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        $conn = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -113,5 +190,8 @@ $result = $DBconnection->query($sql);
         echo "<script>alert('Jūs esat ielagojies!')</script>";
     }
   };
+
+
+  
 
 

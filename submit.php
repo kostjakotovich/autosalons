@@ -8,7 +8,7 @@ require_once 'connection.php';
   $comment = $_POST['comment'];
 
   // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
+  $conn = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
   // Check connection
   if (!$conn) {
       die("Connection failed: " . mysqli_connect_error());
