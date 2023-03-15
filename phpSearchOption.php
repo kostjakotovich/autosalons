@@ -4,7 +4,7 @@ $search = $_POST['search'];
 $column = $_POST['column'];
 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
 
 if ($conn->connect_error){
 	die("Connection failed: ". $conn->connect_error);

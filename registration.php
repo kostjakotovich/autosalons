@@ -49,13 +49,13 @@ if (isset($_POST['reg_user'])) {
     }
     else //if there is no result
     {
-        header('location:index.php?activity=username_or_email_taken');
+        header('location:registrationPage.php?activity=username_or_email_taken');
         
     }
 }
 else 
 {
-    header('location: index.php?acitivity=username_or_email_not_set ');
+    header('location: registrationPage.php?acitivity=username_or_email_not_set ');
 }
 
 

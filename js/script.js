@@ -10,3 +10,13 @@ function RedToComments() {
     window.location.href="../autosalons/index.php";  
 
 }
+
+function RedToRegistration() {
+    window.location.href="../autosalons/registrationPage.php";  
+
+}
+
+function RedToLogin() {
+    window.location.href="../autosalons/loginPage.php";  
+
+}

@@ -1,7 +1,7 @@
 <?php
   $servername = "localhost";
   $DBusername = "root";
-  $DBpassword = "password";
+  $DBpassword = "";
   $dbname = "mariadb";
   //Connecting to the database, catching any errors that can be present.
   try{

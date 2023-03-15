@@ -8,10 +8,10 @@ $result = $DBconnection->query($sql);
 
     <html>
     <head>
-      <title>Formu aizpildīšana</title>
+      
       
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link rel="stylesheet" href="..autosalons/css/index.css">
+      <link rel="stylesheet" href="../css/index.css">
       <script src="../autosalons/js/script.js" defer></script>
       <script src="../autosalons/js/registration.js" defer></script>
     </head>
@@ -23,7 +23,8 @@ $result = $DBconnection->query($sql);
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: auto; 
+margin-right: 0;">
           <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
@@ -48,8 +49,8 @@ $result = $DBconnection->query($sql);
                 
             }
             else {
-                echo "<a href='#' class='logreg' onclick='openRegistration()'>Registration</a>";
-                echo "<a href='#' class='logreg' onclick='openLogin()'>Login</a>";
+                echo "<a href='#' class='logreg' onClick='RedToRegistration()'>Registration/</a>";
+                echo "<a href='#' class='logreg' onclick='RedToLogin()'>Login</a>";
             }
           ?>
           
@@ -83,71 +84,7 @@ $result = $DBconnection->query($sql);
         
       </form>
 
-      <!-- LOGIN FORM -->
-
-
-    <form class="form-container" method="POST" action="login.php" id="js_login">
-        <div class="login-block" id="js_login" >
-            <h1>Login</h1>
-            <input type="text" value="" placeholder="Username" name="username" id="username" />
-            <input type="password" value="" placeholder="Password" name="password" id="password" />
-            <button type="submit">Submit</button>
-            <button id="cancel" onclick="closeLogin()">Cancel</button>
-        </div>
-    </form>
-
-    <!-- REGISTRATION FORM -->
-    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="orangeForm-name" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
-        </div>
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="orangeForm-email" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
-        </div>
-
-        <div class="md-form mb-4">
-          <i class="fas fa-lock prefix grey-text"></i>
-          <input type="password" id="orangeForm-pass" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-pass">Your password</label>
-        </div>
-
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-deep-orange">Sign up</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">Launch
-    Modal Register Form</a>
-</div>
-
-    <form class="form-container" action="registration.php" method="POST" id="jsReg">
-        <div class="registration-block">
-            <h1>Registration</h1>
-            <input type="text" value="" placeholder="Username" name="username" id="username2" />
-            <input type="email" value="" placeholder="E-mail" name="email" id="email"/>
-            <input type="password" value="" placeholder="Password" name="password" id="password2"/>
-            <button type="submit" name="reg_user">Register</button>
-            <button id="cancel" onclick="closeRegistration()">Cancel</button>
-        </div>
-    </form>
+      
 
       <?php 
 
