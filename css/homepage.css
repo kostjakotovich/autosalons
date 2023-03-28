@@ -1,0 +1,83 @@
+/* Новый дизайн для index.php */
+
+/* Стили для верхнего меню */
+.navbar {
+    background-color: #333;
+  }
+  
+  .navbar-brand {
+    color: #fff;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #fff;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ccc;
+  }
+  
+  /* Стили для формы поиска */
+  .form-search {
+    margin: 50px auto;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #eee;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .form-search input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-search select {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-search input[type="submit"] {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-search input[type="submit"]:hover {
+    background-color: #111;
+  }
+  
+  /* Стили для кнопки Profils */
+  .btn-profile {
+    display: block;
+    margin: 50px auto;
+    padding: 20px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-profile:hover {
+    background-color: #111;
+  }
+  

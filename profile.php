@@ -2,9 +2,12 @@
 
 require_once 'connection.php';
 
+$db = new database();
+$conn = $db->getDBConnection();
+
 $sql = "SELECT userID, username, email, password FROM user";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
+$result = $conn->query($sql);
+$row = $result->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
