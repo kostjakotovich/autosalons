@@ -16,14 +16,13 @@ require_once 'connection.php';
     <body>
     <header class="p-3 mb-3 border-bottom">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div class="d-flex flex-wrap align-items-center justify-content-right justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: auto; 
-margin-right: 0;">
-          <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-right mb-md-0">
+          <li><a href="#" class="nav-link px-2 link-secondary" >Overview</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
@@ -56,17 +55,19 @@ margin-right: 0;">
     </div>
   </header>
 
-      <form action="phpSearchOption.php" method="post">
-          <input type="text" placeholder="Search.." name="search" style="width: 100%;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-image: url('searchicon.png');
-  background-position: 10px 10px; 
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px";><br>
+      <form action="phpSearchOption.php" method="post" style="text-align:center">
+          <input type="text" placeholder="Search.." name="search" style="width: 60%;
+          margin: auto;
+          text-align: center;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          background-color: white;
+          background-image: url('searchicon.png');
+          background-position: 10px 10px; 
+          background-repeat: no-repeat;
+          padding: 12px 20px 12px 40px";><br>
 
           Meklēt pēc: <select name="column">
             <option value="name">Name</option>
