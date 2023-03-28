@@ -39,7 +39,7 @@ margin-right: 0;">
                       </a>
                       <ul class='dropdown-menu text-small'>
                         <li><a class='dropdown-item' href='#'>New project...</a></li>
-                        <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Forum</a></li>
+                        <li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
                         <li><hr class='dropdown-divider'></li>
                         <li><a href='logout.php' class='logreg'>Sign out</a></li>

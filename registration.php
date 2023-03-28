@@ -7,9 +7,9 @@ $username = "";
 $email = "";
 $errors = array();
 
-
+$conn = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
 //REGISTER USER
-if (isset($_POST['reg_user'])) {
+if (isset($_POST['reg'])) {
     //receive all input values from the form
     $username = $_POST['username'];
     $email = $_POST['email'];

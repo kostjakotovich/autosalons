@@ -45,7 +45,7 @@ require_once 'connection.php';
             <div class="modal-footer d-flex justify-content-center">
                 <?php
 
-                    echo "<button class='btn btn-deep-orange' type='submit'>Sign up</button>";
+                    echo "<button class='btn btn-deep-orange' type='submit'>Sign In</button>";
                 ?>
             </div>
             </div>

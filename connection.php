@@ -4,6 +4,7 @@
   $DBpassword = "";
   $dbname = "mariadb";
   //Connecting to the database, catching any errors that can be present.
+  
   try{
     $DBconnection = new PDO("mysql:host=$servername; dbname=$dbname" , $DBusername, $DBpassword);
     $DBconnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

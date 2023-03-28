@@ -20,3 +20,8 @@ function RedToLogin() {
     window.location.href="../autosalons/loginPage.php";  
 
 }
+
+function RedToForum() {
+    window.location.href="../autosalons/forum.php";  
+
+}

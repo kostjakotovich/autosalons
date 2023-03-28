@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once 'connection.php'; //Require connection file to connect to database.
@@ -13,19 +12,18 @@ require_once 'connection.php'; //Require connection file to connect to database.
                 //action after a successful login
                 //for now just message a successful login
                 $_SESSION['success'] = 'Login successful';
-                //unset our attempt
+                header('location: index.php');
             }
             else{
                 $_SESSION['error'] = 'Password incorrect';
-                //this is where we put our 3 attempt limit
+                header('location: loginPage.php');
+                
             }
         }
         else{
             $_SESSION['error'] = 'No account with that username';
+            header('location: loginPage.php');
         }
 
-    
-
-header('location: index.php');
 
 ?>
