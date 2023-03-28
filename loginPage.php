@@ -8,12 +8,14 @@ require_once 'connection.php';
     <head>
       <script src="../autosalons/js/script.js" defer></script>
       <script src="../autosalons/js/registration.js" defer></script>
+      
+      <link rel="stylesheet" href="css/homepage.css">
     </head>
     <body>
 
-    
-
-
+    <?php
+      require 'header.php';
+        ?>
     <!-- REGISTRATION FORM -->
 
     <form class="form-container" action="login.php" method="POST">

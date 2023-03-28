@@ -1,83 +1,96 @@
-/* Новый дизайн для index.php */
+/* index.css */
 
-/* Стили для верхнего меню */
-.navbar {
-    background-color: #333;
+/* Общие стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Шапка */
+  header {
+    background-color: #222;
+    color: #fff;
+    padding: 20px 0;
   }
   
   .navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
     color: #fff;
   }
   
-  .navbar-nav .nav-link {
+  .navbar-nav {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    display: inline-block;
+  }
+  
+  .nav-link {
     color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
   }
   
-  .navbar-nav .nav-link:hover {
-    color: #ccc;
+  /* Форма поиска */
+  .search-form {
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: center;
   }
   
-  /* Стили для формы поиска */
-  .form-search {
-    margin: 50px auto;
-    max-width: 500px;
-    padding: 30px;
-    border-radius: 10px;
-    background-color: #eee;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  .search-form input[type="text"] {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
   }
   
-  .form-search input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  .search-form select {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
   }
   
-  .form-search select {
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-search input[type="submit"] {
-    display: block;
-    margin-top: 20px;
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    background-color: #333;
+  .search-form input[type="submit"] {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    background-color: #4CAF50;
     color: #fff;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
   }
   
-  .form-search input[type="submit"]:hover {
-    background-color: #111;
-  }
-  
-  /* Стили для кнопки Profils */
-  .btn-profile {
+  /* Кнопка профиля */
+  .profile-button {
     display: block;
-    margin: 50px auto;
-    padding: 20px 30px;
-    font-size: 18px;
-    border-radius: 10px;
-    background-color: #333;
+    margin: 2rem auto;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    background-color: #4CAF50;
     color: #fff;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
   }
-  
-  .btn-profile:hover {
-    background-color: #111;
-  }
-  

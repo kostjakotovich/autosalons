@@ -2,6 +2,9 @@
 session_start();
 require_once 'connection.php';
 
+require 'header.php';
+
+
 class Profile {
     private $DBconnection;
 
@@ -35,6 +38,7 @@ $profile = new Profile($DBconnection);
 
 <head>
     <script src="../autosalons/js/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <p>Forum</p>
 </head>
 <body>

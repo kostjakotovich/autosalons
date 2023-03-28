@@ -3,6 +3,7 @@
     require_once 'connection.php';
     
 // initializing variables
+
 class user extends database{
     private $username;
     private $email;

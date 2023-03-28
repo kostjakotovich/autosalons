@@ -6,31 +6,37 @@ require_once 'connection.php';
 
 <html>
     <head>
-      <script src="../autosalons/js/script.js" defer></script>
-      <script src="../autosalons/js/registration.js" defer></script>
+      <meta charset="UTF-8">
+      <title>Sign Up</title>
+      <!-- Подключение стилей Bootstrap -->
+
+        <!-- Подключение скриптов -->
+        <script src="../autosalons/js/script.js" defer></script>
+        <script src="../autosalons/js/registration.js" defer></script>
     </head>
     <body>
 
-    
-
+        <?php
+        require 'header.php';
+        ?>
+        <link rel="stylesheet" href="css/index.css">
 
     <!-- REGISTRATION FORM -->
 
     <form class="form-container" action="registration.php" method="POST">
             <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="margin: auto;">
             <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
                 
                 
                 
             </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-5">
-                <i class="fas fa-user prefix grey-text"></i>
-                <input type="text" class="form-control validate" value="" name="username" id="username2">
+                <i></i>
+                <input type="text" id="username2" name="username">
                 <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
                 </div>
                 <div class="md-form mb-5">
