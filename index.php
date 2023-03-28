@@ -39,7 +39,7 @@ margin-right: 0;">
                       </a>
                       <ul class='dropdown-menu text-small'>
                         <li><a class='dropdown-item' href='#'>New project...</a></li>
-                        <li><a class='dropdown-item' href='#'>Settings</a></li>
+                        <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Forum</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
                         <li><hr class='dropdown-divider'></li>
                         <li><a href='logout.php' class='logreg'>Sign out</a></li>
@@ -59,9 +59,18 @@ margin-right: 0;">
   </header>
 
       <form action="phpSearchOption.php" method="post">
-          Search <input type="text" name="search"><br>
+          <input type="text" placeholder="Search.." name="search" style="width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px";><br>
 
-          Column: <select name="column">
+          Meklēt pēc: <select name="column">
             <option value="name">Name</option>
             <option value="email">Email</option>
             </select><br>
@@ -70,48 +79,7 @@ margin-right: 0;">
 
       <button class="button" id="redirecttoprofile" onClick="RedToProfile()">Profils</button>
 
-      <form action='submit.php' method='post'>
-        <label for='name'>Name:</label>
-        <input type='text' id='name' name='name'>
-  
-        <label for='email'>E-mail:</label>
-        <input type='email' id='email' name='email'>
-  
-        <label for='comment'>Comment:</label>
-        <textarea id='comment' name='comment'></textarea>
-  
-        <input type='submit' value='Submit'>
-        
-      </form>
-
-      
-
-      <?php 
-
-        $conn = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
-        // Check connection
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-      
-        $sql = "SELECT commentID, name, email, comment FROM comments";
-        $result = mysqli_query($conn, $sql);
-      
-        if (mysqli_num_rows($result) > 0) {
-            // output data of each row
-            while($row = mysqli_fetch_assoc($result)) {
-                
-                echo "Name: " . $row["name"]. " - Email: " . $row["email"]. " - Comment: " . $row["comment"]. "<br>";
-                ?>
-                <a href="delete.php?commentID=<?php echo $row["commentID"]; ?>">Delete</a>
-                <br></br>
-                <?php
-            }
-        } else {
-            echo "0 results";
-        }
-      
-        mysqli_close($conn);
+    <?php
       
     echo "
       </form>
@@ -127,6 +95,8 @@ margin-right: 0;">
         echo "<script>alert('Jūs esat ielagojies!')</script>";
     }
   };
+
+  ?>
 
 
   
