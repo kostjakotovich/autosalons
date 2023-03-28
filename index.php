@@ -2,8 +2,6 @@
 session_start(); //Start the session.
 require_once 'connection.php';
 
-$sql = "SELECT * FROM comments ORDER BY commentID DESC";
-$result = $DBconnection->query($sql);
 ?>
 
     <html>
@@ -89,12 +87,6 @@ margin-right: 0;">
   
   
   ";
-
-  if(isset($_GET["success"])){
-    if($_GET["success"] =="suc"){
-        echo "<script>alert('Jūs esat ielagojies!')</script>";
-    }
-  };
 
   ?>
 

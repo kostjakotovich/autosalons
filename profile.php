@@ -3,7 +3,6 @@
 require_once 'connection.php';
 
 $sql = "SELECT userID, username, email, password FROM user";
-$conn = mysqli_connect($servername, $DBusername, $DBpassword, $dbname);
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
