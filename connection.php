@@ -1,26 +1,21 @@
 <?php
 class database {
-  private $DBconnection;
+    private $DBusername = "root";
+    private $DBpassword = "";
+    private $dbname = "mariadb";
+    private $DBconnection;
 
-  function __construct(){
-      try {
-          $DBusername = "root";
-          $DBpassword = "";
-          $dbname = "mariadb";
-          $this->DBconnection = new PDO("mysql:host=localhost;dbname=$dbname", $DBusername, $DBpassword);
-          $this->DBconnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      } catch(PDOException $ex) {
-          echo "Exception error: " . $ex->getMessage();
-          die($ex->getMessage());
-      }
-  }
-
-  function getDBConnection() {
-      return $this->DBconnection;
-  }
+    //Connecting to the database, catching any errors that can be present.
+    public function connect(){
+        try{
+            $this->DBconnection = new PDO("mysql:host=localhost; dbname=$this->dbname" , $this->DBusername, $this->DBpassword);
+            $this->DBconnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->DBconnection;
+        }
+        catch(PDOException $ex){
+            echo "Exception error: " . $ex->getMessage();// for testing purposes.
+            die($ex->getMessage());
+        }
+    }
 }
-
-
-$db = new database();
-$connection = $db->getDBconnection();
 ?>

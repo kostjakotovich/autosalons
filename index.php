@@ -39,8 +39,6 @@ require_once 'connection.php';
           <input type ="submit">
       </form>
 
-      <button class="button" id="redirecttoprofile" onClick="RedToProfile()">Profils</button>
-
     <?php
       
     echo "

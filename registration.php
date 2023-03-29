@@ -3,7 +3,6 @@
     require_once 'connection.php';
     
 // initializing variables
-
 class user extends database{
     private $username;
     private $email;
@@ -18,37 +17,31 @@ class user extends database{
     public function registration(){
         $errors = array();
         if (isset($_POST['reg'])) {
-            //receive all input values from the form
-
+            // Получаем все значения из формы
 
             if (empty($this->username)) { array_push($errors, "Username is required");}
             if (empty($this->email)) { array_push($errors, "Email is required");}
             if (empty($this->password)) { array_push($errors, "Password is required");}
-             
-            $stmt = $this->getDBConnection()->prepare("SELECT * FROM user WHERE username=:username OR email=:email LIMIT 1");
-            $stmt->bindParam(':username', $this->username);
-            $stmt->bindParam(':email', $this->email);
-            $stmt->execute();
-            $user = $stmt->fetch();
-        
-            if ($user) { //if user exists
+
+            $result = $this->connect()->prepare("SELECT * FROM user WHERE username='$this->username' OR email='$this->email' LIMIT 1");
+            $user = $result->fetch();
+
+            if ($user) { // если пользователь существует
                 if ($user['username'] === $this->username) {
                     array_push($errors, "Username already exists!");
-        
+
                 }
-        
+
                 if ($user['email'] === $this->email) {
-                    array_push($errors, "email already exists");
-          
+                    array_push($errors, "Email already exists!");
+
                 }
             }
-        
-            //FInally, register user if there are no earrors in the form
-            if (COUNT($errors) == 0) {
-                $passwordMD5 = md5($this->password); //encrypt the password beofre saving in the database
-        
-                
-                
+
+            // Регистрируем пользователя, если нет ошибок в форме
+            if (count($errors) == 0) {
+                $passwordMD5 = md5($this->password); // шифруем пароль перед сохранением в базе данных
+
                 $result = $this->connect()->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
                 if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordMD5, ':roleID' => 0))) {
                     $result = null;
@@ -56,18 +49,15 @@ class user extends database{
                     exit();
                 }
                 $result = null;
-                $_SESSION['username'] = $this->username;
+                $_SESSION['success'] = 'Registration successful';
                 header('location: index.php');
             }
-            else //if there is no result
-            {
-                header('location:registrationPage.php?activity=username_or_email_taken');
-                
+            else {
+                header('location: registrationPage.php?activity=username_or_email_taken');
             }
         }
-        else 
-        {
-            header('location: registrationPage.php?acitivity=username_or_email_not_set ');
+        else {
+            header('location: registrationPage.php?acitivity=username_or_email_not_set');
         }
     }
 }

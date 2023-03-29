@@ -23,7 +23,7 @@ require_once 'connection.php';
             <div class="modal-body mx-3">
                 
                 
-                <input type="text" class="form-control validate" value="" name="name" id="username2">
+                <input type="text" class="form-control validate" value="" name="username" id="username2">
                 <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
                 
 

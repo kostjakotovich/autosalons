@@ -1,16 +1,13 @@
 <?php
-
+session_start();
 require_once 'connection.php';
 
-require 'header.php';
-
-$db = new database();
-$conn = $db->getDBConnection();
-
-$sql = "SELECT userID, username, email, password FROM user";
-$result = $conn->query($sql);
-$row = $result->fetch(PDO::FETCH_ASSOC);
-
+// Retrieve the user information based on the user ID stored in the session
+$userID = $_SESSION["userID"];
+$sql = "SELECT username, email FROM user WHERE userID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->execute([$userID]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <html>
@@ -20,7 +17,8 @@ $row = $result->fetch(PDO::FETCH_ASSOC);
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <button class="button" id="redirecttoindex" onClick="RedToComments()">Home page</button>
-        <?php echo "<h1>Name: <h1>" . $row["username"]; ?>
-        <?php echo "<h2>Email: <h2>" . $row["email"]; ?>
+        <?php require 'header.php'; ?>
+        <h1>Name: <?php echo $user["username"]; ?></h1>
+        <h2>Email: <?php echo $user["email"]; ?></h2>
     </body>
+</html>
