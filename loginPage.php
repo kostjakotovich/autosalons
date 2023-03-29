@@ -7,7 +7,6 @@ require_once 'connection.php';
 <html>
     <head>
       <script src="../autosalons/js/script.js" defer></script>
-      <script src="../autosalons/js/registration.js" defer></script>
       
       <link rel="stylesheet" href="css/homepage.css">
       <title>Sign In</title>

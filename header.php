@@ -5,6 +5,7 @@ require_once 'connection.php';
 <head>    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/headers.css">
 </head>
 
     <header class="p-3 mb-3 border-bottom">
@@ -24,7 +25,8 @@ require_once 'connection.php';
 
         <?php 
             if (isset($_SESSION['success'])) {
-                echo "<div class='dropdown text-end'>
+                echo " <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
+                <div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
                         <img src='https://github.com/mdo.png' alt='mdo' width='32' height='32' class='rounded-circle'>
                       </a>

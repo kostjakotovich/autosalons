@@ -16,13 +16,15 @@ class Login {
     $stmt = $conn->prepare($sql);
     $stmt->execute([$username]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $_SESSION["userID"] = $row["userID"];
 
     if($row){
         //verify password
-        if(md5($password) === $row['password'] || $password === $row['password'])
-            {
+        if(password_verify($password, $row['password']))
+        {
             //action after a successful login
             //for now just message a successful login
+            
             $_SESSION['success'] = 'Login successful';
             header('location: index.php');
         }
@@ -40,7 +42,7 @@ class Login {
 
 if(isset($_POST['username']) && isset($_POST['password'])){
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
 
     $login = new Login(new database());
     $login->login($username, $password);

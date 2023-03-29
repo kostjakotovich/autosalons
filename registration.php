@@ -40,10 +40,11 @@ class user extends database{
 
             // Регистрируем пользователя, если нет ошибок в форме
             if (count($errors) == 0) {
-                $passwordMD5 = md5($this->password); // шифруем пароль перед сохранением в базе данных
+                $passwordHash = password_hash($this->password, PASSWORD_DEFAULT);
+                 // хешируем пароль перед сохранением в базе данных
             
                 $result = $this->connect()->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
-                if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordMD5, ':roleID' => 0))) {
+                if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordHash, ':roleID' => 0))) {
                     $result = null;
                     header("location: registration.php?error=stmtfailed");
                     exit();
@@ -76,3 +77,4 @@ $password = $_POST['password'];
 
 $user = new user($username, $email, $password);
 $user->registration();
+?>
