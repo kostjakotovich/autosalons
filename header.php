@@ -14,12 +14,13 @@ require_once 'connection.php';
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-right mb-md-0">
-          <li><a href="#" class="nav-link px-2 link-secondary" >Overview</a></li>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-right mb-md-0" style="position: absolute;
+                  right: 0;">
+          <li><a href='#' class="nav-link px-2 link-secondary" onClick='RedToHomepage()'>Homepage</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
-        </ul>
+        
 
         <?php 
             if (isset($_SESSION['username'])) {
@@ -32,18 +33,18 @@ require_once 'connection.php';
                         <li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
                         <li><hr class='dropdown-divider'></li>
-                        <li><a href='logout.php' class='logreg'>Sign out</a></li>
+                        <li><a href='logout.php' class='nav-link px-2 link-dark'>Sign out</a></li>
                       </ul>
                     </div>";
                 
                 
             }
             else {
-                echo "<a href='#' class='logreg' onClick='RedToRegistration()'>Registration/</a>";
-                echo "<a href='#' class='logreg' onclick='RedToLogin()'>Login</a>";
+                echo "<a href='#' class='nav-link px-2 link-dark' onClick='RedToRegistration()'>Registration</a>";
+                echo "<a href='#' class='nav-link px-2 link-dark' onclick='RedToLogin()'>Login</a>";
             }
           ?>
-          
+          </ul>
       </div>
     </div>
   </header>

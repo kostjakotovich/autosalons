@@ -25,3 +25,8 @@ function RedToForum() {
     window.location.href="../autosalons/forum.php";  
 
 }
+
+function RedToHomepage() {
+    window.location.href="../autosalons/index.php";  
+
+}

@@ -10,31 +10,22 @@ require_once 'connection.php';
       <script src="../autosalons/js/registration.js" defer></script>
       
       <link rel="stylesheet" href="css/homepage.css">
+      <title>Sign In</title>
     </head>
     <body>
 
     <?php
       require 'header.php';
-        ?>
+    ?>
     <!-- REGISTRATION FORM -->
 
-    <form class="form-container" action="login.php" method="POST">
-            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Sign In</h4>
-                
-                
-                
-            </div>
+    <form action="login.php" method="POST">
             <div class="modal-body mx-3">
-                <div class="md-form mb-5">
-                <i class="fas fa-user prefix grey-text"></i>
+                
+                
                 <input type="text" class="form-control validate" value="" name="name" id="username2">
                 <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
-                </div>
+                
 
 
                 <div class="md-form mb-4">
@@ -54,8 +45,10 @@ require_once 'connection.php';
         </div>
         </div>
     </form>
-    <button id="cancel" onclick="closeLogin()">Cancel</button>
-    <button onclick="RedToRegistration()">Sign Up</button>
+    <div style="text-align:center">
+        <button id="cancel" onclick="closeLogin()" class='btn btn-deep-orange'>Cancel</button>
+        <button onclick="RedToRegistration()" class='btn btn-deep-orange'>Sign Up</button>
+    </div>
 
 
     <?php

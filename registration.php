@@ -24,11 +24,12 @@ class user extends database{
             if (empty($this->username)) { array_push($errors, "Username is required");}
             if (empty($this->email)) { array_push($errors, "Email is required");}
             if (empty($this->password)) { array_push($errors, "Password is required");}
-        
-            
-        
-            $result = $this->connect()->prepare("SELECT * FROM user WHERE username='$this->username' OR email='$this->email' LIMIT 1");
-            $user = $result->fetch();
+             
+            $stmt = $this->getDBConnection()->prepare("SELECT * FROM user WHERE username=:username OR email=:email LIMIT 1");
+            $stmt->bindParam(':username', $this->username);
+            $stmt->bindParam(':email', $this->email);
+            $stmt->execute();
+            $user = $stmt->fetch();
         
             if ($user) { //if user exists
                 if ($user['username'] === $this->username) {

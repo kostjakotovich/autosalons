@@ -13,30 +13,21 @@ require_once 'connection.php';
         <!-- Подключение скриптов -->
         <script src="../autosalons/js/script.js" defer></script>
         <script src="../autosalons/js/registration.js" defer></script>
+        <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
 
         <?php
         require 'header.php';
         ?>
-        <link rel="stylesheet" href="css/index.css">
 
     <!-- REGISTRATION FORM -->
 
     <form class="form-container" action="registration.php" method="POST">
-            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document" style="margin: auto;">
-            <div class="modal-content">
-            <div class="modal-header text-center">
-                
-                
-                
-            </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-5">
                 <i></i>
-                <input type="text" id="username2" name="username">
+                <input type="text" id="username2" name="username" class="form-control validate">
                 <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
                 </div>
                 <div class="md-form mb-5">
@@ -62,8 +53,10 @@ require_once 'connection.php';
         </div>
         </div>
     </form>
-    <button id="cancel" onclick="closeRegistration()">Cancel</button>
-    <button onclick="RedToLogin()">Sign In</button>
+    <div style="text-align:center">
+        <button id="cancel" onclick="closeRegistration()" class='btn btn-deep-orange' style="text-align:center">Cancel</button>
+        <button onclick="RedToLogin()" class='btn btn-deep-orange' style="align:center">Sign In</button>
+    </div>
 
     <?php
 				if(isset($_SESSION['error'])){

@@ -1,9 +1,7 @@
 body{
-    background-image: url("https://steamuserimages-a.akamaihd.net/ugc/821254455055420970/AF58A14BD541F9572D8DD3F665F271F6CEEA4F6A/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false");
+    
     background-size: cover;
-    
-    
-    
+       
     height: 100vh;
     padding:0;
     margin:0;
