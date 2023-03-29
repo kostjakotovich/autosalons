@@ -41,7 +41,7 @@ class user extends database{
             // Регистрируем пользователя, если нет ошибок в форме
             if (count($errors) == 0) {
                 $passwordMD5 = md5($this->password); // шифруем пароль перед сохранением в базе данных
-
+            
                 $result = $this->connect()->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
                 if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordMD5, ':roleID' => 0))) {
                     $result = null;
@@ -49,6 +49,13 @@ class user extends database{
                     exit();
                 }
                 $result = null;
+                
+                // Получаем ID только что зарегистрированного пользователя
+                $result = $this->connect()->prepare("SELECT userID FROM user WHERE email='$this->email'");
+                $result->execute();
+                $user = $result->fetch();
+                $_SESSION['userID'] = $user['userID'];
+            
                 $_SESSION['success'] = 'Registration successful';
                 header('location: index.php');
             }
