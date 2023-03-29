@@ -1,14 +1,18 @@
 <?php
 require_once 'connection.php';
 
-class User {
-    private $userID;
-    private $conn;
+class UserMain {
+    private $username;
+    private $email;
+    private $password;
 
-    public function __construct($userID) {
+    public function __construct($userID){
         $this->userID = $userID;
         $this->conn = (new Database())->connect();
     }
+
+    private $userID;
+    private $conn;
 
     public function getUserInfo() {
         $sql = "SELECT username, email FROM user WHERE userID = ?";

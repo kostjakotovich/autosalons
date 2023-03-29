@@ -5,7 +5,7 @@ require_once 'User.php';
 
 if(isset($_SESSION["userID"])) {
   $userID = $_SESSION["userID"];
-  $user = new User($userID);
+  $user = new UserMain($userID);
   $userInfo = $user->getUserInfo();
   if(isset($userInfo)){
       $username = $userInfo['username'];

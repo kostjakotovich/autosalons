@@ -1,20 +1,20 @@
-<?php 
-    session_start();
-    require_once 'connection.php';
-    
-// initializing variables
-class user extends database{
-    private $username;
-    private $email;
-    private $password;
+<?php
+session_start();
+require_once 'connection.php';
+require_once 'User.php';
 
-    public function __construct($username, $email, $password){
+class UserRegistration extends UserMain {
+    private $conn;
+
+    public function __construct($username, $email, $password) {
+        parent::__construct(null);
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->conn = (new Database())->connect();
     }
 
-    public function registration(){
+    public function registration() {
         $errors = array();
         if (isset($_POST['reg'])) {
             // Получаем все значения из формы
@@ -23,7 +23,8 @@ class user extends database{
             if (empty($this->email)) { array_push($errors, "Email is required");}
             if (empty($this->password)) { array_push($errors, "Password is required");}
 
-            $result = $this->connect()->prepare("SELECT * FROM user WHERE username=:username OR email=:email LIMIT 1");
+            $result = $this->conn->prepare("SELECT * FROM user WHERE username=:username OR email=:email LIMIT 1");
+
             $result->execute(array(':username' => $this->username, ':email' => $this->email));
             $user = $result->fetch();
 
@@ -44,7 +45,7 @@ class user extends database{
                 $passwordHash = password_hash($this->password, PASSWORD_DEFAULT);
                  // хешируем пароль перед сохранением в базе данных
             
-                $result = $this->connect()->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
+                 $result = $this->conn->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
                 if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordHash, ':roleID' => 0))) {
                     $result = null;
                     $_SESSION['error'] = 'Failed to register';
@@ -56,7 +57,7 @@ class user extends database{
                 $result = null;
                 
                 // Получаем ID только что зарегистрированного пользователя
-                $result = $this->connect()->prepare("SELECT userID FROM user WHERE email=:email");
+                $result = $this->conn->prepare("SELECT userID FROM user WHERE email=:email");
                 $result->execute(array(':email' => $this->email));
                 $user = $result->fetch();
                 $_SESSION['userID'] = $user['userID'];
@@ -80,7 +81,7 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];   
 
-$user = new user($username, $email, $password);
+$user = new UserRegistration($_POST['username'], $_POST['email'], $_POST['password']);
 $user->registration();
 
 ?>
