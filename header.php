@@ -28,14 +28,14 @@ require_once 'connection.php';
                 echo " <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
                 <div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
-                        <img src='https://github.com/mdo.png' alt='mdo' width='32' height='32' class='rounded-circle'>
+                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2vRsFCw0zkeM9IE-PfdAWbPUJ4GHKn9ouAw&usqp=CAU' alt='mdo' width='32' height='32' class='rounded-circle'>
                       </a>
                       <ul class='dropdown-menu text-small'>
                         <li><a class='dropdown-item' href='#'>New project...</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
                         <li><hr class='dropdown-divider'></li>
-                        <li><a href='logout.php' class='nav-link px-2 link-dark'>Sign out</a></li>
+                        <li><a href='logout.php' class='dropdown-item'>Sign out</a></li>
                       </ul>
                     </div>";
                 
