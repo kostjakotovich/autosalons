@@ -23,7 +23,8 @@ class user extends database{
             if (empty($this->email)) { array_push($errors, "Email is required");}
             if (empty($this->password)) { array_push($errors, "Password is required");}
 
-            $result = $this->connect()->prepare("SELECT * FROM user WHERE username='$this->username' OR email='$this->email' LIMIT 1");
+            $result = $this->connect()->prepare("SELECT * FROM user WHERE username=:username OR email=:email LIMIT 1");
+            $result->execute(array(':username' => $this->username, ':email' => $this->email));
             $user = $result->fetch();
 
             if ($user) { // если пользователь существует
@@ -46,26 +47,30 @@ class user extends database{
                 $result = $this->connect()->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
                 if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordHash, ':roleID' => 0))) {
                     $result = null;
-                    header("location: registration.php?error=stmtfailed");
-                    exit();
+                    $_SESSION['error'] = 'Failed to register';
                 }
+                else {
+                    $_SESSION['success'] = 'Registration successful';
+                }
+                
                 $result = null;
                 
                 // Получаем ID только что зарегистрированного пользователя
-                $result = $this->connect()->prepare("SELECT userID FROM user WHERE email='$this->email'");
-                $result->execute();
+                $result = $this->connect()->prepare("SELECT userID FROM user WHERE email=:email");
+                $result->execute(array(':email' => $this->email));
                 $user = $result->fetch();
                 $_SESSION['userID'] = $user['userID'];
             
-                $_SESSION['success'] = 'Registration successful';
                 header('location: index.php');
             }
             else {
-                header('location: registrationPage.php?activity=username_or_email_taken');
+                $_SESSION['error'] = implode("<br>", $errors);
+                header('location: registrationPage.php');
             }
         }
         else {
-            header('location: registrationPage.php?acitivity=username_or_email_not_set');
+            $_SESSION['error'] = 'Invalid request';
+            header('location: registrationPage.php');
         }
     }
 }
@@ -77,4 +82,5 @@ $password = $_POST['password'];
 
 $user = new user($username, $email, $password);
 $user->registration();
+
 ?>
