@@ -19,15 +19,20 @@
 CREATE DATABASE IF NOT EXISTS `mariadb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mariadb`;
 
--- Дамп структуры для таблица mariadb.offers
-CREATE TABLE IF NOT EXISTS `offers` (
-  `offerID` int NOT NULL,
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
-  `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
-  PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+-- Дамп структуры для таблица mariadb.offersinfo
+CREATE TABLE IF NOT EXISTS `offersinfo` (
+  `offersInfoID` int NOT NULL,
+  `color` varchar(10) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `yearOfManufacture` date DEFAULT NULL,
+  `weight` int DEFAULT NULL,
+  `offersID` int DEFAULT NULL,
+  PRIMARY KEY (`offersInfoID`),
+  KEY `offersID` (`offersID`),
+  CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.offers: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~0 rows (приблизительно)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

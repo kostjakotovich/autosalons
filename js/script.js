@@ -30,3 +30,8 @@ function RedToHomepage() {
     window.location.href="../autosalons/index.php";  
 
 }
+
+function RedToOffer() {
+    window.location.href="../autosalons/offerPage.php";  
+
+}

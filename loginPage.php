@@ -45,7 +45,7 @@ require_once 'connection.php';
         </div>
     </form>
     <div style="text-align:center">
-        <button id="cancel" onclick="closeLogin()" class='btn btn-deep-orange'>Cancel</button>
+        <button onclick="RedToHomepage()" class='btn btn-deep-orange'>Cancel</button>
         <button onclick="RedToRegistration()" class='btn btn-deep-orange'>Sign Up</button>
     </div>
 
