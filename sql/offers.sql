@@ -24,10 +24,13 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `offerID` int NOT NULL,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
+  `image` blob,
   PRIMARY KEY (`offerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.offers: ~0 rows (приблизительно)
+INSERT INTO `offers` (`offerID`, `type`, `manufacturer`, `image`) VALUES
+	(1, 'GTR', 'Nissan', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

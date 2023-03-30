@@ -39,11 +39,11 @@ Meklēt pēc: <select name="column">
 </form>
 <?php foreach ($offers as $offer) { // проходимся по каждой записи и создаем карточку ?>
   <div class="card">
-    <img src="img/<?php echo $offer['type']; ?>.webp" alt="Car Image">
+    <img src="img/<?php echo $offer['image']; ?>.webp" alt="Car Image">
     <div class="card-body">
       <div style="text-align:center">
         <h5 class="card-title"><?php echo $offer['manufacturer'] . ' ' . $offer['type']; ?></h5>
-        <a href="offerDetails.php?offerID=<?php echo $offer['id']; ?>" class="btn btn-primary">View</a>
+        <a href="offerPage.php?offerID=<?php echo $offer['id']; ?>" class="btn btn-primary">View</a>
       </div>
     </div>
   </div>
