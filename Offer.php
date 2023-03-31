@@ -1,51 +1,42 @@
 <?php
 require_once 'connection.php';
 
-class Offer {
-    
+class Order {
     private $conn;
 
-    private $offerID;
-    private $type;
-    private $manufacturer;
-    private $image;
-
-    private $offersInfoID;
-    private $color;
-    private $price;
-    private $yearOfManufacture;
-    private $weight;
+    private $orderID;
+    private $orderDate;
+    private $name;
+    private $surname;
+    private $telephone;
+    private $status;
+    private $orderOfferID;
+    private $orderUserID;
     
     public function __construct() {
         $this->conn = (new Database())->connect();
     }
-    
-    public function getOffer($offerID) {
-        $sql = "SELECT * FROM offers WHERE offerID = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
-    }
-    
-    
-    public function getOfferInfo($offerID) {
-        $sql = "SELECT * FROM offersinfo WHERE offersID = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
-    }
-    
-    public function getAllOffers() {
-        $sql = "SELECT * FROM offers INNER JOIN offersinfo on offers.offerID = offersinfo.offersID";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-    
-    
-}
 
+    public function createOrder($name, $surname, $telephone, $orderOfferID, $orderUserID) {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->telephone = $telephone;
+        $this->status = 'New';
+        $this->orderOfferID = $orderOfferID;
+        $this->orderUserID = $orderUserID;
+        $this->orderDate = date("Y-m-d H:i:s");
+
+        $sql = "INSERT INTO `order` (orderDate, name, surname, telephone, status, orderOfferID, orderUserID) 
+                VALUES (:orderDate, :name, :surname, :telephone, :status, :orderOfferID, :orderUserID)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':orderDate', $this->orderDate);
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':surname', $this->surname);
+        $stmt->bindParam(':telephone', $this->telephone);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':orderOfferID', $this->orderOfferID);
+        $stmt->bindParam(':orderUserID', $this->orderUserID);
+        $stmt->execute();
+    }
+}
 ?>
