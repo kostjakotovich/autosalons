@@ -6,6 +6,7 @@ require_once 'connection.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="css/headers.css">
+    <script src="../autosalons/js/script.js" defer></script>
 </head>
 
     <header class="p-3 mb-3 border-bottom">
@@ -35,7 +36,7 @@ require_once 'connection.php';
                         <li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
                         <li><hr class='dropdown-divider'></li>
-                        <li><a href='logout.php' class='dropdown-item'>Sign out</a></li>
+                        <li><a href='functions/logout.php' class='dropdown-item'>Sign out</a></li>
                       </ul>
                     </div>";
                 

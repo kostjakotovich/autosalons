@@ -11,7 +11,7 @@ if(isset($_GET['commentID'])) {
       header("Location: index.php?success=successfully deleted");
 
 }else {
-   header("Location: ../index.php?error=smth gone wrong");
+   header("Location: index.php?error=smth gone wrong");
 }
 
 ?>

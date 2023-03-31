@@ -10,7 +10,6 @@ $offers = $offer->getAllOffers();
 
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/cards.css">
   <link rel="stylesheet" href="css/homepage.css">
 </head>
@@ -31,22 +30,28 @@ $offers = $offer->getAllOffers();
   padding: 12px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;">
-  Meklēt pēc: <select name="column">
+  <div class="filter">
+    Meklēt pēc: <select name="column">
+  </div>
   <option value="name">Name</option>
   <option value="email">Email</option>
   </select><br>
   <input type ="submit">
 </form>
+<div class="card-wrapper">
   <?php foreach ($offers as $selectedOffer) { ?>
-    <div class="col-md-3">
-      <div class="card">
-        <img src="img/<?php echo $selectedOffer['image']; ?>.webp" alt="Car Image">
-        <div class="card-body">
-          <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
-          <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>" class="btn btn-primary">View</a>
-        </div>
-      </div>
-    </div>
+          <div class="card-wrapper">
+              <div class="card">
+                  <img src="img/<?php echo $selectedOffer['image']; ?>.webp" alt="Car Image">
+                  <div class="card-body">
+                      <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+                      <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>" class="btn btn-primary">View</a>
+                  </div>
+              </div>
+          </div>
   <?php } ?>
+</div>
+
+
 </body>
 </html>

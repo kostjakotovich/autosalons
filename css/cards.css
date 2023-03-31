@@ -1,52 +1,61 @@
-/* cards */
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row; /* display cards in a row */
+  }
+  
 .card {
     width: 400px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 400px;
+    height: 400px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
     overflow: hidden;
-    position: relative;
-    margin-left: 200px; /* Добавляем отступ слева */
-    transition: all 0.3s ease; /* добавляем плавный переход */
+    transition: all 0.3s ease;
+    
 }
-
+  
 .card:hover {
-    filter: brightness(80%); /* затемняем карточку при наведении на нее курсора */
+    filter: brightness(80%);
 }
-
+  
 .card::before {
     content: "";
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* задаем прозрачный цвет для псевдоэлемента */
-    opacity: 0; /* делаем его изначально прозрачным */
-    transition: all 0.3s ease; /* добавляем плавный переход */
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease;
 }
-
+  
 .card:hover::before {
-    opacity: 1; /* делаем псевдоэлемент видимым при наведении на карточку */
+    opacity: 1;
 }
-
+  
 .card img {
     width: 100%;
     height: auto;
 }
-
+  
 .card-body {
     padding: 15px;
 }
-
+  
 .card-title {
     font-size: 20px;
     font-weight: bold;
 }
-
+  
 .btn {
     position: absolute;
-    bottom: -50px; /* задаем отрицательное значение для свойства bottom, чтобы кнопка "View" изначально была за пределами карточки */
+    bottom: -50px;
     left: 0;
     width: 100%;
     padding: 10px 0;
@@ -54,9 +63,10 @@
     color: #fff;
     text-align: center;
     font-weight: bold;
-    transition: all 0.3s ease; /* добавляем плавный переход */
+    transition: all 0.3s ease;
 }
-
+  
 .card:hover .btn {
-    bottom: 0; /* показываем кнопку "View" при наведении на карточку */
+    bottom: 0;
 }
+  
