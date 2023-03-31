@@ -36,7 +36,7 @@ require_once 'connection.php';
                         <li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>
                         <li><hr class='dropdown-divider'></li>
-                        <li><a href='functions/logout.php' class='dropdown-item'>Sign out</a></li>
+                        <li><a href='logout.php' class='dropdown-item'>Sign out</a></li>
                       </ul>
                     </div>";
                 

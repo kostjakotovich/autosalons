@@ -16,7 +16,7 @@ if (isset($_GET['offerID'])) {
 <html>
 <head>
   <script src="../autosalons/js/script.js" defer></script>
-  <script src="../autosalons/js/registration.js" defer></script>
+  <script src="../autosalons/js/form-popup.js" defer></script>
   <link rel="stylesheet" href="css/offerPage.css">
 </head>
 <body>
@@ -25,39 +25,40 @@ if (isset($_GET['offerID'])) {
 <div class="card">
   <div class="card-body">
     <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+    <br>
+    <br>
+    <h5>More information:</h5>
+    <br>
     <p class="card-text"><?php echo 'Color: ' .$selectedOfferInfo['color'] ; ?></p>
     <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
-    <br>
     <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
     <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
-    <a href="#" class="btn" onclick="on()">Get an offer</a>
+    <?php 
+        if (isset($_SESSION['success'])) {
+          ?> <a href="#" class="btn" onclick="on()">Get an offer</a>
+        <?php } 
+        else{
+          ?> <p class="btn">You need to log in to make an offer.</p>
+        <?php } ?>
   </div>
 </div>
 
     <div id="overlay" onclick="off()">
       <div id="text">
-        <form method="post" action="offerPage.php">
+      <form method="post" action="#">
           <label for="name">Name:</label><br>
           <input type="text" id="name" name="name" required><br>
           <label for="surname">Surname:</label><br>
           <input type="text" id="surname" name="surname" required><br>
           <label for="telephone">Telephone:</label><br>
           <input type="tel" id="telephone" name="telephone" required><br><br>
-          <input type="submit" value="Submit">
-          <input type="button" value="Cancel" onclick="off()">
+          <input type="submit" value="Submit" id="submitButton">
+          <input type="button" value="Cancel" onclick="off(event)" id="cancelButton">
+
         </form>
       </div>
     </div>
 
-<script>
-function on() {
-  document.getElementById("overlay").style.display = "block";
-}
-
-function off() {
-  document.getElementById("overlay").style.display = "none";
-}
-</script>
 
 </body>
 </html>
