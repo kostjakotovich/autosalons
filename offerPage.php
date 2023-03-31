@@ -45,7 +45,7 @@ if (isset($_GET['offerID'])) {
 
     <div id="overlay" onclick="off()">
       <div id="text">
-      <form method="post" action="#">
+      <form method="post" action="Order.php">
           <label for="name">Name:</label><br>
           <input type="text" id="name" name="name" required><br>
           <label for="surname">Surname:</label><br>
