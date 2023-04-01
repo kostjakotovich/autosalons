@@ -41,7 +41,6 @@ class Order {
         $stmt->bindValue(':name', $this->name);
         $stmt->bindValue(':surname', $this->surname);
         $stmt->bindValue(':telephone', $this->telephone);
-        $stmt->execute();
         if ($stmt->execute()) {
             $_SESSION['order_success'] = "Your order has been sent successfully.";
             header("Location: index.php");
