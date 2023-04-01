@@ -11,12 +11,14 @@ $offers = $offer->getAllOffers();
 
 <html>
 <head>
-  <!-- jQuery -->
-  <script src="path/to/jquery.js"></script>
 
   <!-- Bootstrap JS -->
-  <script src="autosalons\bootstrap-5.1.3-dist\js\bootstrap.min.js"></script>
+  <script src="bootstrap-5.1.3-dist\js\bootstrap.min.js"></script>
 
+   <!-- alert close JS -->
+   <script src="js/order-success-close.js" defer></script>
+   
+   
   <link rel="stylesheet" href="css/cards.css">
   <link rel="stylesheet" href="css/homepage.css">
 </head>
@@ -76,6 +78,7 @@ $offers = $offer->getAllOffers();
   <?php } ?>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
