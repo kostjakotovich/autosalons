@@ -42,7 +42,12 @@ class Order {
         $stmt->bindValue(':surname', $this->surname);
         $stmt->bindValue(':telephone', $this->telephone);
         $stmt->execute();
-        header('location: offerPage.php');
+        if ($stmt->execute()) {
+            $_SESSION['order_success'] = "Your order has been sent successfully.";
+            header("Location: index.php");
+          } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
     
     
@@ -65,4 +70,16 @@ class Order {
     }
     
 }
+if (isset($_POST['submit_order'])) {
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $telephone = $_POST['telephone'];
+    echo "<script>event.preventDefault();</script>";
+    if (isset($_SESSION['userID'])) {
+      $order = new Order($offerID, $_SESSION['userID']);
+      $order->createOrder($name, $surname, $telephone, $offerID);
+    } else {
+      // Handle the case where the user is not logged in
+    }
+  }
 ?>

@@ -14,19 +14,6 @@ if (isset($_GET['offerID'])) {
   header("Location: index.php");
 }
 
-if (isset($_POST['submit_order'])) {
-  $name = $_POST['name'];
-  $surname = $_POST['surname'];
-  $telephone = $_POST['telephone'];
-  if (isset($_SESSION['userID'])) {
-    $order = new Order($offerID, $_SESSION['userID']);
-    $order->createOrder($name, $surname, $telephone, $offerID);
-  } else {
-    // Handle the case where the user is not logged in
-  }
-}
-
-
 ?>
 <html>
 <head>

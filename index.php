@@ -3,6 +3,7 @@ session_start();
 require_once 'connection.php';
 require_once 'Offer.php';
 
+
 $offer = new Offer();
 $offers = $offer->getAllOffers();
 
@@ -10,11 +11,34 @@ $offers = $offer->getAllOffers();
 
 <html>
 <head>
+  <!-- jQuery -->
+  <script src="path/to/jquery.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="autosalons\bootstrap-5.1.3-dist\js\bootstrap.min.js"></script>
+
   <link rel="stylesheet" href="css/cards.css">
   <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
 <?php require 'header.php'; ?>
+
+<div>
+    <?php 
+    if(isset($_SESSION['order_success'])){
+    ?>
+      <div class="alert alert-success text-center" role="alert">
+        <?php echo $_SESSION['order_success']; ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <?php
+    unset($_SESSION['order_success']);
+    }
+    ?>
+</div>
+
 <form action="phpSearchOption.php" method="post" style="text-align:center">
   <input type="text" placeholder="Search.." name="search" style="width: 60%;
   margin: auto;
