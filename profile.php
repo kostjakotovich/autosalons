@@ -12,7 +12,24 @@ if(isset($_SESSION["userID"])) {
       $username = $userInfo['username'];
       $email = $userInfo['email'];
   }
-  
+
+  // обработка изменения пароля
+  if(isset($_POST['changePassword'])) {
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    if($user->changePassword($currentPassword, $newPassword, $confirmPassword)) {
+      // если пароль успешно изменен, перенаправляем пользователя на страницу профиля
+      header('location: profile.php');
+      exit();
+    } else {
+      // если произошла ошибка, сохраняем ее в переменной и выводим на страницу
+      $error = "Unable to change password. Please check your current password and make sure the new password fields match.";
+    }
+  }
+
+
   // создаем экземпляр класса Order и передаем userID текущего пользователя
   $order = new Order(null, $userID);
   $orders = $order->getOrderInfo();
@@ -41,6 +58,23 @@ if(isset($_SESSION["userID"])) {
 <div id="UserInfo" class="tabcontent" style="display: block;">
   <p style="font-size: 20px;">Name: <?php echo $username; ?></p>
   <p style="font-size: 20px;">Email: <?php echo $email; ?></p>
+  <button class="btn">Change Password</button>
+
+  <div id="changePassword" style="display:none;">
+  <form method="post">
+    <label for="currentPassword">Current password:</label>
+    <input type="password" id="currentPassword" name="currentPassword" required>
+    <br>
+    <label for="newPassword">New password:</label>
+    <input type="password" id="newPassword" name="newPassword" required>
+    <br>
+    <label for="confirmPassword">Confirm new password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <br>
+    <input type="submit" name="changePassword" value="Change Password">
+  </form>
+</div>
+
 </div>
 
 <div id="Orders" class="tabcontent">
@@ -94,4 +128,18 @@ if(isset($_SESSION["userID"])) {
     }
     
     document.getElementsByClassName("tablinks")[0].click();
+</script>
+
+<script>
+  var changePasswordBtn = document.querySelector('.btn');
+  var changePasswordDiv = document.getElementById('changePassword');
+
+  changePasswordBtn.addEventListener('click', function() {
+    if (changePasswordDiv.style.display === 'none') {
+      changePasswordDiv.style.display = 'block';
+    } else {
+      changePasswordDiv.style.display = 'none';
+    }
+  });
+
 </script>

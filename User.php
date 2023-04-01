@@ -21,5 +21,29 @@ class UserMain {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         return $user;
     }
+
+    public function changePassword($currentPassword, $newPassword, $confirmPassword) {
+        try {
+          $stmt = $this->conn->prepare("SELECT password FROM user WHERE userID = :userID");
+          $stmt->bindParam(':userID', $this->userID);
+          $stmt->execute();
+          $result = $stmt->fetch();
+    
+          if(password_verify($currentPassword, $result['password']) && $newPassword == $confirmPassword) {
+            $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+            $stmt = $this->conn->prepare("UPDATE user SET password = :newPassword WHERE userID = :userID");
+            $stmt->bindParam(':newPassword', $newPasswordHash);
+            $stmt->bindParam(':userID', $this->userID);
+            $stmt->execute();
+            return true;
+          } else {
+            return false;
+          }
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+          return false;
+        }
+      }
+      
 }
 ?>
