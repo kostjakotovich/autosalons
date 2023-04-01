@@ -2,15 +2,30 @@
 session_start();
 require_once 'connection.php';
 require_once 'Offer.php';
+require_once 'User.php';
+require_once 'Order.php';
 
 if (isset($_GET['offerID'])) {
-    $offerID = $_GET['offerID'];
-    $offer = new Offer();
-    $selectedOffer = $offer->getOffer($offerID);
-    $selectedOfferInfo = $offer->getOfferInfo($offerID);
+  $offerID = $_GET['offerID'];
+  $offer = new Offer();
+  $selectedOffer = $offer->getOffer($offerID);
+  $selectedOfferInfo = $offer->getOfferInfo($offerID);
 } else {
-    header("Location: index.php");
+  header("Location: index.php");
 }
+
+if (isset($_POST['submit_order'])) {
+  $name = $_POST['name'];
+  $surname = $_POST['surname'];
+  $telephone = $_POST['telephone'];
+  if (isset($_SESSION['userID'])) {
+    $order = new Order($offerID, $_SESSION['userID']);
+    $order->createOrder($name, $surname, $telephone, $offerID);
+  } else {
+    // Handle the case where the user is not logged in
+  }
+}
+
 
 ?>
 <html>
@@ -35,7 +50,7 @@ if (isset($_GET['offerID'])) {
     <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
     <?php 
         if (isset($_SESSION['success'])) {
-          ?> <a href="#" class="btn" onclick="on()">Get an offer</a>
+          ?> <a href="#" class="btn2" onclick="on()">Get an offer</a>
         <?php } 
         else{
           ?> <p class="btn">You need to log in to make an offer.</p>
@@ -44,16 +59,26 @@ if (isset($_GET['offerID'])) {
 </div>
 
     <div id="overlay" onclick="off()">
-      <div id="text">
-      <form method="post" action="Order.php">
-          <label for="name">Name:</label><br>
-          <input type="text" id="name" name="name" required><br>
-          <label for="surname">Surname:</label><br>
-          <input type="text" id="surname" name="surname" required><br>
-          <label for="telephone">Telephone:</label><br>
-          <input type="tel" id="telephone" name="telephone" required><br><br>
-          <input type="submit" value="Submit" id="submitButton">
-          <input type="button" value="Cancel" onclick="off(event)" id="cancelButton">
+      <div id="text" class="form-container">
+        <form method="post" action="offerPage.php">
+
+          <input type="hidden" name="offerID" value="<?php echo $offerID ?>">
+
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" class="form-control" id="surname" name="surname" required>
+          </div>
+          <div class="form-group">
+            <label for="telephone">Telephone:</label>
+            <input type="text" class="form-control" id="telephone" name="telephone" required>
+          </div>
+          <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
+
+          <input type="button" value="Cancel" onclick="off(event)" id="cancelButton" class="btn btn-primary">
 
         </form>
       </div>
