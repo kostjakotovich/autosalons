@@ -1,7 +1,7 @@
 /* cards */
 .card {
     width: 500px;
-    height: 500px;
+    height: 450px;
     margin-right: 15%; /* Добавляем отступ слева */
     margin-top: 15%; /* Добавляем отступ слева */
     float:right;
@@ -30,7 +30,7 @@
 
 .btn2 {
     position: absolute;
-    bottom: 5px; /* задаем отрицательное значение для свойства bottom, чтобы кнопка "View" изначально была за пределами карточки */
+    bottom: 0px; /* чтобы кнопка была в самом низу карточки*/
     left: 0;
     width: 100%;
     padding: 10px 0;

@@ -37,7 +37,7 @@ if (isset($_GET['offerID'])) {
     <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
     <?php 
         if (isset($_SESSION['success'])) {
-          ?> <a href="#" class="btn2" onclick="on()">Get an offer</a>
+          ?> <input type="button" value="Get an offer" class="btn2" onclick="on()"></input>
         <?php } 
         else{
           ?> <p class="btn">You need to log in to make an offer.</p>

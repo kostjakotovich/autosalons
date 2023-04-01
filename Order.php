@@ -31,22 +31,28 @@ class Order {
         $this->orderOfferID = $_POST['offerID'];
         $this->orderUserID = $_SESSION['userID'];
         
-        $sql = "INSERT INTO `order` (`orderDate`, `status`, `orderOfferID`, `orderUserID`, `name`, `surname`, `telephone`) 
-                VALUES (:orderDate, :status, :orderOfferID, :orderUserID, :name, :surname, :telephone)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':orderDate', $this->orderDate);
-        $stmt->bindValue(':status', $this->status);
-        $stmt->bindValue(':orderOfferID', $this->orderOfferID);
-        $stmt->bindValue(':orderUserID', $this->orderUserID);
-        $stmt->bindValue(':name', $this->name);
-        $stmt->bindValue(':surname', $this->surname);
-        $stmt->bindValue(':telephone', $this->telephone);
-        if ($stmt->execute()) {
-            $_SESSION['order_success'] = "Your order has been sent successfully.";
-            header("Location: index.php");
-          } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+        if(isset($_SESSION["userID"])) { 
+            $sql = "INSERT INTO `order` (`orderDate`, `status`, `orderOfferID`, `orderUserID`, `name`, `surname`, `telephone`) 
+                    VALUES (:orderDate, :status, :orderOfferID, :orderUserID, :name, :surname, :telephone)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':orderDate', $this->orderDate);
+            $stmt->bindValue(':status', $this->status);
+            $stmt->bindValue(':orderOfferID', $this->orderOfferID);
+            $stmt->bindValue(':orderUserID', $this->orderUserID);
+            $stmt->bindValue(':name', $this->name);
+            $stmt->bindValue(':surname', $this->surname);
+            $stmt->bindValue(':telephone', $this->telephone);
+            if ($stmt->execute()) {
+                $_SESSION['order_success'] = "Your order has been sent successfully.";
+                header("Location: index.php");
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
         }
+        else{
+            header('location: loginPage.php');
+        } 
+          
     }
     
     
@@ -69,6 +75,7 @@ class Order {
     }
     
 }
+
 if (isset($_POST['submit_order'])) {
     $name = $_POST['name'];
     $surname = $_POST['surname'];
