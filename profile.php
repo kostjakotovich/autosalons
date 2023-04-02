@@ -4,6 +4,7 @@ require_once 'connection.php';
 require_once 'User.php';
 require_once 'Order.php';
 
+// проверка наличия ошибок
 if(isset($_SESSION["userID"])) {
   $userID = $_SESSION["userID"];
   $user = new UserMain($userID);
@@ -12,30 +13,53 @@ if(isset($_SESSION["userID"])) {
       $username = $userInfo['username'];
       $email = $userInfo['email'];
   }
-
-  // обработка изменения пароля
-  if(isset($_POST['changePassword'])) {
-    $currentPassword = $_POST['currentPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
-
-    if($user->changePassword($currentPassword, $newPassword, $confirmPassword)) {
-      // если пароль успешно изменен, перенаправляем пользователя на страницу профиля
-      header('location: profile.php');
-      exit();
-    } else {
-      // если произошла ошибка, сохраняем ее в переменной и выводим на страницу
-      $error = "Unable to change password. Please check your current password and make sure the new password fields match.";
-    }
-  }
-
-
-  // создаем экземпляр класса Order и передаем userID текущего пользователя
-  $order = new Order(null, $userID);
-  $orders = $order->getOrderInfo();
 } else {
   header('location: loginPage.php');
 }
+// обработка изменения пароля
+$change_errors = array();
+// обработка изменения пароля
+if (isset($_POST["changePassword"])) {
+  $change_errors = array();
+
+  $user = new UserMain($userID);
+  $userPassword = $user->getPassword();
+
+  $currentPassword = $_POST["currentPassword"];
+  $newPassword = $_POST["newPassword"];
+  $confirmPassword = $_POST["confirmPassword"];
+  // проверка, что пароль в первом поле совпадает с текущим паролем пользователя
+  if (!password_verify($currentPassword, $userPassword)) {
+      array_push($change_errors,"Current password is incorrect.");
+  } // проверка, что новый пароль во втором поле не совпадает с текущим паролем пользователя
+  if (password_verify($newPassword, $userPassword)) {
+      array_push($change_errors,"New password must not be the same as current password.");
+  }
+
+  // проверка, что пароли во втором и третьем полях совпадают
+  if ($newPassword !== $confirmPassword) {
+      array_push($change_errors,"New password and confirmation password do not match.");
+  }
+  if (count($change_errors) == 0) {
+      // изменение пароля
+      if ($user->changePassword($currentPassword, $newPassword, $confirmPassword)) {
+        // если пароль успешно изменен, перенаправляем пользователя на страницу профиля
+        $_SESSION['success_change'] = 'Password change successful';
+        session_write_close(); // сохранение данных сессии
+        header('location: profile.php');
+      } else {
+          // если произошла ошибка, сохраняем ее в переменной и выводим на страницу
+          array_push($change_errors,"Unable to change password. Please check your current password and make sure the new password fields match.");
+      }
+    
+  }
+}
+
+// создаем экземпляр класса Order и передаем userID текущего пользователя
+$order = new Order(null, $userID);
+$orders = $order->getOrderInfo();
+
+
 
 ?>
 
@@ -56,22 +80,23 @@ if(isset($_SESSION["userID"])) {
 </div>
 
 <div id="UserInfo" class="tabcontent" style="display: block;">
-  <p style="font-size: 20px;">Name: <?php echo $username; ?></p>
-  <p style="font-size: 20px;">Email: <?php echo $email; ?></p>
+  <p style="font-size: 30px; margin-top: 2%;">Username: <?php echo $username; ?></p>
+  <br>
+  <p style="font-size: 30px;">Email: <?php echo $email; ?></p>
   <button class="btn">Change Password</button>
 
   <div id="changePassword" style="display:none;">
   <form method="post">
     <label for="currentPassword">Current password:</label>
-    <input type="password" id="currentPassword" name="currentPassword" required>
+    <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
     <br>
     <label for="newPassword">New password:</label>
-    <input type="password" id="newPassword" name="newPassword" required>
+    <input type="password" id="newPassword" class="form-control" name="newPassword" required>
     <br>
     <label for="confirmPassword">Confirm new password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
     <br>
-    <input type="submit" name="changePassword" value="Change Password">
+    <input type="submit" name="changePassword" class="form-control" value="Change Password">
   </form>
 </div>
 
@@ -111,6 +136,22 @@ if(isset($_SESSION["userID"])) {
     ?>
   </table>
 </div>
+<?php if (isset($_SESSION['success_change'])): ?>
+  <div class="alert alert-success"><?php echo $_SESSION['success_change']; ?></div>
+  <?php unset($_SESSION['success_change']); ?>
+<?php endif; ?>
+
+
+<?php if (!empty($change_errors)): ?>
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        <?php foreach ($change_errors as $error): ?>
+          <p><?php echo $error; ?></p>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
 
 <script>
     function openTab(evt, tabName) {

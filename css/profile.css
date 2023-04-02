@@ -8,6 +8,15 @@ body{
 
 }
 
+.profile-info {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.profile-info p {
+  margin: 5px 0;
+}
+
+
 
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
   
@@ -78,7 +87,6 @@ body{
 
   .btn {
     position: relative;
-    bottom: 5px; /* задаем отрицательное значение для свойства bottom, чтобы кнопка "View" изначально была за пределами карточки */
     left: 0;
     width: 100%;
     padding: 10px 0;
@@ -86,5 +94,17 @@ body{
     color: #ffffff;
     text-align: center;
     font-weight: bold;
-    margin-top:10%;
+    margin-top:5%;
+  }
+
+  .form-container {
+    height: 440px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   }
