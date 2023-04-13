@@ -54,8 +54,20 @@ class Order {
         } 
           
     }
-    
-    
+
+
+    public function getAllOrderInfo() {
+        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, offInf.price
+                FROM `order` o
+                LEFT JOIN `user` u ON o.orderUserID = u.userID
+                LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
+                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $orders;
+    }    
+      
 
     public function getOrderInfo() {
         $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, offInf.price

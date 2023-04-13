@@ -12,7 +12,7 @@ require_once 'connection.php';
     <header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-right justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+        <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
 
@@ -23,6 +23,13 @@ require_once 'connection.php';
           <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
         
+          <!--  Для переадресации на страницу со семи заказами-->
+          <script>
+            function RedToOrdersPage() {
+              window.location.href = "ordersPage.php";
+            }
+          </script>
+
 
         <?php 
             if (isset($_SESSION['success'])) {
@@ -34,7 +41,7 @@ require_once 'connection.php';
                       <ul class='dropdown-menu text-small'>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>";
                         if ($_SESSION['roleID'] == 1) {
-                          echo "<li><a class='dropdown-item' href='#' onClick='RedToOffer'>All orders</a></li>
+                          echo "<li><a class='dropdown-item' href='#' onClick='RedToOrdersPage()'>All orders</a></li>
                           <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Offers</a></li>";
                         }                       
                         echo "<li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>

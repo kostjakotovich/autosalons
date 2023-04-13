@@ -102,8 +102,9 @@ $orders = $order->getOrderInfo();
     </div>
   <?php 
   } 
-  echo "<br><br><br><h4>Lai saņemtu palīdzību ar paroles maiņu, sazinieties ar administratoru.</h4>";?>
-
+  if ($_SESSION['roleID'] == 1) { 
+    echo "<br><br><br><h4>Lai saņemtu palīdzību ar paroles maiņu, sazinieties ar administratoru.</h4>";
+  } ?>
 </div>
 
 <div id="Orders" class="tabcontent">

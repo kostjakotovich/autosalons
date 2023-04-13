@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_latvian_ci;
 
-INSERT INTO user (username, email, password, roleID) VALUES ('admin', 'admin@example.com', 'admin', 1);
+INSERT INTO user (username, email, password, roleID) VALUES ('worker', 'servicestaff@example.com', 'admin', 1);
 
 
 -- Dumping data for table mariadb.user: ~0 rows (approximately)
