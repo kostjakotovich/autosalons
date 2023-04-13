@@ -7,6 +7,14 @@ require_once 'Offer.php';
 $offer = new Offer();
 $offers = $offer->getAllOffers();
 
+if(isset($_GET['search'])) {
+  $search = $_GET['search'];
+  $column = $_GET['column'] ?? 'manufacturer'; // Поиск по марке по умолчанию
+  $offers = $offer->searchOffers($search, $column);
+} else {
+  $offers = $offer->getAllOffers();
+}
+
 ?>
 
 <html>
@@ -41,7 +49,7 @@ $offers = $offer->getAllOffers();
     ?>
 </div>
 
-<form action="phpSearchOption.php" method="post" style="text-align:center">
+<form action="" method="post" style="text-align:center">
   <input type="text" placeholder="Search.." name="search" style="width: 60%;
   margin: auto;
   text-align: center;
@@ -56,14 +64,9 @@ $offers = $offer->getAllOffers();
   padding: 12px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;">
-  <div class="filter">
-    Meklēt pēc: <select name="column">
-  </div>
-  <option value="name">Name</option>
-  <option value="email">Email</option>
-  </select><br>
-  <input type ="submit">
+  <input type="submit">
 </form>
+
 <div class="card-wrapper">
   <?php foreach ($offers as $selectedOffer) { ?>
           <div class="card-wrapper">

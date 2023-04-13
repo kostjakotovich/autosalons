@@ -76,29 +76,33 @@ $orders = $order->getOrderInfo();
 
 <div class="tab">
   <button class="tablinks active" onclick="openTab(event, 'UserInfo')">User Info</button>
-  <button class="tablinks" onclick="openTab(event, 'Orders')">Orders</button>
+  <button class="tablinks" onclick="openTab(event, 'Orders')">My Orders</button>
 </div>
 
 <div id="UserInfo" class="tabcontent" style="display: block;">
   <p style="font-size: 30px; margin-top: 2%;">Username: <?php echo $username; ?></p>
   <br>
   <p style="font-size: 30px;">Email: <?php echo $email; ?></p>
-  <button class="btn">Change Password</button>
+  <?php if ($_SESSION['roleID'] == 0) { ?>
+    <button class="btn">Change Password</button>
 
-  <div id="changePassword" style="display:none;">
-  <form method="post">
-    <label for="currentPassword">Current password:</label>
-    <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
-    <br>
-    <label for="newPassword">New password:</label>
-    <input type="password" id="newPassword" class="form-control" name="newPassword" required>
-    <br>
-    <label for="confirmPassword">Confirm new password:</label>
-    <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
-    <br>
-    <input type="submit" name="changePassword" class="form-control" value="Change Password">
-  </form>
-</div>
+    <div id="changePassword" style="display:none;">
+    <form method="post">
+      <label for="currentPassword">Current password:</label>
+      <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
+      <br>
+      <label for="newPassword">New password:</label>
+      <input type="password" id="newPassword" class="form-control" name="newPassword" required>
+      <br>
+      <label for="confirmPassword">Confirm new password:</label>
+      <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
+      <br>
+      <input type="submit" name="changePassword" class="form-control" value="Change Password">
+    </form>
+    </div>
+  <?php 
+  } 
+  echo "<br><br><br><h4>Lai saņemtu palīdzību ar paroles maiņu, sazinieties ar administratoru.</h4>";?>
 
 </div>
 

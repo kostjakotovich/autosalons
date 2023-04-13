@@ -17,22 +17,29 @@ class Login {
     $stmt->execute([$username]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $_SESSION["userID"] = $row["userID"];
+    
 
     if($row){
-        //verify password
-        if(password_verify($password, $row['password']))
-        {
-            //action after a successful login
-            //for now just message a successful login
-            
-            $_SESSION['success'] = 'Login successful';
-            header('location: index.php');
-        }
-        else{
-            $_SESSION['error'] = 'Password incorrect';
-            header('location: loginPage.php');
-        }
-    }
+      if ($row['roleID'] == 1 && $row['password'] == $password) {
+        // для администратора пароль не хешируется
+        $_SESSION["roleID"] = $row["roleID"];
+        $_SESSION['success'] = 'Login successful';
+        header('location: index.php');
+      }
+      else if (password_verify($password, $row['password']))
+      {
+          //action after a successful login
+          //for now just message a successful login
+          $_SESSION["roleID"] = $row["roleID"];
+          $_SESSION['success'] = 'Login successful';
+          header('location: index.php');
+      }
+      else{
+          $_SESSION['error'] = 'Password incorrect';
+          header('location: loginPage.php');
+      }
+  }
+  
     else{
         $_SESSION['error'] = 'No account with that username';
         header('location: loginPage.php');

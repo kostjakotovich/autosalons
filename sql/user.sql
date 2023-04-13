@@ -22,10 +22,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
   `email` varchar(40) CHARACTER SET utf8mb4 NOT NULL,
-  `password` varchar(500) CHARACTER SET utf8mb4 NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `roleID` int(11) NOT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_latvian_ci;
+
+INSERT INTO user (username, email, password, roleID) VALUES ('admin', 'admin@example.com', 'admin', 1);
+
 
 -- Dumping data for table mariadb.user: ~0 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
