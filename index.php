@@ -21,7 +21,7 @@ if(isset($_GET['search'])) {
 <head>
 
   <!-- Bootstrap JS -->
-  <script src="bootstrap-5.1.3-dist\js\bootstrap.min.js"></script>
+  <script src="bootstrap\js\bootstrap.min.js"></script>
 
    <!-- alert close JS -->
    <script src="js/order-success-close.js" defer></script>
@@ -82,4 +82,5 @@ if(isset($_GET['search'])) {
 </div>
 
 </body>
+<?php include 'footer.php'; ?>
 </html>

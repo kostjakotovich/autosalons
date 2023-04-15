@@ -45,6 +45,7 @@ if (isset($_GET['offerID'])) {
   </div>
 </div>
 
+
     <div id="overlay" onclick="off()">
       <div id="text" class="form-container">
         <form method="post" action="offerPage.php">
@@ -70,7 +71,7 @@ if (isset($_GET['offerID'])) {
         </form>
       </div>
     </div>
-
-
+<?php include 'footer.php'; ?>
 </body>
+
 </html>

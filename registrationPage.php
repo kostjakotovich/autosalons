@@ -61,7 +61,7 @@ require 'header.php';
 </form>
 <div style="text-align:center">
     <button id="cancel" onclick="closeRegistration()" class='btn btn-deep-orange' style="text-align:center">Cancel</button>
-    <button onclick="RedToLogin()" class='btn btn-deep-orange' style="align:center">Sign In</button>
+    <button onclick="RedToLogin()" class='btn btn-deep-orange' style="align:center">Already have an account?</button>
 </div>
 
 <?php
