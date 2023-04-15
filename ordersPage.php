@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     foreach ($_POST['status'] as $orderID => $status) {
         // Обновляем статус заказа по его ID
         $order = new Order($orderID, 0); // userID тоже не важен, т.к. обновлять статус может админ
-        $order->updateStatus($status);
+        $order->updateStatus($status, $orderID);
 
         // Перезагружаем информацию о заказах из базы данных
         $orders = $order->getAllOrderInfo();
@@ -40,9 +40,27 @@ if (isset($_POST['submit'])) {
   <script src="../autosalons/js/script.js" defer></script>
   <script src="../autosalons/js/form-popup.js" defer></script>
   <link rel="stylesheet" href="css/orders.css">
+  <script src="js/order-success-close.js" defer></script>
 </head>
 <body>
     <?php require 'header.php';?>
+
+    <div>
+        <?php 
+        if(isset($_SESSION['order_status_success'])){
+        ?>
+        <div class="alert alert-success text-center" role="alert">
+            <?php echo $_SESSION['order_status_success']; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php
+            unset($_SESSION['order_status_success']);
+        }
+        ?>
+    </div>
+
     <form method="post">
         <table>
         <thead>

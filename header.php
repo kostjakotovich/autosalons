@@ -39,7 +39,7 @@ require_once 'connection.php';
                         <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2vRsFCw0zkeM9IE-PfdAWbPUJ4GHKn9ouAw&usqp=CAU' alt='mdo' width='32' height='32' class='rounded-circle'>
                       </a>
                       <ul class='dropdown-menu text-small'>
-                        <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile</a></li>";
+                        <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile & Orders</a></li>";
                         if ($_SESSION['roleID'] == 1) {
                           echo "<li><a class='dropdown-item' href='#' onClick='RedToOrdersPage()'>All orders</a></li>
                           <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Offers</a></li>";

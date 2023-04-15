@@ -12,25 +12,28 @@ class Order {
     private $surname;
     private $telephone;
     private $status;
+    private $orderUserID;
     private $orderOfferID;
 
-    public function __construct($orderID) {
+    public function __construct($offerID, $userID) {
         $this->conn = (new Database())->connect();
-        $this->orderID = $orderID;
+        $this->orderOfferID = $offerID;
+        $this->orderUserID = $userID;
     }
 
     public function getStatus() {
         return $this->status;
     }
 
-    public function updateStatus($status) {
+    public function updateStatus($status, $orderID) {
+        $this->orderID = $orderID;
         $this->status = $status;
         $sql = "UPDATE `order` SET `status` = :status WHERE `orderID` = :orderID";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':status', $this->status);
         $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            echo "Order status updated successfully.";
+            $_SESSION['order_status_success'] = "Order status changed successfully.";
         } else {
             echo "Error updating order status: " . $stmt->errorInfo()[2];
         }
