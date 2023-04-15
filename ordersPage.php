@@ -109,7 +109,7 @@ foreach($orders as $order){
                 <tbody>
                     <?php 
                     foreach($newOrders as $order){
-                        include 'ordersTable.inc.php';
+                        include 'includes/ordersTable.inc.php';
                     }
                     ?>
                 </tbody>
@@ -138,7 +138,7 @@ foreach($orders as $order){
                 <tbody>
                     <?php 
                     foreach($inProgressOrders as $order){
-                        include 'ordersTable.inc.php';
+                        include 'includes/ordersTable.inc.php';
                     }
                     ?>
                 </tbody>
@@ -166,7 +166,7 @@ foreach($orders as $order){
                 <tbody>
                     <?php 
                     foreach($doneOrders as $order){
-                        include 'ordersTable.inc.php';
+                        include 'includes/ordersTable.inc.php';
                     }
                     ?>
                 </tbody>
