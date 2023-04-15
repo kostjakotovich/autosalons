@@ -8,6 +8,7 @@ body{
 
 }
 
+
 .profile-info {
   font-size: 16px;
   margin-bottom: 20px;
@@ -15,6 +16,20 @@ body{
 .profile-info p {
   margin: 5px 0;
 }
+
+.btn {
+  position: relative;
+  margin-right: 3%;
+  margin-top: -18%;
+  float: right;
+  background-color: #007bff !important;
+  color: #fff !important;
+  border: black !important;
+  padding: 8px 20px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;  
+}
+
 
 
 
@@ -31,27 +46,10 @@ body{
     margin-bottom: 20px;
 }
 
-.tab button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 12px 20px;
-    margin-right: 10px;
-    font-size: 16px;
-    border-radius: 4px 4px 0px 0px;
-    transition: background-color 0.3s;
-}
-
 .tab button:hover {
     background-color: #0062cc;
 }
 
-.tab button.active {
-    background-color: #ccc;
-    color: black;
-}
 
 .tabcontent {
     display: none;
@@ -75,7 +73,7 @@ body{
   }
 
   th {
-    background-color: #4caf50;
+    background-color: #c0fdff;
     font-size: 18px;
     font-weight: bold;
 }
@@ -85,42 +83,39 @@ body{
     background-color: #f2f2f2;
   }
 
-  .btn {
-    position: relative;
-    left: 0;
-    width: 100%;
-    padding: 10px 0;
-    background-color: #3e83c0;
-    color: #ffffff;
-    text-align: center;
-    font-weight: bold;
-    margin-top:5%;
-  }
 
-  .form-container {
-    height: 440px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  }
-
-  input[type="submit"] {
+  select {
+    width: 150px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #000;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    }
+    
+    select option {
+    background-color: #fff;
+    color: #000;
+    }
+    
+    select option:checked {
     background-color: #007bff;
     color: #fff;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #0062cc;
-  }
+    }
+    
+    select option:hover {
+    background-color: #ccc;
+    }
+    
+    select::-ms-expand {
+    display: none;
+    }
+
   
   
   

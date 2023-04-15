@@ -33,7 +33,8 @@ class Order {
         $stmt->bindValue(':status', $this->status);
         $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            $_SESSION['order_status_success'] = "Order status changed successfully.";
+            $_SESSION['order_status_success'] = "Your order has been sent successfully.";
+            header("Location: ordersPage.php");
         } else {
             echo "Error updating order status: " . $stmt->errorInfo()[2];
         }
@@ -82,7 +83,8 @@ class Order {
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
-                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID";
+                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                order by `status` DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
