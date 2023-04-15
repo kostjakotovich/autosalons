@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
+  `status` varchar(15) DEFAULT NULL,
   `orderOfferID` int DEFAULT NULL,
   `orderUserID` int DEFAULT NULL,
   PRIMARY KEY (`orderID`),

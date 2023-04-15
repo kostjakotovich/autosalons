@@ -13,13 +13,30 @@ class Order {
     private $telephone;
     private $status;
     private $orderOfferID;
-    private $orderUserID;
 
-    public function __construct($offerID, $userID) {
+    public function __construct($orderID) {
         $this->conn = (new Database())->connect();
-        $this->orderOfferID = $offerID;
-        $this->orderUserID = $userID;
+        $this->orderID = $orderID;
     }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function updateStatus($status) {
+        $this->status = $status;
+        $sql = "UPDATE `order` SET `status` = :status WHERE `orderID` = :orderID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':status', $this->status);
+        $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            echo "Order status updated successfully.";
+        } else {
+            echo "Error updating order status: " . $stmt->errorInfo()[2];
+        }
+    }
+
+    
     
     
     public function createOrder($name, $surname, $telephone, $offerID) {
@@ -54,7 +71,8 @@ class Order {
         } 
           
     }
-
+    
+    
 
     public function getAllOrderInfo() {
         $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, offInf.price
