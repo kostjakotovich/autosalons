@@ -8,20 +8,16 @@ body{
 
 }
 
+p {
 
-.profile-info {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
 }
-.profile-info p {
-  margin: 5px 0;
-}
+
+
 
 .btn {
-  position: relative;
-  margin-right: 3%;
-  margin-top: -18%;
-  float: right;
   background-color: #007bff !important;
   color: #fff !important;
   border: black !important;
@@ -117,5 +113,7 @@ body{
     }
 
   
-  
+  #container{
+    text-align:center;
+  }
   

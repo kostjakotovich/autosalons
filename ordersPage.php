@@ -34,6 +34,22 @@ if (isset($_POST['submit'])) {
     }
 }
 
+$newOrders = array();
+$inProgressOrders = array();
+$doneOrders = array();
+
+foreach($orders as $order){
+    if($order['status'] == 'New'){
+        array_push($newOrders, $order);
+    }
+    elseif($order['status'] == 'In progress'){
+        array_push($inProgressOrders, $order);
+    }
+    elseif($order['status'] == 'Done'){
+        array_push($doneOrders, $order);
+    }
+}
+
 
 
 ?>
@@ -67,52 +83,95 @@ if (isset($_POST['submit'])) {
 
     </div>
 
-    <div>
+    <div id="container">
         <form method="post">
-            <table>
-            <thead>
-            <tr>
-            <th>Order Nr</th>
-            <th>Order Date</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Telephone</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Manufacturer</th>
-            <th>Model</th>
-            <th>Price</th>
-            <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php 
-                foreach($orders as $order){
-                    echo "<tr>";
-                    echo "<td>".$order['orderID']."</td>";
-                    echo "<td>".$order['orderDate']."</td>";
-                    echo "<td>".$order['name']."</td>";
-                    echo "<td>".$order['surname']."</td>";
-                    echo "<td>".$order['telephone']."</td>";    
-                    echo "<td>".$order['username']."</td>";
-                    echo "<td>".$order['email']."</td>";
-                    echo "<td>".$order['manufacturer']."</td>";
-                    echo "<td>".$order['type']."</td>";
-                    echo "<td>".$order['price']." $</td>";
-                    echo "<td>
-                    <select name='status[$order[orderID]]'>
-                        <option value='New'" . ($order['status'] == 'New' ? ' selected' : '') . ">New</option>
-                        <option value='In progress'" . ($order['status'] == 'In progress' ? ' selected' : '') . ">In progress</option>
-                        <option value='Done'" . ($order['status'] == 'Done' ? ' selected' : '') . ">Done</option>
-                    </select>
-                
-                        </td>";
-                    echo "</tr>";
-                }
-            ?>
-            </tbody>
-            </table>
             <input type="submit" name="submit" value="Save changes" class="btn">
+            <br>
+            <!-- Таблица для заказов со статусом New -->
+            <br>
+            <p>New</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Nr</th>
+                        <th>Order Date</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Telephone</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Manufacturer</th>
+                        <th>Model</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    foreach($newOrders as $order){
+                        include 'ordersTable.inc.php';
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <!-- Таблица для заказов со статусом In progress -->
+            <br>
+            <br>
+            <p>In progress</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Nr</th>
+                        <th>Order Date</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Telephone</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Manufacturer</th>
+                        <th>Model</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    foreach($inProgressOrders as $order){
+                        include 'ordersTable.inc.php';
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <!-- Таблица для заказов со статусом Done -->
+            <br>
+            <br>
+            <p>Done</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Nr</th>
+                        <th>Order Date</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Telephone</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Manufacturer</th>
+                        <th>Model</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    foreach($doneOrders as $order){
+                        include 'ordersTable.inc.php';
+                    }
+                    ?>
+                </tbody>
+            </table>
+
         </form>
     </div>
     <?php 
