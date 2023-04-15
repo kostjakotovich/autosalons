@@ -21,7 +21,7 @@ USE `mariadb`;
 
 -- Дамп структуры для таблица mariadb.offersinfo
 CREATE TABLE IF NOT EXISTS `offersinfo` (
-  `offersInfoID` int NOT NULL,
+  `offersInfoID` int NOT NULL AUTO_INCREMENT,
   `color` varchar(10) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `yearOfManufacture` date DEFAULT NULL,
@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~14 rows (приблизительно)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

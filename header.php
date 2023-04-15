@@ -23,10 +23,17 @@ require_once 'connection.php';
           <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
         
-          <!--  Для переадресации на страницу со семи заказами-->
+          <!--  Для переадресации на страницу со всеми заказами-->
           <script>
             function RedToOrdersPage() {
               window.location.href = "ordersPage.php";
+            }
+          </script>
+
+          <!--  Для переадресации на страницу с добавлеениями предложений-->
+          <script>
+            function RedToEditOffers() {
+                window.location.href="../autosalons/editOffersPage.php"; 
             }
           </script>
 
@@ -42,7 +49,7 @@ require_once 'connection.php';
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile & Orders</a></li>";
                         if ($_SESSION['roleID'] == 1) {
                           echo "<li><a class='dropdown-item' href='#' onClick='RedToOrdersPage()'>All orders</a></li>
-                          <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Offers</a></li>";
+                          <li><a class='dropdown-item' href='#' onClick='RedToEditOffers()'>Offers</a></li>";
                         }                       
                         echo "<li><a class='dropdown-item' href='#' onClick='RedToForum()'>Forum</a></li>
                         <li><hr class='dropdown-divider'></li>

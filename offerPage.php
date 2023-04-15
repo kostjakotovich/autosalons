@@ -14,6 +14,15 @@ if (isset($_GET['offerID'])) {
   header("Location: index.php");
 }
 
+if (isset($_SESSION['success'])) {
+  // Create an Order object with offerID and userID
+  $order = new Order($offerID, $_SESSION['userID']);
+
+  // Check if the user has any "New" or "In progress" orders
+  $hasActiveOrders = $order->checkOrdersStatus();
+}
+
+
 ?>
 <html>
 <head>
@@ -37,11 +46,22 @@ if (isset($_GET['offerID'])) {
     <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
     <?php 
         if (isset($_SESSION['success'])) {
-          ?> <input type="button" value="Get an offer" class="btn2" onclick="on()"></input>
-        <?php } 
-        else{
-          ?> <p class="btn">You need to log in to make an offer.</p>
-        <?php } ?>
+          if ($hasActiveOrders) {
+              ?>
+              <p class="btn">Wait for a response to Your previous order.</p>
+              <?php
+          } else {
+              ?>
+              <input type="button" value="Get an offer" class="btn2" onclick="on()"></input>
+              <?php
+          }
+        } else {
+            ?>
+            <p class="btn">You need to log in to make an offer.</p>
+            <?php
+        }
+             
+    ?>
   </div>
 </div>
 

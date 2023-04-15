@@ -1,0 +1,92 @@
+/* Typography */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  /* Form */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input[type="text"], input[type="number"], input[type="file"], textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+  input[type="submit"] {
+    background-color: #428bca;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #3071a9;
+  }
+  
+  /* Datepicker */
+  .ui-datepicker {
+    font-size: 0.8rem;
+  }
+  
+  /* General layout */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Add offer page specific styles */
+  .add-offer-form {
+    max-width: 600px;
+  }
+  
+  .add-offer-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .add-offer-form input[type="file"] {
+    padding: 0;
+  }
+  
+  .add-offer-form input[type="file"]::-webkit-file-upload-button {
+    background-color: #428bca;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .add-offer-form input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #3071a9;
+  }
+  

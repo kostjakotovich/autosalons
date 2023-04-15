@@ -10,7 +10,11 @@ require_once 'connection.php';
   background-color: #222;
   color: #fff;
   padding: 40px 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
+
 
 .footer-content {
   display: flex;

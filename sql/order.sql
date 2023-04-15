@@ -26,17 +26,17 @@ CREATE TABLE IF NOT EXISTS `order` (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `status` varchar(15) DEFAULT NULL,
-  `orderOfferID` int DEFAULT NULL,
+  `status` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `orderUserID` int DEFAULT NULL,
+  `orderOfferID` int DEFAULT NULL,
   PRIMARY KEY (`orderID`),
   KEY `orderUserID` (`orderUserID`) USING BTREE,
   KEY `orderOfferID` (`orderOfferID`),
-  CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
+  CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `order` (`orderID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.order: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~4 rows (приблизительно)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

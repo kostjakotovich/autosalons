@@ -104,6 +104,16 @@ class Order {
         return $orders;
     }
 
+    public function checkOrdersStatus() {
+        $query = "SELECT COUNT(*) as count FROM `order` WHERE orderUserID=:userID AND (status='New' OR status='In progress')";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':userID', $this->orderUserID);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+    
+
     public function setUserIDFromSession($userID) {
         $this->orderUserID = $userID;
     }

@@ -71,7 +71,7 @@ if(isset($_GET['search'])) {
   <?php foreach ($offers as $selectedOffer) { ?>
           <div class="card-wrapper">
               <div class="card">
-                  <img src="img/<?php echo $selectedOffer['image']; ?>.webp" alt="Car Image">
+                  <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image">
                   <div class="card-body">
                       <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
                       <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>" class="btn btn-primary">View</a>
