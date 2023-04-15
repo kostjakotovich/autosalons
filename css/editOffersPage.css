@@ -5,8 +5,9 @@ body {
   
   h1 {
     font-size: 2rem;
-    margin-bottom: 1rem;
-  }
+    margin: 0.5rem 0;
+    text-align: center;
+}
   
   label {
     font-weight: bold;
@@ -14,18 +15,24 @@ body {
   
   /* Form */
   form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  input[type="text"], input[type="number"], input[type="file"], textarea {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  textarea {
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
     width: 100%;
     max-width: 400px;
+    background-color: #f0f0f0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   }
   
   textarea {
@@ -53,16 +60,24 @@ body {
     font-size: 0.8rem;
   }
   
-  /* General layout */
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
+/* General layout */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     padding: 20px;
   }
+
+  
   
   /* Add offer page specific styles */
   .add-offer-form {
     max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
   }
   
   .add-offer-form label {

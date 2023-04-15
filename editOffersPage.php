@@ -39,30 +39,32 @@ if (isset($_POST['submit'])) {
 
 <body>
     <?php require 'header.php'; ?>
-    <h1>Add Offer</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
-        <label for="type">Type:</label><br>
-        <input type="text" id="type" name="type" required><br><br>
+    <div class="container">
 
-        <label for="manufacturer">Manufacturer:</label><br>
-        <input type="text" id="manufacturer" name="manufacturer" required><br><br>
+        <form method="POST" action="" enctype="multipart/form-data" class="add-offer-form">
+            <label for="type">Model:</label><br>
+            <input type="text" id="type" name="type" required><br><br>
 
-        <label for="image">Image:</label><br>
-        <input type="file" id="image" name="image" accept="image/*" required><br><br>
+            <label for="manufacturer">Manufacturer:</label><br>
+            <input type="text" id="manufacturer" name="manufacturer" required><br><br>
 
-        <label for="color">Color:</label><br>
-        <input type="text" id="color" name="color" required><br><br>
+            <label for="image">Image:</label><br>
+            <input type="file" id="image" name="image" accept="image/*" required><br><br>
 
-        <label for="price">Price:</label><br>
-        <input type="number" id="price" name="price" required><br><br>
+            <label for="color">Color:</label><br>
+            <input type="text" id="color" name="color" required><br><br>
 
-        <label for="yearOfManufacture">Year of Manufacture:</label><br>
-        <input type="text" id="yearOfManufacture" name="yearOfManufacture" required><br><br>
+            <label for="price">Price:</label><br>
+            <input type="number" id="price" name="price" required><br><br>
 
-        <label for="weight">Weight:</label><br>
-        <input type="number" id="weight" name="weight" required><br><br>
+            <label for="yearOfManufacture">Year of Manufacture:</label><br>
+            <input type="text" id="yearOfManufacture" name="yearOfManufacture" required><br><br>
 
-        <input type="submit" name="submit" value="Add Offer">
-    </form>
+            <label for="weight">Weight:</label><br>
+            <input type="number" id="weight" name="weight" required><br><br>
+
+            <input type="submit" name="submit" value="Add Offer">
+        </form>
+    </div>
 </body>
 </html>
