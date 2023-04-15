@@ -49,6 +49,7 @@ if (isset($_POST['submit'])) {
     <?php require 'header.php';?>
 
     <div>
+    
     <?php 
     if(isset($_SESSION['order_status_success'])){
     ?>
@@ -59,6 +60,7 @@ if (isset($_POST['submit'])) {
         </button>
       </div>
     <?php
+    
     unset($_SESSION['order_status_success']);
     }
     ?>

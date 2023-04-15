@@ -34,7 +34,6 @@ class Order {
         $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
         if ($stmt->execute()) {
             $_SESSION['order_status_success'] = "Your order has been sent successfully.";
-            header("Location: ordersPage.php");
         } else {
             echo "Error updating order status: " . $stmt->errorInfo()[2];
         }
