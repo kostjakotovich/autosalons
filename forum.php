@@ -1,68 +1,49 @@
 <?php
 session_start();
 require_once 'connection.php';
+require_once 'User.php';
+require_once 'Comment.php';
 
-require 'header.php';
+$commentObj = new Comment();
 
+// Получаем все комментарии и имена пользователей из таблицы
+$comments = $commentObj->getAllComments();
 
-class Profile {
-    private $DBconnection;
-
-    function __construct($DBconnection) {
-        $this->DBconnection = $DBconnection;
-    }
-
-    function displayComments() {
-        $sql = "SELECT commentID, name, email, comment FROM comments";
-        $stmt = $this->DBconnection->prepare($sql);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            while($row = $stmt->fetch()) {
-                echo "Name: " . $row["name"]. " - Email: " . $row["email"]. " - Comment: " . $row["comment"]. "<br>";
-                ?>
-                <a href="delete.php?commentID=<?php echo $row["commentID"]; ?>">Delete</a>
-                <br></br>
-                <?php
-            }
-        } else {
-            echo "0 results";
-        }
-    }
+// Обработка формы для добавления нового комментария
+if (isset($_POST['comment'])) {
+    $comment = $_POST['comment'];
+    $userID = $_SESSION['userID'];
+    $commentObj->addComment($comment, $userID);
+    header("Location: forum.php"); // перезагрузка страницы для избежания повторной отправки формы
+    exit;
 }
-
-$db = new database();
-$DBconnection = $db->getDBConnection();
-$profile = new Profile($DBconnection);
 ?>
 
+<html>
 <head>
-    <script src="../autosalons/js/script.js" defer></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <p>Forum</p>
+    <!-- style css link -->
+    <link rel="stylesheet" href="css/forum.css">
+
 </head>
 <body>
-    <script src="../autosalons/js/script.js" defer></script>
+    <?php require 'header.php'; ?>
 
-    <button class="button" id="redirecttoindex" onClick="RedToComments()">Home page</button>
-    
-    <form action='submit.php' method='post'>
-        <label for='name'>Name:</label>
-        <input type='text' id='name' name='name'>
-
-        <label for='comment'>Comment:</label>
-        <textarea id='comment' name='comment'></textarea>
-
-        <input type='submit' value='Submit'>
+    <!-- Форма для добавления нового комментария -->
+    <form method="post">
+        <label for="comment">Оставьте свой комментарий:</label><br>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
+        <input type="submit" value="Отправить">
     </form>
 
     <?php
-        $profile->displayComments();
-
-        if(isset($_GET["success"])){
-            if($_GET["success"] =="suc"){
-                echo "<script>alert('Jūs veiksmīgi atstājāt komentāriju!')</script>";
-            }
-        };
+    // Отображаем комментарии и имена пользователей
+    foreach ($comments as $comment) {
+        echo '<div>';
+        echo '<h4>' . $comment['username'] . ' ' . $comment['date'] . '</h4>';
+        echo '<p>' . $comment['comment'] . '</p>';
+        echo '</div>';
+    }
     ?>
+
 </body>
+</html>
