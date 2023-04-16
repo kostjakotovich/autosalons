@@ -8,7 +8,7 @@ require_once 'connection.php';
     <head>
       <script src="../autosalons/js/script.js" defer></script>
       
-      <link rel="stylesheet" href="css/homepage.css">
+      <link rel="stylesheet" href="css/reglog.css">
       <title>Sign In</title>
     </head>
     <body>
@@ -18,18 +18,18 @@ require_once 'connection.php';
     ?>
     <!-- REGISTRATION FORM -->
 
-    <form action="login.php" method="POST">
+    <form action="login.php" method="POST" class="form-container">
             <div class="modal-body mx-3">
                 
                 
-                <input type="text" class="form-control validate" value="" name="username" id="username2">
+                <input type="text" class="form-control validate" value="" name="username" id="username2" style="width: 300px;">
                 <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
                 
 
 
                 <div class="md-form mb-4">
                 <i class="fas fa-lock prefix grey-text"></i>
-                <input type="password" class="form-control validate" name="password">
+                <input type="password" class="form-control validate" name="password" style="width: 300px; margin-top:15%;">
                 <label data-error="wrong" data-success="right" for="orangeForm-pass" >Your password</label>
                 </div>
 
@@ -44,6 +44,7 @@ require_once 'connection.php';
         </div>
         </div>
     </form>
+    <br><br>
     <div style="text-align:center">
         <button onclick="RedToHomepage()" class='btn btn-deep-orange'>Cancel</button>
         <button onclick="RedToRegistration()" class='btn btn-deep-orange'>Sign Up</button>
