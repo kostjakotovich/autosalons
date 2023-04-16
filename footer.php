@@ -11,7 +11,7 @@ require_once 'connection.php';
   color: #fff;
   padding: 40px 20px;
   position: relative;
-  bottom: 0;
+  bottom: 0%;
   width: 100%;
 }
 

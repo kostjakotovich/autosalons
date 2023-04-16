@@ -5,14 +5,15 @@ require_once 'Offer.php';
 require_once 'User.php';
 require_once 'Order.php';
 
+
+$offerID = isset($_GET['offerID']);
 if (isset($_GET['offerID'])) {
   $offerID = $_GET['offerID'];
-  $offer = new Offer();
+  $offer = new Offer($offerID, $_SESSION['userID']);
   $selectedOffer = $offer->getOffer($offerID);
   $selectedOfferInfo = $offer->getOfferInfo($offerID);
-} else {
-  header("Location: index.php");
-}
+} 
+
 
 if (isset($_SESSION['success'])) {
   // Create an Order object with offerID and userID
@@ -28,8 +29,8 @@ if (isset($_POST['submit_order'])) {
     $telephone = $_POST['telephone'];
     echo "<script>event.preventDefault();</script>";
     if (isset($_SESSION['userID'])) {
-        $order = new Order($userID, $offerID);
-        $order->createOrder($_POST['name'], $_POST['surname'], $_POST['telephone'], $offerID);
+        $order = new Order($offerID, $_SESSION['userID']);
+        $order->createOrder($_POST['name'], $_POST['surname'], $_POST['telephone'], $_POST['offerID']);
     } else {
       // Handle the case where the user is not logged in
     }
@@ -85,7 +86,6 @@ if (isset($_POST['submit_order'])) {
         <form method="post" action="offerPage.php">
 
           <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID'] ?>">
-
 
           <div class="form-group">
             <label for="name">Name:</label>

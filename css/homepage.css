@@ -99,3 +99,7 @@ body {
     float:right;
   }
   
+
+  #container2 {
+    min-height: 860px;
+  }

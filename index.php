@@ -67,20 +67,21 @@ if(isset($_GET['search'])) {
   <input type="submit">
 </form>
 
-<div class="card-wrapper">
-  <?php foreach ($offers as $selectedOffer) { ?>
-          <div class="card-wrapper">
-              <div class="card">
-                  <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image">
-                  <div class="card-body">
-                      <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
-                      <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>" class="btn btn-primary">View</a>
-                  </div>
-              </div>
-          </div>
-  <?php } ?>
+<div id="container2">
+  <div class="card-wrapper">
+    <?php foreach ($offers as $selectedOffer) { ?>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+                        <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+    <?php } ?>
+  </div>
 </div>
-
 </body>
 <?php include 'footer.php'; ?>
 </html>

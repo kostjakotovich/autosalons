@@ -48,7 +48,7 @@ class Order {
         $this->name = $name;
         $this->surname = $surname;
         $this->telephone = $telephone;
-        $this->orderOfferID = $_POST['offerID'];
+        $this->orderOfferID = $offerID;
         $this->orderUserID = $_SESSION['userID'];
         
         if(isset($_SESSION["userID"])) { 
@@ -74,6 +74,7 @@ class Order {
         } 
           
     }
+    
     
     
 
