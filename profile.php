@@ -189,3 +189,4 @@ $orders = $order->getOrderInfo();
   });
 
 </script>
+</body>
