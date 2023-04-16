@@ -9,11 +9,13 @@ $commentObj = new Comment();
 // Определяем количество комментариев на странице
 $commentsPerPage = 7;
 
-// Получаем общее количество комментариев из базы данных
-$totalComments = $commentObj->getTotalCommentsCount();
-
+$startIndex = 0;
+$endIndex = $startIndex + $commentsPerPage;
 // Определяем общее количество страниц, которые будут отображаться
+
+$totalComments = $commentObj->getTotalCommentsCount();
 $totalPages = ceil($totalComments / $commentsPerPage);
+
 
 // Получаем текущую страницу из параметров URL
 if (isset($_GET['page'])) {
@@ -26,8 +28,17 @@ if (isset($_GET['page'])) {
 $startIndex = ($currentPage - 1) * $commentsPerPage;
 $endIndex = $startIndex + $commentsPerPage;
 
+// Проверяем, является ли текущая страница последней
+if ($currentPage == $totalPages) {
+    // Вычисляем количество комментариев на последней странице
+    $commentsOnLastPage = $totalComments - ($totalPages - 1) * $commentsPerPage;
+    // Изменяем переменную $endIndex, чтобы отобразить только необходимое количество комментариев на последней странице
+    $endIndex = $startIndex + $commentsOnLastPage;
+}
+
 // Получаем комментарии для текущей страницы
-$comments = $commentObj->getCommentsForPage($startIndex, $endIndex);
+$comments = $commentObj->getCommentsForPage($startIndex, $commentsPerPage);
+
 
 // Обработка формы для добавления нового комментария
 if (isset($_POST['comment'])) {
@@ -37,6 +48,8 @@ if (isset($_POST['comment'])) {
     header("Location: forum.php"); // перезагрузка страницы для избежания повторной отправки формы
     exit;
 }
+
+
 ?>
 
 <html>
