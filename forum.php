@@ -6,8 +6,28 @@ require_once 'Comment.php';
 
 $commentObj = new Comment();
 
-// Получаем все комментарии и имена пользователей из таблицы
-$comments = $commentObj->getAllComments();
+// Определяем количество комментариев на странице
+$commentsPerPage = 7;
+
+// Получаем общее количество комментариев из базы данных
+$totalComments = $commentObj->getTotalCommentsCount();
+
+// Определяем общее количество страниц, которые будут отображаться
+$totalPages = ceil($totalComments / $commentsPerPage);
+
+// Получаем текущую страницу из параметров URL
+if (isset($_GET['page'])) {
+    $currentPage = $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+
+// Определяем начальный и конечный индексы для отображаемых комментариев
+$startIndex = ($currentPage - 1) * $commentsPerPage;
+$endIndex = $startIndex + $commentsPerPage;
+
+// Получаем комментарии для текущей страницы
+$comments = $commentObj->getCommentsForPage($startIndex, $endIndex);
 
 // Обработка формы для добавления нового комментария
 if (isset($_POST['comment'])) {
@@ -38,17 +58,30 @@ if (isset($_POST['comment'])) {
     </div>
 
     <div class="comments">
+        <?php
+        // Отображаем комментарии и имена пользователей
+        foreach ($comments as $comment) {
+            echo '<div class="comment">';
+            echo '<h4>' . $comment['username'] . '</h4>';
+            echo '<p>' . $comment['comment'] . '</p><br>';
+            echo '<h4>Posted on ' . date('F j, Y', strtotime($comment['date'])) . '</h4>';
+            echo '</div>';
+        }
+        ?>
+
+        <div class="pagination">
             <?php
-            // Отображаем комментарии и имена пользователей
-            foreach ($comments as $comment) {
-                echo '<div class="comment">';
-                echo '<h4>' . $comment['username'] . '</h4>';
-                echo '<p>' . $comment['comment'] . '</p><br>';
-                echo '<h4>Posted on ' . date('F j, Y', strtotime($comment['date'])) . '</h4>';
-                echo '</div>';
+            // Отображаем ссылки на страницы
+            for ($i = 1; $i <= $totalPages; $i++) {
+                if ($i == $currentPage) {
+                    echo '<a href="#" class="active">' . $i . '</a>';
+                } else {
+                    echo '<a href="forum.php?page=' . $i . '">' . $i . '</a>';
+                }
             }
             ?>
         </div>
+    </div>
 
 </body>
 </html>

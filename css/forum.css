@@ -110,4 +110,29 @@ body {
         display: flex;
         justify-content: center;
       }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+      }
+      
+      .pagination a {
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        color: #555;
+      }
+      
+      .pagination a:hover {
+        background-color: #f1f1f1;
+      }
+      
+      .pagination a.active {
+        background-color: #0062cc;
+        color: white;
+      }
+      
       
