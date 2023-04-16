@@ -103,7 +103,7 @@ $orders = $order->getOrderInfo();
   <?php 
   } 
   if ($_SESSION['roleID'] == 1) { 
-    echo "<br><br><br><h4>Lai saņemtu palīdzību ar paroles maiņu, sazinieties ar administratoru.</h4>";
+    echo "<br><br><br><h4>Contact your administrator for help changing your password.</h4>";
   } ?>
 </div>
 

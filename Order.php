@@ -120,16 +120,5 @@ class Order {
     
 }
 
-if (isset($_POST['submit_order'])) {
-    $name = $_POST['name'];
-    $surname = $_POST['surname'];
-    $telephone = $_POST['telephone'];
-    echo "<script>event.preventDefault();</script>";
-    if (isset($_SESSION['userID'])) {
-        $order = new Order($userID, $offerID);
-        $order->createOrder($offerID, $_SESSION['userID'], $_POST['name'], $_POST['surname'], $_POST['telephone']);
-    } else {
-      // Handle the case where the user is not logged in
-    }
-  }
+
 ?>
