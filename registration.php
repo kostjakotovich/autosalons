@@ -19,10 +19,30 @@ class UserRegistration extends UserMain {
         if (isset($_POST['reg'])) {
             // Получаем все значения из формы
 
-            if (empty($this->username)) { array_push($errors, "Username is required");}
-            if (empty($this->email)) { array_push($errors, "Email is required");}
-            if (empty($this->password)) { array_push($errors, "Password is required");}
-            if (empty($password_confirm)) { array_push($errors, "Verify your password");}
+            // Валидация никнейма
+            if (empty($this->username)) {
+                array_push($errors, "Username is required");
+            } elseif (strlen($this->username) > 20) {
+                array_push($errors, "Username should be up to 20 characters");
+            }
+
+            // Валидация email
+            if (empty($this->email)) {
+                array_push($errors, "Email is required");
+            } elseif (strlen($this->email) > 40) {
+                array_push($errors, "Email should be up to 40 characters");
+            } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+                array_push($errors, "Invalid email format");
+            }
+
+            // Валидация пароля
+            if (empty($this->password)) {
+                array_push($errors, "Password is required");
+            } elseif (strlen($this->password) > 30) {
+                array_push($errors, "Password should be up to 30 characters");
+            }
+
+            if (empty($_POST['password_confirm'])) { array_push($errors, "Verify your password");}
 
             if ($this->password !== $_POST['password_confirm']) {
                 array_push($errors, "Passwords do not match");
@@ -62,10 +82,11 @@ class UserRegistration extends UserMain {
                 $result = null;
                 
                 // Получаем ID только что зарегистрированного пользователя
-                $result = $this->conn->prepare("SELECT userID FROM user WHERE email=:email");
+                $result = $this->conn->prepare("SELECT userID, roleID FROM user WHERE email=:email");
                 $result->execute(array(':email' => $this->email));
                 $user = $result->fetch();
                 $_SESSION['userID'] = $user['userID'];
+                $_SESSION['roleID'] = $user['roleID'];
             
                 header('location: index.php');
             }

@@ -84,7 +84,8 @@ if (isset($_POST['submit_order'])) {
       <div id="text" class="form-container">
         <form method="post" action="offerPage.php">
 
-          <input type="hidden" name="offerID" value="<?php echo $offerID ?>">
+          <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID'] ?>">
+
 
           <div class="form-group">
             <label for="name">Name:</label>
