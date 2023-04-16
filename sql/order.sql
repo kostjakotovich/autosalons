@@ -32,11 +32,11 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`orderID`),
   KEY `orderUserID` (`orderUserID`) USING BTREE,
   KEY `orderOfferID` (`orderOfferID`),
-  CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `order` (`orderID`),
+  CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~4 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~0 rows (приблизительно)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

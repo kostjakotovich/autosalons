@@ -16,72 +16,89 @@
 
 
 -- Дамп структуры базы данных mariadb
+DROP DATABASE IF EXISTS `mariadb`;
 CREATE DATABASE IF NOT EXISTS `mariadb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mariadb`;
 
 -- Дамп структуры для таблица mariadb.comments
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `commentID` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `email` varchar(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `comment` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `userID` int DEFAULT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf32 COLLATE=utf32_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.comments: ~0 rows (приблизительно)
+DELETE FROM `comments`;
 
 -- Дамп структуры для таблица mariadb.offers
+DROP TABLE IF EXISTS `offers`;
 CREATE TABLE IF NOT EXISTS `offers` (
-  `offerID` int NOT NULL,
+  `offerID` int NOT NULL AUTO_INCREMENT,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
-  `model` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
+  `image` blob,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.offers: ~0 rows (приблизительно)
+DELETE FROM `offers`;
 
 -- Дамп структуры для таблица mariadb.offersinfo
+DROP TABLE IF EXISTS `offersinfo`;
 CREATE TABLE IF NOT EXISTS `offersinfo` (
-  `offersInfoID` int NOT NULL,
-  `color` varchar(10) DEFAULT NULL,
+  `offersInfoID` int NOT NULL AUTO_INCREMENT,
+  `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `price` float DEFAULT NULL,
   `yearOfManufacture` date DEFAULT NULL,
-  `weight` int DEFAULT NULL,
+  `weight` float DEFAULT NULL,
   `offersID` int DEFAULT NULL,
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.offersinfo: ~0 rows (приблизительно)
+DELETE FROM `offersinfo`;
+
+-- Дамп структуры для таблица mariadb.order
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `orderID` int NOT NULL AUTO_INCREMENT,
+  `orderDate` date DEFAULT NULL,
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `surname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `status` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `orderUserID` int DEFAULT NULL,
+  `orderOfferID` int DEFAULT NULL,
+  PRIMARY KEY (`orderID`),
+  KEY `orderUserID` (`orderUserID`) USING BTREE,
+  KEY `orderOfferID` (`orderOfferID`),
+  CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
+  CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+
+-- Дамп данных таблицы mariadb.order: ~0 rows (приблизительно)
+DELETE FROM `order`;
 
 -- Дамп структуры для таблица mariadb.user
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `roleID` int NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf32 COLLATE=utf32_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.user: ~0 rows (приблизительно)
-INSERT INTO `user` (`userID`, `username`, `email`, `password`, `roleID`) VALUES
-	(20, '1', '1@1', '$2y$10$N85ZufKAKDMFpT0CQceABu2bv.C1zUtoylTYYYGEq52Y1KjYOrmHi', 0),
-	(21, '123', '123@123', '$2y$10$N0BsikqAMdvwjLY3w6vAAO0jAkYWvVCf3YKwDRvpZRjINM8dOhdn6', 0),
-	(22, '1', '1@1', '$2y$10$F4OQSsyl0ZCWdglhM5tv/uHthf/waRF5YtGW/MlYb4VfFvFlSFxE2', 0),
-	(23, '1', '1@1', '$2y$10$t8eB3ArY/xoiXT3W/GeYr.aY1QcpoolbdpqeT5RzfAMjk.fO3C5yy', 0),
-	(24, '1', '1@1', '$2y$10$qNzlHilzAzEYz65UXGT2aeTqdISyX.7/KiNiWrzCSUc7aLPZRrC3i', 0),
-	(25, '23', '23@23', '$2y$10$kmsD5HpmO49nwqsGgerXU.0WzM6gZm3IijoJQRGOO4WyYXGa2PMUG', 0),
-	(26, '1234', '1234@12', '$2y$10$uBh4efRokvC.9utkFAcR1u.anVwh7JNP.6wLzwppa//l2rczjVsSm', 0),
-	(27, '31243', '234@243', '$2y$10$Nk.bouaCWhLSnmiVd9yZI.Mc2gXh399e7bdF5AUTKJjKjSV4tqvQG', 0),
-	(28, '1245', '1245@1245', '$2y$10$WGJ3wtrjGyTbWWsqlnEftecld1OjclnptKM4Ab1F3p2myRDZ0XNt6', 0),
-	(29, '12321', 'abc@23sf', '$2y$10$klACkhcmBooev43NsdJb3O7XD9AFwgpIUezpkUQ4xJtbHLLAiKMWe', 0),
-	(30, '12', '12@12', '$2y$10$QHTHBOgm57QgfcROSUyOj.ihFwMOFh89nlQ33pd.9G/yGsSQ.7Eui', 0);
+DELETE FROM `user`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

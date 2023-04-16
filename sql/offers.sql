@@ -26,24 +26,9 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `image` blob,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~12 rows (приблизительно)
-INSERT INTO `offers` (`offerID`, `type`, `manufacturer`, `image`) VALUES
-	(1, 'GTR', 'Nissan', NULL),
-	(2, 'R6', 'Audi', NULL),
-	(3, 'X5', 'BMW', NULL),
-	(4, 'X3', 'BMW', NULL),
-	(5, 'Corolla', 'Toyota', NULL),
-	(6, 'Seed', 'KIA', NULL),
-	(7, 'Sportage', 'KIA', NULL),
-	(8, 'Camry', 'Toyota', NULL),
-	(9, 'Model Y', 'Tesla', NULL),
-	(10, 'CR-V', 'Honda', NULL),
-	(11, 'Silverado', 'Chevrolet', NULL),
-	(12, 'Sierra', 'GMC', NULL),
-	(13, 'Civic', 'Honda', NULL),
-	(14, 'Escape', 'Ford', NULL);
+-- Дамп данных таблицы mariadb.offers: ~0 rows (приблизительно)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
