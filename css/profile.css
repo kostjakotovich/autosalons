@@ -61,29 +61,114 @@ body{
     border-radius: 0px 0px 4px 4px;
 }
 
-  /* Стили для таблицы заказов */
-  table {
-    border-collapse: collapse;
-    margin: 0 auto;
-    width: 80%;
-  }
-
-  th,
-  td {
-    text-align: left;
-    padding: 8px;
-  }
-
-  th {
-    background-color: #c0fdff;
-    font-size: 18px;
-    font-weight: bold;
+body {
+  background-size: cover;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
 }
-      
 
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
+p {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.btn {
+  width: 200px;
+  background-color: #428bca !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+table,
+th,
+td {
+  border: none;
+  padding: 10px;
+}
+
+.tab {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.tab button:hover {
+  background-color: #3071a9;
+}
+
+.tabcontent {
+  display: none;
+  padding: 10px 20px;
+  border: none;
+  border-top: 1px solid #ccc;
+  border-radius: 0px 0px 5px 5px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 80%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px;
+}
+
+th {
+  background-color: #428bca;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+select {
+  width: 150px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f0f0f0;
+  color: #000;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select option {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+select option:checked {
+  background-color: #428bca;
+  color: #fff;
+}
+
+select option:hover {
+  background-color: #ccc;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+#container {
+  text-align: center;
+}
 
   .btn {
     position: relative;
@@ -97,6 +182,10 @@ body{
     margin-top:5%;
   }
 
+  .form-control {
+    width: 400px;
+  }
+
   .form-container {
     height: 440px;
     position: fixed;
@@ -108,3 +197,52 @@ body{
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   }
+
+
+  .user-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .user-info {
+    margin-right: 30px;
+  }
+  
+  .user-name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .user-email {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .form-container {
+    display: none;
+  }
+
+  .change-password-btn {
+    width: 300px;
+  }
+  
+  .change-password-input {
+    width: 300px;
+  }
+
+  #form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #eef5ff;
+  }
+  
+  
+  

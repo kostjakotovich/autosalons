@@ -61,6 +61,7 @@ $orders = $order->getOrderInfo();
 
 
 
+
 ?>
 
 <html>
@@ -80,31 +81,56 @@ $orders = $order->getOrderInfo();
 </div>
 
 <div id="UserInfo" class="tabcontent" style="display: block;">
-  <p style="font-size: 30px; margin-top: 2%;">Username: <?php echo $username; ?></p>
-  <br>
-  <p style="font-size: 30px;">Email: <?php echo $email; ?></p>
-  <?php if ($_SESSION['roleID'] == 0) { ?>
-    <button class="btn">Change Password</button>
-
-    <div id="changePassword" style="display:none;">
-    <form method="post">
-      <label for="currentPassword">Current password:</label>
-      <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
-      <br>
-      <label for="newPassword">New password:</label>
-      <input type="password" id="newPassword" class="form-control" name="newPassword" required>
-      <br>
-      <label for="confirmPassword">Confirm new password:</label>
-      <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
-      <br>
-      <input type="submit" name="changePassword" class="form-control" value="Change Password">
-    </form>
+  <div class="user-card">
+    <div class="user-info">
+      <UserInfo>
+        <div class="user-name"><?php echo $username; ?></div>
+        <div class="user-email"><?php echo $email; ?></div>
+      </UserInfo>
     </div>
-  <?php 
-  } 
-  if ($_SESSION['roleID'] == 1) { 
-    echo "<br><br><br><h4>Contact your administrator for help changing your password.</h4>";
-  } ?>
+    <?php  
+    if ($_SESSION['roleID'] == 1) { 
+      echo "<br><br><br><strong style='font-size: 20px;'>Contact your administrator for help changing your password.</strong>";
+    } ?>
+  </div>
+    <?php if ($_SESSION['roleID'] == 0) { ?>
+      <button class="btn" class="btn change-password-btn">Change Password</button>
+
+      <div id="changePassword" style="display:none;">
+        <div id="form-group">
+          <form method="post">
+            <br>
+            <label for="currentPassword">Current password:</label>
+            <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
+            <br>
+            <label for="newPassword">New password:</label>
+            <input type="password" id="newPassword" class="form-control" name="newPassword" required>
+            <br>
+            <label for="confirmPassword">Confirm new password:</label>
+            <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
+            <br>
+            <input type="submit" name="changePassword" class="form-control" value="Change Password" >
+          </form>
+          
+        </div>
+        <?php if (isset($_SESSION['success_change'])): ?>
+      <div class="alert alert-success" style="text-align: center;"><?php echo $_SESSION['success_change']; ?></div>
+      <?php unset($_SESSION['success_change']); ?>
+    <?php endif; ?>
+
+
+    <?php if (!empty($change_errors)): ?>
+        <div class="alert alert-danger" role="alert">
+          <ul>
+            <?php foreach ($change_errors as $error): ?>
+              <p><?php echo $error; ?></p>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+      </div>
+    <?php } ?>
+    </div>
 </div>
 
 <div id="Orders" class="tabcontent">
@@ -141,21 +167,6 @@ $orders = $order->getOrderInfo();
     ?>
   </table>
 </div>
-<?php if (isset($_SESSION['success_change'])): ?>
-  <div class="alert alert-success"><?php echo $_SESSION['success_change']; ?></div>
-  <?php unset($_SESSION['success_change']); ?>
-<?php endif; ?>
-
-
-<?php if (!empty($change_errors)): ?>
-    <div class="alert alert-danger" role="alert">
-      <ul>
-        <?php foreach ($change_errors as $error): ?>
-          <p><?php echo $error; ?></p>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  <?php endif; ?>
 
 
 <script>

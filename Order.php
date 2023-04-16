@@ -83,7 +83,7 @@ class Order {
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
-                order by `status` DESC";
+                order by `orderID` DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
