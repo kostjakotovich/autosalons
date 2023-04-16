@@ -7,7 +7,9 @@ require_once 'connection.php';
     <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="css/headers.css">
     <script src="../autosalons/js/script.js" defer></script>
+
 </head>
+
 
     <header class="p-3 mb-3 border-bottom">
     <div class="container">
@@ -20,8 +22,8 @@ require_once 'connection.php';
                   right: 0;">
           <li><a href='#' class="nav-link px-2 link-secondary" onClick='RedToHomepage()'>Homepage</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li >
+          <li><a href='#about-us' class="nav-link px-2 link-dark">About Us</a></li>
         
           <!--  Для переадресации на страницу со всеми заказами-->
           <script>

@@ -1,14 +1,15 @@
-html {
-  position: relative;
-
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: black;
-}
+
 
 
 
@@ -125,4 +126,21 @@ html {
   text-align: center;
   font-weight: bold;
   margin-top:10%;
+} 
+
+
+.container2 {
+  min-height: calc(75vh - 40px);
+}
+
+
+
+.container2 img {
+  text-align: center;
+  margin-top: 10%;
+  margin-left: 10%;
+  width: 1000px;
+  max-height: 500px;
+  height: auto;
+  display: block;
 }

@@ -85,8 +85,9 @@ foreach($orders as $order){
 
     <div id="container">
         <form method="post">
-            <input type="submit" name="submit" value="Save changes" class="btn">
             <br>
+            <input type="submit" name="submit" value="Save changes" class="btn">
+            <br><br><br><br>
             <!-- Таблица для заказов со статусом New -->
             <br>
             <p>New</p>

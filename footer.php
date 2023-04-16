@@ -10,7 +10,7 @@ require_once 'connection.php';
   background-color: #222;
   color: #fff;
   padding: 40px 20px;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 }
@@ -20,7 +20,7 @@ require_once 'connection.php';
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 
 .footer-content h3 {
@@ -52,6 +52,7 @@ require_once 'connection.php';
 .footer-bottom {
   text-align: center;
   font-size: 14px;
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -65,6 +66,23 @@ require_once 'connection.php';
   }
 }
 </style>
+
+<!-- JSQuery Скрипт для плавной прокрутки страницы-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('a[href^="#"]').on('click', function(event) {
+      var target = $(this.getAttribute('href'));
+      if( target.length ) {
+        event.preventDefault();
+        $('html, body').stop().animate({
+          scrollTop: target.offset().top
+        }, 1000);
+      }
+    });
+  });
+</script>
+
 <br>
 <footer class="footer">
   <div class="container">
@@ -77,7 +95,7 @@ require_once 'connection.php';
           <li><a href="#">Twitter</a></li>
         </ul>
       </div>
-      <div class="contact-info">
+      <div class="contact-info" id="about-us">
         <h3>Contact information</h3>
         <p>Address: 123456, city, Riga, st. Alexandra Chaka</p>
         <p>Telephone: +371 123-45-67</p>

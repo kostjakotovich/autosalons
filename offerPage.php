@@ -32,39 +32,40 @@ if (isset($_SESSION['success'])) {
 </head>
 <body>
 <?php require 'header.php'; ?>
-<img src="img/<?php echo $selectedOffer['image']; ?>.webp" alt="Car Image" style="float:left">
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
-    <br>
-    <br>
-    <h5>More information:</h5>
-    <br>
-    <p class="card-text"><?php echo 'Color: ' .$selectedOfferInfo['color'] ; ?></p>
-    <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
-    <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
-    <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
-    <?php 
-        if (isset($_SESSION['success'])) {
-          if ($hasActiveOrders) {
-              ?>
-              <p class="btn">Wait for a response to Your previous order.</p>
-              <?php
+<div class="container2">
+  <img src="<?php echo $selectedOffer['image']; ?>" style="float:left">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+      <br>
+      <br>
+      <h5>More information:</h5>
+      <br>
+      <p class="card-text"><?php echo 'Color: ' .$selectedOfferInfo['color'] ; ?></p>
+      <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
+      <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
+      <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
+      <?php 
+          if (isset($_SESSION['success'])) {
+            if ($hasActiveOrders) {
+                ?>
+                <p class="btn">Wait for a response to Your previous order.</p>
+                <?php
+            } else {
+                ?>
+                <input type="button" value="Get an offer" class="btn2" onclick="on()"></input>
+                <?php
+            }
           } else {
               ?>
-              <input type="button" value="Get an offer" class="btn2" onclick="on()"></input>
+              <p class="btn">You need to log in to make an offer.</p>
               <?php
           }
-        } else {
-            ?>
-            <p class="btn">You need to log in to make an offer.</p>
-            <?php
-        }
-             
-    ?>
+              
+      ?>
+    </div>
   </div>
 </div>
-
 
     <div id="overlay" onclick="off()">
       <div id="text" class="form-container">
@@ -91,6 +92,7 @@ if (isset($_SESSION['success'])) {
         </form>
       </div>
     </div>
+  
 <?php include 'footer.php'; ?>
 </body>
 
