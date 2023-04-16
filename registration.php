@@ -22,7 +22,7 @@ class UserRegistration extends UserMain {
             if (empty($this->username)) { array_push($errors, "Username is required");}
             if (empty($this->email)) { array_push($errors, "Email is required");}
             if (empty($this->password)) { array_push($errors, "Password is required");}
-            if (empty($this->password)) { array_push($errors, "Verify your password");}
+            if (empty($password_confirm)) { array_push($errors, "Verify your password");}
 
             if ($this->password !== $_POST['password_confirm']) {
                 array_push($errors, "Passwords do not match");
