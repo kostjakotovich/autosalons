@@ -44,6 +44,7 @@ class Order {
     
     public function createOrder($name, $surname, $telephone, $offerID) {
         $this->status = 'New';
+        date_default_timezone_set('Europe/Riga');
         $this->orderDate = date("Y-m-d H:i:s");
         $this->name = $name;
         $this->surname = $surname;
