@@ -29,7 +29,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.user: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.user: ~1 row (приблизительно)
+INSERT INTO `user` (`userID`, `username`, `email`, `password`, `roleID`) VALUES
+	(1, 'admin', 'admin@example.com', 'admin', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
