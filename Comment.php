@@ -6,30 +6,7 @@ class Comment {
 
     public function __construct() {
         $this->conn = (new Database())->connect();
-    }
-
-    public function getAllComments() {
-        $sql = "SELECT comments.comment, user.username, comments.date 
-                FROM comments 
-                JOIN user ON comments.userID = user.userID 
-                ORDER BY comments.commentID DESC";
-
-        $stmt = $this->conn->query($sql);
-
-        $comments = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $comment = array(
-                'username' => $row['username'],
-                'comment' => $row['comment'],
-                'date' => $row['date']
-            );
-
-            $comments[] = $comment;
-        }
-
-        return $comments;
-    }
+    }   
 
     public function addComment($comment, $userID) {
         date_default_timezone_set('Europe/Riga');
@@ -42,6 +19,15 @@ class Comment {
         $stmt->bindParam(':date', $date);
         $stmt->execute();
     }
+
+    public function deleteComment($commentID) {
+        $sql = "DELETE FROM comments WHERE commentID = :commentID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':commentID', $commentID, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    
 
     public function getTotalCommentsCount() {
     $sql = "SELECT COUNT(*) as total FROM comments";
@@ -63,7 +49,7 @@ class Comment {
     
 
     public function getCommentsForPage($startIndex, $commentsPerPage) {
-        $sql = "SELECT comments.comment, user.username, comments.date 
+        $sql = "SELECT comments.commentID, comments.comment, user.username, comments.date 
                 FROM comments 
                 JOIN user ON comments.userID = user.userID 
                 ORDER BY comments.commentID DESC
@@ -78,6 +64,7 @@ class Comment {
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $comment = array(
+                'commentID' => $row['commentID'],
                 'username' => $row['username'],
                 'comment' => $row['comment'],
                 'date' => $row['date']
