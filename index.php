@@ -2,17 +2,17 @@
 session_start();
 require_once 'connection.php';
 require_once 'Offer.php';
-
+require_once 'phpSearchOption.php';
 
 $offer = new Offer();
 $offers = $offer->getAllOffers();
 
+$searchOption = new SearchOption();
+
 if(isset($_GET['search'])) {
   $search = $_GET['search'];
-  $column = $_GET['column'] ?? 'manufacturer'; // Поиск по марке по умолчанию
-  $offers = $offer->searchOffers($search, $column);
-} else {
-  $offers = $offer->getAllOffers();
+  $column = $_GET['column'] ?? 'manufacturer';
+  $offers = $searchOption->searchOffers($search, $column);
 }
 
 ?>
@@ -49,7 +49,7 @@ if(isset($_GET['search'])) {
     ?>
 </div>
 
-<form action="" method="post" style="text-align:center">
+<form action="" method="get" style="text-align:center">
   <input type="text" placeholder="Search.." name="search" style="width: 60%;
   margin: auto;
   text-align: center;
@@ -64,7 +64,7 @@ if(isset($_GET['search'])) {
   padding: 12px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;">
-  <input type="submit">
+  <input type="submit" style="display: none;">
 </form>
 
 <div id="container2">
