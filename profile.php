@@ -56,8 +56,8 @@ if (isset($_POST["changePassword"])) {
 }
 
 // создаем экземпляр класса Order и передаем userID текущего пользователя
-$order = new Order(null, $userID);
-$orders = $order->getOrderInfo();
+$order = new Order();
+$orders = $order->getOrderInfo($userID);
 
 
 

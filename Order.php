@@ -15,10 +15,8 @@ class Order {
     private $orderUserID;
     private $orderOfferID;
 
-    public function __construct($offerID, $userID) {
+    public function __construct() {
         $this->conn = (new Database())->connect();
-        $this->orderOfferID = $offerID;
-        $this->orderUserID = $userID;
     }
 
     public function getStatus() {
@@ -76,6 +74,17 @@ class Order {
           
     }
     
+    public function deleteOrder($orderID) {
+        $sql = "DELETE FROM `order` WHERE `orderID` = :orderID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':orderID', $orderID, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            $_SESSION['order_delete_success'] = "Order deleted successfully.";
+            header("Location: ordersPage.php");
+        } else {
+            echo "Error deleting order: " . $stmt->errorInfo()[2];  
+        }
+    }
     
     
 
@@ -93,7 +102,8 @@ class Order {
     }    
       
 
-    public function getOrderInfo() {
+    public function getOrderInfo($userID) {
+        $this->orderUserID = $userID;
         $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, offInf.price
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
@@ -107,6 +117,7 @@ class Order {
     }
 
     public function checkOrdersStatus() {
+        $this->orderUserID = $_SESSION['userID'];
         $query = "SELECT COUNT(*) as count FROM `order` WHERE orderUserID=:userID AND (status='New' OR status='In progress')";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':userID', $this->orderUserID);

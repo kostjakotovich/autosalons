@@ -17,7 +17,7 @@ if ($_SESSION['roleID'] !== 1) {
 }
 
 // Создаем объект заказа
-$order = new Order(0, 0); // второй параметр - userID - не важен, т.к. будет устанавливаться внутри цикла
+$order = new Order(); // второй параметр - userID - не важен, т.к. будет устанавливаться внутри цикла
 
 // Получаем информацию о всех заказах
 $orders = $order->getAllOrderInfo();
@@ -25,7 +25,7 @@ $orders = $order->getAllOrderInfo();
 if (isset($_POST['submit'])) {
     foreach ($_POST['status'] as $orderID => $status) {
         // Обновляем статус заказа по его ID
-        $order = new Order($orderID, 0); // userID тоже не важен, т.к. обновлять статус может админ
+        $order = new Order();
         $order->updateStatus($status, $orderID);
 
         // Перезагружаем информацию о заказах из базы данных
@@ -50,6 +50,10 @@ foreach($orders as $order){
     }
 }
 
+if (isset($_POST['deleteOrder'])) {
+    $order = new Order();
+    $order->deleteOrder($_POST['orderID']);
+}
 
 
 ?>

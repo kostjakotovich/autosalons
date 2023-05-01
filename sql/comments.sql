@@ -28,9 +28,10 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.comments: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.comments: ~13 rows (приблизительно)
+DELETE FROM `comments`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

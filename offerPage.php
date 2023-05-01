@@ -29,7 +29,7 @@ if (isset($_POST['submit_order'])) {
     $telephone = $_POST['telephone'];
     echo "<script>event.preventDefault();</script>";
     if (isset($_SESSION['userID'])) {
-        $order = new Order($offerID, $_SESSION['userID']);
+        $order = new Order();
         $order->createOrder($_POST['name'], $_POST['surname'], $_POST['telephone'], $_POST['offerID']);
     } else {
       // Handle the case where the user is not logged in

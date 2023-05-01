@@ -26,9 +26,10 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `image` blob,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offers: ~2 rows (приблизительно)
+DELETE FROM `offers`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

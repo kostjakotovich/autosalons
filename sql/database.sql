@@ -16,12 +16,10 @@
 
 
 -- Дамп структуры базы данных mariadb
-DROP DATABASE IF EXISTS `mariadb`;
 CREATE DATABASE IF NOT EXISTS `mariadb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mariadb`;
 
 -- Дамп структуры для таблица mariadb.comments
-DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `commentID` int NOT NULL AUTO_INCREMENT,
   `comment` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
@@ -30,26 +28,25 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.comments: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.comments: ~13 rows (приблизительно)
 DELETE FROM `comments`;
 
+
 -- Дамп структуры для таблица mariadb.offers
-DROP TABLE IF EXISTS `offers`;
 CREATE TABLE IF NOT EXISTS `offers` (
   `offerID` int NOT NULL AUTO_INCREMENT,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `image` blob,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offers: ~2 rows (приблизительно)
 DELETE FROM `offers`;
 
 -- Дамп структуры для таблица mariadb.offersinfo
-DROP TABLE IF EXISTS `offersinfo`;
 CREATE TABLE IF NOT EXISTS `offersinfo` (
   `offersInfoID` int NOT NULL AUTO_INCREMENT,
   `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -60,13 +57,12 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~2 rows (приблизительно)
 DELETE FROM `offersinfo`;
 
 -- Дамп структуры для таблица mariadb.order
-DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `orderID` int NOT NULL AUTO_INCREMENT,
   `orderDate` date DEFAULT NULL,
@@ -81,13 +77,12 @@ CREATE TABLE IF NOT EXISTS `order` (
   KEY `orderOfferID` (`orderOfferID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~1 rows (приблизительно)
 DELETE FROM `order`;
 
 -- Дамп структуры для таблица mariadb.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -95,9 +90,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `roleID` int NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.user: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.user: ~3 rows (приблизительно)
 DELETE FROM `user`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

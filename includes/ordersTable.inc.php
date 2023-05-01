@@ -21,6 +21,12 @@
         </select>
                         
     </td>";
+    echo "<td>
+        <form method='post' class='delete-order-form'>
+            <input type='hidden' name='orderID' value='" . $order['orderID'] . "'>
+            <button type='submit' name='deleteOrder' class='btn btn-danger btn-sm'>Delete</button>
+        </form>
+    </td> ";
     echo "</tr>";
 
 ?>
