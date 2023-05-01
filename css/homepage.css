@@ -103,3 +103,38 @@ body {
   #container2 {
     min-height: 860px;
   }
+
+  .brand-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .brand-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .brand-icon img {
+    max-height: 60px;
+    max-width: 60px;
+  }
+
+  .brand-icon:hover,
+.brand-icon:focus {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+  
+.brand-icon.active-icon img {
+  transform: scale(1.1); /* увеличение размера иконки на 10% */
+  filter: brightness(150%); /* увеличение яркости на 50% */
+}

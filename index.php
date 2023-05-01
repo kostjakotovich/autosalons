@@ -15,6 +15,17 @@ if(isset($_GET['search'])) {
   $offers = $searchOption->searchOffers($search, $column);
 }
 
+// массив с иконками и производителями
+// массив с иконками и производителями
+$carBrands = [  
+  'BMW' => '../img/icon/bmw-icon.png',  
+  'Mercedes-Benz' => '../img/icon/mercedes-icon.png',  
+  'Tayota' => '../img/icon/tayota-icon.webp',
+  'Hyundai' => '../img/icon/hyundai-icon.png',
+  'Tesla' => '../img/icon/tesla-icon.png'
+];
+
+
 ?>
 
 <html>
@@ -67,6 +78,16 @@ if(isset($_GET['search'])) {
   <input type="submit" style="display: none;">
 </form>
 
+<!-- вывод иконок производителей -->
+<div class="brand-icons">
+  <?php foreach ($carBrands as $brand => $icon) { ?>
+    <a href="index.php?search=<?php echo $brand ?>&column=manufacturer" class="brand-icon">
+      <img src="icons/<?php echo $icon ?>" alt="<?php echo $brand ?>">
+    </a>
+  <?php } ?>
+</div>
+
+
 <div id="container2">
   <div class="card-wrapper">
     <?php foreach ($offers as $selectedOffer) { ?>
@@ -82,6 +103,22 @@ if(isset($_GET['search'])) {
     <?php } ?>
   </div>
 </div>
+
+<script>
+const icons = document.querySelectorAll('.brand-icon');
+
+icons.forEach(icon => {
+  icon.addEventListener('click', () => {
+    // удалить класс active-icon у всех иконок
+    icons.forEach(icon => {
+      icon.classList.remove('active-icon');
+    });
+    // добавить класс active-icon к нажатой иконке
+    icon.classList.add('active-icon');
+  });
+});
+</script>
+
 </body>
 <?php include 'footer.php'; ?>
 </html>
