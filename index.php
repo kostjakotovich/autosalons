@@ -11,10 +11,9 @@ $searchOption = new SearchOption();
 
 if(isset($_GET['searchBtn'])) {
   $search = $_GET['search'];
-  $column = $_GET['column'] ?? 'manufacturer';
   $selectedBrand = $_GET['brand'] ?? '';
   $currentPrice = $_GET['price'] ?? '';
-  $offers = $searchOption->searchOffers($search, $column, $selectedBrand, $currentPrice);
+  $offers = $searchOption->searchOffers($search, $selectedBrand, $currentPrice);
   }
 
 $selectedBrand = $_GET['brand'] ?? '';
@@ -29,6 +28,11 @@ $carBrands = [
   'Tesla' => '../img/icon/tesla-icon.png'
 ];
 
+$currentPrice = $_GET['price'] ?? '';
+if (!$currentPrice) {
+  $currentPrice = 150000;
+}
+
 
 ?>
 
@@ -40,6 +44,7 @@ $carBrands = [
 
    <!-- alert close JS -->
    <script src="js/order-success-close.js" defer></script>
+   
    
    
   <link rel="stylesheet" href="css/cards.css">
@@ -66,26 +71,43 @@ $carBrands = [
 
 
 <form action="" method="get" style="text-align:center">
-    <input type="text" placeholder="Search.." name="search" style="width: 60%;
-    margin: auto;
-    text-align: center;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;">
+  <div style="display: flex; justify-content: center; text-align: center;">
 
+    <input type="text" placeholder="Search.." name="search" style="width: 40%;
+      margin-left: 2%;
+      text-align: center;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      background-color: white;
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      padding: 12px 20px 12px 40px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;">
+
+    <button type="submit" name="searchBtn" style="margin-left: 10px;">Search</button>
+
+  </div>
   <!-- Фильтр по цене и бренду -->
   <div class="form-group">
       <label for="price"><strong>Price:</strong></label>
-      <input type="range" class="form-control-range" id="price" name="price" min="0" max="300000" step="1000" value="<?php echo $currentPrice ?>">
-      <div id="price-output">0 - 150000</div>
+      <input type="range" class="form-control-range" id="price" name="price" min="0" max="300000" step="1000" value="<?php echo $currentPrice ?>" oninput="limitMaxPrice(this)">
+  <div id="price-output">0 - <?php echo"$currentPrice" ?> </div>
+
+  <script>
+  function limitMaxPrice(elem) {
+    if (elem.value < 1500) {
+      elem.value = 1500;
+    }
+    document.getElementById('price-output').textContent = '0 - ' + elem.value;
+  }
+  </script>
+
   </div>
+
+  
 
   <!-- JavaScript для обновления значения максимальной цены -->
   <script>
@@ -95,6 +117,7 @@ $carBrands = [
     priceInput.addEventListener('input', function() {
       priceOutput.textContent = '0 - ' + priceInput.value;
     });
+    
   </script>
 
   <div class="form-group">
@@ -108,8 +131,8 @@ $carBrands = [
           <?php } print_r ($_GET)?>
       </select>
   </div>
-  <button type="submit" name="searchBtn" class="btn btn-primary">Search</button>
 </form>
+
 
 
 <div id="container2">
@@ -130,5 +153,5 @@ $carBrands = [
 
 
 </body>
- 
+  <?php include 'footer.php'; ?>
 </html>
