@@ -138,3 +138,45 @@ body {
   transform: scale(1.1); /* увеличение размера иконки на 10% */
   filter: brightness(150%); /* увеличение яркости на 50% */
 }
+
+/* Slide design */
+.form-group {
+  width: 60%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.form-control-range {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #363636;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.form-control-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+.form-control-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+#price-output {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}

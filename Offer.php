@@ -44,6 +44,7 @@ class Offer {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    
 
     public function addOffer($data) {
         $imageFileName = $_FILES['image']['name'];

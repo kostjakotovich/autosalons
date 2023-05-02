@@ -25,16 +25,16 @@ require 'header.php';
 
 <!-- REGISTRATION FORM -->
 
-<form class="form-container" action="registration.php" method="POST">
+<form action="registration.php" method="POST" class="form-container">
     <div class="modal-body mx-3">
-        <div class="form-group">
+        <div class="form-group-reg">
             <div class="md-form mb-5">
                 <i></i>
                 <input type="text" id="username2" name="username" class="form-control validate" style="width: 300px;">
                 <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group-reg">
             <div class="md-form mb-5">
                 <i class="fas fa-envelope prefix grey-text"></i>
                 <input type="email" class="form-control validate" name="email" id="email" style="width: 300px;">
@@ -42,7 +42,7 @@ require 'header.php';
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group-reg">
             <div class="md-form mb-4">
                 <i class="fas fa-lock prefix grey-text"></i>
                 <input type="password" class="form-control validate" name="password" style="width: 300px;">
@@ -50,7 +50,7 @@ require 'header.php';
             </div>
         </div>
         <br>
-        <div class="form-group">
+        <div class="form-group-reg">
             <div class="md-form mb-4">
                 <i class="fas fa-lock prefix grey-text"></i>
                 <input type="password" class="form-control validate" name="password_confirm" style="width: 300px;">
@@ -65,9 +65,7 @@ require 'header.php';
         echo "<button class='btn btn-deep-orange' name='reg' type='submit'>Sign up</button>";
         ?>
     </div>
-    </div>
-    </div>
-    </div>
+
 </form>
 <br><br>
 <div style="text-align:center">

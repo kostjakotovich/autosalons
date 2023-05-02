@@ -9,11 +9,15 @@ $offers = $offer->getAllOffers();
 
 $searchOption = new SearchOption();
 
-if(isset($_GET['search'])) {
+if(isset($_GET['searchBtn'])) {
   $search = $_GET['search'];
   $column = $_GET['column'] ?? 'manufacturer';
-  $offers = $searchOption->searchOffers($search, $column);
-}
+  $selectedBrand = $_GET['brand'] ?? '';
+  $currentPrice = $_GET['price'] ?? '';
+  $offers = $searchOption->searchOffers($search, $column, $selectedBrand, $currentPrice);
+  }
+
+$selectedBrand = $_GET['brand'] ?? '';
 
 // массив с иконками и производителями
 // массив с иконками и производителями
@@ -60,32 +64,52 @@ $carBrands = [
     ?>
 </div>
 
-<form action="" method="get" style="text-align:center">
-  <input type="text" placeholder="Search.." name="search" style="width: 60%;
-  margin: auto;
-  text-align: center;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-image: url('searchicon.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;">
-  <input type="submit" style="display: none;">
-</form>
 
-<!-- вывод иконок производителей -->
-<div class="brand-icons">
-  <?php foreach ($carBrands as $brand => $icon) { ?>
-    <a href="index.php?search=<?php echo $brand ?>&column=manufacturer" class="brand-icon">
-      <img src="icons/<?php echo $icon ?>" alt="<?php echo $brand ?>">
-    </a>
-  <?php } ?>
-</div>
+<form action="" method="get" style="text-align:center">
+    <input type="text" placeholder="Search.." name="search" style="width: 60%;
+    margin: auto;
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;">
+
+  <!-- Фильтр по цене и бренду -->
+  <div class="form-group">
+      <label for="price"><strong>Price:</strong></label>
+      <input type="range" class="form-control-range" id="price" name="price" min="0" max="300000" step="1000" value="<?php echo $currentPrice ?>">
+      <div id="price-output">0 - 150000</div>
+  </div>
+
+  <!-- JavaScript для обновления значения максимальной цены -->
+  <script>
+    var priceInput = document.getElementById('price');
+    var priceOutput = document.getElementById('price-output');
+
+    priceInput.addEventListener('input', function() {
+      priceOutput.textContent = '0 - ' + priceInput.value;
+    });
+  </script>
+
+  <div class="form-group">
+      <label for="brand"><strong>Brand:</strong></label>
+      <select name="brand" class="form-control" id="brand">
+          <option value="">All Brands</option>  
+          <?php foreach ($carBrands as $brand => $icon) { ?>
+              <option value="<?php echo $brand ?>" <?php echo $brand == $selectedBrand ? 'selected' : '' ?>>
+                  <?php echo $brand ?>
+              </option>
+          <?php } print_r ($_GET)?>
+      </select>
+  </div>
+  <button type="submit" name="searchBtn" class="btn btn-primary">Search</button>
+</form>
 
 
 <div id="container2">
@@ -104,21 +128,7 @@ $carBrands = [
   </div>
 </div>
 
-<script>
-const icons = document.querySelectorAll('.brand-icon');
-
-icons.forEach(icon => {
-  icon.addEventListener('click', () => {
-    // удалить класс active-icon у всех иконок
-    icons.forEach(icon => {
-      icon.classList.remove('active-icon');
-    });
-    // добавить класс active-icon к нажатой иконке
-    icon.classList.add('active-icon');
-  });
-});
-</script>
 
 </body>
-<?php include 'footer.php'; ?>
+ 
 </html>

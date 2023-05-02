@@ -9,7 +9,7 @@ require_once 'Order.php';
 $offerID = isset($_GET['offerID']);
 if (isset($_GET['offerID'])) {
   $offerID = $_GET['offerID'];
-  $offer = new Offer($offerID, $_SESSION['userID']);
+  $offer = new Offer();
   $selectedOffer = $offer->getOffer($offerID);
   $selectedOfferInfo = $offer->getOfferInfo($offerID);
 } 
