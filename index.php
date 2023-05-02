@@ -21,11 +21,12 @@ $selectedBrand = $_GET['brand'] ?? '';
 // массив с иконками и производителями
 // массив с иконками и производителями
 $carBrands = [  
-  'BMW' => '../img/icon/bmw-icon.png',  
-  'Mercedes-Benz' => '../img/icon/mercedes-icon.png',  
-  'Tayota' => '../img/icon/tayota-icon.webp',
-  'Hyundai' => '../img/icon/hyundai-icon.png',
-  'Tesla' => '../img/icon/tesla-icon.png'
+  'BMW',  
+  'Mercedes-Benz',  
+  'Tayota',
+  'Hyundai',
+  'Tesla',
+  'Lamborghini'
 ];
 
 $currentPrice = $_GET['price'] ?? '';
@@ -90,46 +91,49 @@ if (!$currentPrice) {
     <button type="submit" name="searchBtn" style="margin-left: 10px;">Search</button>
 
   </div>
-  <!-- Фильтр по цене и бренду -->
-  <div class="form-group">
-      <label for="price"><strong>Price:</strong></label>
-      <input type="range" class="form-control-range" id="price" name="price" min="0" max="300000" step="1000" value="<?php echo $currentPrice ?>" oninput="limitMaxPrice(this)">
-  <div id="price-output">0 - <?php echo"$currentPrice" ?> </div>
 
-  <script>
-  function limitMaxPrice(elem) {
-    if (elem.value < 1500) {
-      elem.value = 1500;
+  <div class="filters">
+    <!-- Фильтр по цене и бренду -->
+    <div class="form-group">
+        <label for="price"><strong>Price:</strong></label>
+        <input type="range" class="form-control-range" id="price" name="price" min="0" max="300000" step="1000" value="<?php echo $currentPrice ?>" oninput="limitMaxPrice(this)">
+    <div id="price-output">0 - <?php echo"$currentPrice" ?> </div>
+
+    <script>
+    function limitMaxPrice(elem) {
+      if (elem.value < 1500) {
+        elem.value = 1500;
+      }
+      document.getElementById('price-output').textContent = '0 - ' + elem.value;
     }
-    document.getElementById('price-output').textContent = '0 - ' + elem.value;
-  }
-  </script>
+    </script>
 
-  </div>
+    </div>
 
-  
-
-  <!-- JavaScript для обновления значения максимальной цены -->
-  <script>
-    var priceInput = document.getElementById('price');
-    var priceOutput = document.getElementById('price-output');
-
-    priceInput.addEventListener('input', function() {
-      priceOutput.textContent = '0 - ' + priceInput.value;
-    });
     
-  </script>
 
-  <div class="form-group">
-      <label for="brand"><strong>Brand:</strong></label>
-      <select name="brand" class="form-control" id="brand">
-          <option value="">All Brands</option>  
-          <?php foreach ($carBrands as $brand => $icon) { ?>
-              <option value="<?php echo $brand ?>" <?php echo $brand == $selectedBrand ? 'selected' : '' ?>>
-                  <?php echo $brand ?>
-              </option>
-          <?php } print_r ($_GET)?>
-      </select>
+    <!-- JavaScript для обновления значения максимальной цены -->
+    <script>
+      var priceInput = document.getElementById('price');
+      var priceOutput = document.getElementById('price-output');
+
+      priceInput.addEventListener('input', function() {
+        priceOutput.textContent = '0 - ' + priceInput.value;
+      });
+      
+    </script>
+
+    <div class="form-group">
+        <label for="brand"><strong>Brand:</strong></label>
+        <select name="brand" class="form-control" id="brand">
+            <option value="">All Brands</option>  
+            <?php foreach ($carBrands as $brand) { ?>
+                <option value="<?php echo $brand ?>" <?php echo $brand == $selectedBrand ? 'selected' : '' ?>>
+                    <?php echo $brand ?>
+                </option>
+            <?php } print_r ($_GET)?>
+        </select>
+    </div>
   </div>
 </form>
 

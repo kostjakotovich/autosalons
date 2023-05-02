@@ -21,8 +21,6 @@ require_once 'connection.php';
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-right mb-md-0" style="position: absolute;
                   right: 0;">
           <li><a href='#' class="nav-link px-2 link-secondary" onClick='RedToHomepage()'>Homepage</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li >
           <li><a href='#about-us' class="nav-link px-2 link-dark">About Us</a></li>
         
           <!--  Для переадресации на страницу со всеми заказами-->

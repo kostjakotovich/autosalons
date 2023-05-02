@@ -88,6 +88,36 @@ body {
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .filters {
+    margin-top: 0px;
+    margin-left: 10px;
+    width: 350px;
+    height: 40%;
+    float: left;
+    background-color: #ececec; /* цвет фона, который вы можете изменить */
+    border-radius: 25px; /* задаёт радиус закругления углов */
+    border: 2px solid #000000; /* задаёт толщину, цвет и тип границы */
+    padding: 10px; /* задаёт отступ внутри блока */
+  }
+  
+    
+    .form-group {
+    margin-bottom: 20px;
+    }
+    
+    #price {
+    width: 90%;
+    }
+    
+    #price-output {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    }
+    
+    #brand {
+    width: 90%;
+    }
   
   /* Кнопка профиля */
   .profile-button {
