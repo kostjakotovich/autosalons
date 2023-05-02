@@ -87,18 +87,19 @@ if (isset($_POST['submit_order'])) {
 
           <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID'] ?>">
 
-          <div class="form-group">
+          <div class="form-group2">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <input type="text" class="form-control" id="name" name="name" maxlength="20" required>
           </div>
-          <div class="form-group">
+          <div class="form-group2">
             <label for="surname">Surname:</label>
-            <input type="text" class="form-control" id="surname" name="surname" required>
+            <input type="text" class="form-control" id="surname" name="surname" maxlength="20" required>
           </div>
-          <div class="form-group">
+          <div class="form-group2">
             <label for="telephone">Telephone:</label>
-            <input type="text" class="form-control" id="telephone" name="telephone" required>
+            <input type="text" class="form-control" id="telephone" name="telephone" maxlength="20" required>
           </div>
+          <br>
           <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
 
           <input type="button" value="Cancel" onclick="off(event)" id="cancelButton" class="btn btn-primary">

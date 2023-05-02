@@ -41,6 +41,11 @@ class Order {
     
     
     public function createOrder($name, $surname, $telephone, $offerID) {
+        if (strlen($name) > 20 || strlen($surname) > 20 || strlen($telephone) > 20) {
+            // Handle the error if the length of input is greater than 20 characters
+            return false;
+        }
+        
         $this->status = 'New';
         date_default_timezone_set('Europe/Riga');
         $this->orderDate = date("Y-m-d H:i:s");

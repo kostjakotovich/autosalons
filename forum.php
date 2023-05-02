@@ -86,6 +86,14 @@ if (isset($_POST['delete'])) {
             echo '<h4>' . $comment['username'] . '</h4>';
             echo '<p>' . $comment['comment'] . '</p><br>';
             echo '<h4>Posted on ' . date('F j, Y', strtotime($comment['date'])) . '</h4>';
+            if (isset($_SESSION['userID']) && $_SESSION['roleID'] == 0 && $_SESSION['userID'] == $comment['userID']) {
+                echo '<div class="card2">';
+                echo '  <form method="post">';
+                echo '      <input type="hidden" name="commentID" value="' . $comment['commentID'] . '">';
+                echo '      <input type="submit" value="Delete" name="delete">';
+                echo '  </form>';
+                echo '</div>';
+            }
 
             if (isset($_SESSION['roleID']) && $_SESSION['roleID'] == 1) {
                 echo '<div class="card2">';

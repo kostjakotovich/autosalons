@@ -26,7 +26,8 @@ $carBrands = [
   'Tayota',
   'Hyundai',
   'Tesla',
-  'Lamborghini'
+  'Lamborghini',
+  'Volkswagen'
 ];
 
 $currentPrice = $_GET['price'] ?? '';

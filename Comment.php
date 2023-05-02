@@ -49,9 +49,9 @@ class Comment {
     
 
     public function getCommentsForPage($startIndex, $commentsPerPage) {
-        $sql = "SELECT comments.commentID, comments.comment, user.username, comments.date 
+        $sql = "SELECT comments.commentID, comments.userID, comments.comment, user.username, comments.date
                 FROM comments 
-                JOIN user ON comments.userID = user.userID 
+                Left JOIN user ON comments.userID = user.userID 
                 ORDER BY comments.commentID DESC
                 LIMIT :startIndex, :commentsPerPage";
 
@@ -65,6 +65,7 @@ class Comment {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $comment = array(
                 'commentID' => $row['commentID'],
+                'userID' => $row['userID'],
                 'username' => $row['username'],
                 'comment' => $row['comment'],
                 'date' => $row['date']
