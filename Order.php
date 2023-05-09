@@ -121,6 +121,20 @@ class Order {
         return $orders;
     }
 
+    public function getOrderSum($userID) {
+        $this->orderUserID = $userID;
+        $sql = "SELECT SUM(offInf.price) as totalPrice
+                FROM `order` o
+                LEFT JOIN `user` u ON o.orderUserID = u.userID
+                LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
+                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                WHERE o.orderUserID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$this->orderUserID]);
+        $sum = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $sum['totalPrice'];
+    }
+
     public function checkOrdersStatus() {
         $this->orderUserID = $_SESSION['userID'];
         $query = "SELECT COUNT(*) as count FROM `order` WHERE orderUserID=:userID AND (status='New' OR status='In progress')";
