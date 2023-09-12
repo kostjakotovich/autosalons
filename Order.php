@@ -24,16 +24,18 @@ class Order {
     }
 
     public function updateStatus($status, $orderID) {
-        $this->orderID = $orderID;
-        $this->status = $status;
-        $sql = "UPDATE `order` SET `status` = :status WHERE `orderID` = :orderID";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':status', $this->status);
-        $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
-        if ($stmt->execute()) {
-            $_SESSION['order_status_success'] = "Order status changed successfully.";
-        } else {
-            echo "Error updating order status: " . $stmt->errorInfo()[2];
+        if (!empty($status)) {
+            $this->orderID = $orderID;
+            $this->status = $status;
+            $sql = "UPDATE `order` SET `status` = :status WHERE `orderID` = :orderID";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':status', $this->status);
+            $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $_SESSION['order_status_success'] = "Order status changed successfully.";
+            } else {
+                echo "Error updating order status: " . $stmt->errorInfo()[2];
+            }
         }
     }
 
