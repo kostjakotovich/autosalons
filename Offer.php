@@ -54,15 +54,22 @@ class Offer {
         $this->conn->beginTransaction();
     
         try {
-            $sql = "INSERT INTO offers (type, manufacturer, image) VALUES (?, ?, ?)";
+            // Сначала добавляем информацию о предложении в таблицу offers
+            $sql = "INSERT INTO offers (type, manufacturer) VALUES (?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$data['type'], $data['manufacturer'], $imageFilePath]);
+            $stmt->execute([$data['type'], $data['manufacturer']]);
     
             $offerID = $this->conn->lastInsertId();
     
-            $sql = "INSERT INTO offersinfo (offersID, color, price, yearOfManufacture, weight) VALUES (?, ?, ?, ?, ?)";
+            // Затем добавляем информацию о цвете и URL изображения в таблицу car_colors
+            $sql = "INSERT INTO car_colors (offerID, color, image_url) VALUES (?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$offerID, $data['color'], $data['price'], $data['yearOfManufacture'], $data['weight']]);
+            $stmt->execute([$offerID, $data['color'], $imageFilePath]);
+    
+            // Наконец, добавляем остальную информацию о предложении в таблицу offersinfo
+            $sql = "INSERT INTO offersinfo (offersID, price, yearOfManufacture, weight) VALUES (?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$offerID, $data['price'], $data['yearOfManufacture'], $data['weight']]);
     
             $this->conn->commit();
     
@@ -72,6 +79,7 @@ class Offer {
             echo "Error: " . $e->getMessage();
         }
     }
+    
     
     
     

@@ -21,13 +21,13 @@ USE `mariadb`;
 
 -- Дамп структуры для таблица mariadb.car_colors
 CREATE TABLE IF NOT EXISTS `car_colors` (
-  `color_id` int NOT NULL AUTO_INCREMENT,
+  `colorID` int NOT NULL AUTO_INCREMENT,
   `offerID` int DEFAULT NULL,
-  `color` varchar(255) DEFAULT NULL,
-  `image_url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`color_id`) USING BTREE,
-  KEY `FK_car_colors_offers` (`offerID`),
-  CONSTRAINT `FK_car_colors_offers` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
+  `color` varchar(255) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  PRIMARY KEY (`colorID`),
+  KEY `offerID` (`offerID`),
+  CONSTRAINT `car_colors_ibfk_1` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы mariadb.car_colors: ~0 rows (приблизительно)
