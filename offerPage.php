@@ -6,6 +6,7 @@ require_once 'User.php';
 require_once 'Order.php';
 
 
+
 $offerID = isset($_GET['offerID']);
 if (isset($_GET['offerID'])) {
   $offerID = $_GET['offerID'];
@@ -60,11 +61,14 @@ if (isset($_POST['submit_order'])) {
 
       <label>Choose a color:</label><br>
       <?php foreach ($selectedOfferColors as $color) { ?>
-          <input type="radio" name="color" value="<?php echo $color; ?>">
-          <span style="color: <?php echo $color; ?>;">&#11044;</span>
-          <?php echo ucfirst($color); ?><br>
+          <div class="color-option">
+              <input type="radio" name="color" value="<?php echo $color; ?>">
+              <?php echo ucfirst($color); ?>
+          </div>
+
       <?php } ?>
 
+      <br></br>
       <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
       <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
@@ -89,6 +93,7 @@ if (isset($_POST['submit_order'])) {
     </div>
   </div>
 </div>
+
 
     <div id="overlay" onclick="off()">
       <div id="text" class="form-container">

@@ -61,6 +61,7 @@ class Offer {
         return $result;
     }
     
+    
 
     public function addOffer($data) {
         $imageFileName = $_FILES['image']['name'];
@@ -78,7 +79,7 @@ class Offer {
             $offerID = $this->conn->lastInsertId();
     
             // Затем добавляем информацию о цвете и URL изображения в таблицу car_colors
-            $sql = "INSERT INTO car_colors (offerID, color, image_url) VALUES (?, ?)";
+            $sql = "INSERT INTO car_colors (offerID, color, image) VALUES (?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$offerID, $data['color'], $imageFilePath]);
     

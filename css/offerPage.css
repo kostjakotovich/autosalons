@@ -144,3 +144,8 @@ main {
   height: auto;
   display: block;
 }
+
+.color-option {
+  display: inline-block;
+  margin-right: 10px; /* Добавьте отступ справа, чтобы элементы не налезали друг на друга */
+}
