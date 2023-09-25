@@ -11,6 +11,7 @@ if (isset($_GET['offerID'])) {
   $offerID = $_GET['offerID'];
   $offer = new Offer();
   $selectedOffer = $offer->getOffer($offerID);
+  $selectedOfferColor = $offer->getOfferColor($offerID);
   $selectedOfferInfo = $offer->getOfferInfo($offerID);
 } 
 
@@ -47,7 +48,7 @@ if (isset($_POST['submit_order'])) {
 <body>
 <?php require 'header.php'; ?>
 <div class="container2">
-  <img src="<?php echo $selectedOffer['image']; ?>" style="float:left">
+  <img src="<?php echo $selectedOfferColor['image']; ?>" style="float:left">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
@@ -55,10 +56,10 @@ if (isset($_POST['submit_order'])) {
       <br>
       <h5>More information:</h5>
       <br>
-      <p class="card-text"><?php echo 'Color: ' .$selectedOfferInfo['color'] ; ?></p>
+      <p class="card-text"><?php echo 'Color: ' .$selectedOfferColor['color'] ; ?></p>
 
       <label>Choose a color:</label><br>
-      <input type="radio" name="color" value="Red"> <span style="color: red;">&#11044;</span> <?php echo $selectedOfferInfo['color']; ?><br>
+      <input type="radio" name="color" value="Red"> <span style="color: red;">&#11044;</span> <?php echo $selectedOfferColor['color']; ?><br>
       <input type="radio" name="color" value="Red"> <span style="color: red;">&#11044;</span> Red<br>
       <input type="radio" name="color" value="Blue"> <span style="color: blue;">&#11044;</span> Blue<br>
       <input type="radio" name="color" value="Green"> <span style="color: green;">&#11044;</span> Green<br>

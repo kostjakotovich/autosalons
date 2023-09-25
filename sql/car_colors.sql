@@ -23,15 +23,17 @@ USE `mariadb`;
 CREATE TABLE IF NOT EXISTS `car_colors` (
   `colorID` int NOT NULL AUTO_INCREMENT,
   `offerID` int DEFAULT NULL,
-  `color` varchar(255) NOT NULL,
-  `image_url` varchar(255) NOT NULL,
+  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `image` blob,
   PRIMARY KEY (`colorID`),
   KEY `offerID` (`offerID`),
   CONSTRAINT `car_colors_ibfk_1` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.car_colors: ~0 rows (приблизительно)
 DELETE FROM `car_colors`;
+INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`) VALUES
+	(2, 55, 'simple color', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f32333666653062316338623138353530326135653438626363626365313364622e6a7067);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
