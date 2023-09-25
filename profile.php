@@ -136,19 +136,7 @@ $totalSum = $order -> getOrderSum($userID);
 
 <div id="Orders" class="tabcontent">
   <table>
-    <tr>
-      <th>Order Nr</th>
-      <th>Order Date</th>
-      <th>Name</th>
-      <th>Surname</th>
-      <th>Telephone</th>
-      <th>Status</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Manufacturer</th>
-      <th>Model</th>
-      <th>Price</th>
-    </tr>
+    <?php include 'includes/userOrdersTable.php'; ?>
     <?php 
         foreach($orders as $order){
             echo "<tr>";
@@ -162,6 +150,7 @@ $totalSum = $order -> getOrderSum($userID);
             echo "<td>".$order['email']."</td>";
             echo "<td>".$order['manufacturer']."</td>";
             echo "<td>".$order['type']."</td>";
+            echo "<td>".$order['color']."</td>";
             echo "<td>".$order['price']." $</td>";
             echo "</tr>";
         }

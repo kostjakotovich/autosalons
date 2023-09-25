@@ -12,6 +12,7 @@
     echo "<td>".$order['email']."</td>";
     echo "<td>".$order['manufacturer']."</td>";
     echo "<td>".$order['type']."</td>";
+    echo "<td>".$order['color']."</td>";
     echo "<td>".$order['price']." $</td>";
     echo "<td>
         <select name='status[$order[orderID]]'>

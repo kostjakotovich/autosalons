@@ -44,6 +44,14 @@ class Offer {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getOfferColors($offerID) {
+        $sql = "SELECT color FROM car_colors WHERE offerID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$offerID]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
     public function getAllOffers() {
         $sql = "SELECT * FROM offers INNER JOIN offersinfo on offers.offerID = offersinfo.offersID INNER JOIN car_colors on offers.offerID = car_colors.offerID";
@@ -70,7 +78,7 @@ class Offer {
             $offerID = $this->conn->lastInsertId();
     
             // Затем добавляем информацию о цвете и URL изображения в таблицу car_colors
-            $sql = "INSERT INTO car_colors (offerID, color, image_url) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO car_colors (offerID, color, image_url) VALUES (?, ?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$offerID, $data['color'], $imageFilePath]);
     

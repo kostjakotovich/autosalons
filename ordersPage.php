@@ -98,21 +98,7 @@ if (isset($_POST['deleteOrder'])) {
             <br>
             <p>New</p>
             <table>
-                <thead>
-                    <tr>
-                        <th>Order Nr</th>
-                        <th>Order Date</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Telephone</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Manufacturer</th>
-                        <th>Model</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <?php include 'includes/ordersTableTemplate.php'; ?>
                 <tbody>
                     <?php 
                     foreach($newOrders as $order){
@@ -127,21 +113,7 @@ if (isset($_POST['deleteOrder'])) {
             <br>
             <p>In progress</p>
             <table>
-                <thead>
-                    <tr>
-                        <th>Order Nr</th>
-                        <th>Order Date</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Telephone</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Manufacturer</th>
-                        <th>Model</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <?php include 'includes/ordersTableTemplate.php'; ?>
                 <tbody>
                     <?php 
                     foreach($inProgressOrders as $order){
@@ -155,21 +127,7 @@ if (isset($_POST['deleteOrder'])) {
             <br>
             <p>Done</p>
             <table>
-                <thead>
-                    <tr>
-                        <th>Order Nr</th>
-                        <th>Order Date</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Telephone</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Manufacturer</th>
-                        <th>Model</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <?php include 'includes/ordersTableTemplate.php'; ?>
                 <tbody>
                     <?php 
                     foreach($doneOrders as $order){

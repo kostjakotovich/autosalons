@@ -96,11 +96,12 @@ class Order {
     
 
     public function getAllOrderInfo() {
-        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, offInf.price
+        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, CarCol.color, offInf.price
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                INNER JOIN `car_colors` CarCol ON off.offerID = CarCol.offerID
                 order by `orderID` DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -111,10 +112,11 @@ class Order {
 
     public function getOrderInfo($userID) {
         $this->orderUserID = $userID;
-        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, offInf.price
+        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, col.color, offInf.price
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
+                INNER JOIN `car_colors` col ON off.offerID = col.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
                 WHERE o.orderUserID = ?";
         $stmt = $this->conn->prepare($sql);

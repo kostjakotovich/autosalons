@@ -12,6 +12,7 @@ if (isset($_GET['offerID'])) {
   $offer = new Offer();
   $selectedOffer = $offer->getOffer($offerID);
   $selectedOfferColor = $offer->getOfferColor($offerID);
+  $selectedOfferColors = $offer->getOfferColors($offerID);
   $selectedOfferInfo = $offer->getOfferInfo($offerID);
 } 
 
@@ -56,14 +57,13 @@ if (isset($_POST['submit_order'])) {
       <br>
       <h5>More information:</h5>
       <br>
-      <p class="card-text"><?php echo 'Color: ' .$selectedOfferColor['color'] ; ?></p>
 
       <label>Choose a color:</label><br>
-      <input type="radio" name="color" value="Red"> <span style="color: red;">&#11044;</span> <?php echo $selectedOfferColor['color']; ?><br>
-      <input type="radio" name="color" value="Red"> <span style="color: red;">&#11044;</span> Red<br>
-      <input type="radio" name="color" value="Blue"> <span style="color: blue;">&#11044;</span> Blue<br>
-      <input type="radio" name="color" value="Green"> <span style="color: green;">&#11044;</span> Green<br>
-      <!-- Добавьте круглые кнопки и соответствующие значения цветов -->
+      <?php foreach ($selectedOfferColors as $color) { ?>
+          <input type="radio" name="color" value="<?php echo $color; ?>">
+          <span style="color: <?php echo $color; ?>;">&#11044;</span>
+          <?php echo ucfirst($color); ?><br>
+      <?php } ?>
 
       <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>

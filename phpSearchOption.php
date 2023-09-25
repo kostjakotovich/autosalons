@@ -5,7 +5,8 @@ class SearchOption extends Database{
   public function searchOffers($search, $selectedBrand, $currentPrice) {
       $query = "SELECT * 
                 FROM offers 
-                Inner join offersinfo on offers.offerID = offersinfo.offersID 
+                Inner join car_colors on offers.offerID = car_colors.offerID
+                Inner join offersinfo on offers.offerID = offersinfo.offersID  
                 WHERE (manufacturer LIKE :search OR type LIKE :search OR CONCAT(manufacturer, ' ', type) LIKE :search OR CONCAT(manufacturer, type) LIKE :search)";
       if (!empty($selectedBrand)) {
           $query .= " AND offers.manufacturer=:selectedBrand";
