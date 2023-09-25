@@ -24,16 +24,18 @@ class Order {
     }
 
     public function updateStatus($status, $orderID) {
-        $this->orderID = $orderID;
-        $this->status = $status;
-        $sql = "UPDATE `order` SET `status` = :status WHERE `orderID` = :orderID";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':status', $this->status);
-        $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
-        if ($stmt->execute()) {
-            $_SESSION['order_status_success'] = "Order status changed successfully.";
-        } else {
-            echo "Error updating order status: " . $stmt->errorInfo()[2];
+        if (!empty($status)) {
+            $this->orderID = $orderID;
+            $this->status = $status;
+            $sql = "UPDATE `order` SET `status` = :status WHERE `orderID` = :orderID";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':status', $this->status);
+            $stmt->bindValue(':orderID', $this->orderID, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $_SESSION['order_status_success'] = "Order status changed successfully.";
+            } else {
+                echo "Error updating order status: " . $stmt->errorInfo()[2];
+            }
         }
     }
 
@@ -119,6 +121,20 @@ class Order {
         $stmt->execute([$this->orderUserID]);
         $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $orders;
+    }
+
+    public function getOrderSum($userID) {
+        $this->orderUserID = $userID;
+        $sql = "SELECT SUM(offInf.price) as totalPrice
+                FROM `order` o
+                LEFT JOIN `user` u ON o.orderUserID = u.userID
+                LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
+                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                WHERE o.orderUserID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$this->orderUserID]);
+        $sum = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $sum['totalPrice'];
     }
 
     public function checkOrdersStatus() {
