@@ -94,6 +94,29 @@ if (isset($_POST['submit_order'])) {
   </div>
 </div>
 
+<!-- Форма для добавления новых цветов -->
+<form method="post" action="process_color.php">
+    <label for="newColor">Add New Color:</label>
+    <input type="text" id="newColor" name="newColor" required>
+    <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
+    <button type="submit">Add</button>
+</form>
+
+<!-- Ссылки для удаления цветов -->
+<?php foreach ($selectedOfferColors as $color) { ?>
+    <div class="color-option">
+        <input type="radio" name="color" value="<?php echo $color; ?>">
+        <?php echo ucfirst($color); ?>
+        <?php if ($_SESSION['roleID'] == 1): ?>
+            <!-- Отображаем кнопку "-" для удаления -->
+            <ul>
+                <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color; ?>">-</a>
+            </ul>
+        <?php endif; ?>
+    </div>
+<?php } ?>
+
+
 
     <div id="overlay" onclick="off()">
       <div id="text" class="form-container">
