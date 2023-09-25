@@ -19,7 +19,6 @@ if(isset($_GET['searchBtn'])) {
 $selectedBrand = $_GET['brand'] ?? '';
 
 // массив с иконками и производителями
-// массив с иконками и производителями
 $carBrands = [  
   'BMW',  
   'Mercedes-Benz',  
