@@ -22,7 +22,6 @@ USE `mariadb`;
 -- Дамп структуры для таблица mariadb.offersinfo
 CREATE TABLE IF NOT EXISTS `offersinfo` (
   `offersInfoID` int NOT NULL AUTO_INCREMENT,
-  `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `price` float DEFAULT NULL,
   `yearOfManufacture` date DEFAULT NULL,
   `weight` float DEFAULT NULL,
@@ -30,10 +29,14 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.offersinfo: ~3 rows (приблизительно)
 DELETE FROM `offersinfo`;
+INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`) VALUES
+	(1, NULL, NULL, NULL, 1),
+	(48, 232, '2023-09-10', 232, 55),
+	(49, 53434, '2023-09-11', 345, 64);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

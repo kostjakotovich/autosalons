@@ -28,12 +28,14 @@ CREATE TABLE IF NOT EXISTS `car_colors` (
   PRIMARY KEY (`colorID`),
   KEY `offerID` (`offerID`),
   CONSTRAINT `car_colors_ibfk_1` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.car_colors: ~1 rows (приблизительно)
+-- Дамп данных таблицы mariadb.car_colors: ~3 rows (приблизительно)
 DELETE FROM `car_colors`;
 INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`) VALUES
-	(2, 55, 'simple color', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f32333666653062316338623138353530326135653438626363626365313364622e6a7067);
+	(1, 55, 'somple', NULL),
+	(3, 1, 'dfw', NULL),
+	(4, 64, 'fghfg', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4a756a757473752d4b616973656e2d536561736f6e2d322d476f6a6f2d76732d546f6a692d72656d617463682d696e2d7468652d6d616e67612d312e77656270);
 
 -- Дамп структуры для таблица mariadb.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -64,27 +66,18 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~10 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offers: ~2 rows (приблизительно)
 DELETE FROM `offers`;
 INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
-	(41, 'X5', 'BMW'),
-	(42, 'Model Y', 'Tesla'),
-	(44, 'Elantra', 'Hyundai'),
-	(45, 'Arteon', 'Volkswagen'),
-	(46, 'Kona', 'Hyundai'),
-	(47, 'A6', 'Audi'),
-	(48, 'i8', 'BMW'),
-	(49, 'Aventador', 'Lamborghini'),
-	(50, 'G63 AMG', 'Mercedes-Benz'),
-	(51, 'F430', 'Ferrari'),
-	(55, 'simple model', 's1mle manuf.');
+	(1, 'fgd', 'dfg'),
+	(55, 'simple model', 's1mle manuf.'),
+	(64, 'rtrfh', 'gfhfg');
 
 -- Дамп структуры для таблица mariadb.offersinfo
 CREATE TABLE IF NOT EXISTS `offersinfo` (
   `offersInfoID` int NOT NULL AUTO_INCREMENT,
-  `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `price` float DEFAULT NULL,
   `yearOfManufacture` date DEFAULT NULL,
   `weight` float DEFAULT NULL,
@@ -92,22 +85,14 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~10 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~2 rows (приблизительно)
 DELETE FROM `offersinfo`;
-INSERT INTO `offersinfo` (`offersInfoID`, `color`, `price`, `yearOfManufacture`, `weight`, `offersID`) VALUES
-	(36, 'white', 20000, '2012-04-04', 2000, 41),
-	(37, 'white', 2300, '2014-04-09', 2100, 42),
-	(39, 'Red', 20950, '2020-04-06', 1800, 44),
-	(40, 'Grey', 43000, '2018-01-10', 2000, 45),
-	(41, 'White', 16000, '2021-02-17', 2400, 46),
-	(42, 'Black', 19000, '2022-01-18', 1900, 47),
-	(43, 'grey', 40000, '2022-01-01', 2000, 48),
-	(44, 'white', 250000, '2011-05-01', 1500, 49),
-	(45, 'White', 300000, '2015-05-12', 4100, 50),
-	(46, 'Red', 135000, '2004-05-05', 1500, 51),
-	(48, NULL, 232, '2023-09-10', 232, 55);
+INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`) VALUES
+	(1, NULL, NULL, NULL, 1),
+	(48, 232, '2023-09-10', 232, 55),
+	(49, 53434, '2023-09-11', 345, 64);
 
 -- Дамп структуры для таблица mariadb.order
 CREATE TABLE IF NOT EXISTS `order` (
@@ -124,15 +109,12 @@ CREATE TABLE IF NOT EXISTS `order` (
   KEY `orderOfferID` (`orderOfferID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~4 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~1 rows (приблизительно)
 DELETE FROM `order`;
 INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`) VALUES
-	(132, '2023-05-01', 'Kostja', 'hvj', 'ghj', 'In progress', 45, 41),
-	(133, '2023-05-01', 'Kos', 'Kot', '2040', 'Done', 1, 44),
-	(134, '2023-05-02', 'Nmae', 'sur', '342324', 'Done', 1, 41),
-	(137, '2023-05-03', 'Kostja', 'Kotovich', '3424323', 'Done', 48, 42);
+	(140, '2023-09-26', 'rty', 'try', '45645', 'In progress', 1, 64);
 
 -- Дамп структуры для таблица mariadb.user
 CREATE TABLE IF NOT EXISTS `user` (

@@ -50,7 +50,9 @@ if (isset($_POST['submit_order'])) {
 <body>
 <?php require 'header.php'; ?>
 <div class="container2">
-  <img src="<?php echo $selectedOfferColor['image']; ?>" style="float:left">
+
+
+<img id="colorImage" src="<?php echo $selectedOfferColor['image']; ?>" style="float:left">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
@@ -60,13 +62,17 @@ if (isset($_POST['submit_order'])) {
       <br>
 
       <label>Choose a color:</label><br>
-      <?php foreach ($selectedOfferColors as $color) { ?>
-          <div class="color-option">
-              <input type="radio" name="color" value="<?php echo $color; ?>">
-              <?php echo ucfirst($color); ?>
-          </div>
+<?php foreach ($selectedOfferColors as $index => $color) { ?>
+    <div class="color-option">
+        <input type="radio" name="color" value="<?php echo $color['color']; ?>" data-image="<?php echo $color['image']; ?>">
 
-      <?php } ?>
+        <?php echo ucfirst($color['color']); ?>
+    </div>
+<?php } ?>
+
+
+
+
 
       <br></br>
       <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
@@ -97,24 +103,29 @@ if (isset($_POST['submit_order'])) {
 <?php if(isset($_SESSION['roleID'])): ?>
   <?php if ($_SESSION['roleID'] == 1): ?>
     <!-- Форма для добавления новых цветов -->
-    <form method="post" action="process_color.php">
+    <form method="post" action="process_color.php" enctype="multipart/form-data">
         <label for="newColor">Add New Color:</label>
         <input type="text" id="newColor" name="newColor" required>
+        
+        <!-- Добавьте поле для загрузки изображения -->
+        <label for="colorImage">Color Image:</label>
+        <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
+        
         <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
         <button type="submit">Add</button>
     </form>
 
     <!-- Ссылки для удаления цветов -->
     <?php foreach ($selectedOfferColors as $color) { ?>
-        <div class="color-option">
-            <input type="radio" name="color" value="<?php echo $color; ?>">
-            <?php echo ucfirst($color); ?>
-                <!-- Отображаем кнопку "-" для удаления -->
-                <ul>
-                    <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color; ?>">-</a>
-                </ul>
-        </div>
-    <?php } ?>
+    <div class="color-option">
+        <input type="radio" name="color" value="<?php echo $color['color']; ?>">
+        <?php echo ucfirst($color['color']); ?>
+        <!-- Отображаем кнопку "-" для удаления цвета -->
+        <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
+    </div>
+<?php } ?>
+
+
   <?php endif; ?>
 <?php endif; ?>
 
@@ -146,6 +157,27 @@ if (isset($_POST['submit_order'])) {
       </div>
     </div>
   
+    <script>
+    // Получаем ссылку на изображение и радио-кнопки цвета
+const colorImage = document.getElementById("colorImage");
+const colorRadios = document.querySelectorAll('input[type="radio"][name="color"]');
+
+// Добавляем обработчик события change для радио-кнопок цвета
+colorRadios.forEach(radio => {
+    radio.addEventListener("change", () => {
+        // Получаем индекс выбранной радио-кнопки
+        const selectedIndex = radio.value;
+
+        // Получаем URL изображения из атрибута data-image выбранной радио-кнопки
+        const selectedColorImage = colorRadios[selectedIndex].getAttribute("data-image");
+
+        // Устанавливаем новый источник изображения
+        colorImage.src = selectedColorImage;
+    });
+});
+
+</script>
+
 <?php include 'footer.php'; ?>
 </body>
 

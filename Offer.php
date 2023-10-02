@@ -49,9 +49,9 @@ class Offer {
         $sql = "SELECT color FROM car_colors WHERE offerID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$offerID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    }
+    }    
     
     public function getAllOffers() {
         $sql = "SELECT * FROM offers INNER JOIN offersinfo on offers.offerID = offersinfo.offersID INNER JOIN car_colors on offers.offerID = car_colors.offerID";
@@ -73,6 +73,11 @@ class Offer {
         $stmt->execute([$offerID, $color]);
     }
     
+    public function addColorWithImage($offerID, $color, $imagePath) {
+        $sql = "INSERT INTO car_colors (offerID, color, image) VALUES (?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$offerID, $color, $imagePath]);
+    }
     
 
     public function addOffer($data) {
