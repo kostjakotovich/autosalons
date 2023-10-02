@@ -5,6 +5,8 @@ require_once 'Offer.php';
 require_once 'User.php';
 require_once 'Order.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 $offerID = isset($_GET['offerID']);
@@ -15,6 +17,18 @@ if (isset($_GET['offerID'])) {
   $selectedOfferColor = $offer->getOfferColor($offerID);
   $selectedOfferColors = $offer->getOfferColors($offerID);
   $selectedOfferInfo = $offer->getOfferInfo($offerID);
+
+    // Проверяем, был ли выбран цвет
+  if (isset($_GET['choose_color'])) {
+    $selectedColor = $_GET['color'];
+    // Здесь вы можете использовать $selectedColor для отображения предложения с выбранным цветом
+    $selectedOfferColor = $offer->getOfferColorByColor($offerID, $selectedColor);
+  } else {
+    // Если цвет не выбран, отображаем предложение по умолчанию
+    $selectedColor = null; // Можете использовать это для проверки в других частях страницы
+    $selectedOfferColor = $offer->getOfferColor($offerID); // По умолчанию
+  }
+
 } 
 
 
@@ -61,15 +75,30 @@ if (isset($_POST['submit_order'])) {
       <h5>More information:</h5>
       <br>
 
-      <label>Choose a color:</label><br>
-<?php foreach ($selectedOfferColors as $index => $color) { ?>
+      <!-- Добавьте форму для выбора цвета -->
+<form method="get" action="offerPage.php">
+  <label>Choose a color:</label><br>
+  <?php foreach ($selectedOfferColors as $color) { ?>
     <div class="color-option">
-        <input type="radio" name="color" value="<?php echo $color['color']; ?>" data-image="<?php echo $color['image']; ?>">
-
-        <?php echo ucfirst($color['color']); ?>
+      <input type="radio" name="color" value="<?php echo $color['color']; ?>">
+      <?php echo ucfirst($color['color']); ?>
     </div>
-<?php } ?>
+  <?php } ?>
+  <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
+  <input type="hidden" name="choose_color" value="Choose Color">
+  <input type="submit" value="Choose Color">
+</form>
 
+
+<!-- Обработка выбора цвета и отображение предложения с выбранным цветом -->
+<?php
+if (isset($_GET['choose_color'])) {
+  $selectedColor = $_GET['color'];
+  // Здесь вы можете использовать $selectedColor для отображения предложения с выбранным цветом
+} else {
+  // Если цвет не выбран, отображайте предложение по умолчанию
+}
+?>
 
 
 
@@ -118,7 +147,7 @@ if (isset($_POST['submit_order'])) {
     <!-- Ссылки для удаления цветов -->
     <?php foreach ($selectedOfferColors as $color) { ?>
     <div class="color-option">
-        <input type="radio" name="color" value="<?php echo $color['color']; ?>">
+        
         <?php echo ucfirst($color['color']); ?>
         <!-- Отображаем кнопку "-" для удаления цвета -->
         <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
@@ -157,27 +186,6 @@ if (isset($_POST['submit_order'])) {
       </div>
     </div>
   
-    <script>
-    // Получаем ссылку на изображение и радио-кнопки цвета
-const colorImage = document.getElementById("colorImage");
-const colorRadios = document.querySelectorAll('input[type="radio"][name="color"]');
-
-// Добавляем обработчик события change для радио-кнопок цвета
-colorRadios.forEach(radio => {
-    radio.addEventListener("change", () => {
-        // Получаем индекс выбранной радио-кнопки
-        const selectedIndex = radio.value;
-
-        // Получаем URL изображения из атрибута data-image выбранной радио-кнопки
-        const selectedColorImage = colorRadios[selectedIndex].getAttribute("data-image");
-
-        // Устанавливаем новый источник изображения
-        colorImage.src = selectedColorImage;
-    });
-});
-
-</script>
-
 <?php include 'footer.php'; ?>
 </body>
 
