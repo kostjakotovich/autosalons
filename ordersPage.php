@@ -90,7 +90,7 @@ if (isset($_POST['deleteOrder'])) {
 
     <div id="container">
         <div>
-            <form method="post" action="includes/exportTable.inc.php">
+            <form method="post" action="includes/exportTable.inc.php" >
                 <input type="submit" name="export" value="Export to Excel" class="btn">
                 <input type="hidden" name="export" value="true">
                 <!-- Передайте информацию о заказах как сериализованный массив -->

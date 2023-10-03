@@ -73,7 +73,7 @@ if (isset($_POST['delete'])) {
         <div class="card">
             <form method="post">
                 <label for="comment">Leave your comment (no more than 250 characters):</label><br>
-                <textarea name="comment" id="comment" cols="30" rows="5" maxlength="250"></textarea><br>
+                <textarea name="comment" id="comment" cols="30" rows="5" maxlength="250" required></textarea><br>
                 <input type="submit" value="Send comment">
             </form>
         </div>
