@@ -24,9 +24,15 @@ main {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
-    overflow: hidden;
+
     position: relative;
     transition: all 0.3s ease; /* добавляем плавный переход */
+}
+
+button[name="ChooseBtn"] {
+  width: auto;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
 }
 
 
@@ -148,4 +154,16 @@ main {
 .color-option {
   display: inline-block;
   margin-right: 10px; /* Добавьте отступ справа, чтобы элементы не налезали друг на друга */
+}
+
+/* cards */
+.card-2 {
+  margin-right: 15%; /* Добавляем отступ слева */
+  float:right;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ccc;
+
+  position: relative;
+  transition: all 0.3s ease; /* добавляем плавный переход */
 }
