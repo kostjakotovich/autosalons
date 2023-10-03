@@ -116,7 +116,7 @@ if (isset($_GET['choose_color'])) {
             }
           } else {
               ?>
-              <p class="btn">You need to log in to make an offer.</p>
+              <p class="btn" style="margin-top: -0.5%">You need to log in to make an offer.</p>
               <?php
           }
               
@@ -125,45 +125,43 @@ if (isset($_GET['choose_color'])) {
   </div>
 </div>
 
+<?php if(isset($_SESSION['roleID'])): ?>
+  <?php if ($_SESSION['roleID'] == 1): ?>
+    <div class="card" style="margin-left:58.7%; margin-top:-2%">
+        <div class="card-body">
+        <br>
+              <!-- Форма для добавления новых цветов -->
+              <form method="post" action="process_color.php" enctype="multipart/form-data">
+                  <label for="newColor">Add New Color:</label>
+                
+                  <input type="text" id="newColor" name="newColor" required>
+                  <br>
+                  <!-- Добавьте поле для загрузки изображения -->
+                  <label for="colorImage">Color Image:</label>
+                
+                  <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
+                
+                  <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
+                  <br>
+                  <button type="submit">Add</button>
+              </form>
 
-<div class="card" style="margin-left:58.7%; margin-top:-2%">
-    <div class="card-body">
-    <br>
-      <?php if(isset($_SESSION['roleID'])): ?>
-        <?php if ($_SESSION['roleID'] == 1): ?>
-          <!-- Форма для добавления новых цветов -->
-          <form method="post" action="process_color.php" enctype="multipart/form-data">
-              <label for="newColor">Add New Color:</label>
-             
-              <input type="text" id="newColor" name="newColor" required>
+              <!-- Ссылки для удаления цветов -->
+              <?php foreach ($selectedOfferColors as $color) { ?>
               <br>
-              <!-- Добавьте поле для загрузки изображения -->
-              <label for="colorImage">Color Image:</label>
-            
-              <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
-            
-              <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
-              <br>
-              <button type="submit">Add</button>
-          </form>
-
-          <!-- Ссылки для удаления цветов -->
-          <?php foreach ($selectedOfferColors as $color) { ?>
+              <div class="color-option">          
+                  <?php echo ucfirst($color['color']); ?>
+                  <!-- Отображаем кнопку "-" для удаления цвета -->
+                  <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
+              </div>
+          <?php } ?>
           <br>
-          <div class="color-option">          
-              <?php echo ucfirst($color['color']); ?>
-              <!-- Отображаем кнопку "-" для удаления цвета -->
-              <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
-          </div>
-      <?php } ?>
-
-
-        <?php endif; ?>
-      <?php endif; ?>
-      <br>
+        </div>
     </div>
-</div>
-<br>
+    <br>
+
+  <?php endif; ?>
+<?php endif; ?>
 
 
     <div id="overlay" onclick="off()">
