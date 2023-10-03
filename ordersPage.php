@@ -57,7 +57,6 @@ if (isset($_POST['deleteOrder'])) {
     $order->deleteOrder($_POST['orderID']);
 }
 
-
 ?>
 
 <html>
@@ -90,6 +89,14 @@ if (isset($_POST['deleteOrder'])) {
     </div>
 
     <div id="container">
+        <div>
+            <form method="post" action="includes/exportTable.inc.php">
+                <input type="submit" name="export" value="Export to Excel" class="btn">
+                <input type="hidden" name="export" value="true">
+                <!-- Передайте информацию о заказах как сериализованный массив -->
+                <input type="hidden" name="orders_data" value="<?php echo htmlentities(serialize($orders)); ?>">
+            </form>
+        </div>
         <form method="post">
             <br>
             <input type="submit" name="submit" value="Save changes" class="btn">
@@ -139,6 +146,10 @@ if (isset($_POST['deleteOrder'])) {
 
         </form>
     </div>
+
+
+
+
     <?php 
         $user = new UserMain($_SESSION['userID']);
         $userInfo = $user->getUserInfo();
