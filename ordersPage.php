@@ -71,32 +71,33 @@ if (isset($_POST['deleteOrder'])) {
 
     <div>
     
-    <?php 
-    if(isset($_SESSION['order_status_success'])){
-    ?>
-      <div class="alert alert-success text-center" role="alert">
-        <?php echo $_SESSION['order_status_success']; ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <?php
-    
-    unset($_SESSION['order_status_success']);
-    }
-    ?>
+        <?php 
+        if(isset($_SESSION['order_status_success'])){
+        ?>
+        <div class="alert alert-success text-center" role="alert">
+            <?php echo $_SESSION['order_status_success']; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php
+        
+        unset($_SESSION['order_status_success']);
+        }
+        ?>
 
     </div>
 
-    <div id="container">
-        <div>
+    <div style="float:right;">
             <form method="post" action="includes/exportTable.inc.php" >
                 <input type="submit" name="export" value="Export to Excel" class="btn">
                 <input type="hidden" name="export" value="true">
-                <!-- Передайте информацию о заказах как сериализованный массив -->
+                <!-- Передаёт информацию о заказах как сериализованный массив -->
                 <input type="hidden" name="orders_data" value="<?php echo htmlentities(serialize($orders)); ?>">
             </form>
-        </div>
+    </div>
+    <br><br>
+    <div id="container">
         <form method="post">
             <br>
             <input type="submit" name="submit" value="Save changes" class="btn">
