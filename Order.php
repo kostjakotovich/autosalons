@@ -42,7 +42,7 @@ class Order {
     
     
     
-    public function createOrder($name, $surname, $telephone, $offerID) {
+    public function createOrder($name, $surname, $telephone, $offerID, $colorID) {
         if (strlen($name) > 20 || strlen($surname) > 20 || strlen($telephone) > 20) {
             // Handle the error if the length of input is greater than 20 characters
             return false;
@@ -58,8 +58,8 @@ class Order {
         $this->orderUserID = $_SESSION['userID'];
         
         if(isset($_SESSION["userID"])) { 
-            $sql = "INSERT INTO `order` (`orderDate`, `status`, `orderOfferID`, `orderUserID`, `name`, `surname`, `telephone`) 
-                    VALUES (:orderDate, :status, :orderOfferID, :orderUserID, :name, :surname, :telephone)";
+            $sql = "INSERT INTO `order` (`orderDate`, `status`, `orderOfferID`, `orderUserID`, `name`, `surname`, `telephone`, `colorID`) 
+                    VALUES (:orderDate, :status, :orderOfferID, :orderUserID, :name, :surname, :telephone, :colorID)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':orderDate', $this->orderDate);
             $stmt->bindValue(':status', $this->status);
@@ -68,18 +68,20 @@ class Order {
             $stmt->bindValue(':name', $this->name);
             $stmt->bindValue(':surname', $this->surname);
             $stmt->bindValue(':telephone', $this->telephone);
+            // Привязываем значение colorID
+            $stmt->bindValue(':colorID', $colorID);
+            
             if ($stmt->execute()) {
                 $_SESSION['order_success'] = "Your order has been sent successfully.";
                 header("Location: index.php");
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-        }
-        else{
+        } else {
             header('location: loginPage.php');
         } 
-          
     }
+    
     
     public function deleteOrder($orderID) {
         $sql = "DELETE FROM `order` WHERE `orderID` = :orderID";
@@ -101,7 +103,7 @@ class Order {
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
-                INNER JOIN `car_colors` CarCol ON off.offerID = CarCol.offerID
+                INNER JOIN `car_colors` CarCol ON o.colorID = CarCol.colorID
                 order by `orderID` DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -112,12 +114,12 @@ class Order {
 
     public function getOrderInfo($userID) {
         $this->orderUserID = $userID;
-        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, col.color, offInf.price
+        $sql = "SELECT o.orderID, o.orderDate, o.name, o.surname, o.telephone, o.status, u.username, u.email, off.manufacturer, off.type, CarCol.color, offInf.price
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
-                INNER JOIN `car_colors` col ON off.offerID = col.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                INNER JOIN `car_colors` CarCol ON o.colorID = CarCol.colorID
                 WHERE o.orderUserID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$this->orderUserID]);

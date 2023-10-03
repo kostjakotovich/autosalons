@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once 'connection.php';
 require_once 'Offer.php';
 require_once 'User.php';
@@ -29,7 +30,19 @@ if (isset($_GET['offerID'])) {
     $selectedOfferColor = $offer->getOfferColor($offerID); // По умолчанию
   }
 
+  if (isset($_GET['color'])) {
+    $selectedColor = $_GET['color'];
+    // Здесь вы можете использовать $selectedColor для отображения предложения с выбранным цветом
+    $_SESSION['selectedColor'] = $selectedColor; // Сохраняем выбранный цвет в сессии
+    $selectedOfferColor = $offer->getOfferColorByColor($offerID, $selectedColor);
+} else {
+    // Если цвет не выбран, отображаем предложение по умолчанию
+    $selectedColor = $_SESSION['selectedColor'] ?? null; // Попытка получить сохраненный цвет из сессии
+    $selectedOfferColor = $offer->getOfferColorByColor($offerID, $selectedColor); // Используем сохраненный цвет
+}
+
 } 
+
 
 
 if (isset($_SESSION['success'])) {
@@ -44,10 +57,12 @@ if (isset($_POST['submit_order'])) {
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $telephone = $_POST['telephone'];
+    // Получаем colorID из формы
+    $colorID = $_POST['colorID'];
     echo "<script>event.preventDefault();</script>";
     if (isset($_SESSION['userID'])) {
         $order = new Order();
-        $order->createOrder($_POST['name'], $_POST['surname'], $_POST['telephone'], $_POST['offerID']);
+        $order->createOrder($_POST['name'], $_POST['surname'], $_POST['telephone'], $_POST['offerID'], $_POST['colorID']);
     } else {
       // Handle the case where the user is not logged in
     }
@@ -60,6 +75,26 @@ if (isset($_POST['submit_order'])) {
   <script src="../autosalons/js/script.js" defer></script>
   <script src="../autosalons/js/form-popup.js" defer></script>
   <link rel="stylesheet" href="css/offerPage.css">
+
+<script>
+// JavaScript код для установки выбранного цвета в форме
+document.addEventListener('DOMContentLoaded', function() {
+  const selectedColor = "<?php echo $selectedColor ?>"; // Получаем выбранный цвет из PHP
+  if (selectedColor) {
+    const colorRadio = document.querySelector(`input[name="color"][value="${selectedColor}"]`);
+    if (colorRadio) {
+      colorRadio.checked = true; // Устанавливаем флажок для выбранного цвета
+    }
+  }
+});
+
+window.addEventListener('beforeunload', function() {
+    // Очищаем параметр цвета из сессии
+    <?php unset($_SESSION['selectedColor']); ?>
+});
+
+</script>
+
 </head>
 <body>
 <?php require 'header.php'; ?>
@@ -90,16 +125,6 @@ if (isset($_POST['submit_order'])) {
   <button type="submit" name="ChooseBtn">Choose color</button>
 </form>
 
-
-<!-- Обработка выбора цвета и отображение предложения с выбранным цветом -->
-<?php
-if (isset($_GET['choose_color'])) {
-  $selectedColor = $_GET['color'];
-  // Здесь вы можете использовать $selectedColor для отображения предложения с выбранным цветом
-} else {
-  // Если цвет не выбран, отображайте предложение по умолчанию
-}
-?>
       <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
       <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
@@ -127,9 +152,10 @@ if (isset($_GET['choose_color'])) {
 
 <?php if(isset($_SESSION['roleID'])): ?>
   <?php if ($_SESSION['roleID'] == 1): ?>
-    <div class="card" style="margin-left:58.7%; margin-top:-2%">
+    <div class="card" style="margin-left:58.5%; margin-top:-8%">
         <div class="card-body">
         <br>
+
               <!-- Форма для добавления новых цветов -->
               <form method="post" action="process_color.php" enctype="multipart/form-data">
                   <label for="newColor">Add New Color:</label>
@@ -168,6 +194,7 @@ if (isset($_GET['choose_color'])) {
       <div id="text" class="form-container">
         <form method="post" action="offerPage.php">
 
+          <input type="hidden" name="colorID" value="<?php echo $selectedOfferColor['colorID']; ?>">
           <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID'] ?>">
 
           <div class="form-group2">
