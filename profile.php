@@ -135,6 +135,24 @@ $totalSum = $order -> getOrderSum($userID);
 </div>
 
 <div id="Orders" class="tabcontent">
+  <div style="float:right; width: 200px;">
+      <!-- Кнопка для экспорта в Excel -->
+    <form method="post" action="includes/exportUserOrders.inc.php">
+      <input type="hidden" name="userID" value="<?php echo $userID; ?>">
+      <input type="hidden" name="totalSum" value="<?php echo $totalSum; ?>">
+      <input type="submit" name="export" value="Export to Excel" class="btn">
+    </form>
+  </div>
+
+  <?php
+    if($totalSum){
+      echo"<strong>Total price: $totalSum$</strong>";
+    }
+    else {
+      echo"<strong>Total price: 0$</strong>";
+    }
+  ?>
+
   <table>
     <?php include 'includes/userOrdersTable.php'; ?>
     <?php 
@@ -156,15 +174,6 @@ $totalSum = $order -> getOrderSum($userID);
         }
     ?>
   </table>
-
-  <?php
-    if($totalSum){
-      echo"<strong>Total price: $totalSum$</strong>";
-    }
-    else {
-      echo"<strong>Total price: 0$</strong>";
-    }
-  ?>
  
 </div>
 
