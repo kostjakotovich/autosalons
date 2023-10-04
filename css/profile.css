@@ -250,14 +250,39 @@ select::-ms-expand {
   text-align: center;
 }
 
+
+
+.avatar-input {
+  display: none; /* Скрываем сам инпут для загрузки файла */
+}
+
+.avatar-label {
+  width: 200px;
+  height: 70px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.avatar-label:hover {
+  background-color: #0056b3; /* Цвет при наведении */
+}
+
+
 .avatar-label {
   font-size: 18px;
   font-weight: bold;
-  margin-right: 10px;
 }
 
 .avatar-button {
-  background-color: #007bff;
+  font-weight: bold;
+  width: 200px;
+  height: 70px;
+  background-color: #000000;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -267,7 +292,7 @@ select::-ms-expand {
 
 /* При наведении добавьте стиль hover, чтобы кнопка выглядела активной */
 .avatar-button:hover {
-  background-color: #0056b3;
+  background-color: #8c8c8c;
 }
 
   

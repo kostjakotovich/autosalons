@@ -61,7 +61,7 @@ $orders = $order->getOrderInfo($userID);
 $totalSum = $order -> getOrderSum($userID);
 
 if (isset($_POST["updateAvatar"])) {
-  $uploadDir = 'img/avatar';
+  $uploadDir = 'img/avatar/';
   $uploadFile = $uploadDir . basename($_FILES['avatar']['name']);
 
   if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
@@ -71,8 +71,7 @@ if (isset($_POST["updateAvatar"])) {
       header('Location: profile.php');
       exit;
   } else {
-      // Произошла ошибка при загрузке
-      echo "Error uploading file.";
+      header('Location: profile.php');
   }
 }
 
@@ -86,6 +85,9 @@ if (isset($_POST["updateAvatar"])) {
     <script src="../autosalons/js/script.js" defer></script>
     <script src="../autosalons/js/toggle-tab.js" defer></script>
     <link rel="stylesheet" href="css/profile.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
     <title>User Profile</title>
   </head>
@@ -105,7 +107,7 @@ if (isset($_POST["updateAvatar"])) {
         <div style="float:right;">
           <!-- Форма для изменения аватарки --> 
           <form method="post" enctype="multipart/form-data" class="avatar-form">
-              <label for="avatar" class="avatar-label">Choose a new avatar:</label><br>
+              <label for="avatar" class="avatar-label">Choose a new avatar</label><br>
               <input type="file" id="avatar" name="avatar" class="avatar-input">
               <button type="submit" name="updateAvatar" class="avatar-button">Upload Avatar</button>
           </form>

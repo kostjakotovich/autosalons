@@ -40,20 +40,15 @@ if (!$currentPrice) {
 <html>
 <head>
 
-  <!-- Bootstrap JS -->
-  <script src="bootstrap\js\bootstrap.min.js"></script>
-
    <!-- alert close JS -->
-   <script src="js/order-success-close.js" defer></script>
-   
-   
+   <script src="js/order-success-close.js" defer></script>   
    
   <link rel="stylesheet" href="css/cards.css">
   <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
 <?php require 'header.php'; ?>
-
+<script src="../autosalons/js/script.js" defer></script>
 <div>
     <?php 
     if(isset($_SESSION['order_success'])){

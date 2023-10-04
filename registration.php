@@ -87,6 +87,16 @@ class UserRegistration extends UserMain {
                 $user = $result->fetch();
                 $_SESSION['userID'] = $user['userID'];
                 $_SESSION['roleID'] = $user['roleID'];
+
+                if ($_SESSION['success']) {
+                    $defaultAvatarURL = 'img/avatar/default.png';
+                    $userID = $user['userID'];
+                    // Создайте экземпляр UserMain
+                    $user = new UserMain($userID);
+                
+                    // Обновите аватар пользователя, устанавливая URL дефолтной аватарки
+                    $user->updatePicture($defaultAvatarURL);
+                }
             
                 header('location: index.php');
             }
