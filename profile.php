@@ -86,9 +86,7 @@ if (isset($_POST["updateAvatar"])) {
     <script src="../autosalons/js/toggle-tab.js" defer></script>
     <link rel="stylesheet" href="css/profile.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-
+    
     <title>User Profile</title>
   </head>
   <body>
@@ -109,7 +107,7 @@ if (isset($_POST["updateAvatar"])) {
           <form method="post" enctype="multipart/form-data" class="avatar-form">
               <label for="avatar" class="avatar-label">Choose a new avatar</label><br>
               <input type="file" id="avatar" name="avatar" class="avatar-input">
-              <button type="submit" name="updateAvatar" class="avatar-button">Upload Avatar</button>
+              <button type="submit" name="updateAvatar" class="avatar-button">Upload & Save</button>
           </form>
         </div>
 
