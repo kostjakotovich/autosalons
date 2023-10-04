@@ -1,6 +1,5 @@
 /* notification-modal.css */
   
-  /* notification-modal.css */
 
 /* Стилизация скроллбара */
 .modal-content {
@@ -10,31 +9,9 @@
 
 /* notification-modal.css */
 
-/* Указываем класс simplebar, который позволяет использовать стилизацию скроллбара */
-.simplebar-scrollbar {
-    width: 8px; /* Ширина скроллбара */
-    background-color: #f1f1f1; /* Цвет фона скроллбара */
-    border-radius: 4px; /* Закругление углов скроллбара */
-  }
-  
-  /* Стилизация скроллбара при наведении */
-  .simplebar-scrollbar:hover {
-    background-color: #ddd; /* Цвет фона скроллбара при наведении */
-  }
-  
-  /* Стилизация бара скроллбара */
-  .simplebar-scrollbar .simplebar-scrollbar-thumb {
-    background-color: #888; /* Цвет скроллбара */
-    border-radius: 4px; /* Закругление углов */
-  }
-  
-  /* Скрываем скроллбар при его отсутствии */
-  .simplebar-scrollbar.simplebar-visible:before {
-    opacity: 0;
-  }
   
   .modal {
-    align-items: flex-start !important;
+    align-items: flex-start;
   }
   
   /* Настраиваем положение модального окна вверху экрана */
@@ -47,11 +24,26 @@
 
 /* Стилизация уведомления */
 .notification {
-  background-color: #f5f5f5; /* Цвет фона уведомления */
-  padding: 10px; /* Внутренний отступ для уведомления */
-  margin-bottom: 10px; /* Отступ между уведомлениями */
-  border: 1px solid #ccc; /* Граница уведомления */
-  border-radius: 4px; /* Закругление углов уведомления */
+  position: relative; /* Устанавливаем относительное позиционирование для уведомления */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  align-items: center; /* Выравниваем содержимое по вертикали */
+  justify-content: space-between; /* Размещаем элементы по горизонтали справа */
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  position: absolute; /* Устанавливаем абсолютное позиционирование для кнопки удаления */
+  top: 5px; /* Располагаем кнопку удаления вверху */
+  right: 5px; /* Располагаем кнопку удаления справа */
 }
 
 /* Стили для пользовательской кнопки закрытия */
@@ -78,14 +70,8 @@
   border-radius: 50%; /* Закругление углов для круглого фона */
 }
 
-.delete-btn {
-  color: rgb(255, 0, 0);
-  border: none;
-  cursor: pointer;
-  width: 30px;
-}
-
 .notification-form {
   display: flex;
-  align-items: right;
+  align-items: center;
 }
+

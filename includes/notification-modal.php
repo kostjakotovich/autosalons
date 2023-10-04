@@ -34,20 +34,21 @@
                         $notificationID = $notification['notification_id'];
                         $message = htmlspecialchars_decode($notification['message']);
                         echo "<form method='post' action='includes/delete-notification-modal.php' class='notification-form'>";
-                        echo "<p class='notification'>$message <button type='submit' class='delete-btn' name='notificationID' value='$notificationID'>x</button></p>";
+                        echo "<div class='notification'>";
+                        echo "<button type='submit' class='delete-btn' name='notificationID' value='$notificationID'>✖</button>";
+                        echo "<p>$message</p>";
+                        echo "</div>";
                         echo "</form>";
                     }
                 } else {
-                    echo "<p class='notification' style='text-align: center;'>Empty</p>";
-                }
+                    echo "<div class='notification empty-notification' style='text-align:center;'>Empty</div>";
+                }                
                 ?>
+
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 
 </body>

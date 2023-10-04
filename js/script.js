@@ -32,3 +32,4 @@ function RedToOffer() {
     window.location.href="../autosalons/offerPage.php";  
 
 }
+
