@@ -1,5 +1,12 @@
 <?php
 require_once 'connection.php';
+require_once 'User.php';
+
+// Обработка авторизации пользователя
+if (isset($_SESSION['success'])) {
+  require_once 'User.php'; // Подключаем User.php только если пользователь авторизован
+  $user = new UserMain($_SESSION["userID"]);
+}
 ?>
 
 <head>    
@@ -43,7 +50,10 @@ require_once 'connection.php';
                 echo " <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
                 <div class='dropdown text-end'>
                 <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
-                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2vRsFCw0zkeM9IE-PfdAWbPUJ4GHKn9ouAw&usqp=CAU' alt='mdo' width='32' height='32' class='rounded-circle'>
+                <a href='#' class='d-block link-dark text-decoration-none dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
+                  <img src='<?php echo $user->getPicture(); ?>' alt='User Avatar' width='32' height='32' class='rounded-circle'>
+                </a>
+            
                       </a>
                       <ul class='dropdown-menu text-small'>
                         <li><a class='dropdown-item' href='#' onClick='RedToProfile()'>Profile & Orders</a></li>";

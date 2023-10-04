@@ -60,6 +60,21 @@ $order = new Order();
 $orders = $order->getOrderInfo($userID);
 $totalSum = $order -> getOrderSum($userID);
 
+if (isset($_POST["updateAvatar"])) {
+  $uploadDir = 'img/avatar';
+  $uploadFile = $uploadDir . basename($_FILES['avatar']['name']);
+
+  if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
+      // Загрузка успешно выполнена, обновляем аватарку в базе данных
+      $user->updatePicture($uploadFile);
+      // Перенаправляем пользователя на страницу профиля
+      header('Location: profile.php');
+      exit;
+  } else {
+      // Произошла ошибка при загрузке
+      echo "Error uploading file.";
+  }
+}
 
 
 
@@ -85,8 +100,21 @@ $totalSum = $order -> getOrderSum($userID);
   <div class="user-card">
     <div class="user-info">
       <UserInfo>
-        <div class="user-name"><?php echo $username; ?></div>
-        <div class="user-email"><?php echo $email; ?></div>
+        <!-- Отображение текущей аватарки -->
+        <img src="<?php echo $user->getPicture(); ?>" alt="User Avatar" width="200" height="200">
+        <div style="float:right;">
+          <!-- Форма для изменения аватарки --> 
+          <form method="post" enctype="multipart/form-data" class="avatar-form">
+              <label for="avatar" class="avatar-label">Choose a new avatar:</label><br>
+              <input type="file" id="avatar" name="avatar" class="avatar-input">
+              <button type="submit" name="updateAvatar" class="avatar-button">Upload Avatar</button>
+          </form>
+        </div>
+
+        <div style="margin-top:10%;">
+          <div class="user-name"><?php echo $username; ?></div>
+          <div class="user-email"><?php echo $email; ?></div>
+        </div>
       </UserInfo>
     </div>
     <?php  
@@ -208,4 +236,5 @@ $totalSum = $order -> getOrderSum($userID);
   });
 
 </script>
+
 </body>

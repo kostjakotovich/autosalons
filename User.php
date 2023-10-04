@@ -69,6 +69,21 @@ class UserMain {
           return false;
         }
     }
+
+    public function getPicture() {
+        $sql = "SELECT picture FROM user WHERE userID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$this->userID]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['picture'];
+    }
+    
+    public function updatePicture($pictureURL) {
+        $sql = "UPDATE user SET picture = ? WHERE userID = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$pictureURL, $this->userID]);
+    }
+    
       
 }
 ?>
