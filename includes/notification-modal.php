@@ -31,7 +31,11 @@
                 <?php
                 if ($notifications) {
                     foreach ($notifications as $notification) {
-                        echo "<p class='notification'>{$notification['message']}</p>";
+                        $notificationID = $notification['notification_id'];
+                        $message = htmlspecialchars_decode($notification['message']);
+                        echo "<form method='post' action='includes/delete-notification-modal.php' class='notification-form'>";
+                        echo "<p class='notification'>$message <button type='submit' class='delete-btn' name='notificationID' value='$notificationID'>x</button></p>";
+                        echo "</form>";
                     }
                 } else {
                     echo "<p class='notification' style='text-align: center;'>Empty</p>";

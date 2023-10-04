@@ -95,6 +95,12 @@ class UserMain {
         }
     }
     
+    public function deleteNotification($notificationID) {
+        $sql = "DELETE FROM notifications WHERE notification_id = :notificationID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':notificationID', $notificationID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
     
       
 }

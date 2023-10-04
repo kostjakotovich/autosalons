@@ -77,3 +77,15 @@
   background-color: #ffffff; /* Цвет фона для значка "-" */
   border-radius: 50%; /* Закругление углов для круглого фона */
 }
+
+.delete-btn {
+  color: rgb(255, 0, 0);
+  border: none;
+  cursor: pointer;
+  width: 30px;
+}
+
+.notification-form {
+  display: flex;
+  align-items: right;
+}

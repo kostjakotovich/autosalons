@@ -98,7 +98,7 @@ class UserRegistration extends UserMain {
                     $user->updatePicture($defaultAvatarURL);
 
                     // Вставляем уведомление в таблицу
-                    $notificationText = "You have successfully registered! If you have questions, please visit the Help section.";
+                    $notificationText = "You have successfully registered! If you need <a href='infoPage.php'>Help</a>, please visit the Help section.";
                     $insertNotification = $this->conn->prepare("INSERT INTO Notifications (userID, message) VALUES (:userID, :message)");
                     $insertNotification->execute(array(':userID' => $_SESSION['userID'], ':message' => $notificationText));
 
