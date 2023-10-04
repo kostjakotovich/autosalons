@@ -96,6 +96,12 @@ class UserRegistration extends UserMain {
                 
                     // Обновите аватар пользователя, устанавливая URL дефолтной аватарки
                     $user->updatePicture($defaultAvatarURL);
+
+                    // Вставляем уведомление в таблицу
+                    $notificationText = "You have successfully registered! If you have questions, please visit the Help section.";
+                    $insertNotification = $this->conn->prepare("INSERT INTO Notifications (userID, message) VALUES (:userID, :message)");
+                    $insertNotification->execute(array(':userID' => $_SESSION['userID'], ':message' => $notificationText));
+
                 }
             
                 header('location: index.php');

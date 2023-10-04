@@ -14,5 +14,14 @@
     outline: 0;
   }
 
+/* Измените цвет иконки */
+button.btn-link svg.bi {
+  color: #007bff; /* Цвет иконки */
+}
+
+/* Удалите подчеркивание при наведении курсора */
+button.btn-link:hover {
+  text-decoration: none;
+}
 
   

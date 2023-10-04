@@ -1,0 +1,79 @@
+/* notification-modal.css */
+  
+  /* notification-modal.css */
+
+/* Стилизация скроллбара */
+.modal-content {
+    min-height: 15vh; /* Устанавливаем максимальную высоту во вьюпорте (80% от высоты экрана) */
+    overflow-y: auto; /* Включаем вертикальную прокрутку при необходимости */
+  }
+
+/* notification-modal.css */
+
+/* Указываем класс simplebar, который позволяет использовать стилизацию скроллбара */
+.simplebar-scrollbar {
+    width: 8px; /* Ширина скроллбара */
+    background-color: #f1f1f1; /* Цвет фона скроллбара */
+    border-radius: 4px; /* Закругление углов скроллбара */
+  }
+  
+  /* Стилизация скроллбара при наведении */
+  .simplebar-scrollbar:hover {
+    background-color: #ddd; /* Цвет фона скроллбара при наведении */
+  }
+  
+  /* Стилизация бара скроллбара */
+  .simplebar-scrollbar .simplebar-scrollbar-thumb {
+    background-color: #888; /* Цвет скроллбара */
+    border-radius: 4px; /* Закругление углов */
+  }
+  
+  /* Скрываем скроллбар при его отсутствии */
+  .simplebar-scrollbar.simplebar-visible:before {
+    opacity: 0;
+  }
+  
+  .modal {
+    align-items: flex-start !important;
+  }
+  
+  /* Настраиваем положение модального окна вверху экрана */
+  .modal-dialog {
+    margin: 0 auto;
+    
+    max-width: 500px; /* Устанавливаем максимальную ширину в пикселях */
+}
+  
+
+/* Стилизация уведомления */
+.notification {
+  background-color: #f5f5f5; /* Цвет фона уведомления */
+  padding: 10px; /* Внутренний отступ для уведомления */
+  margin-bottom: 10px; /* Отступ между уведомлениями */
+  border: 1px solid #ccc; /* Граница уведомления */
+  border-radius: 4px; /* Закругление углов уведомления */
+}
+
+/* Стили для пользовательской кнопки закрытия */
+.custom-close-btn {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 24px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Стили для значка "-" */
+.custom-close-btn span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  background-color: #ffffff; /* Цвет фона для значка "-" */
+  border-radius: 50%; /* Закругление углов для круглого фона */
+}

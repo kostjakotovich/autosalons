@@ -39,7 +39,7 @@ if (!$currentPrice) {
 
 <html>
 <head>
-
+   <?php require 'header.php'; ?>
    <!-- alert close JS -->
    <script src="js/order-success-close.js" defer></script>   
    
@@ -47,7 +47,6 @@ if (!$currentPrice) {
   <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
-<?php require 'header.php'; ?>
 <script src="../autosalons/js/script.js" defer></script>
 <div>
     <?php 

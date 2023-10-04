@@ -48,9 +48,7 @@ if (isset($_SESSION['success'])) {
           <?php 
           if (isset($_SESSION['success'])) { ?>
             <li>
-              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#notificationModal">
-                <i class="bi bi-bell">🔔</i>
-              </button>
+              <img src="img/icon/bell.png" alt="Notifications" data-bs-toggle="modal" data-bs-target="#notificationModal" class="mr-2" style="cursor: pointer; width: 30px;height: 30px;margin:auto;">
             </li>
             <li>
               <div class="dropdown text-end">
@@ -78,22 +76,5 @@ if (isset($_SESSION['success'])) {
     </div>
   </header>
 
-  <!-- Модальное окно с уведомлениями -->
-  <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Здесь будет содержимое модального окна с уведомлениями -->
-          <!-- Можете добавить список уведомлений или другие элементы по вашему выбору -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php require 'includes/notification-modal.php'; ?>
 </body>

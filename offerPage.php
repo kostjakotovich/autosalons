@@ -72,6 +72,7 @@ if (isset($_POST['submit_order'])) {
 ?>
 <html>
 <head>
+  <?php require 'header.php'; ?>
   <script src="../autosalons/js/script.js" defer></script>
   <script src="../autosalons/js/form-popup.js" defer></script>
   <link rel="stylesheet" href="css/offerPage.css">
@@ -97,9 +98,7 @@ window.addEventListener('beforeunload', function() {
 
 </head>
 <body>
-<?php require 'header.php'; ?>
 <div class="container2">
-
 
 <img id="colorImage" src="<?php echo $selectedOfferColor['image']; ?>" style="float:left">
   <div class="card">

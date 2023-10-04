@@ -1,0 +1,50 @@
+<?php
+    require_once 'User.php';
+
+    $userID = isset($_SESSION['userID']);
+    $user = new UserMain($userID);
+    $notifications = $user->getNotifications();
+?>
+
+<!-- notification-modal.php -->
+<head>
+    <link rel="stylesheet" href="css/notification-modal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.0/dist/simplebar.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.0/dist/simplebar.min.js"></script>
+
+</head>
+<body>
+
+    <!-- notification-modal.php -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- Используем "-" вместо "×" -->
+                    <span aria-hidden="true">-</span>
+                </button>
+            </div>
+            <div class="modal-body simplebar">
+                <!-- Здесь будет содержимое модального окна с уведомлениями -->
+                <?php
+                if ($notifications) {
+                    foreach ($notifications as $notification) {
+                        echo "<p class='notification'>{$notification['message']}</p>";
+                    }
+                } else {
+                    echo "<p class='notification' style='text-align: center;'>Empty</p>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body>
+

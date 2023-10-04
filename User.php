@@ -84,6 +84,18 @@ class UserMain {
         return $stmt->execute([$pictureURL, $this->userID]);
     }
     
+    public function getNotifications() {
+        if (isset($_SESSION['userID'])) {
+            $this->userID = $_SESSION['userID'];
+            $sql = "SELECT * FROM notifications WHERE userID = :userID Order by created_at desc";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(array(':userID' => $this->userID));
+            $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $notifications;
+        }
+    }
+    
+    
       
 }
 ?>
