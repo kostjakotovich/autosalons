@@ -77,6 +77,7 @@ class Order {
                 $notificationText = "Your order has been successfully completed! Please wait while our staff contacts You.";
                 $insertNotification = $this->conn->prepare("INSERT INTO notifications (userID, message) VALUES (:userID, :message)");
                 $insertNotification->execute(array(':userID' => $_SESSION['userID'], ':message' => $notificationText));
+
                 header("Location: index.php");
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;

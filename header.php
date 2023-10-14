@@ -16,6 +16,47 @@ if (isset($_SESSION['success'])) {
     <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="css/headers.css">
     <script src="../autosalons/js/script.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+// Ваш скрипт внутри head
+$(document).ready(async function() {
+    await initializeNotificationIcon(); // Инициализация иконки при загрузке страницы
+});
+
+async function initializeNotificationIcon() {
+    try {
+        const response = await $.ajax({
+            url: 'get-notification-status.php',
+            type: 'GET',
+        });
+
+        if (response === 'unread') {
+            // Уведомления не прочитаны, измените иконку на "bell-active.png"
+            $('#notification-bell').attr('src', 'img/icon/bell-active.png');
+        } else {
+            // Уведомления прочитаны, иконка остается "bell.png"
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function editNotificationIcon() {
+    // При нажатии на иконку меняем ее на "bell.png"
+    $('#notification-bell').attr('src', 'img/icon/bell.png');
+    
+    // Отправьте AJAX-запрос для пометки уведомлений как прочитанных
+    $.ajax({
+        url: 'mark-notification-as-read.php',
+        type: 'POST',
+    });
+}
+
+</script>
+
+
 
 </head>
 
@@ -48,8 +89,12 @@ if (isset($_SESSION['success'])) {
           <?php 
           if (isset($_SESSION['success'])) { ?>
             <li>
-              <img src="img/icon/bell.png" alt="Notifications" data-bs-toggle="modal" data-bs-target="#notificationModal" class="mr-2" style="cursor: pointer; width: 30px;height: 30px;margin:auto;">
+                <?php
+                // Отобразите иконку "bell.png" и добавьте JavaScript-обработчик на нее
+                echo '<img src="img/icon/bell.png" alt="Notifications" id="notification-bell" data-bs-toggle="modal" data-bs-target="#notificationModal" class="mr-2" style="cursor: pointer; width: 30px;height: 30px;margin:auto;" onclick="editNotificationIcon()">';
+                ?>
             </li>
+
             <li>
               <div class="dropdown text-end">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
