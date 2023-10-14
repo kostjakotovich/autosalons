@@ -20,7 +20,6 @@ if (isset($_SESSION['success'])) {
 
     <script>
 
-// Ваш скрипт внутри head
 $(document).ready(async function() {
     await initializeNotificationIcon(); // Инициализация иконки при загрузке страницы
 });
@@ -47,7 +46,7 @@ function editNotificationIcon() {
     // При нажатии на иконку меняем ее на "bell.png"
     $('#notification-bell').attr('src', 'img/icon/bell.png');
     
-    // Отправьте AJAX-запрос для пометки уведомлений как прочитанных
+    // AJAX-запрос для пометки уведомлений как прочитанных
     $.ajax({
         url: 'mark-notification-as-read.php',
         type: 'POST',
