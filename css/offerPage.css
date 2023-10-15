@@ -118,8 +118,8 @@ button[name="ChooseBtn"] {
   }
   
   .form-container {
-  height: 440px;
-  width: 300px;
+  height: 530px;
+  width: 350px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -164,3 +164,25 @@ button[name="ChooseBtn"] {
   display: inline-block;
   margin-right: 10px; /* Добавьте отступ справа, чтобы элементы не налезали друг на друга */
 }
+
+/* Стилизация чекбокса */
+
+/* Увеличение размера чекбокса */
+.form-group2 label input[type="checkbox"] {
+  transform: scale(1.5); /* Увеличьте значение, чтобы увеличить размер чекбокса */
+}
+
+/* Изменение размера шрифта для текста */
+.form-group2 label {
+  display: flex;
+  align-items: center;
+  padding-left: 10px; /* Увеличьте значение по вашему усмотрению */
+}
+
+.form-group2 label span {
+  font-size: 1.2em; /* Увеличьте значение по вашему усмотрению */
+  color: red; /* Изменение цвета текста */
+}
+
+
+

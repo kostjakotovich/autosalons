@@ -192,34 +192,37 @@ window.addEventListener('beforeunload', function() {
 <?php endif; ?>
 
 
-    <div id="overlay" onclick="off()">
-      <div id="text" class="form-container">
-        <form method="post" action="offerPage.php">
+  <div id="overlay" onclick="off()">
+    <div id="text" class="form-container">
+      <form method="post" action="offerPage.php">
 
-          <input type="hidden" name="colorID" value="<?php echo $selectedOfferColor['colorID']; ?>">
-          <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID'] ?>">
+        <div class="form-group2">
+          <label for="name"><strong>Name:</strong></label>
+          <input type="text" class="form-control" id="name" name="name" maxlength="20" required>
+        </div>
+        <div class="form-group2">
+          <label for="surname"><strong>Surname:</strong></label>
+          <input type="text" class="form-control" id="surname" name="surname" maxlength="20" required>
+        </div>
+        <div class="form-group2">
+          <label for="telephone"><strong>Telephone:</strong></label>
+          <input type="text" class="form-control" id="telephone" name="telephone" maxlength="14" required value="+371 ">
+        </div>
+        <br>
+        <div class="form-group2" style="display: flex; align-items: center;">
+          <input type="checkbox" id="check" name="check" required>
+          <label for="check" style="color: red;">*</label> 
+          <label> I have read and agree to the terms and conditions.</label> 
+        </div>
+        <br>
+        <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
 
-          <div class="form-group2">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" maxlength="20" required>
-          </div>
-          <div class="form-group2">
-            <label for="surname">Surname:</label>
-            <input type="text" class="form-control" id="surname" name="surname" maxlength="20" required>
-          </div>
-          <div class="form-group2">
-              <label for="telephone">Telephone:</label>
-              <input type="text" class="form-control" id="telephone" name="telephone" maxlength="14" required value="+371 ">
-          </div>
+        <input type="button" value="Cancel" onclick="off(event)" id="cancelButton" class="btn btn-primary">
 
-          <br>
-          <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
-
-          <input type="button" value="Cancel" onclick="off(event)" id="cancelButton" class="btn btn-primary">
-
-        </form>
-      </div>
+      </form>
     </div>
+  </div>
+
 
 
 
