@@ -2,6 +2,26 @@ html, body {
     height: 100%;
   }
 
-.info-container {
+  .info-container {
+    max-width: 600px;
+    margin: 0 auto;
     min-height: 1000px;
 }
+
+.info-header {
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.info-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
