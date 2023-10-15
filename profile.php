@@ -237,4 +237,6 @@ if (isset($_POST["updateAvatar"])) {
 
 </script>
 
+<?php include 'footer.php'; ?>
+
 </body>

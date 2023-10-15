@@ -69,45 +69,46 @@ if (isset($_POST['delete'])) {
 <body>
     <?php require 'header.php'; ?>
 
-    <div class="container">
-        <div class="card">
-            <form method="post">
-                <label for="comment">Leave your comment (no more than 250 characters):</label><br>
-                <textarea name="comment" id="comment" cols="30" rows="5" maxlength="250" required></textarea><br>
-                <input type="submit" value="Send comment">
-            </form>
+    <div class="box">
+        <div class="container-comment">
+            <div class="card">
+                <form method="post">
+                    <label for="comment">Leave your comment (no more than 250 characters):</label><br>
+                    <textarea name="comment" id="comment" cols="30" rows="5" maxlength="250" required></textarea><br>
+                    <input type="submit" value="Send comment">
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="comments">
-    <?php
-        foreach ($comments as $comment) {
-            echo '<div class="comment">';
-            echo '<h4>' . $comment['username'] . '</h4>';
-            echo '<p>' . $comment['comment'] . '</p><br>';
-            echo '<h4>Posted on ' . date('F j, Y', strtotime($comment['date'])) . '</h4>';
-            if (isset($_SESSION['userID']) && $_SESSION['roleID'] == 0 && $_SESSION['userID'] == $comment['userID']) {
-                echo '<div class="card2">';
-                echo '  <form method="post">';
-                echo '      <input type="hidden" name="commentID" value="' . $comment['commentID'] . '">';
-                echo '      <input type="submit" value="Delete" name="delete">';
-                echo '  </form>';
+        <div class="comments">
+        <?php
+            foreach ($comments as $comment) {
+                echo '<div class="comment">';
+                echo '<h4>' . $comment['username'] . '</h4>';
+                echo '<p>' . $comment['comment'] . '</p><br>';
+                echo '<h4>Posted on ' . date('F j, Y', strtotime($comment['date'])) . '</h4>';
+                if (isset($_SESSION['userID']) && $_SESSION['roleID'] == 0 && $_SESSION['userID'] == $comment['userID']) {
+                    echo '<div class="card2">';
+                    echo '  <form method="post">';
+                    echo '      <input type="hidden" name="commentID" value="' . $comment['commentID'] . '">';
+                    echo '      <input type="submit" value="Delete" name="delete">';
+                    echo '  </form>';
+                    echo '</div>';
+                }
+
+                if (isset($_SESSION['roleID']) && $_SESSION['roleID'] == 1) {
+                    echo '<div class="card2">';
+                    echo '  <form method="post">';
+                    echo '      <input type="hidden" name="commentID" value="' . $comment['commentID'] . '">';
+                    echo '      <input type="submit" value="Delete" name="delete">';
+                    echo '  </form>';
+                    echo '</div>';
+                }
+
                 echo '</div>';
             }
-
-            if (isset($_SESSION['roleID']) && $_SESSION['roleID'] == 1) {
-                echo '<div class="card2">';
-                echo '  <form method="post">';
-                echo '      <input type="hidden" name="commentID" value="' . $comment['commentID'] . '">';
-                echo '      <input type="submit" value="Delete" name="delete">';
-                echo '  </form>';
-                echo '</div>';
-            }
-
-            echo '</div>';
-        }
-    ?>
-</div>
+        ?>
+        </div>
 
 
 
@@ -123,7 +124,7 @@ if (isset($_POST['delete'])) {
             }
             ?>
         </div>
-
-
+    </div>
+<?php include 'footer.php'; ?>
 </body>
 </html>

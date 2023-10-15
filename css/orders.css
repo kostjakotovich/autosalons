@@ -98,4 +98,5 @@ select::-ms-expand {
 
 #container {
     text-align: center;
+    min-height: 1000px;
 }

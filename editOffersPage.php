@@ -89,7 +89,7 @@ function checkDateFormat($date, $format)
     }
     ?>
 
-    <div class="container">
+    <div class="container-offer">
 
         <form method="POST" action="" enctype="multipart/form-data" class="add-offer-form">
             <label for="type">Model:</label><br>
@@ -116,5 +116,7 @@ function checkDateFormat($date, $format)
             <input type="submit" name="submit" value="Add Offer">
         </form>
     </div>
+
+  <?php include 'footer.php'; ?>
 </body>
 </html>

@@ -73,9 +73,12 @@ if (isset($_POST['submit_order'])) {
 <html>
 <head>
   <?php require 'header.php'; ?>
+
+  
   <script src="../autosalons/js/script.js" defer></script>
   <script src="../autosalons/js/form-popup.js" defer></script>
   <link rel="stylesheet" href="css/offerPage.css">
+
 
 <script>
 // JavaScript код для установки выбранного цвета в форме
@@ -151,7 +154,7 @@ window.addEventListener('beforeunload', function() {
 
 <?php if(isset($_SESSION['roleID'])): ?>
   <?php if ($_SESSION['roleID'] == 1): ?>
-    <div class="card" style="margin-left:58.5%; margin-top:-8%">
+    <div class="card2" style="margin-left:58.5%; margin-top:-8%">
         <div class="card-body">
         <br>
 
@@ -205,9 +208,10 @@ window.addEventListener('beforeunload', function() {
             <input type="text" class="form-control" id="surname" name="surname" maxlength="20" required>
           </div>
           <div class="form-group2">
-            <label for="telephone">Telephone:</label>
-            <input type="text" class="form-control" id="telephone" name="telephone" maxlength="20" required>
+              <label for="telephone">Telephone:</label>
+              <input type="text" class="form-control" id="telephone" name="telephone" maxlength="14" required value="+371 ">
           </div>
+
           <br>
           <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
 
@@ -216,7 +220,20 @@ window.addEventListener('beforeunload', function() {
         </form>
       </div>
     </div>
-  
+
+
+
+<script>
+  // JavaScript код для убирания атрибута readonly
+document.addEventListener('input', function (e) {
+    if (e.target.id === 'telephone') {
+        e.target.removeAttribute('readonly');
+    }
+});
+
+</script>
+
+
 <?php include 'footer.php'; ?>
 </body>
 

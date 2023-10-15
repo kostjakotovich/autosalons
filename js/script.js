@@ -33,3 +33,7 @@ function RedToOffer() {
 
 }
 
+function RedToInfo() {
+    window.location.href="../autosalons/infoPage.php";  
+
+}

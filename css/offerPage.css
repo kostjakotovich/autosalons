@@ -25,6 +25,19 @@ main {
     transition: all 0.3s ease; /* добавляем плавный переход */
 }
 
+/* cards */
+.card2 {
+  width: 500px;
+  height: auto; /* Устанавливаем авто-высоту для динамического роста */
+  float:right;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ccc;
+  float: right; 
+  position: relative;
+  transition: all 0.3s ease; /* добавляем плавный переход */
+}
+
 button[name="ChooseBtn"] {
   width: auto;
   padding: 0.375rem 0.75rem;

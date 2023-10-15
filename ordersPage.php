@@ -156,5 +156,7 @@ if (isset($_POST['deleteOrder'])) {
         $userInfo = $user->getUserInfo();
 
     ?>
+
+<?php include 'footer.php'; ?>
 </body>
 </html>

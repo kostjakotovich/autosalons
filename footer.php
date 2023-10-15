@@ -2,72 +2,11 @@
 require_once 'connection.php';
 ?>
 
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
-
-  <style>
-.footer {
-  background-color: #222;
-  color: #fff;
-  padding: 40px 20px;
-  position: relative;
-  bottom: 0%;
-  width: 100%;
-}
-
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 0px;
-}
-
-.footer-content h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.social-media ul {
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-
-.social-media li {
-  list-style: none;
-  margin-right: 20px;
-}
-
-.social-media li:last-child {
-  margin-right: 0;
-}
-
-.social-media a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-.footer-bottom {
-  text-align: center;
-  font-size: 14px;
-  margin-top: 20px;
-}
-
-@media only screen and (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .social-media {
-    margin-bottom: 20px;
-  }
-}
-</style>
-
-<!-- JSQuery Скрипт для плавной прокрутки страницы-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- JSQuery Скрипт для плавной прокрутки страницы-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
@@ -83,8 +22,8 @@ require_once 'connection.php';
   });
 </script>
 
-<br>
-<footer class="footer">
+  <br>
+  <footer class="footer">
   <div class="container">
     <div class="footer-content">
       <div class="social-media">
@@ -109,3 +48,4 @@ require_once 'connection.php';
     </div>
   </div>
 </footer>
+

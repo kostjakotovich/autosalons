@@ -24,4 +24,6 @@ button.btn-link:hover {
   text-decoration: none;
 }
 
-  
+.spacer {
+  margin-right: 20px; /* Установите необходимый отступ между элементами */
+}

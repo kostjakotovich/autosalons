@@ -1,10 +1,10 @@
 body{
-    
+    background: #f0f0f0; /* Цвет фона страницы */
     background-size: cover;
-       
-    height: 100vh;
+    background: #f0f0f0; /* Цвет фона страницы */
     padding:0;
     margin:0;
+    min-height: 100%;
 
 }
 
@@ -59,14 +59,9 @@ body{
     border: 1px solid #ccc;
     border-top: none;
     border-radius: 0px 0px 4px 4px;
+    min-height: 860px;
 }
 
-body {
-  background-size: cover;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-}
 
 .btn {
   width: 200px;
@@ -162,6 +157,8 @@ select::-ms-expand {
 
 #container {
   text-align: center;
+  min-height: 100%;
+    position: relative;
 }
 
   .btn {
@@ -241,12 +238,14 @@ select::-ms-expand {
   /* Стили для формы изменения аватарки */
 .avatar-form {
   margin-top: 20px;
+  margin-left: -150%;
   text-align: center;
 }
 
 
 
 .avatar-input {
+  margin-left: -10%;
   display: none; /* Скрываем сам инпут для загрузки файла */
 }
 
