@@ -29,10 +29,26 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`notification_id`),
   KEY `userID` (`userID`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.notifications: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.notifications: ~15 rows (приблизительно)
 DELETE FROM `notifications`;
+INSERT INTO `notifications` (`notification_id`, `userID`, `message`, `created_at`, `is_read`) VALUES
+	(22, 56, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2023-10-05 16:56:59', 1),
+	(23, 56, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-05 18:12:34', 1),
+	(30, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 16:50:28', 1),
+	(31, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 17:01:27', 1),
+	(32, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 17:53:29', 1),
+	(33, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 17:56:10', 1),
+	(34, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 18:05:53', 1),
+	(35, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 18:14:58', 1),
+	(36, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 18:21:36', 1),
+	(37, 1, 'Your order has been successfully completed! Please wait while our staff contacts You.', '2023-10-14 18:27:58', 1),
+	(38, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a>.', '2023-10-15 09:40:18', 1),
+	(39, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-15 15:14:22', 1),
+	(40, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-15 17:55:21', 1),
+	(41, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:37:13', 1),
+	(42, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:39:02', 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

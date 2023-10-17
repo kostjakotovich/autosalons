@@ -27,11 +27,20 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `date` date DEFAULT NULL,
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
-  CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+  CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=296 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.comments: ~13 rows (приблизительно)
+-- Дамп данных таблицы mariadb.comments: ~8 rows (приблизительно)
 DELETE FROM `comments`;
+INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`) VALUES
+	(252, 'Thanks!', 46, '2023-04-30'),
+	(253, 'Very good!', 46, '2023-04-30'),
+	(284, '', 48, '2023-05-03'),
+	(285, '', 48, '2023-05-03'),
+	(286, '', 48, '2023-05-03'),
+	(287, '', 48, '2023-05-03'),
+	(288, '', 48, '2023-05-03'),
+	(289, '', 48, '2023-05-03');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -195,6 +195,9 @@ window.addEventListener('beforeunload', function() {
   <div id="overlay" onclick="off()">
     <div id="text" class="form-container">
       <form method="post" action="offerPage.php">
+        
+        <input type="hidden" name="colorID" value="<?php echo $selectedOfferColor['colorID']; ?>">
+        <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID'] ?>">
 
         <div class="form-group2">
           <label for="name"><strong>Name:</strong></label>

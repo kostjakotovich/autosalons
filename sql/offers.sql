@@ -25,14 +25,15 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~3 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offers: ~4 rows (приблизительно)
 DELETE FROM `offers`;
 INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
 	(1, 'fgd', 'dfg'),
 	(55, 'simple model', 's1mle manuf.'),
-	(64, 'rtrfh', 'gfhfg');
+	(64, 'rtrfh', 'gfhfg'),
+	(65, 'YEAT', 'BMW');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -29,14 +29,15 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~3 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~2 rows (приблизительно)
 DELETE FROM `offersinfo`;
 INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`) VALUES
 	(1, NULL, NULL, NULL, 1),
 	(48, 232, '2023-09-10', 232, 55),
-	(49, 53434, '2023-09-11', 345, 64);
+	(49, 53434, '2023-09-11', 345, 64),
+	(50, 23112, '2023-10-09', 123, 65);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

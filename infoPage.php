@@ -9,22 +9,24 @@ require_once 'connection.php';
     <link rel="stylesheet" href="css/infoPage.css">
 </head>
 <body>
+<div class="box">
     <div class="info-container">
         <div class="info-header" onclick="toggleInfo('section1')">О нас</div>
         <div class="info-content" id="section1">
             <p>Мы - компания, занимающаяся предоставлением услуг по разработке веб-сайтов и веб-приложений. Наша команда опытных специалистов готова помочь вам воплотить ваши идеи в реальность.</p>
         </div>
-
+        <br>
         <div class="info-header" onclick="toggleInfo('section2')">Услуги</div>
         <div class="info-content" id="section2">
             <p>Мы предоставляем широкий спектр услуг, включая веб-дизайн, разработку, оптимизацию и поддержку веб-проектов. Мы заботимся о вашем успехе в онлайн-мире.</p>
         </div>
-
+        <br>
         <div class="info-header" onclick="toggleInfo('section3')">Контакты</div>
         <div class="info-content" id="section3">
             <p>Если у вас есть вопросы или вам нужна дополнительная информация, пожалуйста, свяжитесь с нами. Мы всегда готовы ответить на ваши запросы.</p>
         </div>
     </div>
+</div>
     <script>
         function toggleInfo(sectionId) {
             const content = document.getElementById(sectionId);
