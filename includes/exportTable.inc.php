@@ -31,8 +31,10 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
     $sheet->setCellValue('H1', 'Manufacturer');
     $sheet->setCellValue('I1', 'Type');
     $sheet->setCellValue('J1', 'Color');
-    $sheet->setCellValue('K1', 'Price');
-    $sheet->setCellValue('L1', 'Status');
+    $sheet->setCellValue('K1', 'Car Price');
+    $sheet->setCellValue('L1', 'Color Price');
+    $sheet->setCellValue('M1', 'Final Price');
+    $sheet->setCellValue('N1', 'Status');
 
     $row = 2; // Начните с второй строки
 
@@ -48,7 +50,9 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
         $sheet->setCellValue('I' . $row, $order['type']);
         $sheet->setCellValue('J' . $row, $order['color']);
         $sheet->setCellValue('K' . $row, $order['price'] . ' $');
-        $sheet->setCellValue('L' . $row, $order['status']);
+        $sheet->setCellValue('L' . $row, $order['color_price'] . ' $');
+        $sheet->setCellValue('M' . $row, $order['price'] + $order['color_price'] . ' $');
+        $sheet->setCellValue('N' . $row, $order['status']);
         $row++;
     }
 

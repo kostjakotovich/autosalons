@@ -33,8 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
     $sheet->setCellValue('I1', 'Manufacturer');
     $sheet->setCellValue('J1', 'Type');
     $sheet->setCellValue('K1', 'Color');
-    $sheet->setCellValue('L1', 'Price');
-    $sheet->setCellValue('M1', 'Total Price');
+    $sheet->setCellValue('L1', 'Car Price');
+    $sheet->setCellValue('M1', 'Color Price');
+    $sheet->setCellValue('N1', 'Final Price');
+    $sheet->setCellValue('O1', 'Total Price');
 
     // Получите данные о заказах пользователя
     $order = new Order();
@@ -54,11 +56,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
         $sheet->setCellValue('I' . $row, $order['manufacturer']);
         $sheet->setCellValue('J' . $row, $order['type']);
         $sheet->setCellValue('K' . $row, $order['color']);
-        $sheet->setCellValue('L' . $row, $order['price']);
+        $sheet->setCellValue('L' . $row, $order['price'] . ' $');
+        $sheet->setCellValue('M' . $row, $order['color_price'] . ' $');
+        $sheet->setCellValue('N' . $row, $order['price'] + $order['color_price'] . ' $');
 
         $row++;
     }
-    $sheet->setCellValue('M' . $row, $totalSum);
+    $sheet->setCellValue('O' . $row, $totalSum . ' $');
 
     // Создайте объект Writer для формата Xlsx (Excel)
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);

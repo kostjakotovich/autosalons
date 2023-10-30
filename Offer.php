@@ -82,7 +82,14 @@ class Offer {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$offerID, $color, $colorPrice, $imageFilePath]);
     }       
-    
+
+    public function getColorPrice($offerID, $color) {
+        $sql = "SELECT color_price FROM car_colors WHERE offerID = ? AND color = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$offerID, $color]);
+        $result = $stmt->fetchColumn();
+        return $result;
+    }
 
     public function addOffer($data) {
         $imageFileName = $_FILES['image']['name'];

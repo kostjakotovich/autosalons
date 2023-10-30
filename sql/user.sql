@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.user: ~6 rows (приблизительно)
+-- Дамп данных таблицы mariadb.user: ~7 rows (приблизительно)
 DELETE FROM `user`;
 INSERT INTO `user` (`userID`, `username`, `email`, `password`, `picture`, `roleID`) VALUES
 	(1, 'stuff', 'stuff@example.com', 'stuff', _binary 0x696d672f6176617461722f796561742e676966, 1),

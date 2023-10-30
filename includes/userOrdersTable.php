@@ -10,5 +10,7 @@
       <th>Manufacturer</th>
       <th>Model</th>
       <th>Color</th>
-      <th>Price</th>
+      <th>Car Price</th>
+      <th>Color Price</th>
+      <th>Final Price</th>
 </tr>

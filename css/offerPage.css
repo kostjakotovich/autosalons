@@ -28,6 +28,7 @@ main {
 /* cards */
 .card2 {
   width: 500px;
+  margin-top: auto;
   height: auto; /* Устанавливаем авто-высоту для динамического роста */
   float:right;
   border: 1px solid #ccc;
@@ -184,5 +185,12 @@ button[name="ChooseBtn"] {
   color: red; /* Изменение цвета текста */
 }
 
+.green-text {
+  color: rgb(81, 0, 255);
+}
 
+.center-button {
+  text-align: center; /* Центрировать содержимое по горизонтали */
+  margin-top: 10px; /* Настройте отступ сверху, как вам нужно */
+}
 

@@ -37,13 +37,15 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `orderColorID` FOREIGN KEY (`colorID`) REFERENCES `car_colors` (`colorID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~1 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~4 rows (приблизительно)
 DELETE FROM `order`;
 INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`, `colorID`) VALUES
 	(147, '2023-10-03', 'Kostja', 'Kotovich', '234234', 'Done', 1, 65, 14),
-	(185, '2023-10-17', 'Kostja', 'Kotovich', '+371 435345345', 'In progress', 1, 65, 14);
+	(186, '2023-10-24', '5urty', 'tyu', '+371 654456546', 'Done', 1, 65, 14),
+	(187, '2023-10-30', 'Kostja', 'Kotovich', '55675675', 'Done', 1, 65, 26),
+	(188, '2023-10-30', 'fghfghfgh', 'fghfgh', '456456456', 'New', 1, 65, 24);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

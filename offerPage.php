@@ -41,6 +41,12 @@ if (isset($_GET['offerID'])) {
     $selectedOfferColor = $offer->getOfferColorByColor($offerID, $selectedColor); // Используем сохраненный цвет
 }
 
+  // Get the color price for the selected color
+  $colorPrice = $offer->getColorPrice($offerID, $selectedColor);
+  $colorPriceDisplay = isset($colorPrice) ? "+ <span class='green-text'>" . $colorPrice . " €</span>" : "";
+
+  // Display the color price next to the car's price
+  $carPriceDisplay = $selectedOfferInfo['price'] . ' € ' . $colorPriceDisplay;
 } 
 
 
@@ -121,13 +127,14 @@ window.addEventListener('beforeunload', function() {
       <?php echo ucfirst($color['color']); ?>
     </div>
   <?php } ?>
-  <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
-  <input type="hidden" name="choose_color" value="Choose Color">
-  <br>
-  <button type="submit" name="ChooseBtn">Choose color</button>
+  <div class="center-button">
+    <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
+    <input type="hidden" name="choose_color" value="Choose Color">
+    <button type="submit" name="ChooseBtn" style="">Choose color</button>
+  </div>
 </form>
 
-      <p class="card-text"><?php echo 'Price: ' . $selectedOfferInfo['price'] . ' €'; ?></p>
+      <p class="card-text"><?php echo 'Price: ' . $carPriceDisplay; ?></p>
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
       <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
       <?php 
@@ -138,7 +145,7 @@ window.addEventListener('beforeunload', function() {
                 <?php
             } else {
                 ?>
-                <input type="button" value="Get an offer" class="btn2" onclick="on()"></input>
+                <input type="button" value="Get an offer" class="btn" onclick="on()"></input>
                 <?php
             }
           } else {
@@ -154,7 +161,7 @@ window.addEventListener('beforeunload', function() {
 
 <?php if(isset($_SESSION['roleID'])): ?>
   <?php if ($_SESSION['roleID'] == 1): ?>
-    <div class="card2" style="margin-left:58.5%; margin-top:-6%">
+    <div class="card2" style="margin-left:58.5%;">
         <div class="card-body">
         <br>
 

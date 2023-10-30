@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~2 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~4 rows (приблизительно)
 DELETE FROM `offersinfo`;
 INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`) VALUES
 	(1, NULL, NULL, NULL, 1),

@@ -25,18 +25,23 @@ CREATE TABLE IF NOT EXISTS `car_colors` (
   `offerID` int DEFAULT NULL,
   `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image` blob,
+  `color_price` float DEFAULT NULL,
   PRIMARY KEY (`colorID`),
   KEY `offerID` (`offerID`),
   CONSTRAINT `car_colors_ibfk_1` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.car_colors: ~4 rows (приблизительно)
 DELETE FROM `car_colors`;
-INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`) VALUES
-	(13, 65, 'yellow', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4a756a757473752d4b616973656e2d536561736f6e2d322d476f6a6f2d76732d546f6a692d72656d617463682d696e2d7468652d6d616e67612d312e77656270),
-	(14, 65, 'white', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f616236373631366430303030623237333366353630363530633538333434343439386332313466302e6a7067),
-	(17, 65, 'jlbnh ,j', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f594541542d303030315f5f53746f72652d5468656d655f5f42616e6e65725f4d6f62696c652d30312e676966),
-	(18, 65, 'cat', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6b6f746e617374756c652e706e67);
+INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`, `color_price`) VALUES
+	(13, 65, 'yellow', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4a756a757473752d4b616973656e2d536561736f6e2d322d476f6a6f2d76732d546f6a692d72656d617463682d696e2d7468652d6d616e67612d312e77656270, NULL),
+	(14, 65, 'white', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f616236373631366430303030623237333366353630363530633538333434343439386332313466302e6a7067, NULL),
+	(17, 65, 'jlbnh ,j', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f594541542d303030315f5f53746f72652d5468656d655f5f42616e6e65725f4d6f62696c652d30312e676966, NULL),
+	(18, 65, 'cat', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6b6f746e617374756c652e706e67, NULL),
+	(20, 65, 'color price', NULL, 200),
+	(24, 65, 'ryan gosling', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6d617872657364656661756c74202831292e6a7067, 150),
+	(25, 65, 'yeat ', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f353030783530302e6a7067, 0),
+	(26, 65, 'color ye', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f646f6d696e6f6c696c2e6a7067, 0);
 
 -- Дамп структуры для таблица mariadb.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -71,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`notification_id`),
   KEY `userID` (`userID`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы mariadb.notifications: ~12 rows (приблизительно)
 DELETE FROM `notifications`;
@@ -90,7 +95,10 @@ INSERT INTO `notifications` (`notification_id`, `userID`, `message`, `created_at
 	(39, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-15 15:14:22', 1),
 	(40, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-15 17:55:21', 1),
 	(41, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:37:13', 1),
-	(42, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:39:02', 1);
+	(42, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:39:02', 1),
+	(43, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-23 21:11:42', 1),
+	(44, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:39:35', 1),
+	(45, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:45:05', 0);
 
 -- Дамп структуры для таблица mariadb.offers
 CREATE TABLE IF NOT EXISTS `offers` (
@@ -100,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `offers` (
   PRIMARY KEY (`offerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~4 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offers: ~3 rows (приблизительно)
 DELETE FROM `offers`;
 INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
 	(1, 'fgd', 'dfg'),
@@ -146,13 +154,15 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `orderColorID` FOREIGN KEY (`colorID`) REFERENCES `car_colors` (`colorID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~1 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~2 rows (приблизительно)
 DELETE FROM `order`;
 INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`, `colorID`) VALUES
 	(147, '2023-10-03', 'Kostja', 'Kotovich', '234234', 'Done', 1, 65, 14),
-	(185, '2023-10-17', 'Kostja', 'Kotovich', '+371 435345345', 'In progress', 1, 65, 14);
+	(186, '2023-10-24', '5urty', 'tyu', '+371 654456546', 'Done', 1, 65, 14),
+	(187, '2023-10-30', 'Kostja', 'Kotovich', '55675675', 'Done', 1, 65, 26),
+	(188, '2023-10-30', 'fghfghfgh', 'fghfgh', '456456456', 'New', 1, 65, 24);
 
 -- Дамп структуры для таблица mariadb.user
 CREATE TABLE IF NOT EXISTS `user` (

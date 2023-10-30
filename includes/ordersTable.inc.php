@@ -1,5 +1,8 @@
 <?php
 
+    // Вычисляем и отображаем общую стоимость
+    $totalPrice = $order['price'] + $order['color_price'];
+
     echo "<tr>";
     echo "<td>".$order['orderID']."</td>";
     echo "<td>".$order['orderDate']."</td>";
@@ -12,6 +15,8 @@
     echo "<td>".$order['type']."</td>";
     echo "<td>".$order['color']."</td>";
     echo "<td>".$order['price']." $</td>";
+    echo "<td>".$order['color_price']." $</td>";
+    echo "<td>".$totalPrice." $</td>";
     echo "<td>
         <select name='status[$order[orderID]]'>
             <option value='New'" . ($order['status'] == 'New' ? ' selected' : '') . ">New</option>
