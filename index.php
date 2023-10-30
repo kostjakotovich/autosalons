@@ -48,6 +48,9 @@ if (!$currentPrice) {
 </head>
 <body>
 <script src="../autosalons/js/script.js" defer></script>
+
+<img src="img/banner/car_Photo_x4_mainpage.jpg" alt="Homepage banner" style="max-width: 100%;">
+
 <div>
     <?php 
     if(isset($_SESSION['order_success'])){
@@ -65,7 +68,7 @@ if (!$currentPrice) {
 </div>
 
 
-<form action="" method="get" style="text-align:center">
+<form action="" method="get" style="text-align:center; margin-top: 3%;">
   <div style="display: flex; justify-content: center; text-align: center;">
 
     <input type="text" placeholder="Search.." name="search" style="width: 40%;

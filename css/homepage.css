@@ -3,7 +3,7 @@
 /* Общие стили для страницы */
 body {
     font-family: Arial, sans-serif;
-    background-color: #F5F5F5;
+    background-color: #f5f5f568;
     color: #333;
   }
   
@@ -17,7 +17,7 @@ body {
   header {
     background-color: #222;
     color: #fff;
-    padding: 20px 0;
+    padding: 0;
   }
   
   .navbar-brand {
@@ -217,3 +217,4 @@ body {
   font-weight: bold;
   text-align: center;
 }
+
