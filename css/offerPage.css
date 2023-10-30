@@ -13,7 +13,7 @@ main {
 /* cards */
 .card {
     width: 500px;
-    height: 450px;
+    height: auto;
     margin-right: 21.5%; /* Добавляем отступ слева */
     margin-top: 10%; /* Добавляем отступ слева */
     float:right;

@@ -5,8 +5,9 @@ require_once 'Offer.php'; // Подключение класса Offer
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Проверяем, была ли отправлена форма
-    if (isset($_POST['newColor']) && isset($_POST['offerID']) && isset($_FILES['colorImage'])) {
+    if (isset($_POST['newColor']) && isset($_POST['colorPrice']) && isset($_POST['offerID']) && isset($_FILES['colorImage'])) {
         $newColor = $_POST['newColor'];
+        $colorPrice = $_POST['colorPrice'];
         $offerID = $_POST['offerID'];
         
         // Обработка загруженного изображения
@@ -19,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Создаем объект класса Offer
         $offer = new Offer();
 
-        // Вызываем метод добавления цвета с изображением
-        $offer->addColorWithImage($offerID, $newColor, $imageFilePath);
+        // Вызываем метод добавления цвета с изображением и стоимостью
+        $offer->addColor($offerID, $newColor, $colorPrice, $imageFilePath);
 
         // Перенаправляем пользователя обратно на страницу предложения
         header('Location: offerPage.php?offerID=' . $offerID);
@@ -33,4 +34,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Если запрос не является POST-запросом, отобразить сообщение об ошибке
     echo "Invalid request.";
 }
+
 ?>

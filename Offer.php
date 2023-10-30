@@ -70,11 +70,6 @@ class Offer {
         return $result;
     }
     
-    public function addColor($offerID, $color) {
-        $sql = "INSERT INTO car_colors (offerID, color) VALUES (?, ?)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID, $color]);
-    }
     
     public function deleteColor($offerID, $color) {
         $sql = "DELETE FROM car_colors WHERE offerID = ? AND color = ?";
@@ -82,11 +77,11 @@ class Offer {
         $stmt->execute([$offerID, $color]);
     }
     
-    public function addColorWithImage($offerID, $color, $imagePath) {
-        $sql = "INSERT INTO car_colors (offerID, color, image) VALUES (?, ?, ?)";
+    public function addColor($offerID, $color, $colorPrice, $imageFilePath) {
+        $sql = "INSERT INTO car_colors (offerID, color, color_price, image) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID, $color, $imagePath]);
-    }
+        $stmt->execute([$offerID, $color, $colorPrice, $imageFilePath]);
+    }       
     
 
     public function addOffer($data) {
