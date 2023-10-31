@@ -137,7 +137,7 @@ window.addEventListener('beforeunload', function() {
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
       <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
       <?php 
-          if (isset($_SESSION['success'])) {
+          if (isset($_SESSION['success'])) {//sdesj bil kiril
             if ($hasActiveOrders) {
                 ?>
                 <p class="btn" style="margin-top: -0.5%">Wait for a response to Your previous order.</p>
