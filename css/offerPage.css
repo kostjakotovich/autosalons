@@ -15,12 +15,11 @@ main {
     width: 500px;
     height: auto;
     margin-right: 21.5%; /* Добавляем отступ слева */
-    margin-top: 10%; /* Добавляем отступ слева */
+    margin-top: 10%;
     float:right;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
-    float: right; 
     position: relative;
     transition: all 0.3s ease; /* добавляем плавный переход */
 }
@@ -29,8 +28,8 @@ main {
 .card2 {
   width: 500px;
   margin-top: auto;
+  margin-left:58.5%;
   height: auto; /* Устанавливаем авто-высоту для динамического роста */
-  float:right;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #ccc;
@@ -144,33 +143,26 @@ button[name="ChooseBtn"] {
   margin-top:10%;
 } 
 
-
-.container2 {
-  min-height: calc(75vh - 40px);
-}
-
-
-
 .container2 img {
   text-align: center;
   margin-top: 10%;
   margin-left: 10%;
-  width: 850px;
-  max-height: 500px;
+  width: 35%;
+  max-height: 50%;
   height: auto;
   display: block;
 }
 
 .color-option {
   display: inline-block;
-  margin-right: 10px; /* Добавьте отступ справа, чтобы элементы не налезали друг на друга */
+  margin-right: 10px;
 }
 
 /* Стилизация чекбокса */
 
 /* Увеличение размера чекбокса */
 .form-group2 label input[type="checkbox"] {
-  transform: scale(1.5); /* Увеличьте значение, чтобы увеличить размер чекбокса */
+  transform: scale(1.5);
 }
 
 /* Изменение размера шрифта для текста */

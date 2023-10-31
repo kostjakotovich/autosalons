@@ -118,21 +118,20 @@ window.addEventListener('beforeunload', function() {
       <h5>More information:</h5>
       <br>
 
-      <!-- Добавьте форму для выбора цвета -->
-<form method="get" action="offerPage.php">
-  <label>Choose a color:</label><br>
-  <?php foreach ($selectedOfferColors as $color) { ?>
-    <div class="color-option">
-      <input type="radio" name="color" value="<?php echo $color['color']; ?>">
-      <?php echo ucfirst($color['color']); ?>
-    </div>
-  <?php } ?>
-  <div class="center-button">
-    <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
-    <input type="hidden" name="choose_color" value="Choose Color">
-    <button type="submit" name="ChooseBtn" style="">Choose color</button>
-  </div>
-</form>
+      <form method="get" action="offerPage.php">
+        <label>Choose a color:</label><br>
+        <?php foreach ($selectedOfferColors as $color) { ?>
+          <div class="color-option">
+            <input type="radio" name="color" value="<?php echo $color['color']; ?>">
+            <?php echo ucfirst($color['color']); ?>
+          </div>
+        <?php } ?>
+        <div class="center-button">
+          <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
+          <input type="hidden" name="choose_color" value="Choose Color">
+          <button type="submit" name="ChooseBtn" style="">Choose color</button>
+        </div>
+      </form>
 
       <p class="card-text"><?php echo 'Price: ' . $carPriceDisplay; ?></p>
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
@@ -155,51 +154,49 @@ window.addEventListener('beforeunload', function() {
           }
               
       ?>
+    
+  
+
+        <?php if(isset($_SESSION['roleID'])): ?>
+          <?php if ($_SESSION['roleID'] == 1): ?>
+
+                <br>
+
+                      <!-- Форма для добавления новых цветов -->
+                      <form method="post" action="process_color.php" enctype="multipart/form-data">
+                          <p for="newColor" class="card-text">Add New Color:</p>              
+                          <input type="text" id="newColor" name="newColor" required>
+                          <br>
+                          <label for="colorPrice" class="card-text">Color Price:</label>
+                          <input type="number" id="colorPrice" name="colorPrice" required>
+                          <br>
+                          <!-- Добавьте поле для загрузки изображения -->
+                          <label for="colorImage" class="card-text">Color Image:</label>
+                        
+                          <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
+                        
+                          <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
+                          <br>
+                          <button class="btn" type="submit">Add</button>
+                      </form>
+
+                      <!-- Ссылки для удаления цветов -->
+                      <?php foreach ($selectedOfferColors as $color) { ?>
+                      <br>
+                      <div class="color-option">          
+                          <?php echo ucfirst($color['color']); ?>
+                          <!-- Отображаем кнопку "-" для удаления цвета -->
+                          <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
+                      </div>
+                  <?php } ?>
+                  <br>
+            <br>
+
+          <?php endif; ?>
+        <?php endif; ?>
+      </div>
     </div>
-  </div>
 </div>
-
-<?php if(isset($_SESSION['roleID'])): ?>
-  <?php if ($_SESSION['roleID'] == 1): ?>
-    <div class="card2" style="margin-left:58.5%;">
-        <div class="card-body">
-        <br>
-
-              <!-- Форма для добавления новых цветов -->
-              <form method="post" action="process_color.php" enctype="multipart/form-data">
-                  <label for="newColor">Add New Color:</label>              
-                  <input type="text" id="newColor" name="newColor" required>
-                  <br>
-                  <label for="colorPrice">Color Price:</label>
-                  <input type="number" id="colorPrice" name="colorPrice" required>
-                  <br>
-                  <!-- Добавьте поле для загрузки изображения -->
-                  <label for="colorImage">Color Image:</label>
-                
-                  <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
-                
-                  <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
-                  <br>
-                  <button type="submit">Add</button>
-              </form>
-
-              <!-- Ссылки для удаления цветов -->
-              <?php foreach ($selectedOfferColors as $color) { ?>
-              <br>
-              <div class="color-option">          
-                  <?php echo ucfirst($color['color']); ?>
-                  <!-- Отображаем кнопку "-" для удаления цвета -->
-                  <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
-              </div>
-          <?php } ?>
-          <br>
-        </div>
-    </div>
-    <br>
-
-  <?php endif; ?>
-<?php endif; ?>
-
 
   <div id="overlay" onclick="off()">
     <div id="text" class="form-container">
@@ -218,7 +215,7 @@ window.addEventListener('beforeunload', function() {
         </div>
         <div class="form-group2">
           <label for="telephone"><strong>Telephone:</strong></label>
-          <input type="number" class="form-control" id="telephone" name="telephone" maxlength="14" required value="+371 ">
+          <input type="text" class="form-control" id="telephone" name="telephone" maxlength="14" required value="+371 ">
         </div>
         <br>
         <div class="form-group2" style="display: flex; align-items: center;">

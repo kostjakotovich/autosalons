@@ -49,7 +49,7 @@ if (!$currentPrice) {
 <body>
 <script src="../autosalons/js/script.js" defer></script>
 
-<img src="img/banner/car_Photo_x4_mainpage.jpg" alt="Homepage banner" style="max-width: 100%;">
+<img src="img/banner/car_Photo_x4_mainpage.jpg" alt="Homepage banner" style="max-width: 100%; margin-top:0%">
 
 <div>
     <?php 
