@@ -1,7 +1,6 @@
 body{
     background: #f0f0f0; /* Цвет фона страницы */
     background-size: cover;
-    background: #f0f0f0; /* Цвет фона страницы */
     padding:0;
     margin:0;
     min-height: 100%;
@@ -123,19 +122,6 @@ tr:nth-child(even) {
   background-color: #f0f0f0;
 }
 
-select {
-  width: 150px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f0f0f0;
-  color: #000;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
 
 select option {
   background-color: #f0f0f0;
@@ -174,11 +160,10 @@ select::-ms-expand {
   }
 
   .form-control {
-    width: 400px;
+    width: 100%
   }
 
   .form-container {
-    height: 440px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -192,13 +177,16 @@ select::-ms-expand {
 
   .user-card {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     padding: 30px;
-    background-color: #f1f1f1;
+    background-color: #e1e1e1;
     border-radius: 10px;
+    min-height: 300px;
+    width: 100%;
+    margin: 0 auto;
   }
+  
+  
   
   .user-info {
     margin-right: 30px;
@@ -220,34 +208,12 @@ select::-ms-expand {
   }
 
   .change-password-btn {
-    width: 300px;
+    width: 100%;
   }
   
   .change-password-input {
-    width: 300px;
+    width: 100%;
   }
-
-  #form-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: #eef5ff;
-  }
-  
-  /* Стили для формы изменения аватарки */
-.avatar-form {
-  margin-top: 20px;
-  margin-left: -150%;
-  text-align: center;
-}
-
-
-
-.avatar-input {
-  margin-left: -10%;
-  display: none; /* Скрываем сам инпут для загрузки файла */
-}
 
 .avatar-label {
   width: 200px;
@@ -271,21 +237,109 @@ select::-ms-expand {
   font-weight: bold;
 }
 
-.avatar-button {
-  font-weight: bold;
-  width: 200px;
-  height: 70px;
-  background-color: #000000;
+.custom-file-upload {
+  margin-left: 15%;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #007bff;
   color: #fff;
+}
+
+.custom-file-upload input {
+  display: none;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3; /* Цвет при наведении */
+}
+
+
+.emp-profile{
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.profile-img{
+  text-align: center;
+}
+.profile-img img{
+  width: 70%;
+  height: 100%;
+}
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+.profile-head h5{
+  color: #333;
+}
+.profile-head h6{
+  color: #0062cc;
+}
+.profile-edit-btn{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
   cursor: pointer;
 }
-
-/* При наведении добавьте стиль hover, чтобы кнопка выглядела активной */
-.avatar-button:hover {
-  background-color: #8c8c8c;
+.proile-rating{
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
 }
-
-  
+.proile-rating span{
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+.profile-head .nav-tabs{
+  margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+  font-weight:600;
+  border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+  border: none;
+  border-bottom:2px solid #0062cc;
+}
+.profile-work{
+  padding: 14%;
+  margin-top: -15%;
+}
+.profile-work p{
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
+}
+.profile-work a{
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+}
+.profile-work ul{
+  list-style: none;
+}
+.profile-tab label{
+  font-weight: 600;
+}
+.profile-tab p{
+  font-weight: 600;
+  color: #0062cc;
+}

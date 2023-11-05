@@ -60,7 +60,7 @@ $order = new Order();
 $orders = $order->getOrderInfo($userID);
 $totalSum = $order -> getOrderSum($userID);
 
-if (isset($_POST["updateAvatar"])) {
+if (isset($_FILES["avatar"])) {
   $uploadDir = 'img/avatar/';
   $uploadFile = $uploadDir . basename($_FILES['avatar']['name']);
 
@@ -86,6 +86,10 @@ if (isset($_POST["updateAvatar"])) {
     <script src="../autosalons/js/toggle-tab.js" defer></script>
     <link rel="stylesheet" href="css/profile.css">
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     
     <title>User Profile</title>
   </head>
@@ -96,69 +100,129 @@ if (isset($_POST["updateAvatar"])) {
   <button class="tablinks" onclick="openTab(event, 'Orders')">My Orders</button>
 </div>
 
+
 <div id="UserInfo" class="tabcontent" style="display: block;">
   <div class="user-card">
     <div class="user-info">
       <UserInfo>
-        <!-- Отображение текущей аватарки -->
-        <img src="<?php echo $user->getPicture(); ?>" alt="User Avatar" width="200" height="200">
-        <div style="float:right;">
-          <!-- Форма для изменения аватарки --> 
-          <form method="post" enctype="multipart/form-data" class="avatar-form">
-              <label for="avatar" class="avatar-label">Choose a new avatar</label><br>
-              <input type="file" id="avatar" name="avatar" class="avatar-input">
-              <button type="submit" name="updateAvatar" class="avatar-button">Upload & Save</button>
-          </form>
-        </div>
+      
+        <div class="container emp-profile" style="width: 100%; height: 100%;">
+                    
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img src="<?php echo $user->getPicture(); ?>" alt="User Avatar"/>
+                                </div>
+                            </div>  
+                            <div class="col-md-6">
+                                <div class="profile-head">
+                                            <h5>
+                                              <?php echo $username; ?>
+                                            </h5>
+                                            <h6>
+                                            <?php if ($_SESSION['roleID'] == 1) { ?>
+                                              Staff Worker
+                                            <?php } 
+                                            else {?>
+                                              User
+                                            <?php } ?>
+                                            </h6>
+                                            <p class="proile-rating"></p>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                        </li>
+                                    </ul>
+                                </div>  
+                            </div>
+                            <!-- <div class="col-md-2">
+                                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                              <br>
+                              <form method="post" enctype="multipart/form-data" id="avatarForm">
+                                  <label for="avatar" class="custom-file-upload">
+                                      <input type="file" id="avatar" name="avatar">
+                                      Choose
+                                  </label>
+                              </form>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="tab-content profile-tab" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>User Name</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p><?php echo $username; ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>E-mail</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p><?php echo $email; ?></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>Profession</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p>Web Developer and Designer</p>
+                                                    </div>
+                                                </div>
+                                                
+                                    </div>
+                                    <?php if ($_SESSION['roleID'] == 0) { ?>
+                                    <button class="btn" class="btn change-password-btn">Change Password</button>
 
-        <div style="margin-top:10%;">
-          <div class="user-name"><?php echo $username; ?></div>
-          <div class="user-email"><?php echo $email; ?></div>
-        </div>
+                                    <div id="changePassword" style="display:none;">
+                                      <div>
+                                        <form method="post">
+                                          <br>
+                                          <label for="currentPassword">Current password:</label>
+                                          <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
+                                          <br>
+                                          <label for="newPassword">New password:</label>
+                                          <input type="password" id="newPassword" class="form-control" name="newPassword" required>
+                                          <br>
+                                          <label for="confirmPassword">Confirm new password:</label>
+                                          <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
+                                          <br>
+                                          <input type="submit" name="changePassword" class="form-control" value="Change Password" >
+                                        </form>
+                                        
+                                      </div>
+                                  </div>
+                                  <?php if (isset($_SESSION['success_change'])): ?>
+                                    <div class="alert alert-success" style="color:black;"><?php echo $_SESSION['success_change']; ?></div>
+                                    <?php unset($_SESSION['success_change']); ?>
+                                  <?php endif; ?>
+
+
+                                  <?php if (!empty($change_errors)): ?>
+                                      <div class="alert alert-danger" role="alert">
+                                        <ul>
+                                          <?php foreach ($change_errors as $error): ?>
+                                            <p style="color:black;"><?php echo $error; ?></p>
+                                          <?php endforeach; ?>
+                                        </ul>
+                                      </div>
+                                    <?php endif; ?>
+                                    </div>
+                                  <?php } ?>  
+                                </div>
+                            </div>
+                        </div>
+                               
+                </div>  
+
       </UserInfo>
-    </div>
-    <?php  
-    if ($_SESSION['roleID'] == 1) { 
-      echo "<br><br><br><strong style='font-size: 20px;'>Contact your administrator for help changing your password.</strong>";
-    } ?>
-  </div>
-    <?php if ($_SESSION['roleID'] == 0) { ?>
-      <button class="btn" class="btn change-password-btn">Change Password</button>
-
-      <div id="changePassword" style="display:none;">
-        <div id="form-group">
-          <form method="post">
-            <br>
-            <label for="currentPassword">Current password:</label>
-            <input type="password" id="currentPassword" class="form-control" name="currentPassword" required>
-            <br>
-            <label for="newPassword">New password:</label>
-            <input type="password" id="newPassword" class="form-control" name="newPassword" required>
-            <br>
-            <label for="confirmPassword">Confirm new password:</label>
-            <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" required>
-            <br>
-            <input type="submit" name="changePassword" class="form-control" value="Change Password" >
-          </form>
-          
-        </div>
-        <?php if (isset($_SESSION['success_change'])): ?>
-      <div class="alert alert-success" style="text-align: center;"><?php echo $_SESSION['success_change']; ?></div>
-      <?php unset($_SESSION['success_change']); ?>
-    <?php endif; ?>
-
-
-    <?php if (!empty($change_errors)): ?>
-        <div class="alert alert-danger" role="alert">
-          <ul>
-            <?php foreach ($change_errors as $error): ?>
-              <p><?php echo $error; ?></p>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      <?php endif; ?>
-      </div>
-    <?php } ?>
     </div>
 </div>
 
@@ -239,6 +303,12 @@ if (isset($_POST["updateAvatar"])) {
     }
   });
 
+</script>
+
+<script>
+    document.getElementById('avatar').addEventListener('change', function() {
+        document.getElementById('avatarForm').submit(); // Автоматически отправить форму при выборе файла
+    });
 </script>
 
 <?php include 'footer.php'; ?>

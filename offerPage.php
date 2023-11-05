@@ -43,7 +43,7 @@ if (isset($_GET['offerID'])) {
 
   // Get the color price for the selected color
   $colorPrice = $offer->getColorPrice($offerID, $selectedColor);
-  $colorPriceDisplay = isset($colorPrice) ? "+ <span class='green-text'>" . $colorPrice . " €</span>" : "";
+  $colorPriceDisplay = isset($colorPrice) ? "+ <span class='green-text'>" . $colorPrice . " € (Color)</span>" : "";
 
   // Display the color price next to the car's price
   $carPriceDisplay = $selectedOfferInfo['price'] . ' € ' . $colorPriceDisplay;
@@ -164,19 +164,17 @@ window.addEventListener('beforeunload', function() {
 
                       <!-- Форма для добавления новых цветов -->
                       <form method="post" action="process_color.php" enctype="multipart/form-data">
-                          <p for="newColor" class="card-text">Add New Color:</p>              
-                          <input type="text" id="newColor" name="newColor" required>
-                          <br>
-                          <label for="colorPrice" class="card-text">Color Price:</label>
-                          <input type="number" id="colorPrice" name="colorPrice" required>
-                          <br>
+                          <!-- <p for="newColor" class="card-text">Add New Color:</p> -->             
+                          <input type="text" id="newColor" name="newColor" placeholder="Color Name" required>
+                          <br><br>
+                          <!-- <label for="colorPrice" class="card-text"></label> -->
+                          <input type="number" id="colorPrice" name="colorPrice" placeholder="Color Price" required>
+                          <br><br>
                           <!-- Добавьте поле для загрузки изображения -->
                           <label for="colorImage" class="card-text">Color Image:</label>
-                        
                           <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
                         
                           <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
-                          <br>
                           <button class="btn" type="submit">Add</button>
                       </form>
 
