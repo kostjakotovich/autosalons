@@ -45,11 +45,6 @@ button[name="ChooseBtn"] {
 }
 
 
-.card img {
-    width: 100%;
-    height: auto;
-}
-
 .card-body {
     padding: 15px;
 }
@@ -86,7 +81,7 @@ button[name="ChooseBtn"] {
     bottom: 0;
     background-color: rgba(0,0,0,0.5); 
     z-index: 2; 
-    cursor: pointer; 
+    cursor: pointer;
   }
   
   #text {
@@ -143,12 +138,14 @@ button[name="ChooseBtn"] {
   margin-top:10%;
 } 
 
+.container2 {
+  min-height: 900px;
+}
+
 .container2 img {
   text-align: center;
   margin-top: 10%;
   margin-left: 10%;
-  width: 35%;
-  max-height: 50%;
   height: auto;
   display: block;
 }

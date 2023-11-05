@@ -108,8 +108,9 @@ window.addEventListener('beforeunload', function() {
 </head>
 <body>
 <div class="container2">
+  
+  <img id="colorImage" src="<?php echo $selectedOfferColor['image']; ?>" style="float: left; width: 820px; height: 520px;">
 
-<img id="colorImage" src="<?php echo $selectedOfferColor['image']; ?>" style="float:left">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
@@ -219,7 +220,7 @@ window.addEventListener('beforeunload', function() {
         <div class="form-group2" style="display: flex; align-items: center;">
           <input type="checkbox" id="check" name="check" required>
           <label for="check" style="color: red;">*</label> 
-          <label> I have read and agree to the terms and conditions.</label> 
+          <label> I have read and agree to the <a href='profile.php'>terms and conditions</a>.</label> 
         </div>
         <br>
         <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
