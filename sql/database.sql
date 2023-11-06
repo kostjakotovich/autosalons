@@ -23,7 +23,7 @@ USE `mariadb`;
 CREATE TABLE IF NOT EXISTS `car_colors` (
   `colorID` int NOT NULL AUTO_INCREMENT,
   `offerID` int DEFAULT NULL,
-  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image` blob,
   `color_price` float DEFAULT NULL,
   PRIMARY KEY (`colorID`),
@@ -31,12 +31,11 @@ CREATE TABLE IF NOT EXISTS `car_colors` (
   CONSTRAINT `car_colors_ibfk_1` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.car_colors: ~4 rows (приблизительно)
+-- Дамп данных таблицы mariadb.car_colors: ~7 rows (приблизительно)
 DELETE FROM `car_colors`;
 INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`, `color_price`) VALUES
 	(13, 65, 'yellow', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4a756a757473752d4b616973656e2d536561736f6e2d322d476f6a6f2d76732d546f6a692d72656d617463682d696e2d7468652d6d616e67612d312e77656270, NULL),
 	(14, 65, 'white', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f616236373631366430303030623237333366353630363530633538333434343439386332313466302e6a7067, NULL),
-	(17, 65, 'jlbnh ,j', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f594541542d303030315f5f53746f72652d5468656d655f5f42616e6e65725f4d6f62696c652d30312e676966, NULL),
 	(18, 65, 'cat', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6b6f746e617374756c652e706e67, NULL),
 	(20, 65, 'color price', NULL, 200),
 	(24, 65, 'ryan gosling', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6d617872657364656661756c74202831292e6a7067, 150),
@@ -76,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`notification_id`),
   KEY `userID` (`userID`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы mariadb.notifications: ~12 rows (приблизительно)
 DELETE FROM `notifications`;
@@ -98,7 +97,8 @@ INSERT INTO `notifications` (`notification_id`, `userID`, `message`, `created_at
 	(42, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:39:02', 1),
 	(43, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-23 21:11:42', 1),
 	(44, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:39:35', 1),
-	(45, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:45:05', 0);
+	(45, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:45:05', 0),
+	(46, 55, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-11-05 20:40:35', 1);
 
 -- Дамп структуры для таблица mariadb.offers
 CREATE TABLE IF NOT EXISTS `offers` (
@@ -154,15 +154,16 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `orderColorID` FOREIGN KEY (`colorID`) REFERENCES `car_colors` (`colorID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~2 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~4 rows (приблизительно)
 DELETE FROM `order`;
 INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`, `colorID`) VALUES
 	(147, '2023-10-03', 'Kostja', 'Kotovich', '234234', 'Done', 1, 65, 14),
 	(186, '2023-10-24', '5urty', 'tyu', '+371 654456546', 'Done', 1, 65, 14),
 	(187, '2023-10-30', 'Kostja', 'Kotovich', '55675675', 'Done', 1, 65, 26),
-	(188, '2023-10-30', 'fghfghfgh', 'fghfgh', '456456456', 'New', 1, 65, 24);
+	(188, '2023-10-30', 'fghfghfgh', 'fghfgh', '456456456', 'New', 1, 65, 24),
+	(189, '2023-11-05', 'sdffsd', 'fsdfs', '+371 2343234', 'New', 55, 65, 24);
 
 -- Дамп структуры для таблица mariadb.user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -178,12 +179,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Дамп данных таблицы mariadb.user: ~6 rows (приблизительно)
 DELETE FROM `user`;
 INSERT INTO `user` (`userID`, `username`, `email`, `password`, `picture`, `roleID`) VALUES
-	(1, 'stuff', 'stuff@example.com', 'stuff', _binary 0x696d672f6176617461722f796561742e676966, 1),
+	(1, 'stuff', 'stuff@example.com', 'stuff', _binary 0x696d672f6176617461722f68756d61737072696b6f6c2e706e67, 1),
 	(44, '1', '1@1.com', '$2y$10$zlYMd1if0vP.Pl76EmQKuujalvXg2FT.lxmRnF52IuGqjZeDwoISK', NULL, 0),
 	(46, 'konstantins', 'konstantins@gmail.com', '$2y$10$56e9Nl1IXJWYOcKYrgKncOAT4p99/PYH1UtvPgHjPKSUgJmZbQ58O', NULL, 0),
 	(48, 'Konstantins Kotovich', 'kostja@gmail.com', '$2y$10$t80eqpaNFAky2CFIe8B5MO/AVwBujCBKrX90U6ysi5xh4GgzJVXfa', NULL, 0),
 	(50, '1234', '1234@1234.com', '$2y$10$wMepL4xJFeGY2BU4RbGx2e6jC5mCKkp7KEqHA.GZab9RQcC2JrLzS', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0),
-	(55, '123', '123@123.com', '$2y$10$oE58rfPWoGKcZB61cyQW5O0UtqxGMvmj4qMF5YhAoXAb2EPAFl.Ni', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0),
+	(55, '123', '123@123.com', '$2y$10$BTJNbFdTqAD5QD22PGRnO.htfW6imQ6Y9IzkNKQ7bbyDPAMuj9N1e', _binary 0x696d672f6176617461722f68756d61737072696b6f6c2e706e67, 0),
 	(56, '12345', '12345@a.com', '$2y$10$WvxQcssDA7WqShLuc.i6WuFKe8iBnAXGabtziroIlPzHOaPldvDIm', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

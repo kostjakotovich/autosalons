@@ -141,6 +141,7 @@ window.addEventListener('beforeunload', function() {
           if (isset($_SESSION['success'])) {//sdesj bil kiril
             if ($hasActiveOrders) {
                 ?>
+                <br>
                 <p class="btn" style="margin-top: -0.5%">Wait for a response to Your previous order.</p>
                 <?php
             } else {
@@ -160,6 +161,8 @@ window.addEventListener('beforeunload', function() {
 
         <?php if(isset($_SESSION['roleID'])): ?>
           <?php if ($_SESSION['roleID'] == 1): ?>
+            <button id="settingsButton" class="btn" onclick="toggleSettings()">Settings</button>
+            <div id="settingsForm">
 
                 <br>
 
@@ -171,10 +174,12 @@ window.addEventListener('beforeunload', function() {
                           <!-- <label for="colorPrice" class="card-text"></label> -->
                           <input type="number" id="colorPrice" name="colorPrice" placeholder="Color Price" required>
                           <br><br>
-                          <!-- Добавьте поле для загрузки изображения -->
-                          <label for="colorImage" class="card-text">Color Image:</label>
-                          <input type="file" id="colorImage" name="colorImage" accept="image/*" required>
-                        
+                          <!-- поле для загрузки изображения -->                        
+                          <label class="custom-file-upload">
+                            <span class="custom-file-upload-text">Choose File</span>
+                            <input type="file" id="colorImage" name="colorImage" accept="image/*" required data-file-name="No file chosen">
+                          </label>
+
                           <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
                           <button class="btn" type="submit">Add</button>
                       </form>
@@ -190,11 +195,12 @@ window.addEventListener('beforeunload', function() {
                   <?php } ?>
                   <br>
             <br>
-
+          </div>               
           <?php endif; ?>
         <?php endif; ?>
       </div>
     </div>
+  </div>
 </div>
 
   <div id="overlay" onclick="off()">
@@ -219,8 +225,9 @@ window.addEventListener('beforeunload', function() {
         <br>
         <div class="form-group2" style="display: flex; align-items: center;">
           <input type="checkbox" id="check" name="check" required>
-          <label for="check" style="color: red;">*</label> 
-          <label> I have read and agree to the <a href='profile.php'>terms and conditions</a>.</label> 
+          <label for="check" style="color: red;">* </label>
+          <label></label>
+          <p>I have read and agree to the <a href='infoPage.php'>terms and conditions</a>.</p>
         </div>
         <br>
         <input type="submit" name="submit_order" value="Submit" class="btn btn-primary">
@@ -230,9 +237,7 @@ window.addEventListener('beforeunload', function() {
       </form>
     </div>
   </div>
-
-
-
+<div class="hidden-container"></div>
 
 <script>
   // JavaScript код для убирания атрибута readonly
@@ -241,6 +246,16 @@ document.addEventListener('input', function (e) {
         e.target.removeAttribute('readonly');
     }
 });
+
+function toggleSettings() {
+  const settingsForm = document.getElementById('settingsForm');
+  if (settingsForm.style.display === 'none' || settingsForm.style.display === '') {
+    settingsForm.style.display = 'block';
+  } else {
+    settingsForm.style.display = 'none';
+  }
+}
+
 
 </script>
 

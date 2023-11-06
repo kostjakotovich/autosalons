@@ -15,27 +15,13 @@ main {
     width: 500px;
     height: auto;
     margin-right: 21.5%; /* Добавляем отступ слева */
-    margin-top: 10%;
+    margin-top: 12%;
     float:right;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
     position: relative;
     transition: all 0.3s ease; /* добавляем плавный переход */
-}
-
-/* cards */
-.card2 {
-  width: 500px;
-  margin-top: auto;
-  margin-left:58.5%;
-  height: auto; /* Устанавливаем авто-высоту для динамического роста */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px #ccc;
-  float: right; 
-  position: relative;
-  transition: all 0.3s ease; /* добавляем плавный переход */
 }
 
 button[name="ChooseBtn"] {
@@ -64,6 +50,42 @@ button[name="ChooseBtn"] {
     color: #ffffff;
     text-align: center;
     font-weight: bold;
+}
+
+/* Скрыть стандартный input[type="file"] */
+input[type="file"] {
+  display: none;
+}
+
+/* Стилизация для контейнера */
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Стилизация для текста над кнопкой */
+.custom-file-upload-text {
+  margin-right: 5px;
+}
+
+/* Изменение стилей при наведении */
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+
+#settingsForm {
+  display: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  margin-top: 10px;
 }
 
 
@@ -139,12 +161,12 @@ button[name="ChooseBtn"] {
 } 
 
 .container2 {
-  min-height: 900px;
+  height: auto;
 }
 
 .container2 img {
   text-align: center;
-  margin-top: 10%;
+  margin-top: 12%;
   margin-left: 10%;
   height: auto;
   display: block;
@@ -183,3 +205,6 @@ button[name="ChooseBtn"] {
   margin-top: 10px; /* Настройте отступ сверху, как вам нужно */
 }
 
+.hidden-container {
+  height: 20%;
+}
