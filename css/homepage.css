@@ -19,6 +19,16 @@ body {
     color: #fff;
     padding: 0;
   }
+
+  .main-wrapper {
+    background-color: hsl(0, 0%, 94%); /* Цвет заднего фона */
+    font-family: Arial, sans-serif; /* Шрифт */
+    width: 90%; /* Максимальная ширина контейнера */
+    margin: auto; /* Центрирование контейнера */
+    padding: 20px; /* Внутренний отступ контейнера */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+    border-radius: 10px; /* Закругление углов контейнера */
+  }
   
   .navbar-brand {
     font-size: 2rem;

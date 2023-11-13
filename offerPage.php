@@ -184,15 +184,18 @@ window.addEventListener('beforeunload', function() {
                           <button class="btn" type="submit">Add</button>
                       </form>
 
-                      <!-- Ссылки для удаления цветов -->
-                      <?php foreach ($selectedOfferColors as $color) { ?>
-                      <br>
-                      <div class="color-option">          
-                          <?php echo ucfirst($color['color']); ?>
-                          <!-- Отображаем кнопку "-" для удаления цвета -->
-                          <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>">Delete color</a>
+                      <div class="color-options-container">
+                        <!-- Ссылки для удаления цветов -->
+                        <?php foreach ($selectedOfferColors as $color) { ?>
+                          <br>
+                          <div class="color-item">
+                            <div class="color-info">
+                              <?php echo ucfirst($color['color']); ?>
+                            </div>
+                            <a href="delete_color.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $color['color']; ?>" class="btn btn-danger" role="button" style="width: ;">Delete color</a>
+                          </div>
+                        <?php } ?>
                       </div>
-                  <?php } ?>
                   <br>
             <br>
           </div>               
