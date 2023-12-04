@@ -25,5 +25,8 @@ class SearchOption extends Database{
       $stmt->execute();
       $result = $stmt->fetchAll();
       return $result;
+
+      var_dump($result);
+      echo json_encode($result);
   }
 }

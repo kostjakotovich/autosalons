@@ -3,7 +3,7 @@
 /* Общие стили для страницы */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f568;
+    background-color: rgb(245, 245, 245);
     color: #333;
   }
   
@@ -21,7 +21,7 @@ body {
   }
 
   .main-wrapper {
-    background-color: hsl(0, 0%, 94%); /* Цвет заднего фона */
+    background-color: hsl(0, 0%, 100%); /* Цвет заднего фона */
     font-family: Arial, sans-serif; /* Шрифт */
     width: 90%; /* Максимальная ширина контейнера */
     margin: auto; /* Центрирование контейнера */
@@ -99,22 +99,105 @@ body {
     cursor: pointer;
   }
 
-  .filters {
-    margin-top: 0px;
-    margin-left: 10px;
-    width: 350px;
-    height: 40%;
-    float: left;
-    background-color: #ececec; /* цвет фона, который вы можете изменить */
-    border-radius: 25px; /* задаёт радиус закругления углов */
-    border: 2px solid #000000; /* задаёт толщину, цвет и тип границы */
-    padding: 10px; /* задаёт отступ внутри блока */
-  }
+  /* Обновленный стиль для блока фильтров */
+/* Стили для блока с фильтрами */
+.filters {
+  margin-top: -5%;
+  width: 550px;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+/* Стили для блока с полями поиска */
+.search-form {
+  width: calc(100% - 390px); /* 100% ширина минус ширина блока с фильтрами и отступа */
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Общие стили для полей ввода */
+.search-input,
+.brand-select {
+  width: calc(50% - 10px);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #fff;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+
+.brand-select {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+}
+
+/* Стили для кнопки поиска */
+.search-btn {
+  width: calc(50% - 10px);
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.search-btn {
+  width: calc(100% - 20px);
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+
+
+label {
+  font-weight: bold;
+}
+
+.price-range {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+
+.price-output {
+  margin-top: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
   
     
-    .form-group {
-    margin-bottom: 20px;
-    }
     
     #price {
     width: 90%;

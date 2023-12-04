@@ -45,13 +45,19 @@ if (!$currentPrice) {
    
   <link rel="stylesheet" href="css/cards.css">
   <link rel="stylesheet" href="css/homepage.css">
+
+  
 </head>
 <body>
 <script src="../autosalons/js/script.js" defer></script>
 
 <div style="position: relative; max-width: 100%; margin-top: 0%;">
   <img src="img/banner/car_Photo_x4_mainpage.jpg" alt="Homepage banner" style="max-width: 100%;">
-  <a href='#container2' style="position: absolute; top: 20px; right: 20px; color: white; font-size: 24px; text-decoration: none; background: rgba(0, 0, 0, 0.5); padding: 10px;">Try it now</a>
+  <a href='#container2' style="position: absolute; top: 20px; right: 20px; color: white; font-size: 24px; text-decoration: none; background: rgba(0, 0, 0, 0.5); padding: 10px;  background-color: #000;
+  color: #fff;
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 5px;">Try it now</a>
 
 </div>
 
@@ -92,6 +98,8 @@ if (!$currentPrice) {
       <button type="submit" name="searchBtn" style="margin-left: 10px;">Search</button>
 
     </div>
+
+    
 
     <div class="filters">
       <!-- Фильтр по цене и бренду -->
