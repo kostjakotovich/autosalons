@@ -57,8 +57,6 @@ if (isset($_POST['delete'])) {
     exit;
 }
 
-
-
 ?>
 
 <html>

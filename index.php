@@ -59,7 +59,7 @@ if (!$currentPrice) {
   padding: 10px 20px;
   border-radius: 5px;">Try it now</a>
 
-</div>
+</div>  
 
 <div>
     <?php 

@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 100%;
     margin-top: 1rem;
   }
   
@@ -18,7 +19,8 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     margin-bottom: 1rem;
     padding: 1rem;
-    width: 20%;
+    width: 100%;
+    max-width: 500px;
     word-wrap: break-word;
     height: auto;
   }
@@ -93,8 +95,6 @@ body {
     background-color: #0062cc;
     }
     
-
-    
     .comments {
     display: flex;
     flex-direction: column;
@@ -109,7 +109,6 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     padding: 1rem;
     margin-bottom: 1rem;
-    width: 100%;
     max-width: 500px;
     }
 
