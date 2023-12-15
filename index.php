@@ -20,12 +20,14 @@ $selectedBrand = $_GET['brand'] ?? '';
 
 // массив с иконками и производителями
 $carBrands = [  
-  'BMW',  
-  'Mercedes-Benz',  
-  'Tayota',
+  'Audi',
+  'BMW',
+  'Ferrari',
   'Hyundai',
-  'Tesla',
   'Lamborghini',
+  'Mercedes-Benz',
+  'Tayota',
+  'Tesla',
   'Volkswagen'
 ];
 

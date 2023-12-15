@@ -39,8 +39,7 @@ INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`, `color_price`)
 	(18, 65, 'cat', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6b6f746e617374756c652e706e67, NULL),
 	(20, 65, 'color price', NULL, 200),
 	(24, 65, 'ryan gosling', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6d617872657364656661756c74202831292e6a7067, 150),
-	(25, 65, 'yeat ', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f353030783530302e6a7067, 0),
-	(26, 65, 'color ye', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f646f6d696e6f6c696c2e6a7067, 0);
+	(25, 65, 'yeat ', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f353030783530302e6a7067, 0);
 
 -- Дамп структуры для таблица mariadb.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -51,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=296 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=297 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.comments: ~8 rows (приблизительно)
 DELETE FROM `comments`;
@@ -63,7 +62,8 @@ INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`) VALUES
 	(286, '', 48, '2023-05-03'),
 	(287, '', 48, '2023-05-03'),
 	(288, '', 48, '2023-05-03'),
-	(289, '', 48, '2023-05-03');
+	(289, '', 48, '2023-05-03'),
+	(296, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur velit est sapiente neque voluptatibus officia nostrum aut molestias modi deleniti, itaque, architecto autem tenetur cupiditate eveniet. Velit atque fugit quas.', 55, '2023-12-13');
 
 -- Дамп структуры для таблица mariadb.notifications
 CREATE TABLE IF NOT EXISTS `notifications` (
@@ -97,7 +97,7 @@ INSERT INTO `notifications` (`notification_id`, `userID`, `message`, `created_at
 	(42, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-17 14:39:02', 1),
 	(43, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-23 21:11:42', 1),
 	(44, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:39:35', 1),
-	(45, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:45:05', 0),
+	(45, 1, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-10-30 20:45:05', 1),
 	(46, 55, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab..', '2023-11-05 20:40:35', 1);
 
 -- Дамп структуры для таблица mariadb.offers
@@ -156,14 +156,8 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~4 rows (приблизительно)
+-- Дамп данных таблицы mariadb.order: ~0 rows (приблизительно)
 DELETE FROM `order`;
-INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`, `colorID`) VALUES
-	(147, '2023-10-03', 'Kostja', 'Kotovich', '234234', 'Done', 1, 65, 14),
-	(186, '2023-10-24', '5urty', 'tyu', '+371 654456546', 'Done', 1, 65, 14),
-	(187, '2023-10-30', 'Kostja', 'Kotovich', '55675675', 'Done', 1, 65, 26),
-	(188, '2023-10-30', 'fghfghfgh', 'fghfgh', '456456456', 'New', 1, 65, 24),
-	(189, '2023-11-05', 'sdffsd', 'fsdfs', '+371 2343234', 'New', 55, 65, 24);
 
 -- Дамп структуры для таблица mariadb.user
 CREATE TABLE IF NOT EXISTS `user` (

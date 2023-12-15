@@ -109,7 +109,7 @@ window.addEventListener('beforeunload', function() {
 <body>
 <div class="container2">
   
-  <img id="colorImage" src="<?php echo $selectedOfferColor['image']; ?>" style="float: left; width: 820px; height: 520px;">
+  <img id="colorImage" src="<?php echo $selectedOfferColor['image']; ?>" style="float: left; width: 960px; height: 520px;">
 
   <div class="card">
     <div class="card-body">
@@ -138,7 +138,7 @@ window.addEventListener('beforeunload', function() {
       <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
       <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
       <?php 
-          if (isset($_SESSION['success'])) {//sdesj bil kiril
+          if (isset($_SESSION['success'])) {
             if ($hasActiveOrders) {
                 ?>
                 <br>

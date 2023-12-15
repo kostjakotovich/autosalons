@@ -107,9 +107,9 @@ class Offer {
             $offerID = $this->conn->lastInsertId();
     
             // Затем добавляем информацию о цвете и URL изображения в таблицу car_colors
-            $sql = "INSERT INTO car_colors (offerID, color, image) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO car_colors (offerID, color, image, color_price) VALUES (?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$offerID, $data['color'], $imageFilePath]);
+            $stmt->execute([$offerID, $data['color'], $imageFilePath, $data['color_price']]);
     
             // Наконец, добавляем остальную информацию о предложении в таблицу offersinfo
             $sql = "INSERT INTO offersinfo (offersID, price, yearOfManufacture, weight) VALUES (?, ?, ?, ?)";
