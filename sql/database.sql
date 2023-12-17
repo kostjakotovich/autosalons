@@ -29,17 +29,20 @@ CREATE TABLE IF NOT EXISTS `car_colors` (
   PRIMARY KEY (`colorID`),
   KEY `offerID` (`offerID`),
   CONSTRAINT `car_colors_ibfk_1` FOREIGN KEY (`offerID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.car_colors: ~7 rows (приблизительно)
 DELETE FROM `car_colors`;
 INSERT INTO `car_colors` (`colorID`, `offerID`, `color`, `image`, `color_price`) VALUES
-	(13, 65, 'yellow', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4a756a757473752d4b616973656e2d536561736f6e2d322d476f6a6f2d76732d546f6a692d72656d617463682d696e2d7468652d6d616e67612d312e77656270, NULL),
-	(14, 65, 'white', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f616236373631366430303030623237333366353630363530633538333434343439386332313466302e6a7067, NULL),
-	(18, 65, 'cat', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6b6f746e617374756c652e706e67, NULL),
-	(20, 65, 'color price', NULL, 200),
-	(24, 65, 'ryan gosling', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6d617872657364656661756c74202831292e6a7067, 150),
-	(25, 65, 'yeat ', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f353030783530302e6a7067, 0);
+	(27, 66, 'Black', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f424d572d58352d504e472d5472616e73706172656e742d496d6167652e706e67, 0),
+	(28, 67, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f63353337333266372d616331382d343330632d396430322d6537363033356135396366622e77656270, 0),
+	(29, 68, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f616d672e706e67, 0),
+	(30, 70, 'Red', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f666572726172692e706e67, 200),
+	(31, 71, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f5465736c612d4d6f64656c2d582d504e472d49736f6c617465642d5069632e706e67, 0),
+	(32, 72, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f6c616d626f726768696e692e706e67, 0),
+	(34, 66, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f626d7778352e706e67, 250),
+	(35, 73, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f323031382d617564692d61362d7072656d69756d2d32302d746673692d33322d77686974652e706e67, 0),
+	(36, 73, 'Black', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f506f72746164612d417564692d41362e706e67, 150);
 
 -- Дамп структуры для таблица mariadb.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -106,15 +109,18 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.offers: ~3 rows (приблизительно)
 DELETE FROM `offers`;
 INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
-	(1, 'fgd', 'dfg'),
-	(55, 'simple model', 's1mle manuf.'),
-	(64, 'rtrfh', 'gfhfg'),
-	(65, 'YEAT', 'BMW');
+	(66, 'X5', 'BMW'),
+	(67, 'Model Y', 'Tesla'),
+	(68, 'AMG', 'Mercedes-Benz'),
+	(70, 'F430', 'Ferrari'),
+	(71, 'Model X', 'Tesla'),
+	(72, 'Aventador', 'Lamborghini'),
+	(73, 'A6', 'Audi');
 
 -- Дамп структуры для таблица mariadb.offersinfo
 CREATE TABLE IF NOT EXISTS `offersinfo` (
@@ -126,15 +132,18 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.offersinfo: ~2 rows (приблизительно)
 DELETE FROM `offersinfo`;
 INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`) VALUES
-	(1, NULL, NULL, NULL, 1),
-	(48, 232, '2023-09-10', 232, 55),
-	(49, 53434, '2023-09-11', 345, 64),
-	(50, 23112, '2023-10-09', 123, 65);
+	(51, 29000, '2017-02-16', 2000, 66),
+	(52, 30000, '2019-01-25', 2100, 67),
+	(53, 35000, '2018-06-12', 2300, 68),
+	(54, 45000, '2014-05-13', 1700, 70),
+	(55, 60000, '2023-12-15', 2000, 71),
+	(56, 100000, '2021-06-17', 1600, 72),
+	(57, 15000, '2018-06-06', 2000, 73);
 
 -- Дамп структуры для таблица mariadb.order
 CREATE TABLE IF NOT EXISTS `order` (

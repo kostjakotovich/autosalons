@@ -24,6 +24,8 @@ class UserRegistration extends UserMain {
                 array_push($errors, "Username is required");
             } elseif (strlen($this->username) > 20) {
                 array_push($errors, "Username should be up to 20 characters");
+            } elseif (strlen($this->username) < 3) {
+                array_push($errors, "Username should be at least 3 characters");
             }
 
             // Валидация email
@@ -40,6 +42,8 @@ class UserRegistration extends UserMain {
                 array_push($errors, "Password is required");
             } elseif (strlen($this->password) > 30) {
                 array_push($errors, "Password should be up to 30 characters");
+            } elseif (strlen($this->password) < 6) {
+                array_push($errors, "Password should be at least 6 characters");
             }
 
             if (empty($_POST['password_confirm'])) { array_push($errors, "Verify your password");}

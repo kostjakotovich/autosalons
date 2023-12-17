@@ -1,6 +1,6 @@
 <?php
 require_once 'connection.php';
-require_once 'user.php';
+require_once 'User.php';
 
 if (isset($_SESSION['success'])) {
     $userID = $_SESSION['userID']; // идентификатор пользователя

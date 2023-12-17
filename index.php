@@ -18,18 +18,7 @@ if(isset($_GET['searchBtn'])) {
 
 $selectedBrand = $_GET['brand'] ?? '';
 
-// массив с иконками и производителями
-$carBrands = [  
-  'Audi',
-  'BMW',
-  'Ferrari',
-  'Hyundai',
-  'Lamborghini',
-  'Mercedes-Benz',
-  'Tayota',
-  'Tesla',
-  'Volkswagen'
-];
+require_once 'includes/car_brands.php';
 
 $currentPrice = $_GET['price'] ?? '';
 if (!$currentPrice) {
