@@ -101,6 +101,13 @@ class UserMain {
         $stmt->bindParam(':notificationID', $notificationID, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function deleteAllNotifications() {
+        $sql = "DELETE FROM notifications WHERE userID = :userID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':userID', $this->userID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }    
     
       
 }

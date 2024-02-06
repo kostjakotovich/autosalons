@@ -6,10 +6,8 @@
         $user = new UserMain($userID);
         $user->deleteNotification($notificationID);
     
-        // Получаем предыдущий URL
         $previousURL = $_SERVER['HTTP_REFERER'];
     
-        // Перенаправляем пользователя обратно на предыдущий URL
         header("Location: $previousURL");
         exit();
     }

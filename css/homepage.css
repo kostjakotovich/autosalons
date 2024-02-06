@@ -2,132 +2,73 @@
 
 /* Общие стили для страницы */
 body {
-    font-family: Arial, sans-serif;
-    background-color: rgb(245, 245, 245);
-    color: #333;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  /* Шапка */
-  header {
-    background-color: #222;
-    color: #fff;
-    padding: 0;
-  }
-
-  .main-wrapper {
-    background-color: hsl(0, 0%, 100%); /* Цвет заднего фона */
-    font-family: Arial, sans-serif; /* Шрифт */
-    width: 90%; /* Максимальная ширина контейнера */
-    margin: auto; /* Центрирование контейнера */
-    padding: 20px; /* Внутренний отступ контейнера */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень контейнера */
-    border-radius: 10px; /* Закругление углов контейнера */
-  }
-  
-  .navbar-brand {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  .navbar-nav {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-item {
-    display: inline-block;
-  }
-  
-  .nav-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-  }
-  
-  /* Форма поиска */
-  
-  button[name="searchBtn"] {
-    width: auto;
-    padding: 0.375rem 0.75rem;
-    font-size: 0.9rem;
-  }
-  
-  .search-form {
-    margin: 2rem auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  
-  .search-form input[type="text"] {
-    width: 60%;
-    margin: auto;
-    text-align: center;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #fff;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-  }
-  
-  .search-form select {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .search-form input[type="submit"] {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  /* Обновленный стиль для блока фильтров */
-/* Стили для блока с фильтрами */
-.filters {
-  margin-top: -5%;
-  width: 550px;
-  background-color: #f5f5f5;
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: rgb(245, 245, 245);
+  color: #333;
 }
 
-/* Стили для блока с полями поиска */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Шапка */
+header {
+  background-color: #222;
+  color: #fff;
+  padding: 0;
+}
+
+.main-wrapper {
+  background-color: hsl(0, 0%, 100%); /* Цвет заднего фона */
+  font-family: Arial, sans-serif; /* Шрифт */
+  width: 90%; /* Максимальная ширина контейнера */
+  margin: auto; /* Центрирование контейнера */
+  padding: 20px; /* Внутренний отступ контейнера */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень контейнера */
+  border-radius: 10px; /* Закругление углов контейнера */
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+/* Форма поиска */
+
+button[name="searchBtn"] {
+  width: auto;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+}
+
 .search-form {
-  width: calc(100% - 390px); /* 100% ширина минус ширина блока с фильтрами и отступа */
-  margin: 2rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: center;
 }
 
-/* Общие стили для полей ввода */
-.search-input,
-.brand-select {
-  width: calc(50% - 10px);
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.search-input {
+.search-form input[type="text"] {
+  width: 60%;
+  margin: auto;
+  text-align: center;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -139,172 +80,221 @@ body {
   padding: 12px 20px 12px 40px;
 }
 
-.brand-select {
+.search-form select {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
   border: 2px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+}
+
+.search-form input[type="submit"] {
+  margin-top: 1rem;
   padding: 0.5rem 1rem;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Обновленный стиль для блока фильтров */
+/* Стили для блока с фильтрами */
+.filters {
+
+flex-wrap: wrap;
+margin-top: -5%;
+width: 550px;
+background-color: #f5f5f5;
+border-radius: 15px;
+border: 1px solid #ddd;
+padding: 20px;
+}
+
+.price-container {
+display: flex;
+text-align: center;
+width: 40px;
+height: 40px;
+font-size: 12px;
+margin-left:35%;
+}
+
+/* Стили для блока с полями поиска */
+.search-form {
+width: calc(100% - 390px); /* 100% ширина минус ширина блока с фильтрами и отступа */
+margin: 2rem 0;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+/* Общие стили для полей ввода */
+.search-input,
+.brand-select {
+width: calc(50% - 10px);
+padding: 10px;
+margin-bottom: 10px;
+}
+
+.search-input {
+box-sizing: border-box;
+border: 2px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
+background-color: #fff;
+background-image: url('searchicon.png');
+background-position: 10px 10px;
+background-repeat: no-repeat;
+padding: 12px 20px 12px 40px;
+}
+
+.brand-select {
+border: 2px solid #ccc;
+border-radius: 4px;
+font-size: 16px;
+padding: 0.5rem 1rem;
 }
 
 /* Стили для кнопки поиска */
 .search-btn {
-  width: calc(50% - 10px);
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+width: calc(50% - 10px);
+padding: 10px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
 }
 
 .search-btn:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
 
 
 .search-btn {
-  width: calc(100% - 20px);
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+width: calc(100% - 20px);
+padding: 10px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
 }
 
 .search-btn:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
 
 
 label {
-  font-weight: bold;
+font-weight: bold;
 }
 
-.price-range {
+  
+  #brand {
   width: 100%;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #ccc;
+  }
+
+/* Кнопка профиля */
+.profile-button {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.price-output {
-  margin-top: 5px;
-  font-weight: bold;
-  text-align: center;
+.filter{
+  float:right;
 }
-    
-    #price {
-    width: 90%;
-    }
-    
-    #price-output {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    }
-    
-    #brand {
-    width: 90%;
-    }
-  
-  /* Кнопка профиля */
-  .profile-button {
-    display: block;
-    margin: 2rem auto;
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
 
-  .filter{
-    float:right;
-  }
-  
 
-  #container2 {
-    min-height: 860px;
-  }
+#container2 {
+  min-height: 860px;
+}
 
-  .brand-icons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .brand-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 80px;
-    margin: 5px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .brand-icon img {
-    max-height: 60px;
-    max-width: 60px;
-  }
+.brand-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  .brand-icon:hover,
-.brand-icon:focus {
+.brand-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
   border: 2px solid #ccc;
   border-radius: 5px;
 }
-  
+
+.brand-icon img {
+  max-height: 60px;
+  max-width: 60px;
+}
+
+.brand-icon:hover,
+.brand-icon:focus {
+border: 2px solid #ccc;
+border-radius: 5px;
+}
+
 .brand-icon.active-icon img {
-  transform: scale(1.1); /* увеличение размера иконки на 10% */
-  filter: brightness(150%); /* увеличение яркости на 50% */
+transform: scale(1.1); /* увеличение размера иконки на 10% */
+filter: brightness(150%); /* увеличение яркости на 50% */
 }
 
 /* Slide design */
 .form-group {
-  width: 60%;
-  margin: 20px auto;
-  text-align: center;
+width: 60%;
+margin: 20px auto;
+text-align: center;
 }
 
 .form-control-range {
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #363636;
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
+width: 100%;
+height: 10px;
+border-radius: 5px;
+background-color: #363636;
+-webkit-appearance: none;
+appearance: none;
+outline: none;
 }
 
 .form-control-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #007bff;
-  cursor: pointer;
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background-color: #007bff;
+cursor: pointer;
 }
 
 .form-control-range::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #007bff;
-  cursor: pointer;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background-color: #007bff;
+cursor: pointer;
 }
 
 #price-output {
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
+margin-top: 10px;
+font-size: 16px;
+font-weight: bold;
+text-align: center;
 }
 

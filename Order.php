@@ -74,7 +74,7 @@ class Order {
             if ($stmt->execute()) {
                 $_SESSION['order_success'] = "Your order has been sent successfully.";
                 // Вставляем уведомление в таблицу
-                $notificationText = "Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href='profile.php'>here</a> in the 'My Orders' tab..";
+                $notificationText = "Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href='profile.php'>here</a> in the 'My Orders' tab.";
                 $insertNotification = $this->conn->prepare("INSERT INTO notifications (userID, message) VALUES (:userID, :message)");
                 $insertNotification->execute(array(':userID' => $_SESSION['userID'], ':message' => $notificationText));
 
