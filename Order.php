@@ -134,11 +134,12 @@ class Order {
 
     public function getOrderSum($userID) {
         $this->orderUserID = $userID;
-        $sql = "SELECT SUM(offInf.price) as totalPrice
+        $sql = "SELECT SUM(offInf.price) + SUM(CarCol.color_price) as totalPrice
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                INNER JOIN `car_colors` CarCol ON o.colorID = CarCol.colorID
                 WHERE o.orderUserID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$this->orderUserID]);

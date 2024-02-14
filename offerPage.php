@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('beforeunload', function() {
-    // Очищаем параметр цвета из сессии
     <?php unset($_SESSION['selectedColor']); ?>
 });
 
