@@ -5,7 +5,6 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if (isset($_POST['export']) && $_POST['export'] === 'true') {
-    // Получите переданные данные о заказах и десериализуйте их
     if (isset($_POST['orders_data'])) {
         $orders = unserialize($_POST['orders_data']);
     } else {

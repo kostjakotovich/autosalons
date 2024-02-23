@@ -125,8 +125,67 @@ class Offer {
         }
     }
     
+    public function updateOfferInformation($offerID, $type, $manufacturer, $color, $color_price, $price, $weight, $yearOfManufacture, $imageFilePath) {
+        // Создаем пустой массив для хранения значений для SET части запроса
+        $setValues = [];
     
+        // Создаем пустой массив для хранения значений для параметров запроса
+        $params = [];
     
+        // Добавляем значения для SET части запроса и их параметры в массивы, если они были переданы
+        if (!empty($type)) {
+            $setValues[] = 'offers.type = ?';
+            $params[] = $type;
+        }
+        if (!empty($manufacturer)) {
+            $setValues[] = 'offers.manufacturer = ?';
+            $params[] = $manufacturer;
+        }
+        if (!empty($color)) {
+            $setValues[] = 'car_colors.color = ?';
+            $params[] = $color;
+        }
+        if (!empty($color_price)) {
+            $setValues[] = 'car_colors.color_price = ?';
+            $params[] = $color_price;
+        }
+        if (!empty($price)) {
+            $setValues[] = 'offersinfo.price = ?';
+            $params[] = $price;
+        }
+        if (!empty($weight)) {
+            $setValues[] = 'offersinfo.weight = ?';
+            $params[] = $weight;
+        }
+        if (!empty($yearOfManufacture)) {
+            $setValues[] = 'offersinfo.yearOfManufacture = ?';
+            $params[] = $yearOfManufacture;
+        }
+        if (!empty($imageFilePath)) {
+            $setValues[] = 'car_colors.image = ?';
+            $params[] = $imageFilePath;
+        }
+    
+        // Формируем SET часть запроса
+        $setPart = implode(', ', $setValues);
+    
+        // Добавляем в параметры ID предложения для условия WHERE
+        $params[] = $offerID;
+    
+        // Формируем SQL-запрос
+        $sql = "UPDATE offers 
+                INNER JOIN offersinfo ON offers.offerID = offersinfo.offersID 
+                INNER JOIN car_colors ON offers.offerID = car_colors.offerID 
+                SET $setPart
+                WHERE offers.offerID = ?";
+    
+        // Подготавливаем и выполняем запрос
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+    
+        // Возвращаем результат выполнения запроса
+        return $stmt->rowCount() > 0;
+    }
     
     
 }
