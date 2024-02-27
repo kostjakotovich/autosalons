@@ -37,3 +37,8 @@ function RedToInfo() {
     window.location.href="../autosalons/infoPage.php";  
 
 }
+
+function RedToContacts() {
+    window.location.href="../autosalons/contacts.php";  
+
+}

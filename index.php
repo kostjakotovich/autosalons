@@ -113,12 +113,22 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
               </select>
           </div>
 
-          
-
           <div class="form-group">
             <label for="color"><strong>Color:</strong></label>
             <select name="color" class="form-control" id="color">
                 <option value="">All Colors</option>
+                <?php foreach ($carColors as $color) { ?>
+                    <option value="<?php echo $color ?>" <?php echo $color == $selectedColor ? 'selected' : '' ?>>
+                        <?php echo $color ?>
+                    </option>
+                <?php } print_r($_GET) ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="color"><strong>Body type:</strong></label>
+            <select name="color" class="form-control" id="color">
+                <option value="">All types</option>
                 <?php foreach ($carColors as $color) { ?>
                     <option value="<?php echo $color ?>" <?php echo $color == $selectedColor ? 'selected' : '' ?>>
                         <?php echo $color ?>

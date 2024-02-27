@@ -80,7 +80,7 @@ if (isset($_POST['submit_order'])) {
 <head>
   <?php require 'header.php'; ?>
 
-  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
   <script src="../autosalons/js/script.js" defer></script>
   <script src="../autosalons/js/form-popup.js" defer></script>
   <link rel="stylesheet" href="css/offerPage.css">
@@ -162,12 +162,29 @@ window.addEventListener('beforeunload', function() {
           <?php if ($_SESSION['roleID'] == 1): ?>
             <button id="settingsButton" class="btn" onclick="toggleSettings()">Settings</button>
             <div id="settingsForm">
+                      <!-- Форма для редактирование информации -->
+                      <form method="post" action="edit_information.php" enctype="multipart/form-data">
+                          <p for="newColor" class="card-text" style="text-align: center; margin-top: 20px; margin-bottom: 20px;"><strong>Edit Information:</strong></p>
+                          <input type="text" id="type" name="type" placeholder="Model"><br><br>
+                          <input type="text" id="manufacturer" name="manufacturer" placeholder="Manufacturer"><br><br>
+                          <input type="text" id="color" name="color" placeholder="Color Name"><br><br>
+                          <input type="text" id="color_price" name="color_price" placeholder="Color Price"><br><br>
+                          <input type="text" id="price" name="price" placeholder="Car Price" pattern="[0-9\.]+"><br><br>
+                          <input type="text" id="weight" name="weight" placeholder="Weight" pattern="[0-9\.]+"><br><br>
+                          <input type="date" id="yearOfManufacture" name="yearOfManufacture" placeholder="Year of Manufacture"><br><br>
+                          <!-- поле для загрузки изображения -->                        
+                          <label class="custom-file-upload">
+                            <span class="custom-file-upload-text">Choose File</span>
+                            <input type="file" id="car_image" name="car_image" accept="image/*" data-file-name="No file chosen">
+                          </label>
 
-                <br>
+                          <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
+                          <button class="btn" type="submit">Save changes</button>
+                      </form>
 
                       <!-- Форма для добавления новых цветов -->
                       <form method="post" action="process_color.php" enctype="multipart/form-data">
-                          <!-- <p for="newColor" class="card-text">Add New Color:</p> -->             
+                          <p for="newColor" class="card-text" style="text-align: center; margin-top: 20px; margin-bottom: 20px;"><strong>Add New Color:</strong></p>      
                           <input type="text" id="newColor" name="newColor" placeholder="Color Name" required>
                           <br><br>
                           <!-- <label for="colorPrice" class="card-text"></label> -->
@@ -182,7 +199,6 @@ window.addEventListener('beforeunload', function() {
                           <input type="hidden" name="offerID" value="<?php echo $selectedOffer['offerID']; ?>">
                           <button class="btn" type="submit">Add</button>
                       </form>
-
                       <div class="color-options-container">
                         <!-- Ссылки для удаления цветов -->
                         <?php foreach ($selectedOfferColors as $color) { ?>
@@ -196,6 +212,7 @@ window.addEventListener('beforeunload', function() {
                         <?php } ?>
                       </div>
                   <br>
+                  <div><button class="btn btn-danger">Delete offer</button></div>
             <br>
           </div>               
           <?php endif; ?>

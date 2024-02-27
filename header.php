@@ -70,7 +70,8 @@ function editNotificationIcon() {
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-right mb-md-0" style="position: absolute; right: 0;">
         <li><a href='#' class="nav-link px-3 link-secondary" onClick='RedToHomepage()'>Homepage</a></li>
         <li><a href='#about-us' class="nav-link px-2 link-dark">About Us</a></li>
-        <li class="spacer"></li> <!-- Вставляем пустой элемент -->
+        <li><a href='#' class="nav-link px-3 link-secondary" onClick='RedToContacts()'>Contacts</a></li>
+        <li class="spacer"></li>
 
         <!-- Для переадресации на страницу со всеми заказами -->
         <script>
@@ -90,7 +91,6 @@ function editNotificationIcon() {
         if (isset($_SESSION['success'])) { ?>
             <li>
                 <?php
-                // Отобразите иконку "bell.png" и добавьте JavaScript-обработчик на нее
                 echo '<img src="img/icon/bell.png" alt="Notifications" id="notification-bell" data-bs-toggle="modal" data-bs-target="#notificationModal" class="mr-4" style="cursor: pointer; width: 30px;height: 30px;margin:auto;margin-top: 3px;" onclick="editNotificationIcon()">';
                 ?>
             </li>
