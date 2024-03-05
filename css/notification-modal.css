@@ -75,3 +75,22 @@
   align-items: center;
 }
 
+.clear-button {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  padding: 10px 20px; /* Увеличьте отступы для более равномерного распределения */
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin: 10px 5px -10px; /* Добавьте небольшие отступы сверху и снизу */
+}
+
+.clear-button:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+

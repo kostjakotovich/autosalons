@@ -76,4 +76,41 @@ class Comment {
 
         return $comments;
     }
+
+    public function addReply($comment, $userID, $parentCommentID) {
+        date_default_timezone_set('Europe/Riga');
+        $date = date("Y-m-d H:i:s");
+    
+        $sql = "INSERT INTO comments (comment, userID, date, parent_comment_id) VALUES (:comment, :userID, :date, :parentCommentID)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':comment', $comment);
+        $stmt->bindParam(':userID', $userID);
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':parentCommentID', $parentCommentID);
+        $stmt->execute();
+    }
+    
+    public function getRepliesForComment($parentCommentID) {
+        $sql = "SELECT * FROM comments WHERE parent_comment_id = :parentCommentID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':parentCommentID', $parentCommentID, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $replies = array();
+    
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $reply = array(
+                'commentID' => $row['commentID'],
+                'userID' => $row['userID'],
+                'username' => $row['username'], // Если у вас есть поле username в таблице комментариев
+                'comment' => $row['comment'],
+                'date' => $row['date']
+            );
+    
+            $replies[] = $reply;
+        }
+    
+        return $replies;
+    }
+    
 }

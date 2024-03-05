@@ -3,7 +3,7 @@ require_once 'connection.php';
 
 class SearchOption extends Database
 {
-    public function searchOffers($search, $selectedBrand, $selectedColor, $currentMinPrice, $currentMaxPrice)
+    public function searchOffers($search, $selectedBrand, $selectedType, $selectedColor, $currentMinPrice, $currentMaxPrice)
     {
         $query = "SELECT * 
                 FROM offers 
@@ -15,9 +15,13 @@ class SearchOption extends Database
             $query .= " AND offers.manufacturer=:selectedBrand";
         }
 
+        if (!empty($selectedType)) {
+            $query .= " AND offersinfo.body_type=:selectedType";
+        }
+
         if (!empty($selectedColor)) {
           $query .= " AND car_colors.color=:selectedColor";
-      }
+        }
 
         if (!empty($currentMinPrice)) {
             $query .= " AND (offersinfo.price + car_colors.color_price) >= :currentMinPrice";
@@ -32,7 +36,11 @@ class SearchOption extends Database
 
         if (!empty($selectedBrand)) {
           $stmt->bindValue(':selectedBrand', $selectedBrand, PDO::PARAM_STR);
-      }
+        }
+
+        if (!empty($selectedType)) {
+            $stmt->bindValue(':selectedType', $selectedType, PDO::PARAM_STR);
+        }
 
         if (!empty($selectedColor)) {
             $stmt->bindValue(':selectedColor', $selectedColor, PDO::PARAM_STR);

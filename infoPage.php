@@ -39,9 +39,6 @@ require_once 'connection.php';
                 <p><strong>E-mail:</strong> info@yoursalon.com</p>
             </div>
         </div>
-        <div class="map-container" style="width: 50%; margin: 0 auto; margin-top: 5%;">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d543.9373888905965!2d24.1044798!3d56.953092!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2slv!4v1707247168370!5m2!1sru!2slv" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
 
     </div>
     <script>

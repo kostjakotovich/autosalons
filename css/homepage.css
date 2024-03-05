@@ -13,13 +13,6 @@ body {
   padding: 0 20px;
 }
 
-/* Шапка */
-header {
-  background-color: #222;
-  color: #fff;
-  padding: 0;
-}
-
 .main-wrapper {
   background-color: hsl(0, 0%, 100%); /* Цвет заднего фона */
   font-family: Arial, sans-serif; /* Шрифт */
@@ -45,10 +38,11 @@ header {
   display: inline-block;
 }
 
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
+.divider {
+  width: 100%; /* Ширина полоски */
+  height: 2px; /* Высота полоски */
+  background-color: #ccc; /* Цвет полоски */
+  margin: 20px 0; /* Отступы сверху и снизу */
 }
 
 /* Форма поиска */
@@ -221,6 +215,23 @@ font-weight: bold;
   min-height: 860px;
 }
 
+.card-text {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.card-text.year {
+    font-style: italic;
+}
+
+.card-text.price {
+    font-weight: bold;
+    color: green;
+}
+
+
 .brand-icons {
   display: flex;
   flex-wrap: wrap;
@@ -298,3 +309,17 @@ font-weight: bold;
 text-align: center;
 }
 
+/* Стили для надписи "Sorry, but we couldn't find anything." */
+.no-results {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.no-results p {
+  font-size: 18px;
+  color: #555;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

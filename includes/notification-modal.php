@@ -28,7 +28,7 @@
             </div>
             <form method="post" action="includes/delete-all-notifications.php" style="text-align: right; <?php echo $notifications ? '' : 'display: none;'; ?>">
                 <input type="hidden" name="userID" value="<?php echo $userID; ?>">
-                <button type="submit" style="border: 2px solid #000; background-color: #fff; color: #000; padding: 5px 10px; cursor: pointer;">Clear all</button>
+                <button type="submit" class="clear-button">Clear all</button>
             </form>
             <div class="modal-body simplebar">
                 <!-- Здесь будет содержимое модального окна с уведомлениями -->

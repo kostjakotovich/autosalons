@@ -13,7 +13,6 @@ if (isset($_SESSION['success'])) {
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="css/headers.css">
     <script src="../autosalons/js/script.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -55,12 +54,10 @@ function editNotificationIcon() {
 
 </script>
 
-
-
 </head>
 
 <body>
-    <header class="p-3 mb-3 border-bottom">
+    <header class="p-3">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-right justify-content-lg-start">
         <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">

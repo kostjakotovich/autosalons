@@ -13,17 +13,20 @@ if (isset($_GET['searchBtn'])) {
     $search = $_GET['search'];
     $selectedBrand = $_GET['brand'] ?? '';
     $selectedTransmission = $_GET['selectedTransmission'] ?? '';
+    $selectedType = $_GET['type'] ?? '';
     $selectedColor = $_GET['color'] ?? '';
     $currentMinPrice = $_GET['minPrice'] ?? 0;
     $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
-    $offers = $searchOption->searchOffers($search, $selectedBrand, $selectedColor, $currentMinPrice, $currentMaxPrice);
+    $offers = $searchOption->searchOffers($search, $selectedBrand, $selectedType, $selectedColor, $currentMinPrice, $currentMaxPrice);
 }
 
 $selectedTransmission = $_GET['selectedTransmission'] ?? '';
+$selectedType = $_GET['type'] ?? '';
 $selectedBrand = $_GET['brand'] ?? '';
 $selectedColor = $_GET['color'] ?? '';
 
+require_once 'includes/car_body_types.php';
 require_once 'includes/car_colors.php';
 require_once 'includes/car_brands.php';
 
@@ -40,10 +43,9 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/homepage.css">
+    <script src="../autosalons/js/script.js" defer></script>
 </head>
 <body>
-<script src="../autosalons/js/script.js" defer></script>
-
 <div style="position: relative; max-width: 100%; margin-top: 0%;">
     <img src="img/banner/car_Photo_x4_mainpage.jpg" alt="Homepage banner" style="max-width: 100%;">
     <a href='#container2' style="position: absolute; top: 20px; right: 20px; color: white; font-size: 24px; text-decoration: none; background: rgba(0, 0, 0, 0.5); padding: 10px;  background-color: #000;
@@ -113,6 +115,59 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
               </select>
           </div>
 
+          <div class="form-group" id="model-group" style="display:none;">
+            <label for="model"><strong>Model:</strong></label>
+            <select name="model" class="form-control" id="model" disabled>
+                <option value="">Select Brand First</option>
+                <!-- Опции для моделей будут добавлены динамически с помощью JavaScript -->
+            </select>
+          </div>
+
+          <?php
+            // Массив с моделями для каждой марки автомобиля
+            $modelsByBrand = array(
+                "Audi" => array("A3", "A4", "A6"),
+                "BMW" => array("3 Series", "5 Series", "7 Series"),
+                // Добавьте другие марки и модели здесь
+            );
+            ?>
+
+
+          <script>
+            // Ассоциативный массив с моделями для каждой марки автомобиля
+            var modelsByBrand = <?php echo json_encode($modelsByBrand); ?>;
+
+            document.getElementById('brand').addEventListener('change', function() {
+                var selectedBrand = this.value;
+                var modelSelect = document.getElementById('model');
+                var modelGroup = document.getElementById('model-group');
+
+                // Очистить предыдущие опции моделей
+                modelSelect.innerHTML = '<option value="">Select Brand First</option>';
+
+                if (selectedBrand) {
+                    // Отобразить список моделей для выбранной марки
+                    if (modelsByBrand[selectedBrand]) {
+                        modelsByBrand[selectedBrand].forEach(function(model) {
+                            var option = document.createElement('option');
+                            option.value = model;
+                            option.textContent = model;
+                            modelSelect.appendChild(option);
+                        });
+                    }
+                    // Показать поле для выбора модели
+                    modelGroup.style.display = 'block';
+                    // Сделать поле доступным для выбора
+                    modelSelect.disabled = false;
+                } else {
+                    // Скрыть поле для выбора модели и сделать его недоступным
+                    modelGroup.style.display = 'none';
+                    modelSelect.disabled = true;
+                }
+            });
+          </script>
+
+
           <div class="form-group">
             <label for="color"><strong>Color:</strong></label>
             <select name="color" class="form-control" id="color">
@@ -126,12 +181,12 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
           </div>
 
           <div class="form-group">
-            <label for="color"><strong>Body type:</strong></label>
-            <select name="color" class="form-control" id="color">
+            <label for="type"><strong>Body type:</strong></label>
+            <select name="type" class="form-control" id="type">
                 <option value="">All types</option>
-                <?php foreach ($carColors as $color) { ?>
-                    <option value="<?php echo $color ?>" <?php echo $color == $selectedColor ? 'selected' : '' ?>>
-                        <?php echo $color ?>
+                <?php foreach ($carBodyTypes as $type) { ?>
+                    <option value="<?php echo $type ?>" <?php echo $type == $selectedType ? 'selected' : '' ?>>
+                        <?php echo $type ?>
                     </option>
                 <?php } print_r($_GET) ?>
             </select>
@@ -141,21 +196,30 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
     </form>
 
+    <div class="divider"></div>
+
     <div id="container2">
-        <div class="card-wrapper">
-            <?php foreach ($offers as $selectedOffer) { ?>
-                <div class="card-wrapper">
+        <?php if (count($offers) === 0) { ?>
+            <div class="no-results">
+                <p>Sorry, but we couldn't find anything.</p>
+            </div>
+        <?php } else { ?>
+            <div class="card-wrapper">
+                <?php foreach ($offers as $selectedOffer) { ?>
                     <div class="card">
                         <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+                            <p class="card-text">Year: <?php echo date('Y', strtotime($selectedOffer['yearOfManufacture'])); ?></p>
+                            <p class="card-text">Price: $<?php echo ($selectedOffer['price']+$selectedOffer['color_price']); ?></p>
                             <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $selectedOffer['color']; ?>"
-                               class="btn btn-primary">View</a>
+                                class="btn btn-primary">View</a>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
-        </div>
+
+                <?php } ?>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
