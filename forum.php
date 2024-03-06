@@ -111,7 +111,7 @@ if (isset($_POST['reply'])) {
                             <input type="hidden" name="parentCommentID" value="<?php echo $comment['commentID']; ?>">
                             <label for="reply_<?php echo $comment['commentID']; ?>">Your reply:</label><br>
                             <textarea name="reply" id="reply_<?php echo $comment['commentID']; ?>" cols="30" rows="3" maxlength="250" required></textarea><br>
-                            <input type="submit" value="Send reply">
+                            <input class="send_reply_button" type="submit" value="Send reply">
                         </form>
                     </div>
 
@@ -132,10 +132,10 @@ if (isset($_POST['reply'])) {
                                     <h4 class="reply-date">Posted on <?php echo date('F j, Y', strtotime($reply['date'])); ?></h4>
                                     <div class="button-group">
                                         <button class="reply-btn">Reply</button>
-                                        <?php if (isset($_SESSION['userID']) && ($_SESSION['roleID'] == 0 && $_SESSION['userID'] == $comment['userID']) || $_SESSION['roleID'] == 1) { ?>
+                                        <?php if (isset($_SESSION['userID']) && ($_SESSION['roleID'] == 0 && $_SESSION['userID'] == $reply['userID']) || $_SESSION['roleID'] == 1) { ?>
                                             <div class="card2">
                                                 <form method="post">
-                                                    <input type="hidden" name="commentID" value="<?php echo $comment['commentID']; ?>">
+                                                    <input type="hidden" name="commentID" value="<?php echo $reply['commentID']; ?>">
                                                     <input type="submit" value="Delete" name="delete">
                                                 </form>
                                             </div>
@@ -147,7 +147,7 @@ if (isset($_POST['reply'])) {
                                             <input type="hidden" name="parentCommentID" value="<?php echo $reply['commentID']; ?>"> 
                                             <label for="reply_<?php echo $comment['commentID']; ?>">Your reply:</label><br>
                                             <textarea name="reply" id="reply_<?php echo $comment['commentID']; ?>" cols="30" rows="3" maxlength="250" required></textarea><br>
-                                            <input type="submit" value="Send reply">
+                                            <input class="send_reply_button" type="submit" value="Send reply">
                                         </form>
                                     </div>
 

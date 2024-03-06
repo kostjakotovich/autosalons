@@ -229,4 +229,25 @@ body {
   margin: 0;
 }
  
-      
+.reply-form {
+  display: none;
+  width: 100%;
+}
+
+.reply-form textarea {
+  width: 100%;
+}
+
+.send_reply_button {
+  margin-top: 2%;
+  height: 5%;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+  margin-right: 68%; /* Расстояние между кнопками "Reply" и "Delete" */
+}
