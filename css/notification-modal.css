@@ -1,10 +1,8 @@
 /* notification-modal.css */
   
-
-/* Стилизация скроллбара */
 .modal-content {
-    min-height: 15vh; /* Устанавливаем максимальную высоту во вьюпорте (80% от высоты экрана) */
-    overflow-y: auto; /* Включаем вертикальную прокрутку при необходимости */
+    min-height: 15vh;
+    overflow-y: auto; 
   }
 
 /* notification-modal.css */
@@ -14,23 +12,22 @@
     align-items: flex-start;
   }
   
-  /* Настраиваем положение модального окна вверху экрана */
   .modal-dialog {
     margin: 0 auto;
-    
-    max-width: 500px; /* Устанавливаем максимальную ширину в пикселях */
+    max-width: 500px;
 }
   
 
 /* Стилизация уведомления */
 .notification {
-  position: relative; /* Устанавливаем относительное позиционирование для уведомления */
+  position: relative;
+  min-width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  align-items: center; /* Выравниваем содержимое по вертикали */
-  justify-content: space-between; /* Размещаем элементы по горизонтали справа */
+  align-items: center; 
+  justify-content: space-between; 
 }
 
 .delete-btn {
@@ -41,9 +38,9 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
-  position: absolute; /* Устанавливаем абсолютное позиционирование для кнопки удаления */
-  top: 5px; /* Располагаем кнопку удаления вверху */
-  right: 5px; /* Располагаем кнопку удаления справа */
+  position: absolute;
+  top: 5px; 
+  right: 5px;
 }
 
 /* Стили для пользовательской кнопки закрытия */
@@ -66,8 +63,8 @@
   height: 30px;
   text-align: center;
   line-height: 30px;
-  background-color: #ffffff; /* Цвет фона для значка "-" */
-  border-radius: 50%; /* Закругление углов для круглого фона */
+  background-color: #ffffff; 
+  border-radius: 50%; 
 }
 
 .notification-form {
@@ -79,12 +76,12 @@
   background-color: #fff;
   color: #000;
   border: 2px solid #000;
-  padding: 10px 20px; /* Увеличьте отступы для более равномерного распределения */
+  padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  margin: 10px 5px -10px; /* Добавьте небольшие отступы сверху и снизу */
+  margin: 10px 5px -10px;
 }
 
 .clear-button:hover {
