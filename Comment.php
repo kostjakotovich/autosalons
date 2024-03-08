@@ -87,7 +87,7 @@ class Comment {
         $stmt->execute();
     
         // Вставляем уведомление в таблицу
-        $notificationText = "You have received an answer from '$replyUsername'. Comment '$comment'.Check <a href='forum.php'>forum</a>.";
+        $notificationText = "You have received an answer from '$replyUsername'. Comment '$comment'. Check <a href='forum.php'>forum</a>.";
         $insertNotification = $this->conn->prepare("INSERT INTO notifications (userID, message) VALUES (:userID, :message)");
         $insertNotification->execute(array(':userID' => $originalCommentUserID, ':message' => $notificationText));
     }
@@ -98,6 +98,12 @@ class Comment {
     public function getRepliesForComment($parentCommentID) {
         $replies = array();
         $this->getRepliesRecursive($parentCommentID, $replies);
+        
+        // Сортировка массива $replies по дате
+        usort($replies, function($a, $b) {
+            return strtotime($a['date']) - strtotime($b['date']);
+        });
+        
         return $replies;
     }
 
@@ -107,12 +113,12 @@ class Comment {
                 FROM comments 
                 INNER JOIN user ON comments.userID = user.userID 
                 WHERE comments.parent_comment_id = :parentCommentID
-                ORDER BY comments.date ASC"; // Сортировка по дате в возрастающем порядке (новые внизу)
+                ORDER BY comments.date DESC"; // Изменение сортировки на убывающую дату
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':parentCommentID', $parentCommentID, PDO::PARAM_INT);
         $stmt->execute();
-    
+
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $reply = array(
                 'commentID' => $row['commentID'],
@@ -121,13 +127,15 @@ class Comment {
                 'comment' => $row['comment'],
                 'date' => $row['date']
             );
-    
+
             $replies[] = $reply;
-    
+
             // Рекурсивно вызываем эту функцию для поиска ответов на этот ответ
             $this->getRepliesRecursive($row['commentID'], $replies);
         }
     }
+
+
     
     
     // метод для получения имени пользователя оригинального комментария
