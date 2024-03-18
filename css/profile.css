@@ -162,7 +162,7 @@ select::-ms-expand {
   }
 
   .form-control {
-    width: 100%
+    width: 60%;
   }
 
   .form-container {
@@ -210,7 +210,7 @@ select::-ms-expand {
   }
 
   .change-password-btn {
-    width: 100%;
+    width: 60%;
   }
   
   .change-password-input {

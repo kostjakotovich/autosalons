@@ -5,10 +5,10 @@ require_once 'connection.php';
 
 <html>
 <head>
-    <?php require 'header.php'; ?>
     <link rel="stylesheet" href="css/infoPage.css">
 </head>
 <body>
+    <?php require 'header.php'; ?>
     <div class="box">
     <div class="info-container">
         <div class="info-header" onclick="toggleInfo('section1')">About Us</div>
@@ -37,6 +37,7 @@ require_once 'connection.php';
                 <br>
                 <p><strong>Phone:</strong> +371 123456789</p>
                 <p><strong>E-mail:</strong> info@yoursalon.com</p>
+                <h6>More information <a href='contacts.php'>here</a>.</h6>
             </div>
         </div>
 

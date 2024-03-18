@@ -29,6 +29,7 @@ $selectedColor = $_GET['color'] ?? '';
 require_once 'includes/car_body_types.php';
 require_once 'includes/car_colors.php';
 require_once 'includes/car_brands.php';
+require_once 'includes/car_models.php';
 
 $currentMinPrice = $_GET['minPrice'] ?? '';
 $currentMaxPrice = $_GET['maxPrice'] ?? '';
@@ -37,8 +38,6 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
 <html>
 <head>
-    <?php require 'header.php'; ?>
-    <!-- alert close JS -->
     <script src="js/order-success-close.js" defer></script>
 
     <link rel="stylesheet" href="css/cards.css">
@@ -46,6 +45,7 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
     <script src="../autosalons/js/script.js" defer></script>
 </head>
 <body>
+<?php require 'header.php'; ?>
 <div style="position: relative; max-width: 100%; margin-top: 0%;">
     <img src="img/banner/car_Photo_x4_mainpage.jpg" alt="Homepage banner" style="max-width: 100%;">
     <a href='#container2' style="position: absolute; top: 20px; right: 20px; color: white; font-size: 24px; text-decoration: none; background: rgba(0, 0, 0, 0.5); padding: 10px;  background-color: #000;
@@ -75,19 +75,7 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
     <form action="" method="get" style="text-align:center; margin-top: 3%;">
         <div style="display: flex; justify-content: center; text-align: center;">
 
-            <input type="text" placeholder="Search.." name="search" style="width: 40%;
-        margin-left: 2%;
-        text-align: center;
-        box-sizing: border-box;
-        border: 2px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        background-color: white;
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        padding: 12px 20px 12px 40px;
-        -webkit-transition: width 0.4s ease-in-out;
-        transition: width 0.4s ease-in-out;">
+            <input type="text" class="search_input" placeholder="Search.." name="search">
 
             <button type="submit" name="searchBtn" style="margin-left: 10px;">Search</button>
 
@@ -115,7 +103,7 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
               </select>
           </div>
 
-          <div class="form-group" id="model-group" style="display:none;">
+          <div class="form-group" id="model-group">
             <label for="model"><strong>Model:</strong></label>
             <select name="model" class="form-control" id="model" disabled>
                 <option value="">Select Brand First</option>
@@ -123,50 +111,79 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
             </select>
           </div>
 
-          <?php
-            // Массив с моделями для каждой марки автомобиля
-            $modelsByBrand = array(
-                "Audi" => array("A3", "A4", "A6"),
-                "BMW" => array("3 Series", "5 Series", "7 Series"),
-                // Добавьте другие марки и модели здесь
-            );
-            ?>
+<script>
+    // Ассоциативный массив с моделями для каждой марки автомобиля
+    var modelsByBrand = <?php echo json_encode($modelsByBrand); ?>;
 
+    document.getElementById('brand').addEventListener('change', function() {
+        var selectedBrand = this.value;
+        var modelSelect = document.getElementById('model');
+        var modelGroup = document.getElementById('model-group');
 
-          <script>
-            // Ассоциативный массив с моделями для каждой марки автомобиля
-            var modelsByBrand = <?php echo json_encode($modelsByBrand); ?>;
+        // Очистить предыдущие опции моделей
+        modelSelect.innerHTML = '';
 
-            document.getElementById('brand').addEventListener('change', function() {
-                var selectedBrand = this.value;
-                var modelSelect = document.getElementById('model');
-                var modelGroup = document.getElementById('model-group');
+        if (selectedBrand) {
+            // Отобразить список моделей для выбранной марки
+            if (modelsByBrand[selectedBrand]) {
+                modelsByBrand[selectedBrand].forEach(function(model) {
+                    var option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+            // Активировать поле для выбора модели
+            modelSelect.disabled = false;
+            
+            // Установить надпись в зависимости от состояния выбранной марки
+            modelSelect.querySelector('option').textContent = 'All models';
+        } else {
+            // Сделать поле недоступным для выбора, если марка не выбрана, и установить соответствующий текст
+            modelSelect.disabled = true;
+            modelSelect.innerHTML = '<option value="">Select Brand First</option>';
+        }
+    });
 
-                // Очистить предыдущие опции моделей
-                modelSelect.innerHTML = '<option value="">Select Brand First</option>';
+    // Проверить, есть ли в URL-адресе параметр модели при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var selectedBrand = urlParams.get('brand');
+        var selectedModel = urlParams.get('model');
+        var modelSelect = document.getElementById('model');
 
-                if (selectedBrand) {
-                    // Отобразить список моделей для выбранной марки
-                    if (modelsByBrand[selectedBrand]) {
-                        modelsByBrand[selectedBrand].forEach(function(model) {
-                            var option = document.createElement('option');
-                            option.value = model;
-                            option.textContent = model;
-                            modelSelect.appendChild(option);
-                        });
-                    }
-                    // Показать поле для выбора модели
-                    modelGroup.style.display = 'block';
-                    // Сделать поле доступным для выбора
-                    modelSelect.disabled = false;
-                } else {
-                    // Скрыть поле для выбора модели и сделать его недоступным
-                    modelGroup.style.display = 'none';
-                    modelSelect.disabled = true;
-                }
-            });
-          </script>
+        // Очистить предыдущие опции моделей и установить начальный текст
+        modelSelect.innerHTML = '<option value="">Select Brand First</option>';
 
+        if (selectedBrand) {
+            // Отобразить список моделей для выбранной марки
+            if (modelsByBrand[selectedBrand]) {
+                modelsByBrand[selectedBrand].forEach(function(model) {
+                    var option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+            // Активировать поле для выбора модели и установить соответствующий текст
+            modelSelect.disabled = false;
+            modelSelect.querySelector('option').textContent = 'All models';
+
+            // Если модель была сохранена в URL-адресе и есть такая модель для выбранной марки, установить ее выбранным значением
+            if (selectedModel && modelsByBrand[selectedBrand] && modelsByBrand[selectedBrand].includes(selectedModel)) {
+                modelSelect.value = selectedModel;
+            } else {
+                // Если модель не была сохранена в URL-адресе, установить "Select Brand First"
+                modelSelect.value = '';
+            }
+        } else {
+            // Сделать поле недоступным для выбора, если марка не выбрана, и установить соответствующий текст
+            modelSelect.disabled = true;
+            modelSelect.querySelector('option').textContent = 'Select Brand First';
+        }
+    });
+
+</script>
 
           <div class="form-group">
             <label for="color"><strong>Color:</strong></label>

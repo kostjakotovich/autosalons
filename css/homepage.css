@@ -53,25 +53,43 @@ button[name="searchBtn"] {
   font-size: 0.9rem;
 }
 
+button[name="searchBtn"] {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+button[name="searchBtn"]:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
 .search-form {
   margin: 2rem auto;
   max-width: 600px;
   text-align: center;
 }
 
-.search-form input[type="text"] {
-  width: 60%;
-  margin: auto;
+.search_input {
+  width: 40%;
+  margin-left: 2%;
   text-align: center;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 2px solid #000;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #fff;
-  background-image: url('searchicon.png');
+  background-color: white;
   background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 
 .search-form select {

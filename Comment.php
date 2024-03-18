@@ -86,10 +86,21 @@ class Comment {
         $stmt->bindParam(':parentCommentID', $parentCommentID);
         $stmt->execute();
     
-        // Вставляем уведомление в таблицу
-        $notificationText = "You have received an answer from '$replyUsername'. Comment '$comment'. Check <a href='forum.php'>forum</a>.";
-        $insertNotification = $this->conn->prepare("INSERT INTO notifications (userID, message) VALUES (:userID, :message)");
-        $insertNotification->execute(array(':userID' => $originalCommentUserID, ':message' => $notificationText));
+        $maxMessageLength = 100; // Максимальная длина сообщения
+        if (strlen($comment) > $maxMessageLength) {
+            $truncatedMessage = substr($comment, 0, $maxMessageLength) . "...";
+            $notificationText = "You have received a reply from '$replyUsername' to your comment: '$truncatedMessage'. For the full message, visit the <a href='forum.php'>forum</a>.";
+
+        } else {
+            $notificationText = "You have received a reply from '$replyUsername' to your comment: '$comment'. Visit the <a href='forum.php'>forum</a> to view the response.";
+        }
+
+        $userMain = new UserMain($userID);
+            
+        $topicName = 'Forum';
+        $topicID = $userMain->getNotificationTopicIDByName($topicName);
+            
+        $userMain->addNotification($topicID, $notificationText);
     }
     
     
@@ -133,10 +144,7 @@ class Comment {
             // Рекурсивно вызываем эту функцию для поиска ответов на этот ответ
             $this->getRepliesRecursive($row['commentID'], $replies);
         }
-    }
-
-
-    
+    }  
     
     // метод для получения имени пользователя оригинального комментария
     public function getUsernameForOriginalComment($commentID) {

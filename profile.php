@@ -252,7 +252,6 @@ if (isset($_FILES["avatar"])) {
     <?php include 'includes/userOrdersTable.php'; ?>
     <?php 
         foreach($orders as $order){
-            // Вычисляем и отображаем общую стоимость
             $totalPrice = $order['price'] + $order['color_price'];
             echo "<tr>";
             echo "<td>".$order['orderID']."</td>";

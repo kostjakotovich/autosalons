@@ -97,16 +97,19 @@ class UserRegistration extends UserMain {
                     $userID = $user['userID'];
                     // Создайте экземпляр UserMain
                     $user = new UserMain($userID);
-                
+                    $user->addDefaultNotificationTopics();
+                    
                     // Обновите аватар пользователя, устанавливая URL дефолтной аватарки
                     $user->updatePicture($defaultAvatarURL);
 
-                    // Вставляем уведомление в таблицу
+                    // Получите идентификатор топика "Profile"
+                    $topicName = 'Profile';
+                    $topicID = $user->getNotificationTopicIDByName($topicName);
+                    
                     $notificationText = "You have successfully registered! If you need <a href='infoPage.php'>Help</a>, please visit the Help section.";
-                    $insertNotification = $this->conn->prepare("INSERT INTO Notifications (userID, message) VALUES (:userID, :message)");
-                    $insertNotification->execute(array(':userID' => $_SESSION['userID'], ':message' => $notificationText));
-
+                    $user->addNotification($topicID, $notificationText);
                 }
+
             
                 header('location: index.php');
             }

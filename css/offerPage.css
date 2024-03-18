@@ -14,22 +14,33 @@ main {
 .card {
     width: 500px;
     height: auto;
-    margin-right: 21.5%; /* Добавляем отступ слева */
+    margin-right: 21.5%;
     margin-top: 12%;
     float:right;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
     position: relative;
-    transition: all 0.3s ease; /* добавляем плавный переход */
+    transition: all 0.3s ease;
 }
 
 button[name="ChooseBtn"] {
-  width: auto;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  width: 100px;
+  height: 40px;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
+button[name="ChooseBtn"]:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
 
 .card-body {
     padding: 15px;
@@ -42,7 +53,7 @@ button[name="ChooseBtn"] {
 
 .btn2 {
     position: absolute;
-    bottom: 0px; /* чтобы кнопка была в самом низу карточки*/
+    bottom: 0px;
     left: 0;
     width: 100%;
     padding: 10px 0;
@@ -52,7 +63,6 @@ button[name="ChooseBtn"] {
     font-weight: bold;
 }
 
-/* Скрыть стандартный input[type="file"] */
 input[type="file"] {
   display: none;
 }
@@ -84,12 +94,10 @@ input[type="text"],
   color: #fff;
 }
 
-/* Стилизация для текста над кнопкой */
 .custom-file-upload-text {
   margin-right: 5px;
 }
 
-/* Изменение стилей при наведении */
 .custom-file-upload:hover {
   background-color: #0056b3;
 }
@@ -106,8 +114,6 @@ input[type="text"],
 
 
 /* Общие стили для страницы */
-
-  
   #overlay {
     position: fixed; 
     display: none; 
@@ -165,7 +171,7 @@ input[type="text"],
 
 .btn {
   position: relative;
-  bottom: 5px; /* задаем отрицательное значение для свойства bottom, чтобы кнопка "View" изначально была за пределами карточки */
+  bottom: 5px;
   left: 0;
   width: 100%;
   padding: 10px 0;
@@ -186,11 +192,6 @@ input[type="text"],
   margin-left: 10%;
   height: auto;
   display: block;
-}
-
-.color-option {
-  display: inline-block;
-  margin-right: 10px;
 }
 
 .color-options-container {
@@ -215,23 +216,19 @@ input[type="text"],
   margin-right: 10px;
 }
 
-/* Стилизация чекбокса */
-
-/* Увеличение размера чекбокса */
 .form-group2 label input[type="checkbox"] {
   transform: scale(1.5);
 }
 
-/* Изменение размера шрифта для текста */
 .form-group2 label {
   display: flex;
   align-items: center;
-  padding-left: 10px; /* Увеличьте значение по вашему усмотрению */
+  padding-left: 10px;
 }
 
 .form-group2 label span {
-  font-size: 1.2em; /* Увеличьте значение по вашему усмотрению */
-  color: red; /* Изменение цвета текста */
+  font-size: 1.2em;
+  color: red; 
 }
 
 .green-text {
@@ -239,10 +236,66 @@ input[type="text"],
 }
 
 .center-button {
-  text-align: center; /* Центрировать содержимое по горизонтали */
-  margin-top: 10px; /* Настройте отступ сверху, как вам нужно */
+  text-align: center;
+  margin-top: 10px;
 }
 
 .hidden-container {
   height: 20%;
+}
+
+.offer-divider {
+  margin-top: 3%;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.color-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.color-card-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.color-option {
+  margin-right: 16px;
+}
+
+.color-option input[type="radio"] {
+  display: none;
+}
+
+.color-option label {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.color-option input[type="radio"]:checked + label {
+  background-color: #f0f0f0;
+}
+
+.color-card-footer {
+  margin-top: 20px;
+  text-align: center;
 }

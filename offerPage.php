@@ -113,29 +113,33 @@ window.addEventListener('beforeunload', function() {
   <div class="card">
     <div class="card-body">
       <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
-      <br>
-      <br>
-      <h5>More information:</h5>
-      <br>
-
+      <div class="offer-divider"></div>
+      <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
+      <p class="card-text"><?php echo 'Body Type: ' . $selectedOfferInfo['body_type']; ?></p>
+      <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
+      <p class="card-text"><?php echo 'Price: ' . $carPriceDisplay; ?></p>
       <form method="get" action="offerPage.php">
-        <label>Choose a color:</label><br>
-        <?php foreach ($selectedOfferColors as $color) { ?>
-          <div class="color-option">
-            <input type="radio" name="color" value="<?php echo $color['color']; ?>">
-            <?php echo ucfirst($color['color']); ?>
+        <div class="color-card">
+          <div class="color-card-header">
+            <div class="header-content">
+              <h6>Choose a Color</h6>
+              <form method="get" action="offerPage.php">
+                  <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
+                  <input type="hidden" name="choose_color" value="Choose Color">
+                  <button type="submit" name="ChooseBtn">Choose</button>
+              </form>
+            </div>
           </div>
-        <?php } ?>
-        <div class="center-button">
-          <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
-          <input type="hidden" name="choose_color" value="Choose Color">
-          <button type="submit" name="ChooseBtn" style="">Choose color</button>
+          <div class="color-options">
+            <?php foreach ($selectedOfferColors as $color) { ?>
+                <div class="color-option">
+                    <input type="radio" id="<?php echo $color['color']; ?>" name="color" value="<?php echo $color['color']; ?>">
+                    <label for="<?php echo $color['color']; ?>"><?php echo ucfirst($color['color']) . ' - $' . $color['color_price']; ?></label>
+                </div>
+            <?php } ?>
+          </div>
         </div>
       </form>
-
-      <p class="card-text"><?php echo 'Price: ' . $carPriceDisplay; ?></p>
-      <p class="card-text"><?php echo 'Year Of Manufacture: ' . date('Y', strtotime($selectedOfferInfo['yearOfManufacture'])); ?></p>
-      <p class="card-text"><?php echo 'Weight: ' . $selectedOfferInfo['weight'] . ' kg'; ?></p>
       <?php 
           if (isset($_SESSION['success'])) {
             if ($hasActiveOrders) {
@@ -155,8 +159,6 @@ window.addEventListener('beforeunload', function() {
           }
               
       ?>
-    
-  
 
         <?php if(isset($_SESSION['roleID'])): ?>
           <?php if ($_SESSION['roleID'] == 1): ?>

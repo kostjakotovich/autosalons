@@ -38,13 +38,9 @@ class Order {
             }
         }
     }
-
-    
-    
     
     public function createOrder($name, $surname, $telephone, $offerID, $colorID) {
         if (strlen($name) > 20 || strlen($surname) > 20 || strlen($telephone) > 20) {
-            // Handle the error if the length of input is greater than 20 characters
             return false;
         }
         
@@ -72,16 +68,20 @@ class Order {
             $stmt->bindValue(':colorID', $colorID);
             
             if ($stmt->execute()) {
-                $_SESSION['order_success'] = "Your order has been sent successfully.";
-                // Вставляем уведомление в таблицу
-                $notificationText = "Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href='profile.php'>here</a> in the 'My Orders' tab.";
-                $insertNotification = $this->conn->prepare("INSERT INTO notifications (userID, message) VALUES (:userID, :message)");
-                $insertNotification->execute(array(':userID' => $_SESSION['userID'], ':message' => $notificationText));
-
-                header("Location: index.php");
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+            $_SESSION['order_success'] = "Your order has been sent successfully.";
+            
+            $userMain = new UserMain($this->orderUserID);
+            
+            $topicName = 'Orders';
+            $topicID = $userMain->getNotificationTopicIDByName($topicName);
+            
+            $notificationText = "Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href='profile.php'>here</a> in the 'My Orders' tab.";
+            $userMain->addNotification($topicID, $notificationText);
+            
+            header("Location: index.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }           
         } else {
             header('location: loginPage.php');
         } 

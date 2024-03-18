@@ -28,10 +28,11 @@ async function initializeNotificationIcon() {
         const response = await $.ajax({
             url: 'get-notification-status.php',
             type: 'GET',
+            dataType: 'json',
         });
 
-        if (response === 'unread') {
-            // Уведомления не прочитаны, измените иконку на "bell-active.png"
+        if (response.status === 'unread') {
+            // Уведомления не прочитаны, изменяем иконку на "bell-active.png"
             $('#notification-bell').attr('src', 'img/icon/bell-active.png');
         } else {
             // Уведомления прочитаны, иконка остается "bell.png"
@@ -41,16 +42,21 @@ async function initializeNotificationIcon() {
     }
 }
 
+
 function editNotificationIcon() {
-    // При нажатии на иконку меняем ее на "bell.png"
-    $('#notification-bell').attr('src', 'img/icon/bell.png');
+    var currentIcon = $('#notification-bell').attr('src');
     
-    // AJAX-запрос для пометки уведомлений как прочитанных
-    $.ajax({
-        url: 'mark-notification-as-read.php',
-        type: 'POST',
-    });
+    // Если текущая иконка не "bell.png"
+    if (currentIcon !== 'img/icon/bell.png') {
+        $('#notification-bell').attr('src', 'img/icon/bell.png');
+        
+        $.ajax({
+            url: 'mark-notification-as-read.php',
+            type: 'POST',
+        });
+    }
 }
+
 
 </script>
 

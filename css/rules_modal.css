@@ -1,0 +1,57 @@
+/* modal.css */
+.custom-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.custom-modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 600px; /* Set maximum width */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.custom-modal-header {
+    text-align: center;
+}
+
+.custom-divider {
+    width: 100%;
+    margin: 10px 0;
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.custom-button-group {
+    display: flex; /* Display buttons in a row */
+    justify-content: center; /* Center buttons horizontally */
+    margin-top: 20px;
+}
+
+.custom-button-group button {
+    padding: 10px 30px; /* Adjust padding for better button appearance */
+    margin: 0 10px;
+    cursor: pointer;
+    width: 200px; /* Set equal width for buttons */
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button-group button:hover {
+    background-color: #0056b3;
+}

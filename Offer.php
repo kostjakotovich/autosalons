@@ -46,7 +46,7 @@ class Offer {
     }
 
     public function getOfferColors($offerID) {
-        $sql = "SELECT color FROM car_colors WHERE offerID = ?";
+        $sql = "SELECT color, color_price FROM car_colors WHERE offerID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$offerID]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,6 @@ class Offer {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
-    
     
     public function getAllOffers() {
         $sql = "SELECT * FROM offers INNER JOIN offersinfo on offers.offerID = offersinfo.offersID INNER JOIN car_colors on offers.offerID = car_colors.offerID";

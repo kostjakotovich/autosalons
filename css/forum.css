@@ -70,9 +70,9 @@ body {
     }
 
     .comment-divider {
-      border-bottom: 1px solid #ccc; /* Цвет и стиль линии могут быть изменены по вашему усмотрению */
-      margin-bottom: 0.5rem; /* Регулируем отступ после полоски */
-  }
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 0.5rem;
+    }
   
 
     .reply-comment h4 {
