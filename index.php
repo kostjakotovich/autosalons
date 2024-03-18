@@ -12,13 +12,14 @@ $searchOption = new SearchOption();
 if (isset($_GET['searchBtn'])) {
     $search = $_GET['search'];
     $selectedBrand = $_GET['brand'] ?? '';
+    $selectedModel = $_GET['model'] ?? '';
     $selectedTransmission = $_GET['selectedTransmission'] ?? '';
     $selectedType = $_GET['type'] ?? '';
     $selectedColor = $_GET['color'] ?? '';
     $currentMinPrice = $_GET['minPrice'] ?? 0;
     $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
-    $offers = $searchOption->searchOffers($search, $selectedBrand, $selectedType, $selectedColor, $currentMinPrice, $currentMaxPrice);
+    $offers = $searchOption->searchOffers($search, $selectedBrand, $selectedModel, $selectedType, $selectedColor, $currentMinPrice, $currentMaxPrice);
 }
 
 $selectedTransmission = $_GET['selectedTransmission'] ?? '';
@@ -116,34 +117,39 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
     var modelsByBrand = <?php echo json_encode($modelsByBrand); ?>;
 
     document.getElementById('brand').addEventListener('change', function() {
-        var selectedBrand = this.value;
-        var modelSelect = document.getElementById('model');
-        var modelGroup = document.getElementById('model-group');
+    var selectedBrand = this.value;
+    var modelSelect = document.getElementById('model');
+    var modelGroup = document.getElementById('model-group');
 
-        // Очистить предыдущие опции моделей
-        modelSelect.innerHTML = '';
-
-        if (selectedBrand) {
-            // Отобразить список моделей для выбранной марки
-            if (modelsByBrand[selectedBrand]) {
-                modelsByBrand[selectedBrand].forEach(function(model) {
-                    var option = document.createElement('option');
-                    option.value = model;
-                    option.textContent = model;
-                    modelSelect.appendChild(option);
-                });
-            }
-            // Активировать поле для выбора модели
-            modelSelect.disabled = false;
-            
-            // Установить надпись в зависимости от состояния выбранной марки
-            modelSelect.querySelector('option').textContent = 'All models';
-        } else {
-            // Сделать поле недоступным для выбора, если марка не выбрана, и установить соответствующий текст
-            modelSelect.disabled = true;
-            modelSelect.innerHTML = '<option value="">Select Brand First</option>';
+    if (selectedBrand) {
+        // Очистить список моделей перед добавлением новых
+        modelSelect.innerHTML = '<option value="">Select Brand First</option>';
+        
+        // Отобразить список моделей для выбранной марки
+        if (modelsByBrand[selectedBrand]) {
+            modelsByBrand[selectedBrand].forEach(function(model) {
+                var option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                modelSelect.appendChild(option);
+            });
         }
-    });
+        // Активировать поле для выбора модели
+        modelSelect.disabled = false;
+        
+        // Установить надпись в зависимости от состояния выбранной марки
+        modelSelect.querySelector('option').textContent = 'All models';
+
+        // Сбросить выбранную модель на "Select Brand First"
+        modelSelect.value = '';
+    } else {
+        // Сделать поле недоступным для выбора, если марка не выбрана, и установить соответствующий текст
+        modelSelect.disabled = true;
+        modelSelect.innerHTML = '<option value="">Select Brand First</option>';
+    }
+});
+
+
 
     // Проверить, есть ли в URL-адресе параметр модели при загрузке страницы
     document.addEventListener('DOMContentLoaded', function() {

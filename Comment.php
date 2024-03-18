@@ -28,8 +28,6 @@ class Comment {
         $stmt->execute();
     }
 
-    
-
     public function getTotalOriginalCommentsCount() {
     $sql = "SELECT COUNT(*) as total FROM comments WHERE comments.parent_comment_id IS NULL";
     $stmt = $this->conn->query($sql);
@@ -72,10 +70,8 @@ class Comment {
         date_default_timezone_set('Europe/Riga');
         $date = date("Y-m-d H:i:s");
     
-        // Получаем username пользователя, который оставил ответ
         $replyUsername = $this->getUsernameByUserID($userID);
     
-        // Получаем userID пользователя оригинального комментария
         $originalCommentUserID = $this->getUserIDForOriginalComment($parentCommentID);
     
         $sql = "INSERT INTO comments (comment, userID, date, parent_comment_id) VALUES (:comment, :userID, :date, :parentCommentID)";
@@ -103,14 +99,10 @@ class Comment {
         $userMain->addNotification($topicID, $notificationText);
     }
     
-    
-    
-    // Метод для получения ответов на комментарии
     public function getRepliesForComment($parentCommentID) {
         $replies = array();
         $this->getRepliesRecursive($parentCommentID, $replies);
         
-        // Сортировка массива $replies по дате
         usort($replies, function($a, $b) {
             return strtotime($a['date']) - strtotime($b['date']);
         });
