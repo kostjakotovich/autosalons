@@ -13,13 +13,23 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
         exit;
     }
 
-    // новый объект Spreadsheet
     $spreadsheet = new Spreadsheet();
 
     // новый лист
     $sheet = $spreadsheet->getActiveSheet();
 
-    // заголовки для таблицы
+    $styleArray = [
+        'font' => [
+            'bold' => true,
+            'color' => ['rgb' => '000000'],
+        ],
+        'fill' => [
+            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+            'startColor' => ['rgb' => 'FFFF00'],
+        ],
+    ];
+    $sheet->getStyle('A1:N1')->applyFromArray($styleArray);
+
     $sheet->setCellValue('A1', 'Order ID');
     $sheet->setCellValue('B1', 'Order Date');
     $sheet->setCellValue('C1', 'Name');
@@ -35,7 +45,7 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
     $sheet->setCellValue('M1', 'Final Price');
     $sheet->setCellValue('N1', 'Status');
 
-    $row = 2; // Начните с второй строки
+    $row = 2;
 
     foreach ($orders as $order) {
         $sheet->setCellValue('A' . $row, $order['orderID']);
@@ -65,7 +75,7 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
 
     $writer->save('php://output');
 
-    exit; // Завершаем скрипт после отправки файла
+    exit;
 }
 // ...
 ?>

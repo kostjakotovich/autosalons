@@ -39,10 +39,10 @@ body {
 }
 
 .divider {
-  width: 100%; /* Ширина полоски */
-  height: 2px; /* Высота полоски */
-  background-color: #ccc; /* Цвет полоски */
-  margin: 20px 0; /* Отступы сверху и снизу */
+  width: 100%; 
+  height: 2px; 
+  background-color: #ccc; 
+  margin: 20px 0; 
 }
 
 /* Форма поиска */

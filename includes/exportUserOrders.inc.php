@@ -11,17 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
         $userID = $_POST['userID'];
         $totalSum = $_POST['totalSum'];
-        // Далее ваш существующий код для экспорта в Excel
     }
 
-
-    // Создайте новый объект Spreadsheet
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
-    // Создайте новый лист
     $sheet = $spreadsheet->getActiveSheet();
 
-    // Задайте заголовки для таблицы
+    $styleArray = [
+        'font' => [
+            'bold' => true,
+            'color' => ['rgb' => '000000'],
+        ],
+        'fill' => [
+            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+            'startColor' => ['rgb' => 'FFFF00'],
+        ],
+    ];
+    $sheet->getStyle('A1:O1')->applyFromArray($styleArray);
+
     $sheet->setCellValue('A1', 'Order ID');
     $sheet->setCellValue('B1', 'Order Date');
     $sheet->setCellValue('C1', 'Name');
@@ -38,11 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
     $sheet->setCellValue('N1', 'Final Price');
     $sheet->setCellValue('O1', 'Total Price');
 
-    // Получите данные о заказах пользователя
     $order = new Order();
     $orders = $order->getOrderInfo($userID);
 
-    $row = 2; // Начните с второй строки
+    $row = 2;
 
     foreach ($orders as $order) {
         $sheet->setCellValue('A' . $row, $order['orderID']);
@@ -64,16 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
     }
     $sheet->setCellValue('O' . $row, $totalSum . ' $');
 
-    // Создайте объект Writer для формата Xlsx (Excel)
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
-    // Определите заголовки и выводите файл в браузер
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment; filename="' . $order['username'] . '_orders.xlsx"');
     header('Cache-Control: max-age=0');
 
     $writer->save('php://output');
 
-    exit; // Завершаем скрипт после отправки файла
+    exit;
 }
 ?>

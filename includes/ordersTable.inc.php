@@ -1,6 +1,5 @@
 <?php
 
-    // Вычисляем и отображаем общую стоимость
     $totalPrice = $order['price'] + $order['color_price'];
 
     echo "<tr>";

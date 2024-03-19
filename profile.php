@@ -230,7 +230,7 @@ if (isset($_FILES["avatar"])) {
 </div>
 
 <div id="Orders" class="tabcontent">
-  <div style="float:right; width: 200px;">
+  <div class="export-container">
       <!-- Кнопка для экспорта в Excel -->
     <form method="post" action="includes/exportUserOrders.inc.php">
       <input type="hidden" name="userID" value="<?php echo $userID; ?>">
@@ -238,15 +238,6 @@ if (isset($_FILES["avatar"])) {
       <input type="submit" name="export" value="Export to Excel" class="btn">
     </form>
   </div>
-
-  <?php
-    if($totalSum){
-      echo"<strong>Total price: $totalSum$</strong>";
-    }
-    else {
-      echo"<strong>Total price: 0$</strong>";
-    }
-  ?>
 
   <table>
     <?php include 'includes/userOrdersTable.php'; ?>
@@ -272,6 +263,17 @@ if (isset($_FILES["avatar"])) {
         }
     ?>
   </table>
+  <div class="divider"></div>
+  <div class="Total-price-container">
+    <?php
+      if($totalSum){
+        echo"<strong class='total-price'>Total price: $totalSum$</strong>";
+      }
+      else {
+        echo"<strong class='total-price'>Total price: 0$</strong>";
+      }
+    ?>
+  </div>
  
 </div>
 

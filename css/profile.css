@@ -42,7 +42,6 @@ body{
     display: none;
     float: center;
     padding: 6px 12px;
-    border: 1px solid #ccc;
     border-top: none;
     border-radius: 0px 0px 4px 4px;
     min-height: 860px;
@@ -72,6 +71,7 @@ table {
   border-collapse: collapse;
   margin: 0 auto;
   width: 80%;
+  margin-top: 1%;
 }
 
 th,
@@ -91,6 +91,12 @@ tr:nth-child(even) {
   background-color: #f0f0f0;
 }
 
+.divider {
+  width: 80%;
+  height: 2px;
+  background-color: #ccc;
+  margin: 40px auto 0; /* Задаем отступ сверху в 20px */
+}
 
 select option {
   background-color: #f0f0f0;
@@ -234,12 +240,16 @@ select::-ms-expand {
   background: #fff;
   border: 2px solid black; /* Закругленный чёрный контур */
 }
-.profile-img{
+
+.profile-img {
   text-align: center;
 }
+
+
 .profile-img img{
   width: 70%;
   height: 100%;
+  border: 3px solid #000;
 }
 .profile-img .file {
   position: relative;
@@ -332,7 +342,6 @@ select::-ms-expand {
 }
 
 .tabcontent {
-  border-bottom: 2px solid #007bff;
   display: none;
   padding: 20px;
   border-top: none;
@@ -340,4 +349,23 @@ select::-ms-expand {
 
 .tabcontent.active {
   display: block; /* Показывать активную вкладку */
+}
+
+.total-price {
+  font-size: 20px; /* Размер текста */
+  font-weight: bold; /* Жирный шрифт */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+.Total-price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+.export-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
