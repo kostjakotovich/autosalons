@@ -13,9 +13,9 @@
     echo "<td>".$order['manufacturer']."</td>";
     echo "<td>".$order['type']."</td>";
     echo "<td>".$order['color']."</td>";
-    echo "<td>".$order['price']." $</td>";
-    echo "<td>".$order['color_price']." $</td>";
-    echo "<td>".$totalPrice." $</td>";
+    echo "<td>".$order['price']." €</td>";
+    echo "<td>".$order['color_price']." €</td>";
+    echo "<td>".$totalPrice." €</td>";
     echo "<td>
         <select name='status[$order[orderID]]'>
             <option value='New'" . ($order['status'] == 'New' ? ' selected' : '') . ">New</option>

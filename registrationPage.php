@@ -62,7 +62,7 @@ require 'header.php';
     </div>
     <div class="modal-footer d-flex justify-content-center">
         <?php
-        echo "<button class='btn btn-deep-orange' name='reg' type='submit'>Sign up</button>";
+        echo "<button class='btn btn-deep-orange' name='reg' type='submit'>Sign Up</button>";
         ?>
     </div>
 

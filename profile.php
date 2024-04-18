@@ -256,9 +256,9 @@ if (isset($_FILES["avatar"])) {
             echo "<td>".$order['manufacturer']."</td>";
             echo "<td>".$order['type']."</td>";
             echo "<td>".$order['color']."</td>";
-            echo "<td>".$order['price']." $</td>";
-            echo "<td>".$order['color_price']." $</td>";
-            echo "<td>".$totalPrice." $</td>";
+            echo "<td>".$order['price']." €</td>";
+            echo "<td>".$order['color_price']." €</td>";
+            echo "<td>".$totalPrice." €</td>";
             echo "</tr>";
         }
     ?>
@@ -267,10 +267,10 @@ if (isset($_FILES["avatar"])) {
   <div class="Total-price-container">
     <?php
       if($totalSum){
-        echo"<strong class='total-price'>Total price: $totalSum$</strong>";
+        echo"<strong class='total-price'>Total: $totalSum €</strong>";
       }
       else {
-        echo"<strong class='total-price'>Total price: 0$</strong>";
+        echo"<strong class='total-price'>Total price: 0 €</strong>";
       }
     ?>
   </div>

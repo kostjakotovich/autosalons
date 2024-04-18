@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-require_once 'connection.php'; // Подключение к базе данных
-require_once 'Offer.php'; // Подключаем файл с классом Offer
+require_once 'connection.php';
+require_once 'Offer.php';
 
-// Проверяем, была ли отправлена форма методом POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = isset($_POST['type']) ? $_POST['type'] : null;
     $manufacturer = isset($_POST['manufacturer']) ? $_POST['manufacturer'] : null;
@@ -14,6 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $weight = isset($_POST['weight']) ? $_POST['weight'] : null;
     $yearOfManufacture = isset($_POST['yearOfManufacture']) ? $_POST['yearOfManufacture'] : null;
     $offerID = $_POST['offerID'];
+
+    if (empty($type) && empty($manufacturer) && empty($color) && empty($color_price) && empty($price) && empty($weight) && empty($yearOfManufacture)) {
+        echo "<script>
+                window.history.back();
+              </script>";
+        exit();
+    }    
 
     if ($_FILES['car_image']['error'] === UPLOAD_ERR_OK) {
         $imageFileName = $_FILES['car_image']['name'];

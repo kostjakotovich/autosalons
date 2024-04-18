@@ -62,13 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
         $sheet->setCellValue('I' . $row, $order['manufacturer']);
         $sheet->setCellValue('J' . $row, $order['type']);
         $sheet->setCellValue('K' . $row, $order['color']);
-        $sheet->setCellValue('L' . $row, $order['price'] . ' $');
-        $sheet->setCellValue('M' . $row, $order['color_price'] . ' $');
-        $sheet->setCellValue('N' . $row, $order['price'] + $order['color_price'] . ' $');
+        $sheet->setCellValue('L' . $row, $order['price'] . ' €');
+        $sheet->setCellValue('M' . $row, $order['color_price'] . ' €');
+        $sheet->setCellValue('N' . $row, $order['price'] + $order['color_price'] . ' €');
 
         $row++;
     }
-    $sheet->setCellValue('O' . $row, $totalSum . ' $');
+    $sheet->setCellValue('O' . $row, $totalSum . ' €');
 
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 

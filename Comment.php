@@ -177,5 +177,4 @@ class Comment {
         return $result['username'];
     }
     
-    
 }

@@ -58,9 +58,9 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
         $sheet->setCellValue('H' . $row, $order['manufacturer']);
         $sheet->setCellValue('I' . $row, $order['type']);
         $sheet->setCellValue('J' . $row, $order['color']);
-        $sheet->setCellValue('K' . $row, $order['price'] . ' $');
-        $sheet->setCellValue('L' . $row, $order['color_price'] . ' $');
-        $sheet->setCellValue('M' . $row, $order['price'] + $order['color_price'] . ' $');
+        $sheet->setCellValue('K' . $row, $order['price'] . ' €');
+        $sheet->setCellValue('L' . $row, $order['color_price'] . ' €');
+        $sheet->setCellValue('M' . $row, $order['price'] + $order['color_price'] . ' €');
         $sheet->setCellValue('N' . $row, $order['status']);
         $row++;
     }

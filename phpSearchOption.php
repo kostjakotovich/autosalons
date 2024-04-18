@@ -3,12 +3,13 @@ require_once 'connection.php';
 
 class SearchOption extends Database
 {
-    public function searchOffers($search, $selectedBrand, $selectedModel, $selectedType, $selectedColor, $currentMinPrice, $currentMaxPrice)
+    public function searchOffers($search, $selectedBrand, $selectedModel, $selectedType, $selectedYear, $selectedColor, $currentMinPrice, $currentMaxPrice)
     {
-        $query = "SELECT * 
-                FROM offers 
-                INNER JOIN car_colors ON offers.offerID = car_colors.offerID
-                INNER JOIN offersinfo ON offers.offerID = offersinfo.offersID  
+        $query = "SELECT offers.*, offersinfo.*, specific_details.*, car_colors.*
+                FROM offers
+                INNER JOIN offersinfo ON offersinfo.offersID = offers.offerID
+                INNER JOIN specific_details ON offersinfo.offersInfoID = specific_details.offersInfoID
+                INNER JOIN car_colors ON specific_details.colorID = car_colors.colorID  
                 WHERE (manufacturer LIKE :search OR type LIKE :search OR CONCAT(manufacturer, ' ', type) LIKE :search OR CONCAT(manufacturer, type) LIKE :search)";
 
         if (!empty($selectedBrand)) {
@@ -21,6 +22,10 @@ class SearchOption extends Database
 
         if (!empty($selectedType)) {
             $query .= " AND offersinfo.body_type=:selectedType";
+        }
+
+        if (!empty($selectedYear)) {
+            $query .= " AND offersinfo.yearOfManufacture=:selectedYear";
         }
 
         if (!empty($selectedColor)) {
@@ -50,6 +55,10 @@ class SearchOption extends Database
             $stmt->bindValue(':selectedType', $selectedType, PDO::PARAM_STR);
         }
 
+        if (!empty($selectedYear)) {
+            $stmt->bindValue(':selectedYear', $selectedYear, PDO::PARAM_STR);
+        }
+
         if (!empty($selectedColor)) {
             $stmt->bindValue(':selectedColor', $selectedColor, PDO::PARAM_STR);
         }
@@ -67,3 +76,4 @@ class SearchOption extends Database
         return $result;
     }
 }
+?>

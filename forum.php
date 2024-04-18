@@ -4,6 +4,11 @@
     require_once 'User.php';
     require_once 'Comment.php';
 
+    if (!isset($_SESSION['userID'])) {
+        header("Location: login.php");
+        exit();
+    }
+
     $commentObj = new Comment();
 
     // Определяем количество комментариев на странице

@@ -32,7 +32,7 @@ async function initializeNotificationIcon() {
         });
 
         if (response.status === 'unread') {
-            // Уведомления не прочитаны, изменяем иконку на "bell-active.png"
+            // Уведомления не прочитаны, меняем иконку на "bell-active.png"
             $('#notification-bell').attr('src', 'img/icon/bell-active.png');
         } else {
             // Уведомления прочитаны, иконка остается "bell.png"
@@ -107,7 +107,7 @@ function editNotificationIcon() {
                   <li><a class="dropdown-item" href="#" onClick="RedToProfile()">Profile & Orders</a></li>
                   <?php if ($_SESSION['roleID'] == 1) { ?>
                     <li><a class="dropdown-item" href="#" onClick="RedToOrdersPage()">All orders</a></li>
-                    <li><a class="dropdown-item" href="#" onClick="RedToEditOffers()">Offers</a></li>
+                    <li><a class="dropdown-item" href="#" onClick="RedToEditOffers()">Add Offer</a></li>
                   <?php } ?>
                   <li><a class="dropdown-item" href="#" onClick="RedToForum()">Forum</a></li>
                   <li><a class="dropdown-item" href="#" onClick="RedToInfo()">Help & Information</a></li>

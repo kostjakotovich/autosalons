@@ -28,67 +28,125 @@ class Offer {
         return $result; 
     }
     
+    public function getOffersInfoID($offerID) {
+        $sql = "SELECT offersInfoID FROM offersinfo WHERE offersID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$offerID]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['offersInfoID'];
+        } else {
+            return null;
+        }
+    }    
     
-    public function getOfferInfo($offerID) {
+    public function getOfferInfo($offersInfoID) {
         $sql = "SELECT * FROM offersinfo WHERE offersID = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID]);
+        $stmt->execute([$offersInfoID]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getOfferColor($offerID) {
-        $sql = "SELECT * FROM car_colors WHERE offerID = ?";
+    public function getOfferTransmission($offersInfoID) {
+        $sql = "SELECT * FROM transmission 
+                INNER JOIN specific_details ON specific_details.transmissionID = transmission.transmissionID
+                WHERE offersInfoID = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID]);
+        $stmt->execute([$offersInfoID]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getOfferColors($offerID) {
-        $sql = "SELECT color, color_price FROM car_colors WHERE offerID = ?";
+    public function getOfferColor($offersInfoID) {
+        $sql = "SELECT * FROM car_colors 
+                INNER JOIN specific_details ON specific_details.colorID = car_colors.colorID
+                WHERE offersInfoID = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID]);
+        $stmt->execute([$offersInfoID]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getOfferColors($offersInfoID) {
+        $sql = "SELECT car_colors.color, car_colors.image, car_colors.color_price
+                FROM car_colors
+                INNER JOIN specific_details ON specific_details.colorID = car_colors.colorID
+                INNER JOIN offersinfo on offersinfo.offersInfoID = specific_details.offersInfoID
+                WHERE specific_details.offersInfoID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$offersInfoID]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }    
 
-    public function getOfferColorByColor($offerID, $color) {
-        $sql = "SELECT * FROM car_colors WHERE offerID = ? AND color = ?";
+    public function getOfferColorByColor($offersInfoID, $color) {
+        $sql = "SELECT specific_details.*, car_colors.*
+                FROM specific_details
+                INNER JOIN car_colors ON specific_details.colorID = car_colors.colorID
+                WHERE specific_details.offersInfoID = ? AND car_colors.color = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID, $color]);
+        $stmt->execute([$offersInfoID, $color]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
-    }
+    }    
     
     public function getAllOffers() {
-        $sql = "SELECT * FROM offers INNER JOIN offersinfo on offers.offerID = offersinfo.offersID INNER JOIN car_colors on offers.offerID = car_colors.offerID";
+        $sql = "SELECT offers.*, offersinfo.*, specific_details.*, car_colors.*, transmission.*
+                FROM offers
+                JOIN offersinfo ON offers.offerID = offersinfo.offersID
+                JOIN specific_details ON offersinfo.offersInfoID = specific_details.offersInfoID
+                JOIN car_colors ON specific_details.colorID = car_colors.colorID
+                JOIN transmission ON specific_details.transmissionID = transmission.transmissionID";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    }
+    }    
     
-    
-    public function deleteColor($offerID, $color) {
-        $sql = "DELETE FROM car_colors WHERE offerID = ? AND color = ?";
+    public function deleteColor($offerID, $colorID) {
+        $sql = "DELETE FROM specific_details WHERE offerID = ? AND colorID = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID, $color]);
-    }
+        $stmt->execute([$offerID, $colorID]);
+    }    
     
     public function addColor($offerID, $color, $colorPrice, $imageFilePath) {
-        $sql = "INSERT INTO car_colors (offerID, color, color_price, image) VALUES (?, ?, ?, ?)";
+        $sql = "SELECT colorID FROM car_colors WHERE color = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID, $color, $colorPrice, $imageFilePath]);
-    }       
+        $stmt->execute([$color]);
+        $colorID = $stmt->fetchColumn();
+    
+        if (!$colorID) {
+            $sql = "INSERT INTO car_colors (color, color_price, image) VALUES (?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$color, $colorPrice, $imageFilePath]);
+            $colorID = $this->conn->lastInsertId();
+        }
+    
+        $sql = "INSERT INTO specific_details (offerID, colorID) VALUES (?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$offerID, $colorID]);
+    }
+    
+    public function getColorIDByName($color) {
+        $sql = "SELECT colorID FROM car_colors WHERE color = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$color]);
+        $colorID = $stmt->fetchColumn();
+        return $colorID;
+    }    
 
-    public function getColorPrice($offerID, $color) {
-        $sql = "SELECT color_price FROM car_colors WHERE offerID = ? AND color = ?";
+    public function getColorPrice($offersInfoID, $color) {
+        $sql = "SELECT c.color_price 
+                FROM specific_details AS sd
+                INNER JOIN car_colors AS c ON sd.colorID = c.colorID
+                WHERE sd.offersInfoID = ? AND c.color = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offerID, $color]);
+        $stmt->execute([$offersInfoID, $color]);
         $result = $stmt->fetchColumn();
         return $result;
-    }
+    }    
 
     public function addOffer($data) {
         $imageFileName = $_FILES['image']['name'];
@@ -98,22 +156,29 @@ class Offer {
         $this->conn->beginTransaction();
     
         try {
-            // Сначала добавляем информацию о предложении в таблицу offers
             $sql = "INSERT INTO offers (type, manufacturer) VALUES (?, ?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$data['type'], $data['manufacturer']]);
-    
             $offerID = $this->conn->lastInsertId();
     
-            // Затем добавляем информацию о цвете и URL изображения в таблицу car_colors
-            $sql = "INSERT INTO car_colors (offerID, color, image, color_price) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO car_colors (color, image, color_price) VALUES (?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$offerID, $data['color'], $imageFilePath, $data['color_price']]);
+            $stmt->execute([$data['color'], $imageFilePath, $data['color_price']]);
+            $colorID = $this->conn->lastInsertId();
+
+            $sql = "INSERT INTO transmission (transmission_type, transmission_price) VALUES (?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$data['transmission_type'], $data['transmission_price']]);
+            $transmissionID = $this->conn->lastInsertId();
     
-            // Наконец, добавляем остальную информацию о предложении в таблицу offersinfo
-            $sql = "INSERT INTO offersinfo (offersID, price, yearOfManufacture, weight) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO offersinfo (offersID, price, yearOfManufacture, weight, body_type) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$offerID, $data['price'], $data['yearOfManufacture'], $data['weight']]);
+            $stmt->execute([$offerID, $data['price'], $data['yearOfManufacture'], $data['weight'], $data['body_type']]);
+            $offersInfoID = $this->conn->lastInsertId();
+    
+            $sql = "INSERT INTO specific_details (offersInfoID, colorID, transmissionID, created_at) VALUES (?, ?, ?, NOW())";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$offersInfoID, $colorID, $transmissionID]);
     
             $this->conn->commit();
     
@@ -122,70 +187,85 @@ class Offer {
             $this->conn->rollback();
             echo "Error: " . $e->getMessage();
         }
-    }
+    }         
     
     public function updateOfferInformation($offerID, $type, $manufacturer, $color, $color_price, $price, $weight, $yearOfManufacture, $imageFilePath) {
-        // Создаем пустой массив для хранения значений для SET части запроса
-        $setValues = [];
+        $this->conn->beginTransaction();
     
-        // Создаем пустой массив для хранения значений для параметров запроса
-        $params = [];
+        try {
+            // Если указан новый цвет, проверяем его наличие в таблице car_colors
+            $colorID = null;
+            if (!empty($color)) {
+                $colorID = $this->getColorIDByName($color);
+                // Если цвет отсутствует, добавляем его в таблицу car_colors
+                if (!$colorID) {
+                    $this->addColor($color, $color_price, $imageFilePath);
+                    $colorID = $this->conn->lastInsertId();
+                }
+            }
     
-        // Добавляем значения для SET части запроса и их параметры в массивы, если они были переданы
-        if (!empty($type)) {
-            $setValues[] = 'offers.type = ?';
-            $params[] = $type;
-        }
-        if (!empty($manufacturer)) {
-            $setValues[] = 'offers.manufacturer = ?';
-            $params[] = $manufacturer;
-        }
-        if (!empty($color)) {
-            $setValues[] = 'car_colors.color = ?';
-            $params[] = $color;
-        }
-        if (!empty($color_price)) {
-            $setValues[] = 'car_colors.color_price = ?';
-            $params[] = $color_price;
-        }
-        if (!empty($price)) {
-            $setValues[] = 'offersinfo.price = ?';
-            $params[] = $price;
-        }
-        if (!empty($weight)) {
-            $setValues[] = 'offersinfo.weight = ?';
-            $params[] = $weight;
-        }
-        if (!empty($yearOfManufacture)) {
-            $setValues[] = 'offersinfo.yearOfManufacture = ?';
-            $params[] = $yearOfManufacture;
-        }
-        if (!empty($imageFilePath)) {
-            $setValues[] = 'car_colors.image = ?';
-            $params[] = $imageFilePath;
-        }
+            // Создаем пустой массив для хранения значений для SET части запроса
+            $setValues = [];
     
-        // Формируем SET часть запроса
-        $setPart = implode(', ', $setValues);
+            // Создаем пустой массив для хранения значений для параметров запроса
+            $params = [];
     
-        // Добавляем в параметры ID предложения для условия WHERE
-        $params[] = $offerID;
+            // Добавляем значения для SET части запроса и их параметры в массивы, если они были переданы
+            if (!empty($type)) {
+                $setValues[] = 'offers.type = ?';
+                $params[] = $type;
+            }
+            if (!empty($manufacturer)) {
+                $setValues[] = 'offers.manufacturer = ?';
+                $params[] = $manufacturer;
+            }
+            if (!empty($colorID)) {
+                $setValues[] = 'specific_details.colorID = ?';
+                $params[] = $colorID;
+            }
+            if (!empty($price)) {
+                $setValues[] = 'offersinfo.price = ?';
+                $params[] = $price;
+            }
+            if (!empty($weight)) {
+                $setValues[] = 'offersinfo.weight = ?';
+                $params[] = $weight;
+            }
+            if (!empty($yearOfManufacture)) {
+                $setValues[] = 'offersinfo.yearOfManufacture = ?';
+                $params[] = $yearOfManufacture;
+            }
+            if (!empty($imageFilePath)) {
+                $setValues[] = 'specific_details.image = ?';
+                $params[] = $imageFilePath;
+            }
     
-        // Формируем SQL-запрос
-        $sql = "UPDATE offers 
-                INNER JOIN offersinfo ON offers.offerID = offersinfo.offersID 
-                INNER JOIN car_colors ON offers.offerID = car_colors.offerID 
-                SET $setPart
-                WHERE offers.offerID = ?";
+            // Формируем SET часть запроса
+            $setPart = implode(', ', $setValues);
     
-        // Подготавливаем и выполняем запрос
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($params);
+            // Добавляем в параметры ID предложения для условия WHERE
+            $params[] = $offerID;
     
-        // Возвращаем результат выполнения запроса
-        return $stmt->rowCount() > 0;
-    }
+            // Формируем SQL-запрос
+            $sql = "UPDATE offers 
+                    INNER JOIN offersinfo ON offers.offerID = offersinfo.offersID 
+                    INNER JOIN specific_details ON offers.offerID = specific_details.offerID 
+                    SET $setPart
+                    WHERE offers.offerID = ?";
     
+            // Подготавливаем и выполняем запрос
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($params);
+    
+            $this->conn->commit();
+    
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }    
     
 }
 ?>
