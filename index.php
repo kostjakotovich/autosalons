@@ -13,25 +13,26 @@ if (isset($_GET['searchBtn'])) {
     $search = $_GET['search'];
     $selectedBrand = $_GET['brand'] ?? '';
     $selectedModel = $_GET['model'] ?? '';
-    $selectedTransmission = $_GET['selectedTransmission'] ?? '';
+    $selectedTransmission = $_GET['transmission'] ?? '';
     $selectedType = $_GET['type'] ?? '';
     $selectedYear = $_GET['year'] ?? '';
     $selectedColor = $_GET['color'] ?? '';
     $currentMinPrice = $_GET['minPrice'] ?? 0;
     $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
-    $offers = $searchOption->searchOffers($search, $selectedBrand, $selectedModel, $selectedType, $selectedYear, $selectedColor, $currentMinPrice, $currentMaxPrice);
+    $offers = $searchOption->searchOffers($search, $selectedBrand, $selectedModel, $selectedType, $selectedYear, $selectedColor, $selectedTransmission, $currentMinPrice, $currentMaxPrice);
 }
 
-$selectedTransmission = $_GET['selectedTransmission'] ?? '';
 $selectedType = $_GET['type'] ?? '';
 $selectedBrand = $_GET['brand'] ?? '';
 $selectedColor = $_GET['color'] ?? '';
+$selectedTransmission = $_GET['transmission'] ?? '';
 
 require_once 'includes/car_body_types.php';
 require_once 'includes/car_colors.php';
 require_once 'includes/car_brands.php';
 require_once 'includes/car_models.php';
+require_once 'includes/transmissions_types.php';
 
 $selectedYear = $_GET['year'] ?? '';
 $currentMinPrice = $_GET['minPrice'] ?? '';
@@ -235,6 +236,18 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="transmission"><strong>Transmissions:</strong></label>
+                <select name="transmission" class="form-control" id="transmission">
+                    <option value="">All transmissions</option>
+                    <?php foreach ($transmissions as $transmission) { ?>
+                        <option value="<?php echo $transmission ?>" <?php echo $transmission == $selectedTransmission ? 'selected' : '' ?>>
+                            <?php echo $transmission ?>
+                        </option>
+                    <?php } print_r($_GET) ?>
+                </select>
+            </div>
+
         </div>
 
     </form>
@@ -250,12 +263,12 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
             <div class="card-wrapper">
                 <?php foreach ($offers as $selectedOffer) { ?>
                     <div class="card">
-                        <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image">
+                        <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image" class="car_image">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
                             <p class="card-text">Year: <?php echo $selectedOffer['yearOfManufacture']; ?></p>
                             <p class="card-text">Price: $<?php echo ($selectedOffer['price']+$selectedOffer['color_price']+$selectedOffer['transmission_price']); ?></p>
-                            <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>&color=<?php echo $selectedOffer['color']; ?>"
+                            <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>&detailsID=<?php echo $selectedOffer['detailsID']; ?>"
                                 class="btn btn-primary">View</a>
                         </div>
                     </div>

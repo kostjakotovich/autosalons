@@ -37,7 +37,7 @@ class Comment {
 
     // Метод для получения оригинальных комментариев
     public function getOriginalCommentsForPage($startIndex, $commentsPerPage) {
-        $sql = "SELECT comments.commentID, comments.userID, comments.comment, user.username, comments.date
+        $sql = "SELECT comments.commentID, comments.userID, comments.comment, user.username, user.picture, comments.date
                 FROM comments 
                 LEFT JOIN user ON comments.userID = user.userID 
                 WHERE comments.parent_comment_id IS NULL 
@@ -56,6 +56,7 @@ class Comment {
                 'commentID' => $row['commentID'],
                 'userID' => $row['userID'],
                 'username' => $row['username'],
+                'picture' => $row['picture'],
                 'comment' => $row['comment'],
                 'date' => $row['date']
             );
@@ -112,7 +113,7 @@ class Comment {
 
     // Рекурсивная функция для получения всех ответов на комментарии
     private function getRepliesRecursive($parentCommentID, &$replies) {
-        $sql = "SELECT comments.commentID, comments.userID, user.username, comments.comment, comments.date 
+        $sql = "SELECT comments.commentID, comments.userID, user.username, user.picture, comments.comment, comments.date 
                 FROM comments 
                 INNER JOIN user ON comments.userID = user.userID 
                 WHERE comments.parent_comment_id = :parentCommentID
@@ -127,6 +128,7 @@ class Comment {
                 'commentID' => $row['commentID'],
                 'userID' => $row['userID'],
                 'username' => $row['username'],
+                'picture' => $row['picture'],
                 'comment' => $row['comment'],
                 'date' => $row['date']
             );

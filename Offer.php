@@ -69,28 +69,32 @@ class Offer {
         return $result;
     }
 
-    public function getOfferColors($offersInfoID) {
-        $sql = "SELECT car_colors.color, car_colors.image, car_colors.color_price
-                FROM car_colors
-                INNER JOIN specific_details ON specific_details.colorID = car_colors.colorID
+    public function getOfferDetails($offersInfoID) {
+        $sql = "SELECT car_colors.*, specific_details.*, transmission.*, offersinfo.*
+                FROM specific_details
+                INNER JOIN car_colors ON specific_details.colorID = car_colors.colorID
+                INNER JOIN transmission ON specific_details.transmissionID = transmission.transmissionID
                 INNER JOIN offersinfo on offersinfo.offersInfoID = specific_details.offersInfoID
                 WHERE specific_details.offersInfoID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$offersInfoID]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    }    
+    }     
 
-    public function getOfferColorByColor($offersInfoID, $color) {
-        $sql = "SELECT specific_details.*, car_colors.*
+    public function getOfferDetailsByID($detailsID) {
+        $sql = "SELECT specific_details.*, car_colors.*, transmission.*, offersinfo.*
                 FROM specific_details
                 INNER JOIN car_colors ON specific_details.colorID = car_colors.colorID
-                WHERE specific_details.offersInfoID = ? AND car_colors.color = ?";
+                INNER JOIN transmission ON specific_details.transmissionID = transmission.transmissionID
+                INNER JOIN offersinfo on offersinfo.offersInfoID = specific_details.offersInfoID
+                WHERE specific_details.detailsID = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offersInfoID, $color]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute([$detailsID]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
-    }    
+    }
+      
     
     public function getAllOffers() {
         $sql = "SELECT offers.*, offersinfo.*, specific_details.*, car_colors.*, transmission.*
@@ -135,17 +139,6 @@ class Offer {
         $stmt->execute([$color]);
         $colorID = $stmt->fetchColumn();
         return $colorID;
-    }    
-
-    public function getColorPrice($offersInfoID, $color) {
-        $sql = "SELECT c.color_price 
-                FROM specific_details AS sd
-                INNER JOIN car_colors AS c ON sd.colorID = c.colorID
-                WHERE sd.offersInfoID = ? AND c.color = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$offersInfoID, $color]);
-        $result = $stmt->fetchColumn();
-        return $result;
     }    
 
     public function addOffer($data) {

@@ -243,7 +243,7 @@ if (isset($_FILES["avatar"])) {
     <?php include 'includes/userOrdersTable.php'; ?>
     <?php 
         foreach($orders as $order){
-            $totalPrice = $order['price'] + $order['color_price'];
+            $totalPrice = $order['price'] + $order['color_price'] + $order['transmission_price'];
             echo "<tr>";
             echo "<td>".$order['orderID']."</td>";
             echo "<td>".$order['orderDate']."</td>";
@@ -255,8 +255,12 @@ if (isset($_FILES["avatar"])) {
             echo "<td>".$order['email']."</td>";
             echo "<td>".$order['manufacturer']."</td>";
             echo "<td>".$order['type']."</td>";
+            echo "<td>".$order['yearOfManufacture']."</td>";
+            echo "<td>".$order['body_type']."</td>";
+            echo "<td>".$order['transmission_type']."</td>";
             echo "<td>".$order['color']."</td>";
             echo "<td>".$order['price']." €</td>";
+            echo "<td>".$order['transmission_price']." €</td>";
             echo "<td>".$order['color_price']." €</td>";
             echo "<td>".$totalPrice." €</td>";
             echo "</tr>";

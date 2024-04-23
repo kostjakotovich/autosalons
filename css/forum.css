@@ -219,11 +219,17 @@ body {
 
 .reply-header {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.reply-username h4 {
+  margin: 0; /* Убираем внешние отступы у никнейма */
+  margin-right: 10px; /* Отступ между аватаркой и никнеймом */
 }
 
 .reply-info {
-  margin: 0;
+  margin-left: auto; /* Помещаем надпись "Reply to" вправо */
+
 }
 
 .reply-comment-text {
@@ -277,4 +283,26 @@ body {
   background-color: #000;
   color: #fff;
   border-color: #000;
+}
+
+.avatar {
+  margin-right: 1rem; 
+}
+
+.avatar-img {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  object-fit: cover;
+}
+
+.user-info h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0; 
+}
+
+.user-info {
+  display: flex;
+  align-items: center; 
 }

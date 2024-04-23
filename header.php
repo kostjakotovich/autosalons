@@ -101,7 +101,7 @@ function editNotificationIcon() {
             <li>
               <div class="dropdown text-end">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php echo $avatarURL; ?>" alt="Avatar" width="40" height="40" class="rounded-circle">
+                  <img src="<?php echo $avatarURL; ?>" alt="Avatar" width="40" height="40" class="rounded-circle" style="object-fit: cover;">
                 </a>
                 <ul class="dropdown-menu text-small">
                   <li><a class="dropdown-item" href="#" onClick="RedToProfile()">Profile & Orders</a></li>

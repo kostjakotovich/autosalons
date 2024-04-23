@@ -17,11 +17,13 @@
             <p><strong>Manufacturer and model:</strong> <?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></p>
             <p><strong>Year Of Manufacture:</strong> <?php echo $selectedOfferInfo['yearOfManufacture']; ?></p>
             <p><strong>Body Type:</strong> <?php echo $selectedOfferInfo['body_type']; ?></p>
+            <p><strong>Transmission: </strong> <?php echo $selectedOfferTransmission['transmission_type']; ?></p>
             <p><strong>Weight:</strong> <?php echo $selectedOfferInfo['weight'] . ' kg'; ?></p>
             <p><strong>Color: </strong> <?php echo $color['color']; ?></p>
             <p><strong>Color Price: </strong> <?php echo $color['color_price'] . ' €'; ?></p>
+            <p><strong>Transmission Price: </strong> <?php echo $selectedOfferTransmission['transmission_price'] . ' €'; ?></p>
             <p><strong>Car Price:</strong> <?php echo $selectedOfferInfo['price'] . ' €';?></p>
-            <p><strong>Total Price:</strong> <span class="final-price"><?php echo $selectedOfferInfo['price'] + $color['color_price'] . ' €'; ?></span></p>
+            <p><strong>Total Price:</strong> <span class="final-price"><?php echo $selectedOfferInfo['price'] + $color['color_price'] + $selectedOfferTransmission['transmission_price'] . ' €'; ?></span></p>
           </div>
           <!-- Вертикальная полоса -->
           <div class="col-md-1">
@@ -167,6 +169,7 @@ function closeConfirmationModal() {
   height: auto;
   border-radius: 5px;
   margin-bottom: 10px;
+  object-fit: cover;
 }
 
 .confirmation-user-info p {

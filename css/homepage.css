@@ -341,3 +341,8 @@ text-align: center;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.car_image {
+  width: 90%;
+  object-fit: cover;
+}

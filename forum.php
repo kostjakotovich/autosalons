@@ -110,10 +110,16 @@
         <div class="comments">
             <?php foreach ($comments as $comment) { ?>
                 <div class="comment">
-                    <h4><?php echo $comment['username']; ?></h4>
-                    <div class="comment-divider"></div>
-                    <p><?php echo $comment['comment']; ?></p><br>
-                    <h4>Posted at <?php echo date('g:i a, F j, Y', strtotime($comment['date'])); ?></h4>
+                    <div class="user-info">
+                        <div class="avatar">
+                            <img src="<?php echo $comment['picture']; ?>" alt="profile pic" class="avatar-img">
+                        </div>
+                        <h4><?php echo $comment['username']; ?></h4>
+                    </div>
+                        <div class="comment-divider"></div>
+                        <p><?php echo $comment['comment']; ?></p><br>
+                        <h4>Posted at <?php echo date('g:i a, F j, Y', strtotime($comment['date'])); ?></h4>
+
                     <div class="button-group">
                         <button class="reply-btn">Reply</button>
                         <?php if (isset($_SESSION['userID']) && ($_SESSION['roleID'] == 0 && $_SESSION['userID'] == $comment['userID']) || $_SESSION['roleID'] == 1) { ?>
@@ -146,9 +152,17 @@
                                     <div class="reply-container">
                                         <div class="reply">
                                             <div class="reply-header">
-                                                <h4 class="reply-username"><?php echo $reply['username']; ?></h4>
-                                                <p class="reply-info">Reply to: <strong><?php echo $commentObj->getUsernameForOriginalComment($reply['commentID']); ?></strong></p>
+                                                <div class="avatar">
+                                                    <img src="<?php echo $reply['picture']; ?>" alt="profile pic" class="avatar-img">
+                                                </div>
+                                                <div class="reply-username">
+                                                    <h4><?php echo $reply['username']; ?></h4>
+                                                </div>
+                                                <div class="reply-info">
+                                                    <p>Reply to: <strong><?php echo $commentObj->getUsernameForOriginalComment($reply['commentID']); ?></strong></p>
+                                                </div>
                                             </div>
+
                                             <div class="comment-divider"></div>
                                             <p class="reply-comment-text"><?php echo $reply['comment']; ?></p>
                                             <br>
