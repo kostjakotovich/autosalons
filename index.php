@@ -254,6 +254,7 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
 
     <div class="divider"></div>
 
+    
     <div id="container2">
         <?php if (count($offers) === 0) { ?>
             <div class="no-results">
@@ -262,17 +263,38 @@ $currentMaxPrice = $_GET['maxPrice'] ?? '';
         <?php } else { ?>
             <div class="card-wrapper">
                 <?php foreach ($offers as $selectedOffer) { ?>
-                    <div class="card">
-                        <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image" class="car_image">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
-                            <p class="card-text">Year: <?php echo $selectedOffer['yearOfManufacture']; ?></p>
-                            <p class="card-text">Price: $<?php echo ($selectedOffer['price']+$selectedOffer['color_price']+$selectedOffer['transmission_price']); ?></p>
-                            <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>&detailsID=<?php echo $selectedOffer['detailsID']; ?>"
-                                class="btn btn-primary">View</a>
+                    <?php if (!isset($_SESSION['roleID']) || $_SESSION['roleID'] == 0): ?>
+                        <?php if($selectedOffer['active_status'] == 0 OR $selectedOffer['active_status'] == 'Null'): ?>
+                            <div class="card">
+                                <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image" class="car_image">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+                                    <p class="card-text">Year: <?php echo $selectedOffer['yearOfManufacture']; ?></p>
+                                    <p class="card-text">Price: $<?php echo ($selectedOffer['price']+$selectedOffer['color_price']+$selectedOffer['transmission_price']+$selectedOffer['engine_price']); ?></p>
+                                    <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>&detailsID=<?php echo $selectedOffer['detailsID']; ?>" class="btn btn-primary">View</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="card">
+                            <div class="offer-status">
+                                <?php if($selectedOffer['active_status'] == 0 OR $selectedOffer['active_status'] == 'Null'): ?>
+                                    <p class="text-active">🟢Active</p>
+                                <?php endif; ?>
+                                <?php if($selectedOffer['active_status'] == 1): ?>
+                                    <p class="card-not-active">🔴Not active</p>
+                                <?php endif; ?>
+                            </div>
+        
+                            <img src="<?php echo $selectedOffer['image']; ?>" alt="Car Image" class="car_image">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $selectedOffer['manufacturer'] . ' ' . $selectedOffer['type']; ?></h5>
+                                <p class="card-text">Year: <?php echo $selectedOffer['yearOfManufacture']; ?></p>
+                                <p class="card-text">Price: $<?php echo ($selectedOffer['price']+$selectedOffer['color_price']+$selectedOffer['transmission_price']+$selectedOffer['engine_price']); ?></p>
+                                <a href="offerPage.php?offerID=<?php echo $selectedOffer['offerID']; ?>&detailsID=<?php echo $selectedOffer['detailsID']; ?>" class="btn btn-primary">View</a>
+                            </div>
                         </div>
-                    </div>
-
+                    <?php endif; ?>
                 <?php } ?>
             </div>
         <?php } ?>

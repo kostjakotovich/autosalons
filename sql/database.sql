@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `car_colors` (
   `image` blob,
   `color_price` float DEFAULT NULL,
   PRIMARY KEY (`colorID`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.car_colors: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.car_colors: ~13 rows (приблизительно)
 DELETE FROM `car_colors`;
 INSERT INTO `car_colors` (`colorID`, `color`, `image`, `color_price`) VALUES
 	(28, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f63353337333266372d616331382d343330632d396430322d6537363033356135396366622e77656270, 0),
@@ -39,7 +39,11 @@ INSERT INTO `car_colors` (`colorID`, `color`, `image`, `color_price`) VALUES
 	(34, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f626d7778352e706e67, 250),
 	(35, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f323031382d617564692d61362d7072656d69756d2d32302d746673692d33322d77686974652e706e67, 0),
 	(36, 'Black', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f506f72746164612d417564692d41362e706e67, 150),
-	(40, 'dfg', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4f4947322e366435302e6a7067, 0);
+	(40, 'dfg', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f4f4947322e366435302e6a7067, 0),
+	(47, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f626d7778352e706e67, 250),
+	(48, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f626d7778352e706e67, 250),
+	(49, 'White', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f626d7778352e706e67, 250),
+	(50, 'Black', _binary 0x2e2e2f6175746f73616c6f6e732f696d672f424d572d58352d504e472d5472616e73706172656e742d496d6167652e706e67, 100);
 
 -- Дамп структуры для таблица mariadb.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -51,9 +55,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=398 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.comments: ~55 rows (приблизительно)
+-- Дамп данных таблицы mariadb.comments: ~60 rows (приблизительно)
 DELETE FROM `comments`;
 INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`, `parent_comment_id`) VALUES
 	(252, 'Thanks!', 46, '2023-04-30 00:00:00', NULL),
@@ -113,7 +117,9 @@ INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`, `parent_commen
 	(394, 'okok', 1, '2024-03-17 02:35:32', 377),
 	(395, 'not', 1, '2024-03-17 17:02:16', 377),
 	(396, 'stuff new', 1, '2024-03-17 17:02:58', 377),
-	(397, 'kirils pivanovs', 1, '2024-04-16 16:58:53', 377);
+	(397, 'kirils pivanovs', 1, '2024-04-16 16:58:53', 377),
+	(398, '12', 1, '2024-04-18 01:38:06', 377),
+	(399, 'ku eto moja ava', 1, '2024-04-22 01:47:03', NULL);
 
 -- Дамп структуры для таблица mariadb.notifications
 CREATE TABLE IF NOT EXISTS `notifications` (
@@ -125,14 +131,19 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`notification_id`),
   KEY `topic_id` (`topic_id`),
   CONSTRAINT `topic_id` FOREIGN KEY (`topic_id`) REFERENCES `notification_topics` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.notifications: ~3 rows (приблизительно)
+-- Дамп данных таблицы mariadb.notifications: ~8 rows (приблизительно)
 DELETE FROM `notifications`;
 INSERT INTO `notifications` (`notification_id`, `message`, `created_at`, `is_read`, `topic_id`) VALUES
 	(128, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2024-03-17 00:11:41', 1, 9),
 	(135, 'You have received a reply from \'kostjaKO\' to your comment: \'Yes New\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-03-17 00:22:43', 1, 7),
-	(153, 'You have received a reply from \'stuff\' to your comment: \'kirils pivanovs\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-04-16 13:58:53', 1, 1);
+	(153, 'You have received a reply from \'stuff\' to your comment: \'kirils pivanovs\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-04-16 13:58:53', 1, 1),
+	(154, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-04-17 17:07:34', 1, 2),
+	(155, 'You have received a reply from \'stuff\' to your comment: \'12\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-04-17 22:38:06', 1, 1),
+	(156, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-04-23 13:26:49', 1, 2),
+	(157, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-04-23 14:02:41', 1, 2),
+	(158, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-04-24 20:43:33', 1, 2);
 
 -- Дамп структуры для таблица mariadb.notification_topics
 CREATE TABLE IF NOT EXISTS `notification_topics` (
@@ -161,9 +172,9 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `manufacturer` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   PRIMARY KEY (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~7 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offers: ~11 rows (приблизительно)
 DELETE FROM `offers`;
 INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
 	(66, 'X5', 'BMW'),
@@ -173,32 +184,39 @@ INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
 	(71, 'Model X', 'Tesla'),
 	(72, 'Aventador', 'Lamborghini'),
 	(73, 'A6', 'Audi'),
-	(77, 'j,nmn', 'nm,nm');
+	(77, 'j,nmn', 'nm,nm'),
+	(88, 'X5', 'BMW'),
+	(89, 'X5', 'BMW'),
+	(90, 'X5', 'BMW');
 
 -- Дамп структуры для таблица mariadb.offersinfo
 CREATE TABLE IF NOT EXISTS `offersinfo` (
   `offersInfoID` int NOT NULL AUTO_INCREMENT,
   `price` float DEFAULT NULL,
-  `yearOfManufacture` date DEFAULT NULL,
+  `yearOfManufacture` int DEFAULT NULL,
   `weight` float DEFAULT NULL,
   `offersID` int DEFAULT NULL,
   `body_type` varchar(20) COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   PRIMARY KEY (`offersInfoID`),
   KEY `offersID` (`offersID`),
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~7 rows (приблизительно)
+-- Дамп данных таблицы mariadb.offersinfo: ~12 rows (приблизительно)
 DELETE FROM `offersinfo`;
 INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`, `body_type`) VALUES
-	(51, 29000, '2017-02-16', 2000, 66, NULL),
-	(52, 30000, '2019-01-25', 2100, 67, NULL),
-	(53, 35000, '2018-06-12', 2300, 68, NULL),
-	(54, 45000, '2014-05-13', 1700, 70, NULL),
-	(55, 60000, '2023-12-15', 2000, 71, NULL),
-	(56, 100000, '2021-06-17', 1600, 72, NULL),
-	(57, 15000, '2018-06-06', 2000, 73, NULL),
-	(59, 466, '2024-04-24', 45, 77, 'sed');
+	(69, 20000, 2019, 2000, 90, 'SUV'),
+	(70, 50000, 2022, 2000, 66, 'SUV'),
+	(71, 60000, 2021, 2100, 67, 'SUV'),
+	(72, 70000, 2023, 2200, 68, 'Sedan'),
+	(73, 80000, 2024, 2300, 70, 'Coupe'),
+	(74, 90000, 2023, 2400, 71, 'SUV'),
+	(75, 100000, 2022, 2500, 72, 'Coupe'),
+	(76, 110000, 2021, 2600, 73, 'Sedan'),
+	(77, 120000, 2020, 2700, 77, 'SUV'),
+	(78, 130000, 2024, 2800, 88, 'SUV'),
+	(79, 140000, 2023, 2900, 89, 'SUV'),
+	(80, 150000, 2022, 3000, 90, 'SUV');
 
 -- Дамп структуры для таблица mariadb.order
 CREATE TABLE IF NOT EXISTS `order` (
@@ -210,47 +228,69 @@ CREATE TABLE IF NOT EXISTS `order` (
   `status` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `orderUserID` int DEFAULT NULL,
   `orderOfferID` int DEFAULT NULL,
-  `colorID` int DEFAULT NULL,
+  `orderDetailsID` int DEFAULT NULL,
   PRIMARY KEY (`orderID`),
   KEY `orderUserID` (`orderUserID`) USING BTREE,
   KEY `orderOfferID` (`orderOfferID`),
-  KEY `orderColorID` (`colorID`),
-  CONSTRAINT `orderColorID` FOREIGN KEY (`colorID`) REFERENCES `car_colors` (`colorID`),
+  KEY `orderDetailsID` (`orderDetailsID`),
+  CONSTRAINT `orderDetailsID` FOREIGN KEY (`orderDetailsID`) REFERENCES `specific_details` (`detailsID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- Дамп данных таблицы mariadb.order: ~2 rows (приблизительно)
 DELETE FROM `order`;
+INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`, `orderDetailsID`) VALUES
+	(249, '2024-04-23', 'ghj', 'ghjgh', '+371 6564', 'Done', 1, 90, 12),
+	(251, '2024-04-24', 'Kostja', 'Kotovich', '+371 43534534', 'New', 1, 90, 13);
 
 -- Дамп структуры для таблица mariadb.specific_details
 CREATE TABLE IF NOT EXISTS `specific_details` (
   `detailsID` int NOT NULL AUTO_INCREMENT,
   `colorID` int DEFAULT NULL,
-  `offerID` int DEFAULT NULL,
+  `offersInfoID` int DEFAULT NULL,
   `transmissionID` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`detailsID`),
   KEY `colorID` (`colorID`),
-  KEY `offerID` (`offerID`),
   KEY `transmissionID` (`transmissionID`),
+  KEY `offerID` (`offersInfoID`) USING BTREE,
   CONSTRAINT `colorID` FOREIGN KEY (`colorID`) REFERENCES `car_colors` (`colorID`),
-  CONSTRAINT `offerID` FOREIGN KEY (`offerID`) REFERENCES `offersinfo` (`offersInfoID`),
+  CONSTRAINT `offersInfoID` FOREIGN KEY (`offersInfoID`) REFERENCES `offersinfo` (`offersInfoID`),
   CONSTRAINT `transmissionID` FOREIGN KEY (`transmissionID`) REFERENCES `transmission` (`transmissionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы mariadb.specific_details: ~8 rows (приблизительно)
 DELETE FROM `specific_details`;
+INSERT INTO `specific_details` (`detailsID`, `colorID`, `offersInfoID`, `transmissionID`, `created_at`) VALUES
+	(12, 49, 69, 2, '2024-04-18 12:09:13'),
+	(13, 50, 69, 3, '2024-04-24 21:23:38'),
+	(14, 28, 71, 4, '2024-04-24 22:00:06'),
+	(15, 29, 72, 5, '2024-04-24 22:04:59'),
+	(16, 30, 73, 6, '2024-04-24 22:05:00'),
+	(17, 31, 74, 7, '2024-04-24 22:06:23'),
+	(18, 32, 75, 8, '2024-04-24 22:07:28'),
+	(19, 35, 76, NULL, NULL);
 
 -- Дамп структуры для таблица mariadb.transmission
 CREATE TABLE IF NOT EXISTS `transmission` (
   `transmissionID` int NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) DEFAULT NULL,
+  `transmission_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `transmission_price` float DEFAULT NULL,
   PRIMARY KEY (`transmissionID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.transmission: ~0 rows (приблизительно)
+-- Дамп данных таблицы mariadb.transmission: ~8 rows (приблизительно)
 DELETE FROM `transmission`;
+INSERT INTO `transmission` (`transmissionID`, `transmission_type`, `transmission_price`) VALUES
+	(2, 'Sport Automatic', 2000),
+	(3, 'Manual', 1000),
+	(4, 'Automatic', 2100),
+	(5, 'Automatic', 1000),
+	(6, 'Manual', 5000),
+	(7, 'Automatic', 2000),
+	(8, 'Automatic', 5000),
+	(9, 'Manual', 1000);
 
 -- Дамп структуры для таблица mariadb.user
 CREATE TABLE IF NOT EXISTS `user` (

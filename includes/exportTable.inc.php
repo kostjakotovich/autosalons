@@ -28,7 +28,7 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
             'startColor' => ['rgb' => 'FFFF00'],
         ],
     ];
-    $sheet->getStyle('A1:R1')->applyFromArray($styleArray);
+    $sheet->getStyle('A1:T1')->applyFromArray($styleArray);
 
     $sheet->setCellValue('A1', 'Order ID');
     $sheet->setCellValue('B1', 'Order Date');
@@ -42,12 +42,14 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
     $sheet->setCellValue('J1', 'Year of Manufacture');
     $sheet->setCellValue('K1', 'Body Type');
     $sheet->setCellValue('L1', 'Transmission');
-    $sheet->setCellValue('M1', 'Color');
-    $sheet->setCellValue('N1', 'Car Price');
-    $sheet->setCellValue('O1', 'Transmission Price');
-    $sheet->setCellValue('P1', 'Color Price');
-    $sheet->setCellValue('Q1', 'Final Price');
-    $sheet->setCellValue('R1', 'Status');
+    $sheet->setCellValue('M1', 'Engine Type');
+    $sheet->setCellValue('N1', 'Color');
+    $sheet->setCellValue('O1', 'Car Price');
+    $sheet->setCellValue('P1', 'Transmission Price');
+    $sheet->setCellValue('Q1', 'Engine Price');
+    $sheet->setCellValue('R1', 'Color Price');
+    $sheet->setCellValue('S1', 'Final Price');
+    $sheet->setCellValue('T1', 'Status');
 
     $row = 2;
 
@@ -64,12 +66,14 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
         $sheet->setCellValue('J' . $row, $order['yearOfManufacture']);
         $sheet->setCellValue('K' . $row, $order['body_type']);
         $sheet->setCellValue('L' . $row, $order['transmission_type']);
-        $sheet->setCellValue('M' . $row, $order['color']);
-        $sheet->setCellValue('N' . $row, $order['price'] . ' €');
-        $sheet->setCellValue('O' . $row, $order['transmission_price'] . ' €');
-        $sheet->setCellValue('P' . $row, $order['color_price'] . ' €');
-        $sheet->setCellValue('Q' . $row, $order['price'] + $order['color_price'] + $order['transmission_price'] . ' €');
-        $sheet->setCellValue('R' . $row, $order['status']);
+        $sheet->setCellValue('M' . $row, $order['engine_type']);
+        $sheet->setCellValue('N' . $row, $order['color']);
+        $sheet->setCellValue('O' . $row, $order['price'] . ' €');
+        $sheet->setCellValue('P' . $row, $order['transmission_price'] . ' €');
+        $sheet->setCellValue('Q' . $row, $order['engine_price'] . ' €');
+        $sheet->setCellValue('R' . $row, $order['color_price'] . ' €');
+        $sheet->setCellValue('S' . $row, $order['price'] + $order['color_price'] + $order['transmission_price'] + $order['engine_price'] . ' €');
+        $sheet->setCellValue('T' . $row, $order['status']);
         $row++;
     }
 

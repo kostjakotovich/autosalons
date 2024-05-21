@@ -5,12 +5,13 @@ class SearchOption extends Database
 {
     public function searchOffers($search, $selectedBrand, $selectedModel, $selectedType, $selectedYear, $selectedColor, $selectedTransmission, $currentMinPrice, $currentMaxPrice)
     {
-        $query = "SELECT offers.*, offersinfo.*, specific_details.*, car_colors.*, transmission.*
+        $query = "SELECT offers.*, offersinfo.*, specific_details.*, car_colors.*, transmission.*, engine.*
                 FROM offers
                 INNER JOIN offersinfo ON offersinfo.offersID = offers.offerID
                 INNER JOIN specific_details ON offersinfo.offersInfoID = specific_details.offersInfoID
                 INNER JOIN car_colors ON specific_details.colorID = car_colors.colorID  
                 INNER JOIN transmission ON specific_details.transmissionID = transmission.transmissionID 
+                INNER JOIN engine ON specific_details.engineID = engine.engineID 
                 WHERE (manufacturer LIKE :search OR type LIKE :search OR CONCAT(manufacturer, ' ', type) LIKE :search OR CONCAT(manufacturer, type) LIKE :search)";
 
         if (!empty($selectedBrand)) {
@@ -41,11 +42,11 @@ class SearchOption extends Database
         
 
         if (!empty($currentMinPrice)) {
-            $query .= " AND (offersinfo.price + car_colors.color_price + transmission.transmission_price) >= :currentMinPrice";
+            $query .= " AND (offersinfo.price + car_colors.color_price + transmission.transmission_price + engine.engine_price) >= :currentMinPrice";
         }
 
         if (!empty($currentMaxPrice)) {
-            $query .= " AND (offersinfo.price + car_colors.color_price + transmission.transmission_price) <= :currentMaxPrice";
+            $query .= " AND (offersinfo.price + car_colors.color_price + transmission.transmission_price + engine.engine_price) <= :currentMaxPrice";
         }
 
         $stmt = $this->connect()->prepare($query);

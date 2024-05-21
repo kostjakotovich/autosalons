@@ -1,6 +1,6 @@
 <?php
 require_once 'connection.php';
-require_once 'user.php';
+require_once 'User.php';
 
 class Comment {
     private $conn;

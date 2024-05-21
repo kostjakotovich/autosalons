@@ -64,7 +64,7 @@ tr:nth-child(even) {
     background-color: #f0f0f0;
 }
 
-select {
+.select1 {
     width: 150px;
     font-family: 'Raleway', sans-serif;
     font-size: 14px;
@@ -78,17 +78,17 @@ select {
     -moz-appearance: none;
 }
 
-select option {
+.select1 option {
     background-color: #f0f0f0;
     color: #000;
 }
 
-select option:checked {
+.select1 option:checked {
     background-color: #428bca;
     color: #fff;
 }
 
-select option:hover {
+.select1 option:hover {
     background-color: #ccc;
 }
 

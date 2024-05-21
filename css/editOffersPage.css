@@ -13,14 +13,6 @@ body {
     font-weight: bold;
   }
   
-  /* Form */
-  form {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
   input[type="text"],
   input[type="number"],
   input[type="file"],
@@ -60,18 +52,6 @@ body {
     font-size: 0.8rem;
   }
   
-/* General layout */
-.container-offer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    min-height: 1000px;
-  }
-
-  
-  
   /* Add offer page specific styles */
   .add-offer-form {
     background-color: #fff;
@@ -105,7 +85,7 @@ body {
     background-color: #3071a9;
   }
   
-select {
+.select1 {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
@@ -117,19 +97,14 @@ select {
   margin-bottom: 5%;
 }
 
-select option {
+.select1 option {
   padding: 10px;
   font-size: 16px;
 }
 
-select option:checked {
+.select1 option:checked {
   background-color: dodgerblue;
   color: white;
-}
-
-.container-offer {
-  display: flex;
-  justify-content: space-between;
 }
 
 .column {
@@ -146,6 +121,10 @@ select option:checked {
 .container-offer {
   display: flex;
   justify-content: center;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  min-height: 1000px;
 }
 
 table {

@@ -345,4 +345,19 @@ text-align: center;
 .car_image {
   width: 90%;
   object-fit: cover;
+  position: relative;
+  z-index: 1; /* Перед содержимым карты */
+  max-height: 200px;
 }
+
+.offer-status {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 10;
+}
+
+.offer-status p {
+  font-size: 0.8em;
+}
+

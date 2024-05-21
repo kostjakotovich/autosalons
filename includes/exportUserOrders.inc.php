@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
             'startColor' => ['rgb' => 'FFFF00'],
         ],
     ];
-    $sheet->getStyle('A1:S1')->applyFromArray($styleArray);
+    $sheet->getStyle('A1:U1')->applyFromArray($styleArray);
 
     $sheet->setCellValue('A1', 'Order ID');
     $sheet->setCellValue('B1', 'Order Date');
@@ -42,12 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
     $sheet->setCellValue('K1', 'Year of Manufacture');
     $sheet->setCellValue('L1', 'Body Type');
     $sheet->setCellValue('M1', 'Transmission');
-    $sheet->setCellValue('N1', 'Color');
-    $sheet->setCellValue('O1', 'Car Price');
-    $sheet->setCellValue('P1', 'Transmission Price');
-    $sheet->setCellValue('Q1', 'Color Price');
-    $sheet->setCellValue('R1', 'Final Price');
-    $sheet->setCellValue('S1', 'Total Price');
+    $sheet->setCellValue('N1', 'Engine Type');
+    $sheet->setCellValue('O1', 'Color');
+    $sheet->setCellValue('P1', 'Car Price');
+    $sheet->setCellValue('Q1', 'Transmission Price');
+    $sheet->setCellValue('R1', 'Engine Price');
+    $sheet->setCellValue('S1', 'Color Price');
+    $sheet->setCellValue('T1', 'Final Price');
+    $sheet->setCellValue('U1', 'Total Price');
 
     $order = new Order();
     $orders = $order->getOrderInfo($userID);
@@ -68,15 +70,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
         $sheet->setCellValue('K' . $row, $order['yearOfManufacture']);
         $sheet->setCellValue('L' . $row, $order['body_type']);
         $sheet->setCellValue('M' . $row, $order['transmission_type']);
-        $sheet->setCellValue('N' . $row, $order['color']);
-        $sheet->setCellValue('O' . $row, $order['price'] . ' €');
-        $sheet->setCellValue('P' . $row, $order['transmission_price'] . ' €');
-        $sheet->setCellValue('Q' . $row, $order['color_price'] . ' €');
-        $sheet->setCellValue('R' . $row, $order['price'] + $order['color_price'] + $order['transmission_price'] . ' €');
+        $sheet->setCellValue('N' . $row, $order['engine_type']);
+        $sheet->setCellValue('O' . $row, $order['color']);
+        $sheet->setCellValue('P' . $row, $order['price'] . ' €');
+        $sheet->setCellValue('Q' . $row, $order['transmission_price'] . ' €');
+        $sheet->setCellValue('R' . $row, $order['engine_price'] . ' €');
+        $sheet->setCellValue('S' . $row, $order['color_price'] . ' €');
+        $sheet->setCellValue('T' . $row, $order['price'] + $order['color_price'] + $order['transmission_price'] + $order['engine_price'] . ' €');
 
         $row++;
     }
-    $sheet->setCellValue('S' . $row, $totalSum . ' €');
+    $sheet->setCellValue('U' . $row, $totalSum . ' €');
 
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 

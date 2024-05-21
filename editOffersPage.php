@@ -54,12 +54,13 @@ if (!isset($_SESSION['userID']) || $_SESSION['roleID'] !== 1) {
 
     <div class="container-offer">
 
-        <form method="POST" action="" enctype="multipart/form-data" class="add-offer-form" style="">
+        <form method="POST" action="" enctype="multipart/form-data" class="add-offer-form" style="width: 50%;">
             <table>
                 <tr>
                   <th class="car">1. Car</th>
                   <th class="color">2. Color</th>
                   <th class="transmission">3. Transmission</th>
+                  <th class="engine">4. Engine</th>
                 </tr>
                 <tr>
                     <td>
@@ -69,11 +70,11 @@ if (!isset($_SESSION['userID']) || $_SESSION['roleID'] !== 1) {
                         <label for="manufacturer">Manufacturer:</label><br>
                         <input type="text" id="manufacturer" name="manufacturer" required><br><br>
 
-                        <label for="body_type">Body type:</label><br>
+                        <label for="body_type">Body Type:</label><br>
                         <input type="text" id="body_type" name="body_type" required><br><br>
 
                         <label for="yearOfManufacture">Year of Manufacture:</label><br>
-                        <select name="yearOfManufacture" id="yearOfManufacture" required>
+                        <select name="yearOfManufacture" id="yearOfManufacture" class="select1" required>
                             <option value="">Select Year</option>
                             <?php
                             $currentYear = date('Y');
@@ -104,8 +105,16 @@ if (!isset($_SESSION['userID']) || $_SESSION['roleID'] !== 1) {
                         <label for="transmission">Transmission:</label><br>
                         <input type="text" id="transmission_type" name="transmission_type" required><br><br>
 
-                        <label for="transmission">Transmission price:</label><br>
+                        <label for="transmission">Transmission Price:</label><br>
                         <input type="text" id="transmission_price" name="transmission_price" required><br><br>
+
+                    </td>
+                    <td>
+                        <label for="engine">Engine Type:</label><br>
+                        <input type="text" id="engine_type" name="engine_type" required><br><br>
+
+                        <label for="engine">Engine Price:</label><br>
+                        <input type="text" id="engine_price" name="engine_price" required><br><br>
 
                     </td>
                 </tr>

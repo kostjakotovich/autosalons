@@ -170,7 +170,7 @@ min-height: 70%;
   object-fit: cover;
 }
 
-.color-options-container {
+.conf-options-container {
 display: flex;
 flex-wrap: wrap;
 
@@ -178,12 +178,12 @@ align-items: baseline;
 margin-right: 10px;
 }
 
-.color-item {
+.conf-item {
 margin-bottom: 30px;
 margin-left: 10%;
 }
 
-.color-info {
+.conf-info {
 min-width: 150px;
 width: 100%;
 padding: 10px;
@@ -223,7 +223,7 @@ margin-bottom: 0.5rem;
 }
 
 .conf-card {
-  width: 400px; 
+  width: 370px; 
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
@@ -257,6 +257,7 @@ display: none;
 
 .conf-option label {
 display: inline-block;
+width: 150px;
 padding: 8px 12px;
 border: 1px solid #ccc;
 border-radius: 4px;
@@ -277,4 +278,89 @@ text-align: center;
   float: left;
   margin-left: 1%;
 }
+
+.delete-conf-btn {
+  width: 200px;
+  height: 40px;
+  margin-top: 2%;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.card-del-header {
+  display: flex; /* Сделать дочерние элементы flex-контейнером */
+  justify-content: space-between; /* Распределить пространство между элементами */
+  align-items: center; /* Выровнять элементы по вертикали */
+}
+
+.delete-conf-btn:hover {
+background-color: #000;
+color: #fff;
+border-color: #000;
+}
+
+.status-btn {
+  width: 200px;
+  height: 40px;
+  margin-top: 5%;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.status-btn:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+  }
+
+/* Стили для модального окна */
+.modal-settings {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-settings-content {
+  background-color: #fefefe;
+  text-align: center;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute; 
+  top: 0;
+  right: 0.5%;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+
 

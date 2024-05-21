@@ -100,13 +100,14 @@ class Order {
     }
 
     public function getAllOrderInfo() {
-        $sql = "SELECT o.*, u.*, off.*, car_colors.*, offInf.*, specific_details.*, transmission.*
+        $sql = "SELECT o.*, u.*, off.*, car_colors.*, offInf.*, specific_details.*, transmission.*, engine.*
                 FROM `order` o
-                LEFT JOIN `user` u ON o.orderUserID = u.userID
-                LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
-                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                INNER JOIN `user` u ON o.orderUserID = u.userID
+                INNER JOIN `offers` off ON o.orderOfferID = off.offerID
+                INNER JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
                 INNER JOIN `specific_details` ON o.orderDetailsID = specific_details.detailsID
                 INNER JOIN `transmission` ON transmission.transmissionID = specific_details.transmissionID
+                INNER JOIN `engine` ON engine.engineID = specific_details.engineID
                 INNER JOIN `car_colors` ON specific_details.colorID = car_colors.colorID
                 ORDER BY `orderID` DESC";
         $stmt = $this->conn->prepare($sql);
@@ -117,13 +118,14 @@ class Order {
     
     public function getOrderInfo($userID) {
         $this->orderUserID = $userID;
-        $sql = "SELECT o.*, u.*, off.*, car_colors.*, offInf.*, specific_details.*, transmission.*
+        $sql = "SELECT o.*, u.*, off.*, car_colors.*, offInf.*, specific_details.*, transmission.*, engine.*
                 FROM `order` o
-                LEFT JOIN `user` u ON o.orderUserID = u.userID
-                LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
-                LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
+                INNER JOIN `user` u ON o.orderUserID = u.userID
+                INNER JOIN `offers` off ON o.orderOfferID = off.offerID
+                INNER JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
                 INNER JOIN `specific_details` ON o.orderDetailsID = specific_details.detailsID
                 INNER JOIN `transmission` ON transmission.transmissionID = specific_details.transmissionID
+                INNER JOIN `engine` ON engine.engineID = specific_details.engineID
                 INNER JOIN `car_colors` ON specific_details.colorID = car_colors.colorID
                 WHERE o.orderUserID = ?
                 ORDER BY o.orderDate DESC";
@@ -135,13 +137,14 @@ class Order {
     
     public function getOrderSum($userID) {
         $this->orderUserID = $userID;
-        $sql = "SELECT SUM(offInf.price) + SUM(car_colors.color_price) + SUM(transmission.transmission_price)as totalPrice
+        $sql = "SELECT SUM(offInf.price) + SUM(car_colors.color_price) + SUM(transmission.transmission_price) + SUM(engine.engine_price) as totalPrice
                 FROM `order` o
                 LEFT JOIN `user` u ON o.orderUserID = u.userID
                 LEFT JOIN `offers` off ON o.orderOfferID = off.offerID
                 LEFT JOIN `offersinfo` offInf ON off.offerID = offInf.offersID
                 INNER JOIN `specific_details` ON o.orderDetailsID = specific_details.detailsID
                 INNER JOIN `transmission` ON transmission.transmissionID = specific_details.transmissionID
+                INNER JOIN `engine` ON engine.engineID = specific_details.engineID
                 INNER JOIN `car_colors` ON specific_details.colorID = car_colors.colorID
                 WHERE o.orderUserID = ?";
         $stmt = $this->conn->prepare($sql);
