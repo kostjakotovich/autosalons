@@ -39,7 +39,7 @@ require_once 'connection.php';
         <h2 class="emp-profile-title">> Location on the map</h2>
         <div class="emp-profile-divider"></div>
         <div class="map-container" style="margin-top: 20px;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d543.9373888905965!2d24.1044798!3d56.953092!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2slv!4v1707247168370!5m2!1sru!2slv" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d543.936956951441!2d24.1044477!3d56.9531216!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2slv!4v1717096814705!5m2!1sen!2slv" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
     <?php include 'footer.php'; ?>

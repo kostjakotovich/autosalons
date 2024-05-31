@@ -265,15 +265,15 @@ if (isset($_POST['submit_order'])) {
 
         <div class="form-group2">
           <label for="name"><strong>Name:</strong></label>
-          <input type="text" class="form-control" id="name" name="name" maxlength="20" required>
+          <input type="text" class="form-control" id="name" name="name" minlength="3" maxlength="20" required>
         </div>
         <div class="form-group2">
           <label for="surname"><strong>Surname:</strong></label>
-          <input type="text" class="form-control" id="surname" name="surname" maxlength="20" required>
+          <input type="text" class="form-control" id="surname" name="surname" minlength="3" maxlength="20" required>
         </div>
         <div class="form-group2">
             <label for="telephone"><strong>Telephone:</strong></label>
-            <input type="text" class="form-control" id="telephone" name="telephone" maxlength="14" required>
+            <input type="text" class="form-control" id="telephone" name="telephone" minlength="5" maxlength="14" required>
         </div>
 
         <script>

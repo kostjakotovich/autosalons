@@ -64,7 +64,7 @@
     if (isset($_POST['reply'])) {
         $reply = $_POST['reply'];
         $userID = $_SESSION['userID'];
-        $commentID = $_POST['parentCommentID']; // Используем parentCommentID
+        $commentID = $_POST['parentCommentID']; 
         $commentObj->addReply($reply, $userID, $commentID);
         header("Location: forum.php"); // перезагрузка страницы для избежания повторной отправки формы
         exit;

@@ -37,7 +37,6 @@ td {
     display: none;
     padding: 10px 20px;
     border: none;
-    border-top: 1px solid #ccc;
     border-radius: 0px 0px 5px 5px;
 }
 
@@ -97,6 +96,26 @@ select::-ms-expand {
 }
 
 #container {
+    margin-top: 1%;
     text-align: center;
     min-height: 1000px;
+}
+
+.order-divider {
+    margin-top: 5%;
+    border-bottom: 1px solid #7a7a7a;
+    margin-bottom: 0.5rem;
+    width: 60%;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.order-divider2 {
+    margin-top: 1%;
+    border-bottom: 1px solid #7a7a7a;
+    width: 40%;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
 }

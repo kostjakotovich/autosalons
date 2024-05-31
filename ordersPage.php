@@ -71,12 +71,13 @@ if (isset($_POST['deleteOrder'])) {
         <?php endif; ?>
     </div>
 
-    <div style="float:right;">
+    <div style="float:right; margin-top: 1%; margin-right: 1%;">
         <form method="post" action="includes/exportTable.inc.php">
             <input type="submit" name="export" value="Export to Excel" class="btn">
             <input type="hidden" name="export" value="true">
             <input type="hidden" name="orders_data" value="<?php echo htmlentities(serialize($orders)); ?>">
         </form>
+        <div class="order-divider"></div>
     </div>
     <br><br>
     <div id="container">
@@ -88,6 +89,8 @@ if (isset($_POST['deleteOrder'])) {
                 <button id="inProgressTab" class="setTabButton" onclick="showTab('inProgress', event)">In Progress</button>
                 <button id="doneTab" class="setTabButton" onclick="showTab('done', event)">Done</button>
             </div>
+
+            <div class="order-divider2"></div>
 
             <div id="newTable" class="tabContent">
                 <br><br>
@@ -170,7 +173,6 @@ if (isset($_POST['deleteOrder'])) {
         padding: 10px 20px;
         cursor: pointer;
         border-radius: 5px;
-        margin-right: 10px; 
         outline: none; 
     }
 

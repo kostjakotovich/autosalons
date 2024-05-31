@@ -71,10 +71,13 @@ class Comment {
         date_default_timezone_set('Europe/Riga');
         $date = date("Y-m-d H:i:s");
     
+        // Получаем имя пользователя, оставившего ответ
         $replyUsername = $this->getUsernameByUserID($userID);
     
+        // Получаем ID пользователя, которому отвечают
         $originalCommentUserID = $this->getUserIDForOriginalComment($parentCommentID);
     
+        // Вставка ответа в базу данных
         $sql = "INSERT INTO comments (comment, userID, date, parent_comment_id) VALUES (:comment, :userID, :date, :parentCommentID)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':comment', $comment);
@@ -83,22 +86,25 @@ class Comment {
         $stmt->bindParam(':parentCommentID', $parentCommentID);
         $stmt->execute();
     
-        $maxMessageLength = 100; // Максимальная длина сообщения
+        // Ограничение длины сообщения
+        $maxMessageLength = 100; 
         if (strlen($comment) > $maxMessageLength) {
             $truncatedMessage = substr($comment, 0, $maxMessageLength) . "...";
             $notificationText = "You have received a reply from '$replyUsername' to your comment: '$truncatedMessage'. For the full message, visit the <a href='forum.php'>forum</a>.";
-
+    
         } else {
             $notificationText = "You have received a reply from '$replyUsername' to your comment: '$comment'. Visit the <a href='forum.php'>forum</a> to view the response.";
         }
-
-        $userMain = new UserMain($userID);
+    
+        // Создание уведомления для пользователя, которому ответили
+        $userMain = new UserMain($originalCommentUserID);
             
         $topicName = 'Forum';
         $topicID = $userMain->getNotificationTopicIDByName($topicName);
             
         $userMain->addNotification($topicID, $notificationText);
     }
+    
     
     public function getRepliesForComment($parentCommentID) {
         $replies = array();
@@ -135,7 +141,6 @@ class Comment {
 
             $replies[] = $reply;
 
-            // Рекурсивно вызываем эту функцию для поиска ответов на этот ответ
             $this->getRepliesRecursive($row['commentID'], $replies);
         }
     }  

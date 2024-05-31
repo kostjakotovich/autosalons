@@ -26,9 +26,9 @@ require_once 'connection.php';
                 <p>Here you will find a wide selection of vehicles from various makes and models. We provide detailed descriptions of each vehicle, including specifications, photos, and color options. You can choose a vehicle that matches your preferences and budget.</p>
             </div>
             <br>
-            <div class="info-header" onclick="toggleInfo('section4')">Colors</div>
+            <div class="info-header" onclick="toggleInfo('section4')">Configurations</div>
             <div class="info-content" id="section4">
-            <p>We offer a variety of color options for every vehicle. We have cars in various colors to meet your stylistic preferences. You can choose your perfect color to make your car unique.</p>
+                <p>Our vehicles come with various configurations that you can choose from. Each configuration includes different engine types, transmission options, and color choices, allowing you to personalize your car according to your preferences. Feel free to explore the available configurations and select the one that best suits your needs.</p>
             </div>
             <br>
             <div class="info-header" onclick="toggleInfo('section5')">Contact Us</div>

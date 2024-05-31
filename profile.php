@@ -36,6 +36,13 @@ if (isset($_POST["changePassword"])) {
       array_push($change_errors,"New password must not be the same as current password.");
   }
 
+  if (strlen($newPassword) > 30) {
+    array_push($change_errors, "New password should be up to 30 characters");
+  } 
+  if (strlen($newPassword) < 6) {
+    array_push($change_errors, "New password should be at least 6 characters");
+  } 
+
   // проверка, что пароли во втором и третьем полях совпадают
   if ($newPassword !== $confirmPassword) {
       array_push($change_errors,"New password and confirmation password do not match.");
@@ -202,12 +209,12 @@ if (isset($_FILES["avatar"])) {
                                       </div>
 
                                       <?php if (isset($_SESSION['success_change'])): ?>
-                                          <div class="alert alert-success" style="color:black;"><?php echo $_SESSION['success_change']; ?></div>
+                                          <div class="alert alert-success" style="color:black; margin-top: 2%; width:60%;"><?php echo $_SESSION['success_change']; ?></div>
                                           <?php unset($_SESSION['success_change']); ?>
                                       <?php endif; ?>
 
                                       <?php if (!empty($change_errors)): ?>
-                                          <div class="alert alert-danger" role="alert">
+                                          <div class="alert alert-danger" role="alert" style="width:60%; margin-top: 2%;">
                                               <ul>
                                                   <?php foreach ($change_errors as $error): ?>
                                                       <p style="color:black;"><?php echo $error; ?></p>

@@ -55,24 +55,24 @@
 
 <script>
 function showConfirmationModal() {
-    // Получение значений полей формы
-    var name = document.getElementById("name").value;
-    var surname = document.getElementById("surname").value;
-    var telephone = document.getElementById("telephone").value;
-    var termsChecked = document.getElementById("check").checked;
+            var name = document.getElementById("name").value;
+            var surname = document.getElementById("surname").value;
+            var telephone = document.getElementById("telephone").value;
+            var termsChecked = document.getElementById("check").checked;
 
-    // Проверка на заполненность всех полей и согласия с условиями
-    if (name && surname && telephone && termsChecked) {
-        // Если все поля заполнены и условия приняты, открываем модальное окно с подтверждением
-        document.getElementById("confirmation_modal").style.display = "block";
-        // Добавляем только что введённые данные в модальное окно
-        document.getElementById("confirmation_name").innerText = name;
-        document.getElementById("confirmation_surname").innerText = surname;
-        document.getElementById("confirmation_telephone").innerText = telephone;
-    } else {
-        var errorText = "Please fill in all fields and accept the terms and conditions!";
-        swal("Error", errorText, "error");
-    }
+            if (name.length >= 3 && surname.length >= 3 && telephone.length >= 5 && termsChecked) {
+                document.getElementById("confirmation_modal").style.display = "block";
+                document.getElementById("confirmation_name").innerText = name;
+                document.getElementById("confirmation_surname").innerText = surname;
+                document.getElementById("confirmation_telephone").innerText = telephone;
+            } else {
+                var errorText = "Please ensure all fields meet the minimum length requirements and accept the terms and conditions:\n\n"
+                              + "Name: at least 3 characters\n"
+                              + "Surname: at least 3 characters\n"
+                              + "Telephone: at least 5 characters\n"
+                              + "Acceptance of terms and conditions";
+                swal("Error", errorText, "error");
+            }
 }
 
 function closeConfirmationModal() {

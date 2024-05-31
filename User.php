@@ -60,6 +60,13 @@ class UserMain {
             $stmt->bindParam(':newPassword', $newPasswordHash);
             $stmt->bindParam(':userID', $this->userID);
             $stmt->execute();
+
+            $topicName = 'Profile';
+            $topicID = $this->getNotificationTopicIDByName($topicName);
+            
+            $notificationText = "Your password has been successfully changed!";
+            $this->addNotification($topicID, $notificationText);
+
             return true;
           } else {
             return false;
