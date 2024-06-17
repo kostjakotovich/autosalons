@@ -3,9 +3,9 @@ require_once 'connection.php';
 require_once 'User.php';
 
 if (isset($_SESSION['success'])) {
-    $userID = $_SESSION['userID']; // идентификатор пользователя
-    $user = new UserMain($userID); // объект UserMain
-    $avatarURL = $user->getPicture(); // URL аватарки пользователя
+    $userID = $_SESSION['userID'];
+    $user = new UserMain($userID); 
+    $avatarURL = $user->getPicture(); 
 }
 ?>
 
@@ -20,7 +20,7 @@ if (isset($_SESSION['success'])) {
     <script>
 
 $(document).ready(async function() {
-    await initializeNotificationIcon(); // Инициализация иконки при загрузке страницы
+    await initializeNotificationIcon(); 
 });
 
 async function initializeNotificationIcon() {
@@ -32,10 +32,8 @@ async function initializeNotificationIcon() {
         });
 
         if (response.status === 'unread') {
-            // Уведомления не прочитаны, меняем иконку на "bell-active.png"
             $('#notification-bell').attr('src', 'img/icon/bell-active.png');
         } else {
-            // Уведомления прочитаны, иконка остается "bell.png"
         }
     } catch (error) {
         console.error(error);
@@ -46,7 +44,6 @@ async function initializeNotificationIcon() {
 function editNotificationIcon() {
     var currentIcon = $('#notification-bell').attr('src');
     
-    // Если текущая иконка не "bell.png"
     if (currentIcon !== 'img/icon/bell.png') {
         $('#notification-bell').attr('src', 'img/icon/bell.png');
         
@@ -76,14 +73,12 @@ function editNotificationIcon() {
         <li><a href='#' class="nav-link px-3 link-secondary" onClick='RedToContacts()'>Contacts</a></li>
         <li class="spacer"></li>
 
-        <!-- Для переадресации на страницу со всеми заказами -->
         <script>
           function RedToOrdersPage() {
             window.location.href = "ordersPage.php";
           }
         </script>
 
-        <!-- Для переадресации на страницу с добавлением предложений -->
         <script>
           function RedToEditOffers() {
             window.location.href="../autosalons/editOffersPage.php"; 

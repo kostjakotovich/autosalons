@@ -17,9 +17,8 @@ class UserRegistration extends UserMain {
     public function registration() {
         $errors = array();
         if (isset($_POST['reg'])) {
-            // Получаем все значения из формы
+           
 
-            // Валидация никнейма
             if (empty($this->username)) {
                 array_push($errors, "Username is required");
             } elseif (strlen($this->username) > 20) {
@@ -28,7 +27,6 @@ class UserRegistration extends UserMain {
                 array_push($errors, "Username should be at least 3 characters");
             }
 
-            // Валидация email
             if (empty($this->email)) {
                 array_push($errors, "Email is required");
             } elseif (strlen($this->email) > 40) {
@@ -37,7 +35,6 @@ class UserRegistration extends UserMain {
                 array_push($errors, "Invalid email format");
             }
 
-            // Валидация пароля
             if (empty($this->password)) {
                 array_push($errors, "Password is required");
             } elseif (strlen($this->password) > 30) {
@@ -57,7 +54,7 @@ class UserRegistration extends UserMain {
             $result->execute(array(':username' => $this->username, ':email' => $this->email));
             $user = $result->fetch();
 
-            if ($user) { // если пользователь существует
+            if ($user) { 
                 if ($user['username'] === $this->username) {
                     array_push($errors, "Username already exists!");
 
@@ -69,10 +66,8 @@ class UserRegistration extends UserMain {
                 }
             }
 
-            // Регистрируем пользователя, если нет ошибок в форме
             if (count($errors) == 0) {
                 $passwordHash = password_hash($this->password, PASSWORD_DEFAULT);
-                 // хешируем пароль перед сохранением в базе данных
             
                  $result = $this->conn->prepare("INSERT INTO user (username, email, password, roleID) VALUES(:username, :email, :password, :roleID)");
                 if(!$result->execute(array(':username' => $this->username, ':email' => $this->email, ':password' => $passwordHash, ':roleID' => 0))) {
@@ -85,7 +80,6 @@ class UserRegistration extends UserMain {
                 
                 $result = null;
                 
-                // Получаем ID только что зарегистрированного пользователя
                 $result = $this->conn->prepare("SELECT userID, roleID FROM user WHERE email=:email");
                 $result->execute(array(':email' => $this->email));
                 $user = $result->fetch();
@@ -95,14 +89,11 @@ class UserRegistration extends UserMain {
                 if ($_SESSION['success']) {
                     $defaultAvatarURL = 'img/avatar/default.png';
                     $userID = $user['userID'];
-                    // Создайте экземпляр UserMain
                     $user = new UserMain($userID);
                     $user->addDefaultNotificationTopics();
                     
-                    // Обновите аватар пользователя, устанавливая URL дефолтной аватарки
                     $user->updatePicture($defaultAvatarURL);
 
-                    // Получите идентификатор топика "Profile"
                     $topicName = 'Profile';
                     $topicID = $user->getNotificationTopicIDByName($topicName);
                     

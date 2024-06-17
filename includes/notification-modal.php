@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ordersStatus = $_POST['orders'] === 'disable' ? 'disable' : 'enable';
             $profileStatus = $_POST['profile'] === 'disable' ? 'disable' : 'enable';
 
-            // Обновление статуса уведомлений
             $user->updateNotificationTopicStatus($forumTopicID, $forumStatus);
             $user->updateNotificationTopicStatus($ordersTopicID, $ordersStatus);
             $user->updateNotificationTopicStatus($profileTopicID, $profileStatus);

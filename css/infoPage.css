@@ -55,7 +55,7 @@ html, body {
 }
 
 p strong {
-    color: #ff0000; /* Цвет текста номера телефона */
-    font-weight: bold; /* Жирный шрифт */
+    color: #ff0000;
+    font-weight: bold; 
   }
   

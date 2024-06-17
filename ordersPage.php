@@ -95,42 +95,48 @@ if (isset($_POST['deleteOrder'])) {
             <div id="newTable" class="tabContent">
                 <br><br>
                 <p>New</p>
-                <table>
-                    <?php include 'includes/ordersTableTemplate.php'; ?>
-                    <tbody>
-                        <?php foreach($newOrders as $order): ?>
-                            <?php include 'includes/ordersTable.inc.php'; ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <?php include 'includes/ordersTableTemplate.php'; ?>
+                        <tbody>
+                            <?php foreach($newOrders as $order): ?>
+                                <?php include 'includes/ordersTable.inc.php'; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div id="inProgressTable" class="tabContent">
                 <br>
                 <br>
                 <p>In progress</p>
-                <table>
-                    <?php include 'includes/ordersTableTemplate.php'; ?>
-                    <tbody>
-                        <?php foreach($inProgressOrders as $order): ?>
-                            <?php include 'includes/ordersTable.inc.php'; ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <?php include 'includes/ordersTableTemplate.php'; ?>
+                        <tbody>
+                            <?php foreach($inProgressOrders as $order): ?>
+                                <?php include 'includes/ordersTable.inc.php'; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div id="doneTable" class="tabContent">
                 <br>
                 <br>
                 <p>Done</p>
-                <table>
-                    <?php include 'includes/ordersTableTemplate.php'; ?>
-                    <tbody>
-                        <?php foreach($doneOrders as $order): ?>
-                            <?php include 'includes/ordersTable.inc.php'; ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <?php include 'includes/ordersTableTemplate.php'; ?>
+                        <tbody>
+                            <?php foreach($doneOrders as $order): ?>
+                                <?php include 'includes/ordersTable.inc.php'; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </form>

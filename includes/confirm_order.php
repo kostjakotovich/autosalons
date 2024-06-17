@@ -6,10 +6,12 @@
         <button type="button" class="confirmation-close" onclick="closeConfirmationModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <button type="button" class="scroll-down-btn" onclick="scrollDown()">
+          &#x2193;
+        </button>
       </div>
       <div class="confirmation-modal-body">
         <div class="row">
-          <!-- Первый столбец с информацией об автомобиле -->
           <div class="col-md-6">
             <h6><strong>Offer Information:</strong></h6>
             <div class="divider"></div>
@@ -27,11 +29,9 @@
             <p><strong>Engine Price:</strong> <?php echo $selectedOfferEngine['engine_price'] . ' €';?></p>
             <p><strong>Total Price:</strong> <span class="final-price"><?php echo $selectedOfferInfo['price'] + $selectedOfferColor['color_price'] + $selectedOfferTransmission['transmission_price'] + $selectedOfferEngine['engine_price'] . ' €'; ?></span></p>
           </div>
-          <!-- Вертикальная полоса -->
           <div class="col-md-1">
             <div class="vertical-line"></div>
           </div>
-          <!-- Второй столбец с информацией о пользователе -->
           <div class="col-md-5">
             <div class="confirmation-user-info">
               <h6><strong>Customer Information:</strong></h6>
@@ -43,10 +43,10 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="confirmation-modal-footer">
-        <button type="button" class="confirmation-btn confirmation-btn-secondary" onclick="closeConfirmationModal()">Back</button>
-        <button type="submit" name="submit_order" class="confirmation-btn confirmation-btn-primary">Confirm</button>
+        <div class="confirmation-modal-footer">
+          <button type="button" class="confirmation-btn confirmation-btn-secondary" onclick="closeConfirmationModal()">Back</button>
+          <button type="submit" name="submit_order" class="confirmation-btn confirmation-btn-primary">Confirm</button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,6 +78,37 @@ function showConfirmationModal() {
 function closeConfirmationModal() {
   document.getElementById("confirmation_modal").style.display = "none";
 }
+
+function scrollDown() {
+  var modalContent = document.querySelector('.confirmation-modal-content');
+  var scrollAmount = modalContent.scrollHeight - modalContent.scrollTop - modalContent.clientHeight;
+  
+  modalContent.scrollBy({
+    top: scrollAmount,
+    behavior: 'smooth'
+  });
+
+  var isScrolledToBottom = modalContent.scrollHeight - modalContent.scrollTop === modalContent.clientHeight;
+  
+  var scrollDownBtn = document.querySelector('.scroll-down-btn');
+  if (isScrolledToBottom) {
+    scrollDownBtn.classList.add('hidden');
+  } else {
+    scrollDownBtn.classList.remove('hidden');
+  }
+}
+
+document.querySelector('.confirmation-modal-content').addEventListener('scroll', function() {
+  var modalContent = this;
+  var isScrolledToBottom = modalContent.scrollHeight - modalContent.scrollTop === modalContent.clientHeight;
+  
+  var scrollDownBtn = document.querySelector('.scroll-down-btn');
+  if (isScrolledToBottom) {
+    scrollDownBtn.classList.add('hidden');
+  } else {
+    scrollDownBtn.classList.remove('hidden');
+  }
+});
 </script>
 
 <style>
@@ -90,11 +121,13 @@ function closeConfirmationModal() {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 3;
+
 }
 
 .confirmation-modal-dialog {
   position: absolute;
   width: 200%;
+  height: 130%; 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -102,19 +135,21 @@ function closeConfirmationModal() {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .confirmation-modal-content {
   padding: 20px;
+  height: 100%;
+  overflow-y: auto; 
 }
 
 .confirmation-modal-header,
 .confirmation-modal-footer {
   padding: 10px;
-  background-color: #f7f7f7;
   border-bottom: 1px solid #ddd;
   display: flex;
-  justify-content: center; /* Центрирование по горизонтали */
+  justify-content: center;
 }
 
 .confirmation-modal-body {
@@ -180,7 +215,7 @@ function closeConfirmationModal() {
 
 .final-price {
   text-decoration: underline;
-  text-underline-offset: 4px; /* Дополнительный отступ между цифрами и подчеркиванием */
+  text-underline-offset: 4px; 
 }
 
 .divider {
@@ -189,4 +224,33 @@ function closeConfirmationModal() {
   background-color: #ccc; 
   margin: 20px 0; 
 }
+
+.scroll-down-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  background-color: #007bff;
+  color: #fff;
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-down-btn.hidden {
+  display: none; 
+}
+
+
 </style>

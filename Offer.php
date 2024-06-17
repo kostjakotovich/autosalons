@@ -19,6 +19,22 @@ class Offer {
     public function __construct() {
         $this->conn = (new Database())->connect();
     }
+
+    public function getAllBrands() {
+        $sql = "SELECT DISTINCT manufacturer FROM offers ORDER BY manufacturer";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $brands = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $brands;
+    }
+
+    public function getModelsByBrand($brand) {
+        $sql = "SELECT DISTINCT type FROM offers WHERE manufacturer = ? ORDER BY type";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$brand]);
+        $models = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $models;
+    }    
     
     public function getOffer($offerID) {
         $sql = "SELECT * FROM offers 
@@ -187,7 +203,6 @@ class Offer {
     
             $params = [];
     
-            // Добавляем значения для SET части запроса и их параметры в массивы, если они были переданы
             if (isset($type)) {
                 $setValues[] = 'offers.type = ?';
                 $params[] = $type;
@@ -269,25 +284,21 @@ class Offer {
     }    
 
     public function addConfiguration($detailsID, $offersInfoID, $color, $image, $color_price, $transmission_type, $transmission_price, $engine_type, $engine_price) {
-        // Вставка записи в таблицу car_colors
         $sql = "INSERT INTO car_colors (color, image, color_price) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$color, $image, $color_price]);
         $colorID = $this->conn->lastInsertId();
     
-        // Вставка записи в таблицу transmission
         $sql = "INSERT INTO transmission (transmission_type, transmission_price) VALUES (?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$transmission_type, $transmission_price]);
         $transmissionID = $this->conn->lastInsertId();
     
-        // Вставка записи в таблицу engine
         $sql = "INSERT INTO engine (engine_type, engine_price) VALUES (?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$engine_type, $engine_price]);
         $engineID = $this->conn->lastInsertId();
     
-        // Вставка записи в таблицу specific_details
         $sql = "INSERT INTO specific_details (offersInfoID, colorID, transmissionID, created_at, engineID) 
                 VALUES (?, ?, ?, NOW(), ?)";
         $stmt = $this->conn->prepare($sql);
@@ -342,7 +353,7 @@ class Offer {
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
-            return false; // В случае ошибки возвращаем false
+            return false;
         }
     }
 
@@ -367,5 +378,115 @@ class Offer {
         return $result['active_status'] ?? false;
     }    
     
+    public function addColor($color) {
+        $sql = "INSERT INTO all_colors (color_name) VALUES (?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$color]);
+    }
+
+    public function getAllColors() {
+        $sql = "SELECT * FROM all_colors";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteColor($color_name_id) {
+        $sql = "DELETE FROM all_colors WHERE color_name_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$color_name_id]);
+    }
+
+    public function updateColor($color_name_id, $newColor)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE all_colors SET color_name = :newColor WHERE color_name_id = :color_name_id");
+            $stmt->bindParam(':newColor', $newColor);
+            $stmt->bindParam(':color_name_id', $color_name_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function addTransmission($transmission) {
+        $sql = "INSERT INTO all_transmissions (transmission) VALUES (?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$transmission]);
+    }
+
+    public function getAllTransmissions() {
+        $sql = "SELECT * FROM all_transmissions";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteTransmission($transmission_name_id) {
+        $sql = "DELETE FROM all_transmissions WHERE transmission_name_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$transmission_name_id]);
+    }
+
+    public function updateTransmission($transmission_name_id, $newTransmission)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE all_transmissions SET transmission = :newTransmission WHERE transmission_name_id = :transmission_name_id");
+            $stmt->bindParam(':newTransmission', $newTransmission);
+            $stmt->bindParam(':transmission_name_id', $transmission_name_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function addEngine($engine) {
+        $sql = "INSERT INTO all_engines (engine) VALUES (?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$engine]);
+    }
+
+    public function getAllEngines() {
+        $sql = "SELECT * FROM all_engines";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteEngine($engine_name_id) {
+        $sql = "DELETE FROM all_engines WHERE engine_name_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$engine_name_id]);
+    }
+
+    public function updateEngine($engine_name_id, $newEngine)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE all_engines SET engine = :newEngine WHERE engine_name_id = :engine_name_id");
+            $stmt->bindParam(':newEngine', $newEngine);
+            $stmt->bindParam(':engine_name_id', $engine_name_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function colorExists($color) {
+        $sql = "SELECT COUNT(*) FROM all_colors WHERE color_name = :color";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':color' => $color]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+    public function transmissionExists($transmission) {
+        $sql = "SELECT COUNT(*) FROM all_transmissions WHERE transmission = :transmission";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':transmission' => $transmission]);
+        return $stmt->fetchColumn() > 0;
+    }
+
+    public function engineExists($engine) {
+        $sql = "SELECT COUNT(*) FROM all_engines WHERE engine = :engine";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':engine' => $engine]);
+        return $stmt->fetchColumn() > 0;
+    }
 }
 ?>

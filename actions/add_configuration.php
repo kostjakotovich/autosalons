@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $offersInfoID = $_POST['offersInfoID'];
     $offerID = $_POST['offerID'];
 
-    // Обработка загруженного изображения
     $imageFilePath = '';
     if ($_FILES['car_image']['error'] === UPLOAD_ERR_OK) {
         $imageFileName = $_FILES['car_image']['name'];

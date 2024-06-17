@@ -2,41 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    flex-direction: row; /* display cards in a row */
-  }
-  
-.card {
-    margin-right: 20px;
-    margin-bottom: 20px ;
-    width: 400px;
-    height: 370px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px #ccc;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    
+    flex-direction: row;
 }
-  
-.card:hover {
-    filter: brightness(80%);
-}
-  
-.card::before {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-  
-.card:hover::before {
-    opacity: 1;
-}
-  
+
 .card-body {
     margin-top: -2%;
     padding: 15px;
@@ -46,27 +14,10 @@
     height: 100%;
     text-align: center;
 }
-  
+
 .card-title {
     font-size: 20px;
     font-weight: bold;
-}
-  
-.btn {
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    width: 100%;
-    padding: 10px 0;
-    background-color: #428bca;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-  
-.card:hover .btn {
-    bottom: 0;
 }
 
 .card img {
@@ -75,5 +26,105 @@
     width: 100%;
     height: 220px;
     display: block;
-  }
-  
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card {
+    position: relative;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 400px;
+    height: 370px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #2c2c2c;
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.35s ease-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #a7a7a7; 
+}
+
+.card:hover:before {
+    transform: scale(40);
+}
+
+.card:hover .car_image {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.card-text.year {
+    font-style: italic;
+}
+
+.card-text.price {
+    font-weight: bold;
+    color: green;
+}
+
+.card:hover .card-title,
+.card:hover .card-text {
+    transition: all 0.5s ease-out;
+    color: #fff;
+}
+
+.offer-status {
+    position: absolute;
+    top: 10px;
+    height: 10%;
+    right: 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.card:hover .offer-status {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+
+}
+
+.offer-status p {
+    font-size: 0.8em;
+    margin: auto 0; 
+}
+

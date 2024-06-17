@@ -5,7 +5,6 @@ class database {
     private $dbname = "mariadb";
     private $DBconnection;
 
-    //Connecting to the database, catching any errors that can be present.
     public function connect(){
         try{
             $this->DBconnection = new PDO("mysql:host=localhost; dbname=$this->dbname" , $this->DBusername, $this->DBpassword);
@@ -13,7 +12,7 @@ class database {
             return $this->DBconnection;
         }
         catch(PDOException $ex){
-            echo "Exception error: " . $ex->getMessage();// for testing purposes.
+            echo "Exception error: " . $ex->getMessage();
             die($ex->getMessage());
         }
     }

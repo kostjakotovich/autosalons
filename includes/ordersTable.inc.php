@@ -3,7 +3,7 @@
     $totalPrice = $order['price'] + $order['color_price'] + $order['transmission_price'] + $order['engine_price'];
 
     echo "<tr>";
-    echo "<td>".$order['orderID']."</td>";
+    echo "<td><a href='offerPage.php?offerID=" . $order['orderOfferID'] . "&detailsID=" . $order['orderDetailsID'] . "'>" . $order['orderOfferID'] . "</a></td>";
     echo "<td>".$order['orderDate']."</td>";
     echo "<td>".$order['name']."</td>";
     echo "<td>".$order['surname']."</td>";
@@ -13,14 +13,9 @@
     echo "<td>".$order['manufacturer']."</td>";
     echo "<td>".$order['type']."</td>";
     echo "<td>".$order['yearOfManufacture']."</td>";
-    echo "<td>".$order['body_type']."</td>";
     echo "<td>".$order['transmission_type']."</td>";
     echo "<td>".$order['engine_type']."</td>";
     echo "<td>".$order['color']."</td>";
-    echo "<td>".$order['price']." €</td>";
-    echo "<td>".$order['transmission_price']." €</td>";
-    echo "<td>".$order['engine_price']." €</td>";
-    echo "<td>".$order['color_price']." €</td>";
     echo "<td>".$totalPrice." €</td>";
     echo "<td>
         <select name='status[$order[orderID]]' class='select1'>

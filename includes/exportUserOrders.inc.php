@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php'; // Путь к autoload.php из PhpSpreadsheet
+require '../vendor/autoload.php'; 
 require_once '../Order.php';
 
 
@@ -7,7 +7,6 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
-    // exportUserOrders.inc.php
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['export'])) {
         $userID = $_POST['userID'];
         $totalSum = $_POST['totalSum'];

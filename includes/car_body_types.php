@@ -10,5 +10,16 @@ $carBodyTypes = [
     "Pickup Truck",
     "Wagon",
     "Van",
+    "Roadster",
+    "Sportback",
+    "Liftback",
+    "Fastback",
+    "Compact",
+    "Microcar",
+    "Off-Road Vehicle",
+    "Luxury Car",
+    "Limousine",
+    "City Car",
 ];
+
 ?>

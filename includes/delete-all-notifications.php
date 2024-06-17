@@ -1,7 +1,7 @@
 <?php
     require_once '../User.php';
 
-    $userID = isset($_POST['userID']) ? $_POST['userID'] : null; // Получить userID из POST запроса
+    $userID = isset($_POST['userID']) ? $_POST['userID'] : null;
     
     if ($userID) {
         $user = new UserMain($userID);

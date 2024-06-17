@@ -19,15 +19,12 @@ if (isset($_SESSION['userID'])) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $unreadCount = $result['unread_count'];
 
-        // Формируем JSON-ответ
         $response = array('status' => ($unreadCount > 0) ? 'unread' : 'read');
         echo json_encode($response);
     } else {
-        // Ошибка при выполнении запроса
         echo json_encode(array('status' => 'error'));
     }
 } else {
-    // Пользователь не авторизован
     echo json_encode(array('status' => 'invalid'));
 }
 ?>

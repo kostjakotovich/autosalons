@@ -1,0 +1,46 @@
+.attribute-container {
+    margin-top: 50px;
+    min-height: calc(80vh - 150px);
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: 21%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+.attribute-column {
+    margin-bottom: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.attribute-form-group {
+    display: flex;
+    align-items: center;
+}
+.attribute-form-group label {
+    margin-right: 10px;
+}
+.attribute-form-group button {
+    margin-left: 10px;
+}
+.output-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.output-container .output-item {
+    margin-bottom: 5px;
+    text-align: center; 
+}
+
+.output-item .form-control {
+    width: 70%;
+}
+
+.attribute-container input{
+    width: 100%;
+}
+
+

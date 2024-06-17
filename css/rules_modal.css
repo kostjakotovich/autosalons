@@ -16,7 +16,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
-    max-width: 600px; /* Set maximum width */
+    max-width: 600px; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -34,16 +34,16 @@
 }
 
 .custom-button-group {
-    display: flex; /* Display buttons in a row */
-    justify-content: center; /* Center buttons horizontally */
+    display: flex;
+    justify-content: center; 
     margin-top: 20px;
 }
 
 .custom-button-group button {
-    padding: 10px 30px; /* Adjust padding for better button appearance */
+    padding: 10px 30px;
     margin: 0 10px;
     cursor: pointer;
-    width: 200px; /* Set equal width for buttons */
+    width: 200px; 
     border: none;
     background-color: #007bff;
     color: #fff;

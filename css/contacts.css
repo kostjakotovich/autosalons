@@ -3,7 +3,7 @@
 body {
     background-color: rgb(255, 255, 255);
 }
-/* Стили для контейнера emp-profile */
+
 .emp-profile-container {
     width:40%;
     min-height: 500px;
@@ -14,7 +14,6 @@ body {
     margin: 2% auto;
 }
 
-/* Стили для разделительной полосы */
 .emp-profile-divider {
     width: 100%;
     height: 2px;
@@ -22,24 +21,20 @@ body {
     margin: 20px 0;
 }
 
-/* Стили для заголовка */
 .emp-profile-title {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-/* Стили для контактных данных */
 .emp-profile-contact-info {
     margin-bottom: 20px;
 }
 
-/* Стили для адреса */
 .emp-profile-address {
     font-style: italic;
     color: #666;
 }
 
-/* Стили для контактного номера */
 .emp-profile-phone {
     color: #333;
     font-weight: bold;

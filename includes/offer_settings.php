@@ -14,42 +14,79 @@
                             <form method="post" action="edit_information.php" enctype="multipart/form-data">
                                 <p class="card-text" style="text-align: center; margin-top: 20px; margin-bottom: 20px;"><strong>Edit Information:</strong></p>
                                 <div style="display: flex;">
-                                    <!-- Первая колонка -->
                                     <div style="flex: 1; padding-right: 20px;">
                                         <h6>Common Parameters</h6><br>
                                         <div class="offer-settings-divider"></div>
                                         <label for="type" style="display: block;">Model:</label>
-                                        <input type="text" id="type" name="type" value="<?php echo $selectedOffer['type']; ?>" style="width: 80%;" required><br><br>
+                                        <input type="text" id="type" name="type" value="<?php echo $selectedOffer['type']; ?>" style="width: 80%;" maxlength="20" required><br><br>
                                         <label for="manufacturer" style="display: block;">Manufacturer:</label>
-                                        <input type="text" id="manufacturer" name="manufacturer" value="<?php echo $selectedOffer['manufacturer']; ?>" style="width: 80%;" required><br><br>
+                                        <input type="text" id="manufacturer" name="manufacturer" value="<?php echo $selectedOffer['manufacturer']; ?>" style="width: 80%;" maxlength="20" required><br><br>
                                         <label for="yearOfManufacture" style="display: block;">Year of Manufacture:</label>
-                                        <input type="text" id="yearOfManufacture" name="yearOfManufacture" value="<?php echo $selectedOfferInfo['yearOfManufacture'] ?>" style="width: 80%;" required><br><br>
+                                        <select name="yearOfManufacture" id="yearOfManufacture" style="width: 80%; margin-left: 10%;" class="form-control" required>
+                                            <?php
+                                            $currentYear = date('Y');
+                                            $selectedYear = $selectedOfferInfo['yearOfManufacture'];
+                                            for ($year = 1990; $year <= $currentYear; $year++) {
+                                                $selected = ($year == $selectedYear) ? 'selected' : '';
+                                                echo '<option value="' . $year . '" ' . $selected . '>' . $year . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                        <br><br>
                                         <label for="weight" style="display: block;">Weight:</label>
-                                        <input type="text" id="weight" name="weight" pattern="[0-9\.]+" value="<?php echo $selectedOfferInfo['weight']; ?>" style="width: 80%;" required><br><br>
+                                        <input type="text" id="weight" name="weight" pattern="[0-9\.]+" value="<?php echo $selectedOfferInfo['weight']; ?>" style="width: 80%;" maxlength="20" required><br><br>
                                         <label for="body_type" style="display: block;">Body type:</label>
-                                        <input type="text" id="body_type" name="body_type" value="<?php echo $selectedOfferInfo['body_type']; ?>" style="width: 80%;" required><br><br>
+                                        <select id="body_type" name="body_type" style="width: 80%; margin-left: 10%;" class="form-control" required>
+                                            <?php
+                                            foreach ($carBodyTypes as $bodyType) {
+                                                $selected = ($bodyType == $selectedOfferInfo['body_type']) ? 'selected' : '';
+                                                echo "<option value=\"$bodyType\" $selected>$bodyType</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <br><br>
+
                                         <label for="price" style="display: block;">Car Price:</label>
-                                        <input type="text" id="price" name="price" pattern="[0-9\.]+" value="<?php echo $selectedOfferInfo['price']; ?>" style="width: 80%;" required><br><br>
+                                        <input type="text" id="price" name="price" pattern="[0-9\.]+" value="<?php echo $selectedOfferInfo['price']; ?>" style="width: 80%;" maxlength="20" required><br><br>
                                     </div>
 
-                                    <!-- Вторая колонка -->
                                     <div style="flex: 1; padding-left: 20px;">
                                         <h6>Configuration Parameters</h6><br>
                                         <div class="offer-settings-divider"></div>
                                         <label for="transmission_type" style="display: block;">Transmission:</label>
-                                        <input type="text" id="transmission_type" name="transmission_type" value="<?php echo $selectedOfferTransmission['transmission_type']; ?>" style="width: 80%;" required><br><br>
+                                        <select id="transmission_type" name="transmission_type" style="width: 80%; margin-left: 10%;" class="form-control" required>
+                                            <?php foreach ($allTransmissions as $transmission) { ?>
+                                                <option value="<?php echo $transmission['transmission'] ?>" <?php echo $transmission['transmission'] == $selectedOfferTransmission['transmission_type'] ? 'selected' : '' ?>>
+                                                    <?php echo $transmission['transmission'] ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                        <br><br>
                                         <label for="color" style="display: block;">Color Name:</label>
-                                        <input type="text" id="color" name="color" value="<?php echo $selectedOfferColor['color']; ?>" style="width: 80%;" required><br><br>
+                                        <select id="color" name="color" style="width: 80%; margin-left: 10%;" class="form-control" required>
+                                            <?php foreach ($allColors as $color) { ?>
+                                                <option value="<?php echo $color['color_name'] ?>" <?php echo $color['color_name'] == $selectedOfferColor['color'] ? 'selected' : '' ?>>
+                                                    <?php echo $color['color_name'] ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                        <br><br>
                                         <label for="engine_type" style="display: block;">Engine Type:</label>
-                                        <input type="text" id="engine_type" name="engine_type" value="<?php echo $selectedOfferEngine['engine_type']; ?>" style="width: 80%;" required><br><br>
+                                        <select id="engine_type" name="engine_type" style="width: 80%; margin-left: 10%;" class="form-control" required>
+                                            <?php foreach ($allEngines as $engine) { ?>
+                                                <option value="<?php echo $engine['engine'] ?>" <?php echo $engine['engine'] == $selectedOfferEngine['engine_type'] ? 'selected' : '' ?>>
+                                                    <?php echo $engine['engine'] ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                        <br><br>
                                         <label for="color_price" style="display: block;">Color Price:</label>
-                                        <input type="text" id="color_price" name="color_price" value="<?php echo $selectedOfferColor['color_price']; ?>" style="width: 80%;" required><br><br>
+                                        <input type="text" id="color_price" name="color_price" pattern="[0-9\.]+" value="<?php echo $selectedOfferColor['color_price']; ?>" style="width: 80%;" maxlength="20" required><br><br>
                                         <label for="transmission_price" style="display: block;">Transmission Price:</label>
-                                        <input type="text" id="transmission_price" name="transmission_price" value="<?php echo $selectedOfferTransmission['transmission_price']; ?>" style="width: 80%;" required><br><br>
+                                        <input type="text" id="transmission_price" name="transmission_price" pattern="[0-9\.]+" value="<?php echo $selectedOfferTransmission['transmission_price']; ?>" style="width: 80%;" maxlength="20" required><br><br>
                                         <label for="engine_price" style="display: block;">Engine Price:</label>
-                                        <input type="text" id="engine_price" name="engine_price" value="<?php echo $selectedOfferEngine['engine_price']; ?>" style="width: 80%;" required><br><br>
-
-                                        <!-- поле для загрузки изображения -->                        
+                                        <input type="text" id="engine_price" name="engine_price" pattern="[0-9\.]+" value="<?php echo $selectedOfferEngine['engine_price']; ?>" style="width: 80%;" maxlength="20" required><br><br>
+                     
                                         <label class="custom-file-upload">
                                             <span class="custom-file-upload-text">Choose File</span>
                                             <input type="file" id="car_image" name="car_image" accept="image/*" data-file-name="No file chosen">
@@ -67,33 +104,55 @@
                             <form method="post" action="actions/add_configuration.php" enctype="multipart/form-data">
                                 <p class="card-text" style="text-align: center; margin-top: 20px; margin-bottom: 20px;"><strong>Add Configuration:</strong></p>
                                 
-                                <!-- Введите необходимые поля для добавления комплектации -->
                                 <label for="color" style="display: block;">Color:</label>
-                                <input type="text" id="color" name="color" style="width: 40%;" required><br><br>
-
-                                <!-- Поле для загрузки изображения -->   
+                                <select id="color" name="color" style="width: 40%; margin-left: 30%;" class="form-control" maxlength="50" required>
+                                    <option value="">Select Color</option>
+                                    <?php foreach ($allColors as $color) { ?>
+                                        <option value="<?php echo $color['color_name']; ?>">
+                                            <?php echo $color['color_name']; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                                <br><br>
+ 
                                 <label for="color">Image:</label>   
                                 <br><br>                  
                                 <label class="custom-file-upload">
                                     <span class="custom-file-upload-text">Choose File</span>
-                                    <input type="file" id="car_image" name="car_image" accept="image/*">
+                                    <input type="file" id="car_image" name="car_image" accept="image/*" required>
                                 </label>
                                 <br><br>
 
                                 <label for="color_price" style="display: block;">Color Price:</label>
-                                <input type="text" id="color_price" name="color_price" style="width: 40%;" required><br><br>
+                                <input type="text" id="color_price" name="color_price" style="width: 40%;" maxlength="20" pattern="[0-9\.]+" required><br><br>
 
                                 <label for="transmission_type" style="display: block;">Transmission Type:</label>
-                                <input type="text" id="transmission_type" name="transmission_type" style="width: 40%;" required><br><br>
+                                <select id="transmission_type" name="transmission_type" style="width: 40%; margin-left: 30%;" class="form-control" required>
+                                    <option value="">Select Transmission</option>
+                                    <?php foreach ($allTransmissions as $transmission) { ?>
+                                        <option value="<?php echo $transmission['transmission']; ?>">
+                                            <?php echo $transmission['transmission']; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                                <br><br>
 
                                 <label for="transmission_price" style="display: block;">Transmission Price:</label>
-                                <input type="text" id="transmission_price" name="transmission_price" style="width: 40%;" required><br><br>
+                                <input type="text" id="transmission_price" name="transmission_price" style="width: 40%;" maxlength="20" pattern="[0-9\.]+" required><br><br>
 
                                 <label for="engine_type" style="display: block;">Engine Type:</label>
-                                <input type="text" id="engine_type" name="engine_type" style="width: 40%;" required><br><br>
+                                <select id="engine_type" name="engine_type" style="width: 40%; margin-left: 30%;" class="form-control" maxlength="20" required>
+                                    <option value="">Select Engine</option>
+                                    <?php foreach ($allEngines as $engine) { ?>
+                                        <option value="<?php echo $engine['engine']; ?>">
+                                            <?php echo $engine['engine']; ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                                <br><br>
 
                                 <label for="engine_price" style="display: block;">Engine Price:</label>
-                                <input type="text" id="engine_price" name="engine_price" style="width: 40%;" required><br><br>
+                                <input type="text" id="engine_price" name="engine_price" style="width: 40%;" pattern="[0-9\.]+" maxlength="20" required><br><br>
 
                                 <input type="hidden" name="detailsID" value="<?php echo $_GET['detailsID']; ?>">
                                 <input type="hidden" name="offersInfoID" value="<?php echo $offersInfoID; ?>">
@@ -133,57 +192,38 @@
 <?php endif; ?>
 
 <script>
-    // Получаем ссылку на модальное окно
     var modal = document.getElementById('settingsModal');
 
     function openModal() {
-        modal.style.display = 'block';
-        document.getElementById('editTab').classList.add('activeSetTab');
-        document.getElementById('addConfigTab').classList.remove('activeSetTab');
-        document.getElementById('manageOptionsForm').classList.remove('activeSetTab');
+    modal.style.display = 'block';
+    showTab('edit');
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+function showTab(tabName) {
+    document.getElementById('editForm').style.display = 'none';
+    document.getElementById('addConfigForm').style.display = 'none';
+    document.getElementById('manageOptionsForm').style.display = 'none';
+
+    document.getElementById('editTab').classList.remove('activeSetTab');
+    document.getElementById('addConfigTab').classList.remove('activeSetTab');
+    document.getElementById('manageOptionsTab').classList.remove('activeSetTab');
+
+    if (tabName === 'edit') {
         document.getElementById('editForm').style.display = 'block';
-        document.getElementById('addConfigForm').style.display = 'none';
-        document.getElementById('manageOptionsForm').style.display = 'none';
+        document.getElementById('editTab').classList.add('activeSetTab');
+    } else if (tabName === 'addConfig') {
+        document.getElementById('addConfigForm').style.display = 'block';
+        document.getElementById('addConfigTab').classList.add('activeSetTab');
+    } else if (tabName === 'manageOptions') {
+        document.getElementById('manageOptionsForm').style.display = 'block';
+        document.getElementById('manageOptionsTab').classList.add('activeSetTab');
     }
+}
 
-    // Функция для скрытия модального окна
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-
-    function showTab(tabName) {
-        if (tabName === 'edit') {
-            document.getElementById('editForm').style.display = 'block';
-            document.getElementById('addConfigForm').style.display = 'none';
-            document.getElementById('manageOptionsForm').style.display = 'none';
-            
-            // Добавляем стиль активной кнопке "Edit"
-            document.getElementById('editTab').classList.add('activeSetTab');
-            // Убираем стиль активной кнопки с "Add Configuration"
-            document.getElementById('addConfigTab').classList.remove('activeSetTab');
-            document.getElementById('manageOptionsTab').classList.remove('activeSetTab');
-        } else if (tabName === 'addConfig') {
-            document.getElementById('editForm').style.display = 'none';
-            document.getElementById('addConfigForm').style.display = 'block';
-            document.getElementById('manageOptionsForm').style.display = 'none';
-            
-            // Добавляем стиль активной кнопке "Add Configuration"
-            document.getElementById('addConfigTab').classList.add('activeSetTab');
-            // Убираем стиль активной кнопки с "Edit"
-            document.getElementById('editTab').classList.remove('activeSetTab');
-            document.getElementById('manageOptionsTab').classList.remove('activeSetTab');
-        } else if (tabName === 'manageOptions') {
-            document.getElementById('editForm').style.display = 'none';
-            document.getElementById('addConfigForm').style.display = 'none';
-            document.getElementById('manageOptionsForm').style.display = 'block';
-            
-            // Добавляем стиль активной кнопке "Manage Options"
-            document.getElementById('manageOptionsTab').classList.add('activeSetTab');
-            // Убираем стили активных кнопок с "Edit" и "Add Configuration"
-            document.getElementById('editTab').classList.remove('activeSetTab');
-            document.getElementById('addConfigTab').classList.remove('activeSetTab');
-        }
-    }
 </script>
 
 <style>
@@ -210,7 +250,7 @@
     .offer-settings-divider {
         border-bottom: 1px solid #ccc;
         width: 70%;
-        margin: 0 auto; /* Центрирование по горизонтали */
+        margin: 0 auto;
         margin-top: -5%;
         margin-bottom: 5%;
     }

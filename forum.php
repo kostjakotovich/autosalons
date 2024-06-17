@@ -11,62 +11,51 @@
 
     $commentObj = new Comment();
 
-    // Определяем количество комментариев на странице
     $commentsPerPage = 7;
 
     $startIndex = 0;
     $endIndex = $startIndex + $commentsPerPage;
-    // Определяем общее количество страниц, которые будут отображаться
 
     $totalComments = $commentObj->getTotalOriginalCommentsCount();
     $totalPages = ceil($totalComments / $commentsPerPage);
 
-    // Получаем текущую страницу из параметров URL
     if (isset($_GET['page'])) {
         $currentPage = $_GET['page'];
     } else {
         $currentPage = 1;
     }
 
-    // Определяем начальный и конечный индексы для отображаемых комментариев
     $startIndex = ($currentPage - 1) * $commentsPerPage;
     $endIndex = $startIndex + $commentsPerPage;
 
-    // Проверяем, является ли текущая страница последней
     if ($currentPage == $totalPages) {
-        // Вычисляем количество комментариев на последней странице
         $commentsOnLastPage = $totalComments - ($totalPages - 1) * $commentsPerPage;
-        // Изменяем переменную $endIndex, чтобы отобразить только необходимое количество комментариев на последней странице
         $endIndex = $startIndex + $commentsOnLastPage;
     }
 
-    // Получаем комментарии для текущей страницы
     $comments = $commentObj->getOriginalCommentsForPage($startIndex, $commentsPerPage);
 
-    // Обработка формы для добавления нового комментария
     if (isset($_POST['comment'])) {
         $comment = $_POST['comment'];
         $userID = $_SESSION['userID'];
         $commentObj->addComment($comment, $userID);
-        header("Location: forum.php"); // перезагрузка страницы для избежания повторной отправки формы
+        header("Location: forum.php");
         exit;
     }
 
-    // Получение ID с комментария для его удаления
     if (isset($_POST['delete'])) {
         $commentID = $_POST['commentID'];
         $commentObj->deleteComment($commentID);
-        header("Location: forum.php"); // перезагрузка страницы для избежания повторной отправки формы
+        header("Location: forum.php"); 
         exit;
     }
 
-    // Получение ID комментария для ответа
     if (isset($_POST['reply'])) {
         $reply = $_POST['reply'];
         $userID = $_SESSION['userID'];
         $commentID = $_POST['parentCommentID']; 
         $commentObj->addReply($reply, $userID, $commentID);
-        header("Location: forum.php"); // перезагрузка страницы для избежания повторной отправки формы
+        header("Location: forum.php");
         exit;
     }
 
@@ -89,7 +78,6 @@
 
 <html>
 <head>
-    <!-- style css links -->
     <link rel="stylesheet" href="css/forum.css">
     <link rel="stylesheet" href="css/rules_modal.css">
 </head>
@@ -131,7 +119,6 @@
                             </div>
                         <?php } ?>
                     </div>
-                    <!-- Форма для ответа на комментарий -->
                     <div class="reply-form" style="display: none;">
                         <form method="post">
                             <input type="hidden" name="parentCommentID" value="<?php echo $comment['commentID']; ?>">
@@ -142,7 +129,6 @@
                     </div>
                 </div>
 
-                    <!-- Показывать ответы только при наличии -->
                     <?php $replies = $commentObj->getRepliesForComment($comment['commentID']); ?>
                     <?php if (!empty($replies)) { ?>
                         <button class="show-replies-btn" data-comment-id="<?php echo $comment['commentID']; ?>">Show Replies (<?php echo count($replies); ?>)</button>
@@ -178,7 +164,6 @@
                                                     </div>
                                                 <?php } ?>
                                             </div>
-                                            <!-- Форма для ответа на комментарий -->
                                             <div class="reply-form" style="display: none;">
                                                 <form method="post">
                                                     <input type="hidden" name="parentCommentID" value="<?php echo $reply['commentID']; ?>"> 
@@ -197,7 +182,6 @@
             <?php } ?>
 
             <script>
-                // JavaScript для управления отображением формы ответа и ответов
                 document.querySelectorAll('.reply-btn').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         var parentContainer = this.parentNode.parentNode;
@@ -224,7 +208,6 @@
 
         <div class="pagination">
             <?php
-            // Отображаем ссылки на страницы
             for ($i = 1; $i <= $totalPages; $i++) {
                 if ($i == $currentPage) {
                     echo '<a href="#" class="active">' . $i . '</a>';

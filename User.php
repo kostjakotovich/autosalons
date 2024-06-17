@@ -81,15 +81,27 @@ class UserMain {
         $sql = "SELECT picture FROM user WHERE userID = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$this->userID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['picture'];
-    }
+        return $stmt->fetchColumn();
+    }    
     
-    public function updatePicture($pictureURL) {
+    public function updatePicture($newPictureURL) {
+        $sql = "SELECT picture FROM user WHERE userID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$this->userID]);
+        $currentPictureURL = $stmt->fetchColumn();
+    
+        if ($currentPictureURL && basename($currentPictureURL) !== 'default.png') {
+            $currentPicturePath = __DIR__ . '/../' . $currentPictureURL;
+            if (file_exists($currentPicturePath)) {
+                unlink($currentPicturePath);
+            }
+        }
+    
         $sql = "UPDATE user SET picture = ? WHERE userID = ?";
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([$pictureURL, $this->userID]);
+        return $stmt->execute([$newPictureURL, $this->userID]);
     }
+    
     
     /* Notifications methods */
     public function addNotification($topicID, $message) {
@@ -191,7 +203,7 @@ class UserMain {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$this->userID]);
         $rulesAccepted = $stmt->fetchColumn();
-        return $rulesAccepted === 1; // Вернет true, если правила приняты
+        return $rulesAccepted === 1;
     }    
 
     public function acceptRules() {

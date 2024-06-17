@@ -6,7 +6,6 @@ require_once 'connection.php';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
   <link rel="stylesheet" href="css/footer.css">
-  <!-- JSQuery Скрипт для плавной прокрутки страницы-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $(document).ready(function() {

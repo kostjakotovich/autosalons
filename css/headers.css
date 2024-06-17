@@ -27,16 +27,14 @@ header {
     outline: 0;
   }
 
-/* Измените цвет иконки */
 button.btn-link svg.bi {
-  color: #007bff; /* Цвет иконки */
+  color: #007bff;
 }
 
-/* Удалите подчеркивание при наведении курсора */
 button.btn-link:hover {
   text-decoration: none;
 }
 
 .spacer {
-  margin-right: 20px; /* Установите необходимый отступ между элементами */
+  margin-right: 20px;
 }

@@ -8,14 +8,12 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
     if (isset($_POST['orders_data'])) {
         $orders = unserialize($_POST['orders_data']);
     } else {
-        // Обработка ошибки: данные о заказах отсутствуют
         echo "Error: Orders data is missing.";
         exit;
     }
 
     $spreadsheet = new Spreadsheet();
 
-    // новый лист
     $sheet = $spreadsheet->getActiveSheet();
 
     $styleArray = [
@@ -77,10 +75,8 @@ if (isset($_POST['export']) && $_POST['export'] === 'true') {
         $row++;
     }
 
-    // объект Writer для формата Xlsx (Excel)
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
-    // заголовки и выводите файл в браузер
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment;filename="Orders.xlsx"');
     header('Cache-Control: max-age=0');

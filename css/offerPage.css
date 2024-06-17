@@ -76,7 +76,6 @@ input[type="text"],
     border-color: dodgerblue;
   }
 
-/* Стилизация для контейнера */
 .custom-file-upload {
 display: inline-block;
 padding: 6px 12px;
@@ -105,7 +104,6 @@ background-color: #f5f5f5;
 margin-top: 10px;
 }
 
-/* Общие стили для страницы */
 #overlay_order {
   position: fixed; 
   display: none; 
@@ -293,9 +291,9 @@ text-align: center;
 }
 
 .card-del-header {
-  display: flex; /* Сделать дочерние элементы flex-контейнером */
-  justify-content: space-between; /* Распределить пространство между элементами */
-  align-items: center; /* Выровнять элементы по вертикали */
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
 }
 
 .delete-conf-btn:hover {
@@ -323,7 +321,6 @@ border-color: #000;
   border-color: #000;
   }
 
-/* Стили для модального окна */
 .modal-settings {
   display: none;
   position: fixed;

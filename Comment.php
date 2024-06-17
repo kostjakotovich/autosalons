@@ -22,11 +22,32 @@ class Comment {
     }
 
     public function deleteComment($commentID) {
+        $sql = "SELECT parent_comment_id FROM comments WHERE commentID = :commentID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':commentID', $commentID, PDO::PARAM_INT);
+        $stmt->execute();
+        $parentCommentID = $stmt->fetchColumn();
+        
+        $this->deleteCommentAndChildren($commentID);
+    }
+    
+    private function deleteCommentAndChildren($commentID) {
+        $sql = "SELECT commentID FROM comments WHERE parent_comment_id = :commentID";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':commentID', $commentID, PDO::PARAM_INT);
+        $stmt->execute();
+        $childComments = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        
+        foreach ($childComments as $childCommentID) {
+            $this->deleteCommentAndChildren($childCommentID);
+        }
+        
         $sql = "DELETE FROM comments WHERE commentID = :commentID";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':commentID', $commentID, PDO::PARAM_INT);
         $stmt->execute();
     }
+    
 
     public function getTotalOriginalCommentsCount() {
     $sql = "SELECT COUNT(*) as total FROM comments WHERE comments.parent_comment_id IS NULL";
@@ -35,7 +56,6 @@ class Comment {
     return $result['total'];
     }
 
-    // Метод для получения оригинальных комментариев
     public function getOriginalCommentsForPage($startIndex, $commentsPerPage) {
         $sql = "SELECT comments.commentID, comments.userID, comments.comment, user.username, user.picture, comments.date
                 FROM comments 
@@ -71,13 +91,10 @@ class Comment {
         date_default_timezone_set('Europe/Riga');
         $date = date("Y-m-d H:i:s");
     
-        // Получаем имя пользователя, оставившего ответ
         $replyUsername = $this->getUsernameByUserID($userID);
     
-        // Получаем ID пользователя, которому отвечают
         $originalCommentUserID = $this->getUserIDForOriginalComment($parentCommentID);
     
-        // Вставка ответа в базу данных
         $sql = "INSERT INTO comments (comment, userID, date, parent_comment_id) VALUES (:comment, :userID, :date, :parentCommentID)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':comment', $comment);
@@ -85,8 +102,7 @@ class Comment {
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':parentCommentID', $parentCommentID);
         $stmt->execute();
-    
-        // Ограничение длины сообщения
+
         $maxMessageLength = 100; 
         if (strlen($comment) > $maxMessageLength) {
             $truncatedMessage = substr($comment, 0, $maxMessageLength) . "...";
@@ -96,7 +112,6 @@ class Comment {
             $notificationText = "You have received a reply from '$replyUsername' to your comment: '$comment'. Visit the <a href='forum.php'>forum</a> to view the response.";
         }
     
-        // Создание уведомления для пользователя, которому ответили
         $userMain = new UserMain($originalCommentUserID);
             
         $topicName = 'Forum';
@@ -117,13 +132,12 @@ class Comment {
         return $replies;
     }
 
-    // Рекурсивная функция для получения всех ответов на комментарии
     private function getRepliesRecursive($parentCommentID, &$replies) {
         $sql = "SELECT comments.commentID, comments.userID, user.username, user.picture, comments.comment, comments.date 
                 FROM comments 
                 INNER JOIN user ON comments.userID = user.userID 
                 WHERE comments.parent_comment_id = :parentCommentID
-                ORDER BY comments.date DESC"; // Изменение сортировки на убывающую дату
+                ORDER BY comments.date DESC";
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':parentCommentID', $parentCommentID, PDO::PARAM_INT);
@@ -145,7 +159,6 @@ class Comment {
         }
     }  
     
-    // метод для получения имени пользователя оригинального комментария
     public function getUsernameForOriginalComment($commentID) {
         $query = "SELECT u.username 
                 FROM user u 
@@ -162,7 +175,6 @@ class Comment {
         return $result['username'];
     }
 
-    // метод для получения ID пользователя оригинального комментария
     public function getUserIDForOriginalComment($parentCommentID) {
         $query = "SELECT c.userID 
                 FROM comments c 

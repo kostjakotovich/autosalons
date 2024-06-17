@@ -201,7 +201,7 @@ body {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s ease;
-  margin-right: 68%; /* Расстояние между кнопками "Reply" и "Delete" */
+  margin-right: 68%;
 }
 
 .btn-delete {
@@ -223,12 +223,12 @@ body {
 }
 
 .reply-username h4 {
-  margin: 0; /* Убираем внешние отступы у никнейма */
-  margin-right: 10px; /* Отступ между аватаркой и никнеймом */
+  margin: 0; 
+  margin-right: 10px;
 }
 
 .reply-info {
-  margin-left: auto; /* Помещаем надпись "Reply to" вправо */
+  margin-left: auto; 
 
 }
 
@@ -252,7 +252,7 @@ body {
 
 .send_reply_button {
   margin-top: 2%;
-  height: 5%;
+  height: 40px;
   background-color: #007bff;
   border: none;
   border-radius: 0.25rem;
@@ -261,7 +261,7 @@ body {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s ease;
-  margin-right: 68%; /* Расстояние между кнопками "Reply" и "Delete" */
+  margin-right: 68%;
 }
 
 .show-replies-btn {

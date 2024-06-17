@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Хост:                         localhost
--- Версия сервера:               8.0.30 - MySQL Community Server - GPL
--- Операционная система:         Win64
--- HeidiSQL Версия:              12.1.0.6537
+-- Host:                         localhost
+-- Server version:               8.0.30 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -15,11 +15,52 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Дамп структуры базы данных mariadb
+-- Dumping database structure for mariadb
 CREATE DATABASE IF NOT EXISTS `mariadb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mariadb`;
 
--- Дамп структуры для таблица mariadb.car_colors
+-- Dumping structure for table mariadb.all_colors
+CREATE TABLE IF NOT EXISTS `all_colors` (
+  `color_name` varchar(50) DEFAULT NULL,
+  `color_name_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`color_name_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table mariadb.all_colors: ~0 rows (approximately)
+DELETE FROM `all_colors`;
+INSERT INTO `all_colors` (`color_name`, `color_name_id`) VALUES
+	('Red', 3),
+	('White', 5),
+	('Red', 6),
+	('Black', 7);
+
+-- Dumping structure for table mariadb.all_engines
+CREATE TABLE IF NOT EXISTS `all_engines` (
+  `engine` varchar(50) DEFAULT NULL,
+  `engine_name_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`engine_name_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table mariadb.all_engines: ~2 rows (approximately)
+DELETE FROM `all_engines`;
+INSERT INTO `all_engines` (`engine`, `engine_name_id`) VALUES
+	('Petrol', 3),
+	('Diesel', 4);
+
+-- Dumping structure for table mariadb.all_transmissions
+CREATE TABLE IF NOT EXISTS `all_transmissions` (
+  `transmission` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `transmission_name_id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`transmission_name_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table mariadb.all_transmissions: ~2 rows (approximately)
+DELETE FROM `all_transmissions`;
+INSERT INTO `all_transmissions` (`transmission`, `transmission_name_id`) VALUES
+	('Manual', 4),
+	('Automatic', 5);
+
+-- Dumping structure for table mariadb.car_colors
 CREATE TABLE IF NOT EXISTS `car_colors` (
   `colorID` int NOT NULL AUTO_INCREMENT,
   `color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -28,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `car_colors` (
   PRIMARY KEY (`colorID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.car_colors: ~29 rows (приблизительно)
+-- Dumping data for table mariadb.car_colors: ~29 rows (approximately)
 DELETE FROM `car_colors`;
 INSERT INTO `car_colors` (`colorID`, `color`, `image`, `color_price`) VALUES
 	(28, 'White', _binary 0x696d672f63353337333266372d616331382d343330632d396430322d6537363033356135396366622e77656270, 0),
@@ -59,7 +100,7 @@ INSERT INTO `car_colors` (`colorID`, `color`, `image`, `color_price`) VALUES
 	(68, 'black xd', _binary 0x2e2e2f696d672f627265617468652e61766966, 100),
 	(69, 'black xd', _binary 0x2e2e2f696d672f627265617468652e61766966, 100);
 
--- Дамп структуры для таблица mariadb.comments
+-- Dumping structure for table mariadb.comments
 CREATE TABLE IF NOT EXISTS `comments` (
   `commentID` int NOT NULL AUTO_INCREMENT,
   `comment` varchar(700) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
@@ -69,9 +110,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`commentID`),
   KEY `userID` (`userID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=447 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.comments: ~54 rows (приблизительно)
+-- Dumping data for table mariadb.comments: ~62 rows (approximately)
 DELETE FROM `comments`;
 INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`, `parent_comment_id`) VALUES
 	(252, 'Thanks!', 46, '2023-04-30 00:00:00', NULL),
@@ -100,8 +141,6 @@ INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`, `parent_commen
 	(343, '2 test', 50, '2024-03-06 00:00:00', 341),
 	(344, 'io', 50, '2024-03-06 00:00:00', 341),
 	(345, 'ok', 50, '2024-03-06 00:00:00', 343),
-	(346, 'new', 50, '2024-03-06 00:00:00', NULL),
-	(347, 'ko', 50, '2024-03-06 00:00:00', 346),
 	(348, 'rabotaet?', 50, '2024-03-06 00:00:00', 342),
 	(349, 'DAAAA!!!!', 55, '2024-03-06 00:00:00', 348),
 	(350, 'datetime', 50, '2024-03-06 03:08:27', NULL),
@@ -121,21 +160,24 @@ INSERT INTO `comments` (`commentID`, `comment`, `userID`, `date`, `parent_commen
 	(373, 'kruto', 1, '2024-03-09 01:31:42', 370),
 	(374, 'shakira shakira', 1, '2024-03-09 01:32:39', 362),
 	(375, 'vc', 1, '2024-03-12 16:00:16', NULL),
-	(377, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. A', 1, '2024-03-12 16:57:55', NULL),
-	(379, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. A', 1, '2024-03-12 16:59:48', 377),
-	(381, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. A', 1, '2024-03-12 17:00:04', 379),
-	(384, 'hmmmmmmmmmmmm?', 1, '2024-03-12 17:09:37', 377),
-	(385, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias cumque magnam ab maiores modi eligendi dolorum quae atque voluptatem hic cum laudantium asperiores possimus magni tenetur, iure autem rem consequuntur.Lorem ipsum dolor sit amet consectetur adipisicing elit. A', 1, '2024-03-12 17:12:26', 379),
-	(386, 'new notification', 69, '2024-03-17 02:18:55', NULL),
-	(393, 'Yes New', 69, '2024-03-17 02:22:43', 386),
-	(394, 'okok', 1, '2024-03-17 02:35:32', 377),
-	(395, 'not', 1, '2024-03-17 17:02:16', 377),
-	(396, 'stuff new', 1, '2024-03-17 17:02:58', 377),
-	(397, 'kirils pivanovs', 1, '2024-04-16 16:58:53', 377),
-	(398, '12', 1, '2024-04-18 01:38:06', 377),
-	(399, 'ku eto moja ava', 1, '2024-04-22 01:47:03', NULL);
+	(400, 'Very satisfied with the car dealership service. The car was delivered on time and in the promised condition. Definitely recommend!', 70, '2024-05-26 16:04:50', NULL),
+	(401, 'I agree, I had a similar experience. The staff was very helpful and professional.', 48, '2024-05-26 16:05:45', 400),
+	(403, 'I also used their leasing options and have only positive feedback. Very friendly and understanding approach from the staff.', 48, '2024-05-26 16:07:28', NULL),
+	(404, 'Thank you for your positive review!', 1, '2024-05-26 16:09:03', 403),
+	(406, 'hi', 1, '2024-05-26 16:10:40', 400),
+	(408, 'a', 1, '2024-05-26 16:13:08', 407),
+	(411, 'ok', 48, '2024-05-26 16:23:33', 406),
+	(414, 'no', 1, '2024-05-26 16:29:39', 400),
+	(415, 'yes', 1, '2024-05-26 16:30:25', 401),
+	(417, 'ty', 1, '2024-05-26 16:38:58', 411),
+	(419, 'nothing', 1, '2024-05-26 16:46:55', 401),
+	(420, 'something', 1, '2024-05-26 16:47:18', 400),
+	(423, 'wow', 1, '2024-05-26 16:50:28', 400),
+	(424, 'now', 1, '2024-06-09 13:47:00', NULL),
+	(426, 'no', 1, '2024-06-09 13:47:12', 425),
+	(432, 'yep', 1, '2024-06-09 14:11:04', 431);
 
--- Дамп структуры для таблица mariadb.engine
+-- Dumping structure for table mariadb.engine
 CREATE TABLE IF NOT EXISTS `engine` (
   `engineID` int NOT NULL AUTO_INCREMENT,
   `engine_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -143,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `engine` (
   PRIMARY KEY (`engineID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Дамп данных таблицы mariadb.engine: ~23 rows (приблизительно)
+-- Dumping data for table mariadb.engine: ~23 rows (approximately)
 DELETE FROM `engine`;
 INSERT INTO `engine` (`engineID`, `engine_type`, `engine_price`) VALUES
 	(8, 'Diesel', 5000),
@@ -168,7 +210,7 @@ INSERT INTO `engine` (`engineID`, `engine_type`, `engine_price`) VALUES
 	(32, 'Petrol', 4000),
 	(33, 'Petrol', 4000);
 
--- Дамп структуры для таблица mariadb.notifications
+-- Dumping structure for table mariadb.notifications
 CREATE TABLE IF NOT EXISTS `notifications` (
   `notification_id` int NOT NULL AUTO_INCREMENT,
   `message` text,
@@ -178,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`notification_id`),
   KEY `topic_id` (`topic_id`),
   CONSTRAINT `topic_id` FOREIGN KEY (`topic_id`) REFERENCES `notification_topics` (`topic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=175 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.notifications: ~18 rows (приблизительно)
+-- Dumping data for table mariadb.notifications: ~56 rows (approximately)
 DELETE FROM `notifications`;
 INSERT INTO `notifications` (`notification_id`, `message`, `created_at`, `is_read`, `topic_id`) VALUES
 	(128, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2024-03-17 00:11:41', 1, 9),
@@ -200,9 +242,52 @@ INSERT INTO `notifications` (`notification_id`, `message`, `created_at`, `is_rea
 	(165, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-05-16 22:26:58', 1, 2),
 	(166, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-05-16 22:28:15', 1, 2),
 	(167, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-05-16 22:29:08', 1, 2),
-	(174, 'Your password has been successfully changed!', '2024-05-21 14:40:06', 1, 9);
+	(174, 'Your password has been successfully changed!', '2024-05-21 14:40:06', 1, 9),
+	(176, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-05-25 20:29:51', 1, 2),
+	(177, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2024-05-25 20:32:35', 1, 12),
+	(178, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-05-25 20:33:41', 1, 11),
+	(179, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-05-25 21:10:06', 1, 2),
+	(182, 'You have received a reply from \'stuff\' to your comment: \'Thank you for your positive review!\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:09:03', 1, 1),
+	(184, 'You have received a reply from \'stuff\' to your comment: \'hi\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:10:40', 1, 1),
+	(186, 'You have received a reply from \'stuff\' to your comment: \'hi\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:13:21', 1, 1),
+	(189, 'You have received a reply from \'stuff\' to your comment: \'ok\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:28:57', 1, 1),
+	(190, 'You have received a reply from \'stuff\' to your comment: \'ty\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:29:10', 1, 1),
+	(191, 'You have received a reply from \'stuff\' to your comment: \'no\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:29:39', 1, 1),
+	(192, 'You have received a reply from \'stuff\' to your comment: \'yes\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:30:25', 1, 1),
+	(193, 'You have received a reply from \'stuff\' to your comment: \'ty\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:36:11', 1, 1),
+	(194, 'You have received a reply from \'stuff\' to your comment: \'ty\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:38:58', 1, 1),
+	(195, 'You have received a reply from \'stuff\' to your comment: \'now?\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:41:29', 1, 1),
+	(197, 'You have received a reply from \'stuff\' to your comment: \'something\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:47:18', 1, 10),
+	(198, 'You have received a reply from \'kostjaKO1\' to your comment: \'nice, like\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:48:38', 1, 1),
+	(199, 'You have received a reply from \'stuff\' to your comment: \'respect\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:49:54', 1, 10),
+	(200, 'You have received a reply from \'stuff\' to your comment: \'wow\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-05-26 13:50:28', 1, 10),
+	(201, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2024-05-26 18:40:46', 1, 15),
+	(202, 'Your password has been successfully changed!', '2024-05-26 18:50:03', 1, 15),
+	(203, 'Your password has been successfully changed!', '2024-05-26 18:56:34', 1, 15),
+	(204, 'Your password has been successfully changed!', '2024-05-26 18:58:07', 1, 15),
+	(205, 'Your password has been successfully changed!', '2024-05-26 19:03:46', 1, 15),
+	(206, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-06-02 19:40:11', 1, 2),
+	(207, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2024-06-02 20:32:44', 1, 18),
+	(208, 'You have received a reply from \'stuff\' to your comment: \'yes\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 10:47:08', 1, 1),
+	(209, 'You have received a reply from \'stuff\' to your comment: \'no\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 10:47:12', 1, 1),
+	(210, 'You have received a reply from \'stuff\' to your comment: \'sd\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:09:35', 1, 1),
+	(211, 'You have received a reply from \'stuff\' to your comment: \'calc\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:09:42', 1, 1),
+	(212, 'You have received a reply from \'stuff\' to your comment: \'ahah\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:10:17', 1, 1),
+	(213, 'You have received a reply from \'stuff\' to your comment: \'yep\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:10:57', 1, 1),
+	(214, 'You have received a reply from \'stuff\' to your comment: \'yep\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:11:04', 1, 1),
+	(215, 'You have received a reply from \'stuff\' to your comment: \'2\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:38:26', 1, 1),
+	(216, 'You have received a reply from \'stuff\' to your comment: \'3\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:38:29', 1, 1),
+	(217, 'You have received a reply from \'stuff\' to your comment: \'2\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:42:53', 1, 1),
+	(218, 'You have received a reply from \'stuff\' to your comment: \'3\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:42:57', 1, 1),
+	(219, 'You have received a reply from \'stuff\' to your comment: \'2\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:43:27', 1, 1),
+	(220, 'You have received a reply from \'stuff\' to your comment: \'3\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:43:31', 1, 1),
+	(221, 'You have received a reply from \'stuff\' to your comment: \'2\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:46:39', 1, 1),
+	(222, 'You have received a reply from \'stuff\' to your comment: \'3\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-09 11:46:43', 1, 1),
+	(223, 'You have successfully registered! If you need <a href=\'infoPage.php\'>Help</a>, please visit the Help section.', '2024-06-09 12:25:15', 0, 21),
+	(224, 'Your order has been successfully completed! Please wait while our staff contacts You. You can check your order <a href=\'profile.php\'>here</a> in the \'My Orders\' tab.', '2024-06-10 16:26:23', 1, 2),
+	(225, 'You have received a reply from \'stuff\' to your comment: \'hello\'. Visit the <a href=\'forum.php\'>forum</a> to view the response.', '2024-06-10 19:43:09', 1, 1);
 
--- Дамп структуры для таблица mariadb.notification_topics
+-- Dumping structure for table mariadb.notification_topics
 CREATE TABLE IF NOT EXISTS `notification_topics` (
   `topic_id` int NOT NULL AUTO_INCREMENT,
   `topic_name` varchar(255) DEFAULT NULL,
@@ -211,9 +296,9 @@ CREATE TABLE IF NOT EXISTS `notification_topics` (
   PRIMARY KEY (`topic_id`),
   KEY `user_id` (`userID`),
   CONSTRAINT `user_id` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.notification_topics: ~6 rows (приблизительно)
+-- Dumping data for table mariadb.notification_topics: ~18 rows (approximately)
 DELETE FROM `notification_topics`;
 INSERT INTO `notification_topics` (`topic_id`, `topic_name`, `status`, `userID`) VALUES
 	(1, 'Forum', 'enable', 1),
@@ -221,9 +306,21 @@ INSERT INTO `notification_topics` (`topic_id`, `topic_name`, `status`, `userID`)
 	(3, 'Profile', 'enable', 1),
 	(7, 'Forum', 'disable', 69),
 	(8, 'Orders', 'enable', 69),
-	(9, 'Profile', 'enable', 69);
+	(9, 'Profile', 'enable', 69),
+	(10, 'Forum', 'enable', 70),
+	(11, 'Orders', 'enable', 70),
+	(12, 'Profile', 'enable', 70),
+	(13, 'Forum', 'enable', 71),
+	(14, 'Orders', 'enable', 71),
+	(15, 'Profile', 'enable', 71),
+	(16, 'Forum', 'enable', 72),
+	(17, 'Orders', 'enable', 72),
+	(18, 'Profile', 'enable', 72),
+	(19, 'Forum', 'enable', 73),
+	(20, 'Orders', 'enable', 73),
+	(21, 'Profile', 'enable', 73);
 
--- Дамп структуры для таблица mariadb.offers
+-- Dumping structure for table mariadb.offers
 CREATE TABLE IF NOT EXISTS `offers` (
   `offerID` int NOT NULL AUTO_INCREMENT,
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_latvian_ci DEFAULT NULL,
@@ -231,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `offers` (
   PRIMARY KEY (`offerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offers: ~12 rows (приблизительно)
+-- Dumping data for table mariadb.offers: ~12 rows (approximately)
 DELETE FROM `offers`;
 INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
 	(66, 'X5', 'BMW'),
@@ -247,7 +344,7 @@ INSERT INTO `offers` (`offerID`, `type`, `manufacturer`) VALUES
 	(90, 'X5', 'BMW'),
 	(93, 'Model X', 'Tesla');
 
--- Дамп структуры для таблица mariadb.offersinfo
+-- Dumping structure for table mariadb.offersinfo
 CREATE TABLE IF NOT EXISTS `offersinfo` (
   `offersInfoID` int NOT NULL AUTO_INCREMENT,
   `price` float DEFAULT NULL,
@@ -260,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `offersinfo` (
   CONSTRAINT `offersID` FOREIGN KEY (`offersID`) REFERENCES `offers` (`offerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.offersinfo: ~12 rows (приблизительно)
+-- Dumping data for table mariadb.offersinfo: ~12 rows (approximately)
 DELETE FROM `offersinfo`;
 INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`, `offersID`, `body_type`) VALUES
 	(69, 20000, 2019, 2000, 90, 'SUV'),
@@ -276,7 +373,7 @@ INSERT INTO `offersinfo` (`offersInfoID`, `price`, `yearOfManufacture`, `weight`
 	(79, 140000, 2023, 2900, 89, 'SUV'),
 	(83, 19000, 2019, 2000, 93, 'Sedan');
 
--- Дамп структуры для таблица mariadb.order
+-- Dumping structure for table mariadb.order
 CREATE TABLE IF NOT EXISTS `order` (
   `orderID` int NOT NULL AUTO_INCREMENT,
   `orderDate` date DEFAULT NULL,
@@ -294,15 +391,17 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `orderDetailsID` FOREIGN KEY (`orderDetailsID`) REFERENCES `specific_details` (`detailsID`),
   CONSTRAINT `orderOfferID` FOREIGN KEY (`orderOfferID`) REFERENCES `offers` (`offerID`),
   CONSTRAINT `orderUserID` FOREIGN KEY (`orderUserID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=261 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.order: ~1 rows (приблизительно)
+-- Dumping data for table mariadb.order: ~3 rows (approximately)
 DELETE FROM `order`;
 INSERT INTO `order` (`orderID`, `orderDate`, `name`, `surname`, `telephone`, `status`, `orderUserID`, `orderOfferID`, `orderDetailsID`) VALUES
-	(252, '2024-05-13', 'xcvxcv', '34343', '+371 34322', 'New', 1, 67, 14),
-	(260, '2024-05-17', 'Kostja', 'Kotovich', '23423443344534', 'In progress', 1, 70, 16);
+	(260, '2024-05-17', 'Kostja', 'Kotovich', '23423443344534', 'Done', 1, 70, 16),
+	(261, '2024-05-25', 'Kostja', 'Kotovich', '234234', 'Done', 55, 90, 13),
+	(262, '2024-05-25', 'Kostja', 'Kotovich', '234234', 'Done', 1, 90, 13),
+	(266, '2024-06-10', 'Konstantins', 'Kotovich', '32423423423', 'Done', 1, 68, 15);
 
--- Дамп структуры для таблица mariadb.specific_details
+-- Dumping structure for table mariadb.specific_details
 CREATE TABLE IF NOT EXISTS `specific_details` (
   `detailsID` int NOT NULL AUTO_INCREMENT,
   `colorID` int DEFAULT NULL,
@@ -322,17 +421,17 @@ CREATE TABLE IF NOT EXISTS `specific_details` (
   CONSTRAINT `transmissionID` FOREIGN KEY (`transmissionID`) REFERENCES `transmission` (`transmissionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.specific_details: ~7 rows (приблизительно)
+-- Dumping data for table mariadb.specific_details: ~7 rows (approximately)
 DELETE FROM `specific_details`;
 INSERT INTO `specific_details` (`detailsID`, `colorID`, `offersInfoID`, `transmissionID`, `created_at`, `engineID`, `active_status`) VALUES
 	(12, 49, 69, 2, '2024-04-18 12:09:13', 8, 0),
-	(13, 50, 69, 3, '2024-04-24 21:23:38', 9, 0),
-	(14, 28, 71, 4, '2024-04-24 22:00:06', 10, 0),
+	(13, 50, 69, 3, '2024-04-24 21:23:38', 9, 1),
+	(14, 28, 71, 4, '2024-04-24 22:00:06', 10, 1),
 	(15, 29, 72, 5, '2024-04-24 22:04:59', 11, 0),
 	(16, 30, 73, 6, '2024-04-24 22:05:00', 12, 1),
 	(19, 35, 76, NULL, NULL, NULL, NULL);
 
--- Дамп структуры для таблица mariadb.transmission
+-- Dumping structure for table mariadb.transmission
 CREATE TABLE IF NOT EXISTS `transmission` (
   `transmissionID` int NOT NULL AUTO_INCREMENT,
   `transmission_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -340,7 +439,7 @@ CREATE TABLE IF NOT EXISTS `transmission` (
   PRIMARY KEY (`transmissionID`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы mariadb.transmission: ~24 rows (приблизительно)
+-- Dumping data for table mariadb.transmission: ~24 rows (approximately)
 DELETE FROM `transmission`;
 INSERT INTO `transmission` (`transmissionID`, `transmission_type`, `transmission_price`) VALUES
 	(2, 'Sport Automatic', 2000),
@@ -366,7 +465,7 @@ INSERT INTO `transmission` (`transmissionID`, `transmission_type`, `transmission
 	(27, 'Sport Automatic', 2000),
 	(28, 'Sport Automatic', 2000);
 
--- Дамп структуры для таблица mariadb.user
+-- Dumping structure for table mariadb.user
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -376,17 +475,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `roleID` int NOT NULL,
   `rules_accepted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
--- Дамп данных таблицы mariadb.user: ~14 rows (приблизительно)
+-- Dumping data for table mariadb.user: ~14 rows (approximately)
 DELETE FROM `user`;
 INSERT INTO `user` (`userID`, `username`, `email`, `password`, `picture`, `roleID`, `rules_accepted`) VALUES
-	(1, 'stuff', 'stuff@example.com', 'stuff', _binary 0x696d672f6176617461722f68756d61737072696b6f6c2e706e67, 1, 1),
+	(1, 'stuff', 'stuff@example.com', 'stuff', _binary 0x696d672f6176617461722f64656661756c742e706e67, 1, 1),
 	(44, '1', '1@1.com', '$2y$10$zlYMd1if0vP.Pl76EmQKuujalvXg2FT.lxmRnF52IuGqjZeDwoISK', NULL, 0, NULL),
 	(46, 'konstantins', 'konstantins@gmail.com', '$2y$10$56e9Nl1IXJWYOcKYrgKncOAT4p99/PYH1UtvPgHjPKSUgJmZbQ58O', NULL, 0, NULL),
-	(48, 'Konstantins Kotovich', 'kostja@gmail.com', '$2y$10$t80eqpaNFAky2CFIe8B5MO/AVwBujCBKrX90U6ysi5xh4GgzJVXfa', NULL, 0, NULL),
+	(48, 'Konstantins Kotovich', 'kostja@gmail.com', '$2y$10$t80eqpaNFAky2CFIe8B5MO/AVwBujCBKrX90U6ysi5xh4GgzJVXfa', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, 1),
 	(50, '1234', '1234@1234.com', '$2y$10$wMepL4xJFeGY2BU4RbGx2e6jC5mCKkp7KEqHA.GZab9RQcC2JrLzS', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
-	(55, '123', '123@123.com', '$2y$10$QTOYR2Ktjp/jOL1aOFoqduXiTPdoTf/8ngSUZuvDMd6o9nhHjlhJe', _binary 0x696d672f6176617461722f68756d61737072696b6f6c2e706e67, 0, 1),
+	(55, '123', '123@123.com', '$2y$10$QTOYR2Ktjp/jOL1aOFoqduXiTPdoTf/8ngSUZuvDMd6o9nhHjlhJe', _binary 0x696d672f6176617461722f363636353965363035376463622e706e67, 0, 1),
 	(56, '12345', '12345@a.com', '$2y$10$WvxQcssDA7WqShLuc.i6WuFKe8iBnAXGabtziroIlPzHOaPldvDIm', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
 	(57, 'Kostja', 'kostja.kotovich@inbox.lv', '$2y$10$VCnCqu/X3vJskhZU8po9cuzCDEm4H.cOx6luPXbhzWIU8wd.IrEJ6', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
 	(59, '123456', 'kostja.kohghtovich@gmail.com', '$2y$10$PBRYzRNI4eDNI4ozoEVH5.E2/kOrO080adz7pzeRapR2emhyymMrS', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
@@ -394,7 +493,11 @@ INSERT INTO `user` (`userID`, `username`, `email`, `password`, `picture`, `roleI
 	(64, 'o7d1', 'kostja.kotovidsfch@gmail.com', '$2y$10$rPoNbDa2LafKdgFIqZPvg.88Z.Dz2FbUV1KPUCbu8GANG4dm8.E.e', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
 	(65, 'o7d3', 'kostja.kotovfsdich@gmail.com', '$2y$10$PFULBb6sAsCNngx0hKUYS..hUmoi3Zfa.9aSJl2LoJMB5e.L3g7o6', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
 	(66, 'o7d6', 'kostja.kotofhgfgvich@gmail.com', '$2y$10$td33qZ.ttr9qTs9hYiwfU.Np.kUCqICbnbeCH3.5OVz6ghRUZtelS', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
-	(69, 'kostjaKO', 'kostjaKO@gmaiil.com', '$2y$10$.4TT6RhelEovxMPILmG9i./aqdtiZWvs/A8endcwKfFd7kcHNPh.K', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, 1);
+	(69, 'kostjaKO', 'kostjaKO@gmaiil.com', '$2y$10$.4TT6RhelEovxMPILmG9i./aqdtiZWvs/A8endcwKfFd7kcHNPh.K', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, 1),
+	(70, 'kostjaKO1', 'kostjaKO1@gmail.com', '$2y$10$0Q8D4YVvJdES5iBOR.wXoO65//vNlzbpyeSijuJjjTuGspb7Dol3q', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, 1),
+	(71, 'Konstantin Kotovich', 'kostja.kotov@gmail.com', '$2y$10$wJCMTskxUZQOs2JgcJFaUuo1NsQXLdu2HyChHKcGDar1d2WwK8Qde', _binary 0x696d672f6176617461722f64656661756c742e706e67, 0, NULL),
+	(72, 'staff', 'staff@staff.com', '$2y$10$XzTQdsYTVGr2S4PLNAvTxempt2H0mM3NO/aLR.Y4uW4n5QQ2lxXlm', _binary 0x696d672f6176617461722f64656661756c742e706e67, 1, NULL),
+	(73, 'Ozols', 'Ozols@gmail.com', '$2y$10$V43nMTxb7n.oduGU/fG63OddBCPK61XM6GrS4xesPPxqXQbXfduXq', _binary 0x696d672f6176617461722f363636356131353439323132632e6a7067, 0, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -21,15 +21,12 @@ class Login {
 
     if($row){
       if ($row['roleID'] == 1 && $row['password'] == $password) {
-        // для администратора пароль не хешируется
         $_SESSION["roleID"] = $row["roleID"];
         $_SESSION['success'] = 'Login successful';
         header('location: index.php');
       }
       else if (password_verify($password, $row['password']))
       {
-          //action after a successful login
-          //for now just message a successful login
           $_SESSION["roleID"] = $row["roleID"];
           $_SESSION['success'] = 'Login successful';
           header('location: index.php');

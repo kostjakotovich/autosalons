@@ -14,7 +14,6 @@
     max-width: 700px;
 }
   
-/* Стилизация уведомления */
 .notification {
   position: relative;
   min-width: 100%;
@@ -49,7 +48,6 @@
   cursor: pointer;
 }
 
-/* Стили для значка "-" */
 .custom-close-btn span {
   display: inline-block;
   width: 30px;
@@ -139,7 +137,6 @@ form {
   margin-left: 20%;
 }
 
-/* Стили для элементов select */
 .filter-item select {
   padding: 8px 12px;
   font-size: 16px;

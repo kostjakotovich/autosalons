@@ -34,9 +34,8 @@ if (isset($_GET['offerID'])) {
     $selectedDetailsID = $_GET['detailsID'];
     $selectedOfferDetails = $offer->getOfferDetailsByID($offersInfoID);
   } else {
-    // Если комплектация не выбрана, отображаем предложение по умолчанию
     $selectedDetailsID = null;
-    $selectedOfferDetails = $offer->getOfferDetails($offersInfoID); // По умолчанию
+    $selectedOfferDetails = $offer->getOfferDetails($offersInfoID); 
   }
 
 
@@ -45,7 +44,6 @@ if (isset($_GET['offerID'])) {
     $_SESSION['selectedDetailsID'] = $selectedDetailsID; 
     $selectedOfferDetails = $offer->getOfferDetailsByID($offersInfoID);
 } else {
-    // Если комплектация не выбрана, отображаем предложение по умолчанию
     $selectedDetailsID = $_SESSION['selectedDetailsID'] ?? null;
     $selectedOfferDetails = $offer->getOfferDetailsByID($offersInfoID);
 }
@@ -99,7 +97,13 @@ if (isset($_POST['submit_order'])) {
     }
   } 
 
+  $allColors = $offer->getAllColors();
+  $allTransmissions = $offer->getAllTransmissions();
+  $allEngines = $offer->getAllEngines();
+
+  require_once 'includes/car_body_types.php';
 ?>
+
 <html>
 <head>
 
@@ -140,11 +144,11 @@ if (isset($_POST['submit_order'])) {
         <script>
           $(document).ready(function(){
               $('button[name="delete_configuration"]').click(function(e){
-                  e.preventDefault(); // Предотвращаем стандартное действие кнопки
+                  e.preventDefault();
 
-                  var form = $(this).closest('form'); // Получаем родительскую форму
-                  var detailsID = form.find('input[name="detailsID"]').val(); // Получаем ID деталей
-                  var offerID = form.find('input[name="offerID"]').val(); // Получаем ID предложения
+                  var form = $(this).closest('form'); 
+                  var detailsID = form.find('input[name="detailsID"]').val(); 
+                  var offerID = form.find('input[name="offerID"]').val();
 
                   var deleteConfirmationText = "Are you sure you want to delete this configuration?";
                   swal({
@@ -207,50 +211,57 @@ if (isset($_POST['submit_order'])) {
     </div>
 
     <div class="complictations">
-      <form method="get" action="offerPage.php">
-            <div class="conf-card">
-                <div class="conf-card-header">
-                    <div class="header-content">
-                        <h6>Choose a Configuration</h6>
-                        <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
-                        <input type="hidden" name="choose_configuration" value="Choose Configuration">                     
-                        <button type="submit" name="ChooseBtn">Choose</button>
-                    </div>
+      <form method="get" action="offerPage.php" id="configurationForm">
+        <div class="conf-card">
+            <div class="conf-card-header">
+                <div class="header-content">
+                    <h6>Choose a Configuration</h6>
+                    <input type="hidden" name="offerID" value="<?php echo $offerID; ?>">
+                    <input type="hidden" name="choose_configuration" value="Choose Configuration">
                 </div>
-                <div class="conf-options">
-              
-                          <?php foreach ($selectedOfferDetails as $detail): ?>
-                            <?php if (!isset($_SESSION['roleID']) || $_SESSION['roleID'] == 0): ?>
-                              <?php if($detail['active_status'] == 0 OR $detail['active_status'] == 'Null'): ?>
-                                <div class="conf-option">
-                                    <input type="radio" id="<?php echo $detail['detailsID']; ?>" name="detailsID" value="<?php echo $detail['detailsID']; ?>" <?php echo ($detail['detailsID'] == $selectedDetailsID) ? 'checked' : ''; ?>>
-                                    <label for="<?php echo $detail['detailsID']; ?>">
-                                        <?php echo $detail['engine_type']; ?><br>
-                                        <?php echo $detail['transmission_type']; ?><br>
-                                        <?php echo ucfirst($detail['color']); ?><br>
-                                        <div class="offer-divider"></div>
-                                        <span class="price-label"><?php echo $detail['color_price'] + $detail['transmission_price'] + $detail['price'] + $detail['engine_price']; ?>€</span>
-                                    </label>
-                                </div>
-                              <?php endif; ?>
-                            <?php else: ?>
-                
-                          <div class="conf-option">
-                              <input type="radio" id="<?php echo $detail['detailsID']; ?>" name="detailsID" value="<?php echo $detail['detailsID']; ?>" <?php echo ($detail['detailsID'] == $selectedDetailsID) ? 'checked' : ''; ?>>
-                              <label for="<?php echo $detail['detailsID']; ?>">
-                                  <?php echo $detail['engine_type']; ?><br>
-                                  <?php echo $detail['transmission_type']; ?><br>
-                                  <?php echo ucfirst($detail['color']); ?><br>
-                                  <div class="offer-divider"></div>
-                                  <span class="price-label"><?php echo $detail['color_price'] + $detail['transmission_price'] + $detail['price'] + $detail['engine_price']; ?>€</span>
-                              </label>
-                          </div>
-                    <?php endif; ?>
-                  <?php endforeach; ?>
-              </div>
-
             </div>
+            <div class="conf-options">
+                <?php foreach ($selectedOfferDetails as $detail): ?>
+                    <?php if (!isset($_SESSION['roleID']) || $_SESSION['roleID'] == 0): ?>
+                        <?php if($detail['active_status'] == 0 OR $detail['active_status'] == 'Null'): ?>
+                            <div class="conf-option">
+                                <input type="radio" id="<?php echo $detail['detailsID']; ?>" name="detailsID" value="<?php echo $detail['detailsID']; ?>" <?php echo ($detail['detailsID'] == $selectedDetailsID) ? 'checked' : ''; ?>>
+                                <label for="<?php echo $detail['detailsID']; ?>">
+                                    <?php echo $detail['engine_type']; ?><br>
+                                    <?php echo $detail['transmission_type']; ?><br>
+                                    <?php echo ucfirst($detail['color']); ?><br>
+                                    <div class="offer-divider"></div>
+                                    <span class="price-label"><?php echo $detail['color_price'] + $detail['transmission_price'] + $detail['price'] + $detail['engine_price']; ?>€</span>
+                                </label>
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="conf-option">
+                            <input type="radio" id="<?php echo $detail['detailsID']; ?>" name="detailsID" value="<?php echo $detail['detailsID']; ?>" <?php echo ($detail['detailsID'] == $selectedDetailsID) ? 'checked' : ''; ?>>
+                            <label for="<?php echo $detail['detailsID']; ?>">
+                                <?php echo $detail['engine_type']; ?><br>
+                                <?php echo $detail['transmission_type']; ?><br>
+                                <?php echo ucfirst($detail['color']); ?><br>
+                                <div class="offer-divider"></div>
+                                <span class="price-label"><?php echo $detail['color_price'] + $detail['transmission_price'] + $detail['price'] + $detail['engine_price']; ?>€</span>
+                            </label>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
       </form>
+
+      <script>
+          var radioButtons = document.querySelectorAll('input[name="detailsID"]');
+
+          radioButtons.forEach(function(radioButton) {
+              radioButton.addEventListener('change', function() {
+                  document.getElementById('configurationForm').submit();
+              });
+          });
+      </script>
+
     </div>
 
   </div>

@@ -1,5 +1,4 @@
 body{
-    /* background-image: url('../img/banner/background-profile.png'); /* Путь к картинке */
     opacity: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -95,7 +94,7 @@ tr:nth-child(even) {
   width: 80%;
   height: 2px;
   background-color: #ccc;
-  margin: 40px auto 0; /* Задаем отступ сверху в 20px */
+  margin: 40px auto 0; 
 }
 
 select option {
@@ -203,7 +202,7 @@ select::-ms-expand {
 }
 
 .avatar-label:hover {
-  background-color: #0056b3; /* Цвет при наведении */
+  background-color: #0056b3; 
 }
 
 
@@ -228,7 +227,7 @@ select::-ms-expand {
 }
 
 .custom-file-upload:hover {
-  background-color: #0056b3; /* Цвет при наведении */
+  background-color: #0056b3; 
 }
 
 
@@ -238,7 +237,7 @@ select::-ms-expand {
   margin-bottom: 3%;
   border-radius: 0.5rem;
   background: #fff;
-  border: 2px solid black; /* Закругленный чёрный контур */
+  border: 2px solid black;
 }
 
 .profile-img {
@@ -347,13 +346,13 @@ select::-ms-expand {
 }
 
 .tabcontent.active {
-  display: block; /* Показывать активную вкладку */
+  display: block;
 }
 
 .total-price {
-  font-size: 20px; /* Размер текста */
-  font-weight: bold; /* Жирный шрифт */
-  margin-bottom: 20px; /* Отступ снизу */
+  font-size: 20px; 
+  font-weight: bold; 
+  margin-bottom: 20px;
 }
 
 .Total-price-container {

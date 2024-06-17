@@ -4,7 +4,6 @@ require_once 'connection.php';
 require_once 'User.php';
 require_once 'Order.php';
 
-// проверка наличия ошибок
 if(isset($_SESSION["userID"])) {
   $userID = $_SESSION["userID"];
   $user = new UserMain($userID);
@@ -16,9 +15,8 @@ if(isset($_SESSION["userID"])) {
 } else {
   header('location: loginPage.php');
 }
-// обработка изменения пароля
 $change_errors = array();
-// обработка изменения пароля
+
 if (isset($_POST["changePassword"])) {
   $change_errors = array();
 
@@ -28,10 +26,10 @@ if (isset($_POST["changePassword"])) {
   $currentPassword = $_POST["currentPassword"];
   $newPassword = $_POST["newPassword"];
   $confirmPassword = $_POST["confirmPassword"];
-  // проверка, что пароль в первом поле совпадает с текущим паролем пользователя
+
   if (!password_verify($currentPassword, $userPassword)) {
       array_push($change_errors,"Current password is incorrect.");
-  } // проверка, что новый пароль во втором поле не совпадает с текущим паролем пользователя
+  }
   if (password_verify($newPassword, $userPassword)) {
       array_push($change_errors,"New password must not be the same as current password.");
   }
@@ -43,46 +41,45 @@ if (isset($_POST["changePassword"])) {
     array_push($change_errors, "New password should be at least 6 characters");
   } 
 
-  // проверка, что пароли во втором и третьем полях совпадают
+ 
   if ($newPassword !== $confirmPassword) {
       array_push($change_errors,"New password and confirmation password do not match.");
   }
   if (count($change_errors) == 0) {
-      // изменение пароля
+
       if ($user->changePassword($currentPassword, $newPassword, $confirmPassword)) {
-        // если пароль успешно изменен, перенаправляем пользователя на страницу профиля
+        
         $_SESSION['success_change'] = 'Password change successful';
-        session_write_close(); // сохранение данных сессии
+        session_write_close(); 
         header('location: profile.php');
       } else {
-          // если произошла ошибка, сохраняем ее в переменной и выводим на страницу
+          
           array_push($change_errors,"Unable to change password. Please check your current password and make sure the new password fields match.");
       }
     
   }
 }
 
-// создаем экземпляр класса Order и передаем userID текущего пользователя
+
 $order = new Order();
 $orders = $order->getOrderInfo($userID);
 $totalSum = $order -> getOrderSum($userID);
 
 if (isset($_FILES["avatar"])) {
   $uploadDir = 'img/avatar/';
-  $uploadFile = $uploadDir . basename($_FILES['avatar']['name']);
+  $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+  $uniqueName = uniqid() . '.' . $extension;
+  $uploadFile = $uploadDir . $uniqueName;
 
   if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
-      // Загрузка успешно выполнена, обновляем аватарку в базе данных
       $user->updatePicture($uploadFile);
-      // Перенаправляем пользователя на страницу профиля
+      
       header('Location: profile.php');
       exit;
   } else {
       header('Location: profile.php');
   }
 }
-
-
 
 ?>
 
@@ -238,7 +235,6 @@ if (isset($_FILES["avatar"])) {
 
 <div id="Orders" class="tabcontent">
   <div class="export-container">
-      <!-- Кнопка для экспорта в Excel -->
     <form method="post" action="includes/exportUserOrders.inc.php">
       <input type="hidden" name="userID" value="<?php echo $userID; ?>">
       <input type="hidden" name="totalSum" value="<?php echo $totalSum; ?>">
@@ -246,36 +242,34 @@ if (isset($_FILES["avatar"])) {
     </form>
   </div>
 
-  <table>
-    <?php include 'includes/userOrdersTable.php'; ?>
-    <?php 
-        foreach($orders as $order){
-            $totalPrice = $order['price'] + $order['color_price'] + $order['transmission_price'] + $order['engine_price'];
-            echo "<tr>";
-            echo "<td>".$order['orderID']."</td>";
-            echo "<td>".$order['orderDate']."</td>";
-            echo "<td>".$order['name']."</td>";
-            echo "<td>".$order['surname']."</td>";
-            echo "<td>".$order['telephone']."</td>";
-            echo "<td>".$order['status']."</td>";
-            echo "<td>".$order['username']."</td>";
-            echo "<td>".$order['email']."</td>";
-            echo "<td>".$order['manufacturer']."</td>";
-            echo "<td>".$order['type']."</td>";
-            echo "<td>".$order['yearOfManufacture']."</td>";
-            echo "<td>".$order['body_type']."</td>";
-            echo "<td>".$order['transmission_type']."</td>";
-            echo "<td>".$order['engine_type']."</td>";
-            echo "<td>".$order['color']."</td>";
-            echo "<td>".$order['price']." €</td>";
-            echo "<td>".$order['transmission_price']." €</td>";
-            echo "<td>".$order['engine_price']." €</td>";
-            echo "<td>".$order['color_price']." €</td>";
-            echo "<td>".$totalPrice." €</td>";
-            echo "</tr>";
-        }
-    ?>
-  </table>
+  <div style="overflow-x: auto;">
+    <table>
+      <?php include 'includes/userOrdersTable.php'; ?>
+      <?php 
+          foreach($orders as $order){
+              $totalPrice = $order['price'] + $order['color_price'] + $order['transmission_price'] + $order['engine_price'];
+              echo "<tr>";
+              echo "<td>".$order['orderID']."</td>";
+              echo "<td>".$order['orderDate']."</td>";
+              echo "<td>".$order['status']."</td>";
+              echo "<td>".$order['manufacturer']."</td>";
+              echo "<td>".$order['type']."</td>";
+              echo "<td>".$order['yearOfManufacture']."</td>";
+              echo "<td>".$order['body_type']."</td>";
+              echo "<td>".$order['transmission_type']."</td>";
+              echo "<td>".$order['engine_type']."</td>";
+              echo "<td>".$order['color']."</td>";
+              echo "<td>".$order['price']." €</td>";
+              echo "<td>".$order['transmission_price']." €</td>";
+              echo "<td>".$order['engine_price']." €</td>";
+              echo "<td>".$order['color_price']." €</td>";
+              echo "<td>".$totalPrice." €</td>";
+              echo "</tr>";
+          }
+      ?>
+    </table>
+  </div>
+
   <div class="divider"></div>
   <div class="Total-price-container">
     <?php
@@ -324,7 +318,7 @@ if (isset($_FILES["avatar"])) {
 
 <script>
     document.getElementById('avatar').addEventListener('change', function() {
-        document.getElementById('avatarForm').submit(); // Автоматически отправить форму при выборе файла
+        document.getElementById('avatarForm').submit();
     });
 </script>
 

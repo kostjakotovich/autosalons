@@ -35,7 +35,6 @@ class SearchOption extends Database
         }
 
         if (!empty($selectedTransmission)) {
-            // для поиска частичного совпадения
             $selectedTransmission = '%' . $selectedTransmission . '%';
             $query .= " AND transmission.transmission_type LIKE :selectedTransmission";
         }
